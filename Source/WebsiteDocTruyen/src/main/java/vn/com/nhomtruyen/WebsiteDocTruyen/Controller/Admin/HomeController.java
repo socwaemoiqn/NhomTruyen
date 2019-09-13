@@ -28,7 +28,7 @@ public class HomeController {
 		List<danhMucTruyenInfo> listDanhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
 		model.addAttribute("danhMucTruyen", listDanhMuc);
 		
-		return "admin/danhmuctruyen";
+		return "admin/ql_danhmuctruyen";
 	}
 
 	@RequestMapping(value = "/ql_theloai_truyen", method = RequestMethod.GET)
