@@ -17,18 +17,10 @@ public class IndexController {
   @RequestMapping("/login")
   public String login(HttpServletRequest request)
   {
-//	  String username = request.getParameter("username");
-//	  String password = request.getParameter("password");
 	  List<String> list = new ArrayList<>();
-	  list.add("viet");
+	  list.add("viet12asas");
 	  list.add("dsada");
 	  request.setAttribute("list", list);
-//	  if(username.equals("admin") && password.equals("1234"))
-//	  {
-//		  request.setAttribute("username", username);
-//		  request.setAttribute("password", password);
-//		  return "info";
-//	  }
 	  request.setAttribute("message", "Sai tài khoản hoặc mật khẩu");
 	  return "index";
   }
