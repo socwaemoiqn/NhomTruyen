@@ -6,13 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Nhóm Truyện</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/template/client/assets/css/index.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/client/assets/css/header.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/client/assets/css/index.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/template/client/assets/css/footer.css">
 </head>
 <body>
 	<%@ include file="/common/client/menu.jsp"%>
 	<div class="main">This is index page</div>
 	<dec:body />
+	<%@ include file="/common/client/footer.jsp"%>
 
 	<script>
 		var y = document.getElementById("user");
