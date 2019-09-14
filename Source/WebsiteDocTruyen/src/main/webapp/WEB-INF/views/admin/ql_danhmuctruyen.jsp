@@ -49,7 +49,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${danhMucTruyen}" var="us" varStatus="status">
+								<c:forEach items="${danhMucTruyen.list}" var="us"
+									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
 										<td>${us.id}</td>
@@ -64,7 +65,7 @@
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}"><i
 												class="fa  fa-edit"></i></a> <a
 											class="btn btn-danger btn-circle" title="Xóa danh mục"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=1"><i
+											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
 								</c:forEach>
@@ -72,25 +73,24 @@
 							</tbody>
 						</table>
 					</div>
-					<!-- /.table-responsive -->
 					<div class="grid_3 grid_5 agileits">
-						<div class="col-md-6">
-							<nav>
-								<ul class="pagination pagination-lg">
-									<li><a href="#" aria-label="Previous"> <span
-											aria-hidden="true">«</span>
-									</a></li>
-									<li><a href="#">1</a></li>
-									<li><a href="#">2</a></li>
-									<li><a href="#">3</a></li>
-									<li><a href="#">4</a></li>
-									<li><a href="#">5</a></li>
-									<li><a href="#" aria-label="Next"> <span
-											aria-hidden="true">»</span>
-									</a></li>
-								</ul>
-							</nav>
-						</div>
+						<c:if test="${danhMucTruyen.totalPages >1}">
+							<div class="col-md-6">
+								<nav>
+									<ul class="pagination pagination-lg">
+										<c:forEach items="${danhMucTruyen.navigationPages}" var="page">
+											<c:if test="${page != -1 }">
+												<li><a href="ql_danhmuc_truyen?page=${page}"
+													class="nav-item">${page}</a></li>
+											</c:if>
+											<c:if test="${page == -1 }">
+												<li><a><span> ... </span></a></li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</nav>
+							</div>
+						</c:if>
 					</div>
 				</div>
 				<!-- /.panel-body -->
@@ -112,13 +112,15 @@
 						<h4>Nhập thông tin về danh mục truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them" method="post">
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+									method="post">
 									<div class="form-group">
-										<label>Tên danh mục truyện</label> <input class="form-control"
+										<label>Tên danh mục truyện</label> <input class="form-control" name="tenDanhMuc"
 											placeholder="Nhập tên danh mục truyện">
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control"
+										<label>Giới thiệu</label> <input class="form-control" name="gioiThieu"
 											placeholder="Nhập giới thiệu về danh mục">
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm

@@ -18,7 +18,7 @@
 			<li><a href="#"><i class="fa fa-table fa-fw"></i>Quản Lý<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen">QL Danh Mục Truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen?page=0">QL Danh Mục Truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_theloai_truyen">QL Thể Loại truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_truyen">QL Danh Sách Truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_nhomdich">QL Nhóm dịch</a></li>

@@ -19,6 +19,14 @@ public class danhMucTruyenInfo {
 		this.trangThai = trangThai;
 		this.ngayTao = ngayTao;
 	}
+	
+	public danhMucTruyenInfo(String tenDanhMuc, String gioiThieu, String trangThai, String ngayTao) {
+		super();
+		this.tenDanhMuc = tenDanhMuc;
+		this.gioiThieu = gioiThieu;
+		this.trangThai = trangThai;
+		this.ngayTao = ngayTao;
+	}
 	public String getId() {
 		return id;
 	}
