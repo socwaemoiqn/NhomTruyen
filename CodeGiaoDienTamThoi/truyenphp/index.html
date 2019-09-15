@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <meta charset="utf-8"/>
 </head>
 <body>
@@ -16,11 +17,11 @@
                 <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
             </span>
     TRUYỆN PHP</a>
-    <div class="dropdown">
+    <div class="dropdown" id="dropdown">
         <button class="dropbtn"><i class="fas fa-list"></i> Danh mục
             <i class="fa fa-caret-down"></i>
         </button>
-        <div class="dropdown-content">
+        <div class="dropdown-content" id="dropdown-content">
             <a href="#"><b>Truyện full
                     <span data-placeholder="Truyện full"></span>
             </b></a>
@@ -306,7 +307,7 @@
 </div>
 <script>
     var y = document.getElementById("user");
-    var z = document.getElementById("search");
+    var z = document.getElementById("search");;
     window.onload = function(){
         resize();
     };
@@ -316,7 +317,7 @@
     function resize()
     {
         
-        if(screen.width > 1039 && document.body.clientWidth > 1039)
+        if(screen.width > 1131 && document.body.clientWidth > 1131)
         {
             y.style.position = "absolute";
         }

@@ -2,7 +2,9 @@
 { 
     padding: 10px 10%;
 }
-
+.row{
+    
+}
 .col-7,.col-3,.col-10{
     border: 1px solid gray;
     min-height: 330px;
@@ -91,12 +93,12 @@
     position: absolute;
     z-index: 1;
     height: 25px;
-    width: 50%;
+    width: 45%;
     top:5px;
     left: 2px;
     background: #e3b71e;
     opacity: 0.9;
-    font-size: 14px;
+    font-size: 13px;
     padding: 2px 7px;
 }
  .content .item .item-status i{
@@ -172,3 +174,4 @@
 #truyen-moi-cap-nhat table td a:hover{
     color:gray;
 }
+
