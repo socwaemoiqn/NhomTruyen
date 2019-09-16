@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/login.css">
     <meta charset="utf-8"/>
 </head>
-<body>
+<body id="body">
 <div class="topnav" id="myTopnav">
     <a href="#home" id="home">
             <span class="fa-stack">
@@ -17,7 +18,7 @@
                 <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
             </span>
     TRUYỆN PHP</a>
-    <div class="dropdown" id="dropdown">
+    <div class="dropdown" id="danhMuc">
         <button class="dropbtn"><i class="fas fa-list"></i> Danh mục
             <i class="fa fa-caret-down"></i>
         </button>
@@ -33,8 +34,7 @@
             </strong></a>
         </div>
     </div>
-    
-    <div class="dropdown">
+    <div class="dropdown" id="theLoai">
         <button class="dropbtn"><i class="fa fa-sort"></i> Thể loại
             <i class="fa fa-caret-down"></i>
         </button>
@@ -91,9 +91,10 @@
 </div>
 <div class="main">
     <div class="row">
-        <div class="col-7">
+        <div class="col-7" id="truyen-de-cu">
                 <div class="title">TRUYỆN ĐỀ CỬ <i class="fas fa-arrow-circle-down"></i></div>
                 <div class="content">
+                        <i class="fas fa-chevron-left fa-4x"></i>
                     <div class="item">
                         <div class="item-status"><i class="fab fa-hotjar"></i> Full</div>
                         <div class="item-title"><a href="#">Phàm nhân tu tiên</a></div>
@@ -105,7 +106,9 @@
                     <div class="item">
                         <div class="item-status"><i class="fab fa-hotjar"></i>  Chương 89</div>
                         <div class="item-title"><a href="#">Tiên nghịch</a></div>
-                        <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg"/></div>
+                        <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg"/>
+                    </div>
+                    <i class="fas fa-chevron-right fa-4x"></i>
                 </div>  
         </div>
         <div class="col-3" id="truyen-vua-doc">
@@ -180,6 +183,57 @@
                                                                 <td><a href="#" class="chuong">Chương 201</a></td>
                                                                 <td>3 phút trước</td>
                                                             </tr>
+                                                            <tr>
+                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                <td>3 phút trước</td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                    <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                    <td>3 phút trước</td>
+                                                                </tr> <tr>
+                                                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                        <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                        <td>3 phút trước</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                            <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                            <td>3 phút trước</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                                <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                                <td>3 phút trước</td>
+                                                                            </tr> <tr>
+                                                                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                                    <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                                    <td>3 phút trước</td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                                        <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                                        <td>3 phút trước</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                                            <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                                            <td>3 phút trước</td>
+                                                                                        </tr> <tr>
+                                                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
+                                                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+                                                                                                <td><a href="#" class="chuong">Chương 201</a></td>
+                                                                                                <td>3 phút trước</td>
+                                                                                            </tr>
                     </table>
                     </div>
         </div>
@@ -305,9 +359,86 @@
          <span>Liên hệ:</span> <a href="#"><i class="fab fa-facebook"></i></a href="#"><i class="fas fa-envelope-square"></i></a>
     </div>
 </div>
+<div id="container-login">
+    <i class="fas fa-times-circle fa-lg"></i>
+    <form action="#" method="post">
+        <h1 id="abac">Đăng nhập</h1>
+        <div class="txtb">
+            <input type="text">
+            <span data-placeholder="Tài khoản"></span>
+        </div>
+        <div class="txtb">
+            <input type="password">
+            <span data-placeholder="Mật khẩu"></span>
+        </div>
+        <input type="button" value="Đăng nhập">
+        <div class="bottom-text">
+           Chưa có tài khoản? <a HREF="#">Đăng ký</a>
+        </div>
+ </form>
+</div>
+ <div class="cover-login"></div>
+<!-- JS phần login -->
+<script type="text/javascript">
+    var user = document.getElementById("user");
+    var input = document.querySelectorAll(".txtb input");
+    var container_login = document.getElementById("container-login");
+    var exit_login = document.querySelector("#container-login i");
+    var cover_login = document.querySelector("div.cover-login");    
+    exit_login.onclick = function(){
+        container_login.classList.remove("show-login");
+        cover_login.classList.remove("cover-login-show");
+        
+    };
+    input[0].onfocus = function(){
+        this.classList.add("focus");
+    };
+    input[0].onblur = function(){
+        if(this.value == "")
+       this.classList.remove("focus");
+    };
+    input[1].onfocus = function(){
+        this.classList.add("focus");
+    };
+    input[1].onblur = function(){
+        if(this.value == "")
+       this.classList.remove("focus");
+    };
+    user.onclick = function(){
+        container_login.classList.add("show-login");
+        cover_login.classList.add("cover-login-show");
+    };
+
+</script>
+<!-- JS phần login -->
+<!-- JS phần menu và responsive -->
 <script>
     var y = document.getElementById("user");
-    var z = document.getElementById("search");;
+    var z = document.getElementById("search");
+    var danhMuc = document.getElementById("danhMuc");
+    var theLoai =  document.getElementById("theLoai");
+    var topnav = document.getElementById("myTopnav");
+    var slideLeft = document.querySelector("#truyen-de-cu .fa-chevron-left");
+    var slideRight = document.querySelector("#truyen-de-cu .fa-chevron-right");
+    var itemSlide = document.querySelectorAll("#truyen-de-cu .content .item");
+    danhMuc.onmouseover = function(){
+        ScrollToTop();
+    };
+    theLoai.onmouseover = function(){
+        ScrollToTop();
+    };
+    function ScrollToTop()
+    {
+        if(topnav.classList.length == 1)
+        window.scrollTo(0,0);
+    }
+    window.onscroll = function(){
+        if (document.body.scrollTop  > 0  || document.documentElement.scrollTop > 0) {
+            topnav.style.position = "fixed";
+        } else {
+            topnav.style.position = "static";  
+        }
+    };
     window.onload = function(){
         resize();
     };
@@ -345,8 +476,39 @@
 
         }
     }
+    // Xử lí phần slide Truyện đề cử
+    slideLeft.onclick = function(){
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].classList.add("hide-slide-right-to-left");    
+        }
+        setTimeout(function(){},2000);
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "right"; 
+            itemSlide[i].classList.add("hien-slide-right-to-left");     
+        }    
+     };
+    slideRight.onclick = function(){
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "right";
+            itemSlide[i].classList.add("hide-slide-left-to-right");
+            itemSlide[i].classList.remove("hide-slide-left-to-right");
+            
+        }    
+        setTimeout(function(){},2000);
+       for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "left"; 
+            itemSlide[i].classList.add("hien-slide-right-to-left");  
+            itemSlide[i].classList.remove("hien-slide-right-to-left");   
+        } 
+           
+    };
+    
 </script>
-
+<!-- JS phần menu và responsive -->
 </body>
 </html>
 

@@ -1,5 +1,5 @@
 @media screen and (min-width: 1131px) {
-    span:before{
+   strong span:before{
     content: attr(data-placeholder);
    position: absolute;
    top:85%;

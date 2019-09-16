@@ -29,7 +29,7 @@ b:hover,.dropdown-content strong:hover{
 .dropdown-content a b{
     color: red;
 }
-input[type=text] {
+#myTopnav input[type=text] {
     padding: 10px 10px;
     font-size: 15px;
     border: none;
@@ -62,7 +62,7 @@ button[type=submit] {
     border-bottom: 2px solid yellow;
     position: static ;
     width: 100%;
-    z-index: 3;
+    z-index: 5;
     opacity: 1;
 }
 .topnav a {
@@ -97,8 +97,8 @@ button[type=submit] {
     padding: 15px 16px;
     background-color: inherit;
     font-family: inherit;
-    margin:
-     0;
+    margin:0;
+    
 }
 
 .dropdown-content {

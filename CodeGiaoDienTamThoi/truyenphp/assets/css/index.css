@@ -2,9 +2,6 @@
 { 
     padding: 10px 10%;
 }
-.row{
-    
-}
 .col-7,.col-3,.col-10{
     border: 1px solid gray;
     min-height: 330px;
@@ -57,14 +54,73 @@
 }
  .content{
     padding: 5px 1%;
+    position: relative;
+    overflow: hidden;
 }
-.col-7 .content .item{
+
+.hide-slide-right-to-left{
+    float:left;
+    animation: anTruyenDeCu 1s forwards;
+}
+.hide-slide-left-to-right{
+    float:right;
+    animation: anTruyenDeCu 1s forwards;
+}
+.hien-slide-right-to-left{
+    float:right;
+    animation: hienTruyenDeCu 1s forwards;
+}
+.hien-slide-left-to-right{
+    float:left;
+    animation: hienTruyenDeCu 1s forwards;
+}
+@-webkit-keyframes anTruyenDeCu{
+    0%{
+        width: 31.3%;
+        opacity: 1;
+    }
+    100%{
+        width: 0%;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes hienTruyenDeCu{
+    0%{
+        width: 0%;
+        opacity: 0;
+    }
+    100%{
+        width: 31.3%;
+        opacity: 1;
+    }
+}
+#truyen-de-cu .content .fa-chevron-left,#truyen-de-cu .content .fa-chevron-right{
+    position: absolute;
+    top: 50%;   
+    z-index: 4;
+    color: gray;
+    opacity: 0.9;
+    cursor: pointer;
+    transform: translateY(-50%);
+} 
+#truyen-de-cu .content .fa-chevron-right{
+    right: 1px;
+} 
+#truyen-de-cu .content .fa-chevron-right:hover{
+    opacity: 1;
+}
+#truyen-de-cu .content .fa-chevron-left{
+    left: 1px;
+} 
+#truyen-de-cu .content .fa-chevron-left:hover{
+    opacity: 1;
+}
+#truyen-de-cu .content .item{
     position: relative;
     width: 31.3%;
     height: 280px;
     border: 1px solid gray;
-    float: left;
-    margin: 0 1%;
+    float: left;   margin: 0 1%;
 
 }
 .content .item img{
@@ -93,7 +149,7 @@
     position: absolute;
     z-index: 1;
     height: 25px;
-    width: 45%;
+    width: 50%;
     top:5px;
     left: 2px;
     background: #e3b71e;
