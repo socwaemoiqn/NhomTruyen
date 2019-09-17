@@ -1,0 +1,15 @@
+﻿* Văn
+- Quản lý danh mục truyện
+- Quản lý thể loại truyện
+- Gửi phản hồi
+- Tiếp nhận phản hồi
+* Việt
+- Quản lý tất cả truyện
+- Thống kê
+- Tiếp nhận phản hồi
+- Quản lý tất cả nhóm dịch
+* Toàn
+- Tùy chỉnh giao diện đọc truyện
+- Tìm kiếm truyện
+- Quản lý nhóm dịch
+- Quản lý truyện nhóm dịch

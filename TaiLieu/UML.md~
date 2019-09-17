@@ -6895,7 +6895,7 @@
 			quidu      	"5D74BF1E02DA"
 			height     	118)
 		    (object UseCaseView "Use Case View::Gui phan hoi" @300
-			location   	(560, 672)
+			location   	(368, 832)
 			font       	(object Font
 			    size       	9
 			    face       	"Arial"
@@ -6907,7 +6907,7 @@
 			    default_color 	TRUE)
 			label      	(object ItemLabel
 			    Parent_View 	@300
-			    location   	(560, 810)
+			    location   	(368, 970)
 			    anchor_loc 	1
 			    nlines     	2
 			    max_width  	630
@@ -7145,7 +7145,7 @@
 				    (329, 273))
 				line_style 	0)))
 		    (object AssociationViewNew "$UNNAMED$9" @313
-			location   	(442, 496)
+			location   	(327, 598)
 			font       	(object Font
 			    size       	9
 			    face       	"Arial"
@@ -7161,27 +7161,27 @@
 			roleview_list 	(list RoleViews
 			    (object RoleView "$UNNAMED$10" @314
 				Parent_View 	@313
-				location   	(170, 256)
+				location   	(55, 358)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5D74C022035A"
 				client     	@313
 				supplier   	@300
 				vertices   	(list Points
-				    (442, 496)
-				    (520, 614))
+				    (327, 598)
+				    (356, 773))
 				line_style 	0)
 			    (object RoleView "$UNNAMED$11" @315
 				Parent_View 	@313
-				location   	(170, 256)
+				location   	(55, 358)
 				stereotype 	TRUE
 				line_color 	3342489
 				quidu      	"5D74C022035C"
 				client     	@313
 				supplier   	@306
 				vertices   	(list Points
-				    (442, 496)
-				    (364, 379))
+				    (327, 598)
+				    (299, 423))
 				line_style 	0)))
 		    (object ClassView "Class" "Use Case View::Nguoi quan ly" @316
 			ShowCompartmentStereotypes 	TRUE
