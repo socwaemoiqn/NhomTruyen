@@ -5,7 +5,7 @@
 			class="fa fa-circle fa-stack-2x"></i> <i
 			class="fa fa-book-open fa-spin fa-stack-1x fa-inverse"
 			style="color: black;"></i>
-	</span> TRUYỆN PHP
+	</span> Nhóm Truyện
 	</a>
 	<div class="dropdown">
 		<button class="dropbtn">
@@ -30,7 +30,7 @@
 			<table width="100%">
 				<tr>
 					<td><strong>Tiên hiệp <span
-							data-placeholder="Tiên hiệp"></span></strong></td>
+							data-placeholder="Tiên hiệp"></span></strong></a></td>
 					<td><strong>Kiếm hiệp <span
 							data-placeholder="Kiếm hiệp"></span>
 					</strong></td>
@@ -61,10 +61,10 @@
 	</a>
 
 	<div class="dropdown" id="user" style="right: 10%;">
-		<button class="dropbtn">
-			Đăng nhập <i class="fa fa-caret-down"></i>
-		</button>
+	<a href="" class="dropbtn">Đăng Nhập</a>
+		
 	</div>
 	<a style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
-
+	
+	
 </div>

@@ -31,7 +31,9 @@
 									<td><input class="btn btn-default" type="submit"
 										value="Tìm kiếm"></td>
 
-									<td><a href="" class="btn btn-primary" data-toggle="modal"
+									<td><a
+										href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+										class="btn btn-primary" data-toggle="modal"
 										data-target="#themmoi">Thêm Mới</a></td>
 								</tr>
 							</tbody>
@@ -43,7 +45,7 @@
 									<th>STT</th>
 									<th>ID Danh mục</th>
 									<th>Tên Danh Mục</th>
-									<th>Số lượng Sản Phẩm</th>
+									<th>Số lượng Truyện</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
@@ -56,15 +58,19 @@
 										<td>${us.id}</td>
 										<td>${us.tenDanhMuc}</td>
 										<td class="center">4</td>
-										<td class="center">4</td>
-										<td class="center"><a class="btn btn-primary btn-circle"
-											title="Tất cả truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=1"><i
-												class="fa fa-list-ul"></i></a> <a
-											class="btn btn-success btn-circle" title="Chỉnh sửa danh mục"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}"><i
-												class="fa  fa-edit"></i></a> <a
-											class="btn btn-danger btn-circle" title="Xóa danh mục"
+										<td class="center">
+										dùng check
+										</td>
+										<td class="center">
+											<a class="btn btn-primary btn-circle" title="Tất cả truyện"
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+												<i class="fa fa-list-ul"></i>
+											</a> 
+											<a data-toggle="modal" data-target="#sua" class="btn btn-success btn-circle" title="Chỉnh sửa danh mục"
+											 href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+												<i class="fa  fa-edit"></i>
+											</a>
+											<a class="btn btn-danger btn-circle" title="Xóa danh mục"
 											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
@@ -116,12 +122,48 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
 									method="post">
 									<div class="form-group">
-										<label>Tên danh mục truyện</label> <input class="form-control" name="tenDanhMuc"
-											placeholder="Nhập tên danh mục truyện">
+										<label>Tên danh mục truyện</label> <input class="form-control"
+											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control" name="gioiThieu"
-											placeholder="Nhập giới thiệu về danh mục">
+										<label>Giới thiệu</label> <input class="form-control"
+											name="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
+									</div>
+									<button type="submit" class="btn btn-primary">Thêm
+										danh mục</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+		</div>
+	</div>
+	<div class="modal fade" id="sua" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="col-lg-12">
+				<div class="panel panel-green">
+
+					<div class="panel-heading">
+						<h4>Thêm danh mục truyện mới</h4>
+					</div>
+					<div class="panel-body">
+						<h4>Nhập thông tin về danh mục truyện</h4>
+						<div class="row">
+							<div class="col-lg-12">
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+									method="post">
+									<div class="form-group">
+										<label>Tên danh mục truyện</label> <input class="form-control"
+											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
+									</div>
+									<div class="form-group">
+										<label>Giới thiệu</label> <input class="form-control"
+											name="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm
 										danh mục</button>

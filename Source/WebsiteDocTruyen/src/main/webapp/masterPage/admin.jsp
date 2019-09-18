@@ -20,6 +20,7 @@
 <!-- Custom Fonts -->
 <link href="${pageContext.request.contextPath}/template/admin/css/font-awesome.min.css" rel="stylesheet"
 	type="text/css">
+	<script src="${pageContext.request.contextPath}/template/admin/ckeditor/ckeditor.js"></script>
 </head>
 <body>
 	<div id="wrapper">

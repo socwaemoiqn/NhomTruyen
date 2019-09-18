@@ -18,7 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
 
 @Configuration
 @ComponentScan(" vn.com.nhomtruyen.WebsiteDocTruyen.*")
@@ -77,8 +79,13 @@ public class ApplicationContextConfig {
 			return transactionManager;
 		}
 
-		@Bean(name = "applicantDAO")
+		@Bean(name = "danhMucTruyenDAO")
 		public danhMucTruyenDAO getApplicantDAO() {
 			return new danhMucTruyenImpl();
+		}
+		
+		@Bean(name = "theLoaiTruyenDAO")
+		public theLoaiTruyenDAO getTheLoaiTruyenDAO() {
+			return new theLoaiTruyenImpl();
 		}
 }

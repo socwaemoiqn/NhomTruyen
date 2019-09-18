@@ -45,4 +45,19 @@ public class QL_DanhMucTruyenController {
 		}
 		return "redirect:/quan-tri/ql_danhmuc_truyen";
 	}
+	
+	
+	
+	@RequestMapping(value="/edit", method=RequestMethod.GET)
+	public String updataDanhMuc(Model model, @RequestParam("id") String id) {
+		danhMucTruyenInfo danhMucTruyenInfo=null;
+		
+		if(id!=null) {
+			danhMucTruyenInfo=danhMucTruyenDAO.findDanhMucTruyenInfo(id);
+		}
+		if(danhMucTruyenInfo!=null) {
+			return "redirect:/quan-tri/ql_danhmuc_truyen";
+		}
+		return "redirect:/quan-tri/ql_danhmuc_truyen";
+	}
 }

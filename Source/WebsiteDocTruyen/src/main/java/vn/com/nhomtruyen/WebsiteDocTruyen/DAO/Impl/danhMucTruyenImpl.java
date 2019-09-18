@@ -1,8 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
-import java.awt.image.RescaleOp;
 import java.util.List;
-import java.util.UUID;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -54,24 +52,34 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 	}
 
 	@Override
+	public danhMucTruyenInfo findDanhMucTruyenInfo(String id) {
+		danhMucTruyenEntity danhMucTruyenEntity= this.findDanhMucTruyenEntity(id);
+		if(danhMucTruyenEntity ==null) {
+			return null;
+		}
+		return new danhMucTruyenInfo(danhMucTruyenEntity.getId(), danhMucTruyenEntity.getTenDanhMuc(),
+				danhMucTruyenEntity.getGioiThieu(), danhMucTruyenEntity.getTrangThai(), danhMucTruyenEntity.getNgayTao());
+	}
+
+	@Override
 	public void insertDanhMucTruyen(danhMucTruyenInfo danhMucTruyenInfo) {
-		String id=danhMucTruyenInfo.getId();
+		String id = danhMucTruyenInfo.getId();
 		danhMucTruyenEntity danhMucTruyenEntity = null;
-		if(id != null) {
+		if (id != null) {
 			danhMucTruyenEntity = this.findDanhMucTruyenEntity(id);
 		}
-		boolean isNew= false;
-		if(danhMucTruyenEntity==null) {
-			isNew=true;
-			danhMucTruyenEntity=new danhMucTruyenEntity();
-			
+		boolean isNew = false;
+		if (danhMucTruyenEntity == null) {
+			isNew = true;
+			danhMucTruyenEntity = new danhMucTruyenEntity();
+
 		}
 		danhMucTruyenEntity.setId(danhMucTruyenInfo.getId());
 		danhMucTruyenEntity.setTenDanhMuc(danhMucTruyenInfo.getTenDanhMuc());
 		danhMucTruyenEntity.setGioiThieu(danhMucTruyenInfo.getGioiThieu());
 		danhMucTruyenEntity.setTrangThai(danhMucTruyenInfo.getTrangThai());
 		danhMucTruyenEntity.setNgayTao(danhMucTruyenInfo.getNgayTao());
-		if(isNew) {
+		if (isNew) {
 			Session session = this.sessionFactory.getCurrentSession();
 			session.persist(danhMucTruyenEntity);
 		}
@@ -79,11 +87,11 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 
 	@Override
 	public void deleteDanhMucTruyen(String id) {
-		danhMucTruyenEntity danhMucTruyenEntity= this.findDanhMucTruyenEntity(id);
-		if(danhMucTruyenEntity!=null) {
+		danhMucTruyenEntity danhMucTruyenEntity = this.findDanhMucTruyenEntity(id);
+		if (danhMucTruyenEntity != null) {
 			this.sessionFactory.getCurrentSession().delete(danhMucTruyenEntity);
 		}
-		
+
 	}
 
 }

@@ -14,6 +14,7 @@ public interface danhMucTruyenDAO {
 	public List<danhMucTruyenInfo> dsDanhMucTruyen();
 	public PaginationResult<danhMucTruyenInfo> listDanhMucTruyen(int page, int maxResult, int maxNavigationPage);
 	public danhMucTruyenEntity findDanhMucTruyenEntity(String id); 
+	public danhMucTruyenInfo findDanhMucTruyenInfo(String id);
 	public void insertDanhMucTruyen(danhMucTruyenInfo danhMucTruyenInfo); 
 	public void deleteDanhMucTruyen(String id);
 }
