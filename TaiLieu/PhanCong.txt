@@ -6,7 +6,7 @@
 * Việt
 - Quản lý tất cả truyện
 - Thống kê
-- Tiếp nhận phản hồi
+- Thảo luận ý kiến
 - Quản lý tất cả nhóm dịch
 * Toàn
 - Tùy chỉnh giao diện đọc truyện
