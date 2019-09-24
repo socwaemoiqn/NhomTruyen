@@ -13,3 +13,25 @@
 - Tìm kiếm truyện
 - Quản lý nhóm dịch
 - Quản lý truyện nhóm dịch
+
+Phần Các Mô hình phân tích
+1. Biểu đồ hoạt động:
+Việt:
+- Quản lý tất cả truyện
+-Tùy chỉnh giao diện đọc
+- Thảo luận ý kiến
+Toàn:
+- QL Nhóm dịch
+- Tìm kiếm truyện
+Văn:
+- Ql danh muc truyện
+2. Biểu đồ tuần tự
+Việt
+- Thêm
+- Sửa
+Toàn: 
+- Xóa
+- Thống kê
+Văn
+- Gửi phản hồi-tiếp nhận phản hồi
+- Bình luận ý kiến
