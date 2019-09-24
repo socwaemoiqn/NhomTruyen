@@ -19,8 +19,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.userAccountsDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.userAccountsImpl;
 
 @Configuration
 @ComponentScan(" vn.com.nhomtruyen.WebsiteDocTruyen.*")
@@ -87,5 +89,9 @@ public class ApplicationContextConfig {
 		@Bean(name = "theLoaiTruyenDAO")
 		public theLoaiTruyenDAO getTheLoaiTruyenDAO() {
 			return new theLoaiTruyenImpl();
+		}
+		@Bean(name = "userAccountsDAO")
+		public userAccountsDAO getUserAccountDAO() {
+			return new userAccountsImpl();
 		}
 }

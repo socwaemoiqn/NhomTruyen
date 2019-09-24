@@ -7,13 +7,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+
+${loi}
 	<div class="main">
 		<div class="row">
-			<div class="col-7">
+			<div class="col-7" id="truyen-de-cu">
 				<div class="title">
 					TRUYỆN ĐỀ CỬ <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
+					<i class="fas fa-chevron-left fa-4x"></i>
 					<div class="item">
 						<div class="item-status">
 							<i class="fab fa-hotjar"></i> Full
@@ -44,6 +48,7 @@
 						<img
 							src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg" />
 					</div>
+					<i class="fas fa-chevron-right fa-4x"></i>
 				</div>
 			</div>
 			<div class="col-3" id="truyen-vua-doc">
@@ -74,6 +79,69 @@
 				</div>
 				<div class="content">
 					<table>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						<tr>
+							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
+									địch thật tịch mịch</a></td>
+							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
+							<td><a href="#" class="chuong">Chương 201</a></td>
+							<td>3 phút trước</td>
+						</tr>
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
 									địch thật tịch mịch</a></td>
@@ -281,5 +349,102 @@
 			</div>
 		</div>
 	</div>
+	<!-- JS phần menu và responsive -->
+	<script>
+    var y = document.getElementById("user");
+    var z = document.getElementById("search");
+    var danhMuc = document.getElementById("danhMuc");
+    var theLoai =  document.getElementById("theLoai");
+    var topnav = document.getElementById("myTopnav");
+    var slideLeft = document.querySelector("#truyen-de-cu .fa-chevron-left");
+    var slideRight = document.querySelector("#truyen-de-cu .fa-chevron-right");
+    var itemSlide = document.querySelectorAll("#truyen-de-cu .content .item");
+    danhMuc.onmouseover = function(){
+        ScrollToTop();
+    };
+    theLoai.onmouseover = function(){
+        ScrollToTop();
+    };
+    function ScrollToTop()
+    {
+        if(topnav.classList.length == 1)
+        window.scrollTo(0,0);
+    }
+    window.onscroll = function(){
+        if (document.body.scrollTop  > 0  || document.documentElement.scrollTop > 0) {
+            topnav.style.position = "fixed";
+        } else {
+            topnav.style.position = "static";  
+        }
+    };
+    window.onload = function(){
+        resize();
+    };
+    window.onresize = function () {
+        resize();
+    };
+    function resize()
+    {
+        
+        if(screen.width > 1131 && document.body.clientWidth > 1131)
+        {
+            y.style.position = "absolute";
+        }
+        else
+        {
+            y.style.position = "static";
+        }
+        if(screen.width <= 351 && document.body.clientWidth <= 351)
+        {
+            z.style.width = "250px";
+        }
+        else
+        {
+            z.style.width = "300px";
+        }
+    }
+    function myFunction() {
+
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+
+        } else {
+            x.className = "topnav";
+
+        }
+    }
+    // Xử lí phần slide Truyện đề cử
+    slideLeft.onclick = function(){
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].classList.add("hide-slide-right-to-left");    
+        }
+        setTimeout(function(){},2000);
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "right"; 
+            itemSlide[i].classList.add("hien-slide-right-to-left");     
+        }    
+     };
+    slideRight.onclick = function(){
+        for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "right";
+            itemSlide[i].classList.add("hide-slide-left-to-right");
+            itemSlide[i].classList.remove("hide-slide-left-to-right");
+            
+        }    
+        setTimeout(function(){},2000);
+       for(var i = 0;i<itemSlide.length;i++)
+        {
+            itemSlide[i].style.float = "left"; 
+            itemSlide[i].classList.add("hien-slide-right-to-left");  
+            itemSlide[i].classList.remove("hien-slide-right-to-left");   
+        } 
+           
+    };
+    
+</script>
 </body>
 </html>
