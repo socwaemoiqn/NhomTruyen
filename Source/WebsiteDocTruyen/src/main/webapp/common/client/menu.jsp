@@ -77,11 +77,11 @@
 		<form action="${pageContext.request.contextPath}/login" method="post">
 			<h1 id="abac">Đăng nhập</h1>
 			<div class="txtb">
-				<input type="text" name="userName"> <span
-					data-placeholder="Tài khoản"></span>
+				<input type="text" name="userName" required=""> <span
+					data-placeholder="Tài khoản" ></span>
 			</div>
 			<div class="txtb">
-				<input type="password" name="passWord"> <span
+				<input type="password" name="passWord" required=""> <span
 					data-placeholder="Mật khẩu"></span>
 			</div>
 			<button class="btn" type="submit">Đăng Nhâp</button>

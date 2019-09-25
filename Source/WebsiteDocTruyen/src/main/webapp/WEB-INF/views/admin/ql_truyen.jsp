@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	<%@ include file="/common/taglib.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,33 +40,39 @@
 							<thead>
 								<tr>
 									<th>STT</th>
-									<th>ID Danh mục</th>
-									<th>Tên Danh Mục</th>
-									<th>Số lượng Truyện</th>
+									<th>Hình Ảnh</th>
+									<th>Tên Truyện</th>
+									<th>Tên Tác Giả</th>
+									<th>Thể Loại Truyện</th>
+									<th>Số Chương</th>
+									<th>Lượt Xem</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${danhMucTruyen.list}" var="us"
+								<c:forEach items="${listTruyen.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
-										<td>${us.id}</td>
-										<td>${us.tenDanhMuc}</td>
-										<td class="center">4</td>
-										<td class="center">dùng check</td>
+										<td class="center">${us.hinhAnh}</td>
+										<td>${us.tenTruyen}</td>
+										<td class="center">${us.tenTacGia }</td>
+										<td class="center">${us.tenTheLoai }</td>
+										<td class="center">${us.soChuong }</td>
+										<td class="center">${us.luotXem }</td>
+										<td class="center">....</td>
 										<td class="center"><a class="btn btn-primary btn-circle"
 											title="Tất cả chương"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?id=${us.id}">
+											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?idtruyen=${us.ID}">
 												<i class="fa fa-list-ul"></i>
 										</a> <a data-toggle="modal" data-target="#sua"
 											class="btn btn-success btn-circle"
 											title="Chỉnh sửa thông tin truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
 												<i class="fa  fa-edit"></i>
 										</a> <a class="btn btn-danger btn-circle" title="Xóa truyện"
-											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
+											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.ID}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
 								</c:forEach>
@@ -73,13 +81,13 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits">
-						<c:if test="${danhMucTruyen.totalPages >1}">
+						<c:if test="${listTruyen.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${danhMucTruyen.navigationPages}" var="page">
+										<c:forEach items="${listTruyen.navigationPages}" var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_danhmuc_truyen?page=${page}"
+												<li><a href="ql_truyen?page=${page}"
 													class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">

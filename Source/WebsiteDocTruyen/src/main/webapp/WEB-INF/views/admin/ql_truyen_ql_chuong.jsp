@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="row">
+	<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">Quản lý</h1>
 		</div>
@@ -28,8 +29,9 @@
 									<td><input class="btn btn-default" type="submit"
 										value="Tìm kiếm"></td>
 
-									<td><a href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong/them_chuong" 
-									class="btn btn-primary" >Thêm Chương Mới</a></td>
+									<td><a
+										href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong/them_chuong"
+										class="btn btn-primary">Thêm Chương Mới</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -45,25 +47,23 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${danhMucTruyen.list}" var="us"
+								<c:forEach items="${listChuongOfTruyen.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
-										<td>${us.id}</td>
-										<td>${us.tenDanhMuc}</td>
-										<td class="center">
-										dùng check
-										</td>
-										<td class="center">
-											<a class="btn btn-primary btn-circle" title="Xem trước"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong/xem_chuong?id=${us.id}">
+										<td>${us.IDTruyen }</td>
+										<td>${us.tieuDe}</td>
+										<td class="center">dùng check</td>
+										<td class="center"><a class="btn btn-primary btn-circle"
+											title="Xem trước"
+											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong/xem_chuong?idChuong=${us.id}">
 												<i class="fa fa-eye"></i>
-											</a> 
-											<a data-toggle="modal" data-target="#sua" class="btn btn-success btn-circle" title="Chỉnh sửa nội dung chương"
-											 href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+										</a> <a 
+											class="btn btn-success btn-circle"
+											title="Chỉnh sửa nội dung chương"
+											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong/sua_chuong?idChuong=${us.id}">
 												<i class="fa  fa-edit"></i>
-											</a>
-											<a class="btn btn-danger btn-circle" title="Xóa chương"
+										</a> <a class="btn btn-danger btn-circle" title="Xóa chương"
 											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
@@ -73,13 +73,13 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits">
-						<c:if test="${danhMucTruyen.totalPages >1}">
+						<c:if test="${listChuongOfTruyen.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${danhMucTruyen.navigationPages}" var="page">
+										<c:forEach items="${listChuongOfTruyen.navigationPages}" var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_danhmuc_truyen?page=${page}"
+												<li><a href="ql_chuong?page=${page}&idtruyen=${idt}"
 													class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
@@ -91,12 +91,12 @@
 							</div>
 						</c:if>
 					</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+	</div>
+
 
 </body>
 </html>

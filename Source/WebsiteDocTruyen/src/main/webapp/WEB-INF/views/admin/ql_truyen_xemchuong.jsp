@@ -16,10 +16,10 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Chương abcd...</div>
+				<div class="panel-heading">${tieuDe }</div>
 				<div class="panel-body">
 										
-						${noidung}
+						${noiDung}
 					
 				</div>
 			</div>

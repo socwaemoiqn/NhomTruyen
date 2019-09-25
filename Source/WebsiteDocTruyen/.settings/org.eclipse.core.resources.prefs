@@ -4,5 +4,6 @@ encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_T
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/DAO/Impl/danhMucTruyenImpl.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/PaginationResult.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_ql_chuong.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_suachuong.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_themchuong.jsp=UTF-8
 encoding//src/main/webapp/common/client/footer.jsp=UTF-8

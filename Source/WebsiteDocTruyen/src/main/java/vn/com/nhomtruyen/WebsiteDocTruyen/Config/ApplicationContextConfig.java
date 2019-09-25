@@ -17,11 +17,15 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.userAccountsDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.chuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.truyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.userAccountsImpl;
 
 @Configuration
@@ -93,5 +97,14 @@ public class ApplicationContextConfig {
 		@Bean(name = "userAccountsDAO")
 		public userAccountsDAO getUserAccountDAO() {
 			return new userAccountsImpl();
+		}
+		@Bean(name = "truyenDAO")
+		public truyenDAO getTruyenDAO() {
+			return new truyenImpl();
+		}
+		
+		@Bean(name = "chuongDAO")
+		public chuongDAO getChuongDAO() {
+			return new chuongImpl();
 		}
 }
