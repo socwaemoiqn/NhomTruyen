@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfo;
 
 @Controller(value = "QL_TruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql_truyen")
@@ -20,6 +22,12 @@ public class QL_TruyenController {
 
 	@Autowired
 	private chuongDAO chuongDao;
+	
+	
+	@RequestMapping(value = "/them", method = RequestMethod.POST)
+	private String themTruyenAction(Model model, @ModelAttribute("truyen") truyenInfo truyen ) {
+		return "redirect:/quan-tri/ql_truyen";
+	}
 
 	@RequestMapping(value = "/ql_chuong", method = RequestMethod.GET)
 	public String qlChuongPage(Model model, @RequestParam("idtruyen") int idTruyen,
@@ -79,5 +87,5 @@ public class QL_TruyenController {
 			else	
 			return "redirect:/quan-tri/ql_truyen/ql_chuong/xem_chuong?idChuong="+id;
 	}
-
+	
 }

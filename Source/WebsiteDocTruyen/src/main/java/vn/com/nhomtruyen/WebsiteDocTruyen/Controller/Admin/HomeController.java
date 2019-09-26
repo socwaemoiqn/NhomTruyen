@@ -1,18 +1,24 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.tacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.tacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.theLoaiTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenSelectInfo;
 
 @Controller(value = "HomeControllerOfAdmin")
@@ -27,6 +33,9 @@ public class HomeController {
 	
 	@Autowired
 	private truyenDAO truyenDao;
+	
+	@Autowired
+	private tacGiaDAO tacGiaDao;
 
 	@RequestMapping(value = { "/", "home", "" }, method = RequestMethod.GET)
 	public String indexAdminPage(Model model) {
@@ -50,6 +59,8 @@ public class HomeController {
 				Max_Navigation);
 
 		model.addAttribute("danhMucTruyen", listDanhMuc);
+		
+		
 
 		return "admin/ql_danhmuctruyen";
 	}
@@ -86,14 +97,39 @@ public class HomeController {
 		PaginationResult<truyenSelectInfo> listTruyen= truyenDao.litTruyen(page, Max_Result, Max_Navigation);
 		
 		model.addAttribute("listTruyen", listTruyen);
-		
+		truyenInfo truyen = new truyenInfo();
+		model.addAttribute("truyen", truyen);
 		return "admin/ql_truyen";
 	}
-
+	
 	@RequestMapping(value = "/ql_nhomdich", method = RequestMethod.GET)
 	public String QlNhomDichPage(Model model) {
 
 		return "admin/ql_nhomdich";
+	}
+	
+	@RequestMapping(value = "/ql_tacgia", method = RequestMethod.GET)
+	public String QlTacGiaPage(Model model) {
+
+		return "admin/ql_tacgia";
+	}
+	
+	@ModelAttribute("danhMuc")
+	public List<danhMucTruyenInfo> getDanhMuc(){
+		List<danhMucTruyenInfo> danhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
+		return danhMuc;	
+	}
+	
+	@ModelAttribute("tacGia")
+	public List<tacGiaInfo> getTacGia(){
+		List<tacGiaInfo> tacGia= tacGiaDao.listTacGia();
+		return tacGia;	
+	}
+	
+	@ModelAttribute("theLoai")
+	public List<theLoaiTruyenInfo> getTheLoai(){
+		List<theLoaiTruyenInfo> theLoai=theLoaiTruyenDAO.dsTheLoai(); 
+		return theLoai;	
 	}
 
 }

@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="row">
+<div class="row">
 		<div class="col-lg-12">
 			<h1 class="page-header">Quản lý</h1>
 		</div>
@@ -18,7 +17,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Truyện</div>
+				<div class="panel-heading">Tác Giả</div>
 				<div class="panel-body">
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover"
@@ -40,39 +39,32 @@
 							<thead>
 								<tr>
 									<th>STT</th>
-									<th>Hình Ảnh</th>
-									<th>Tên Truyện</th>
+									<th>ID Tác Giả</th>
 									<th>Tên Tác Giả</th>
-									<th>Thể Loại Truyện</th>
-									<th>Số Chương</th>
-									<th>Lượt Xem</th>
+									<th>Số lượng Truyện</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTruyen.list}" var="us"
+								<c:forEach items="${listTheLoaiTruyen.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
-										<td class="center">${us.hinhAnh}</td>
-										<td>${us.tenTruyen}</td>
-										<td class="center">${us.tenTacGia }</td>
-										<td class="center">${us.tenTheLoai }</td>
-										<td class="center">${us.soChuong }</td>
-										<td class="center">${us.luotXem }</td>
-										<td class="center">....</td>
+										<td>${us.id}</td>
+										<td>${us.tenTheLoai}</td>
+										<td class="center">4</td>
+										<td class="center">dùng check</td>
 										<td class="center"><a class="btn btn-primary btn-circle"
-											title="Tất cả chương"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?idtruyen=${us.ID}">
+											title="Tất cả truyện"
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
 												<i class="fa fa-list-ul"></i>
 										</a> <a data-toggle="modal" data-target="#sua"
-											class="btn btn-success btn-circle"
-											title="Chỉnh sửa thông tin truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
+											class="btn btn-success btn-circle" title="Chỉnh sửa danh mục"
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
 												<i class="fa  fa-edit"></i>
-										</a> <a class="btn btn-danger btn-circle" title="Xóa truyện"
-											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.ID}"><i
+										</a> <a class="btn btn-danger btn-circle" title="Xóa danh mục"
+											href="${pageContext.request.contextPath}/quan-tri/ql_theloai_truyen/xoa?id=${us.id}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
 								</c:forEach>
@@ -81,13 +73,15 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits">
-						<c:if test="${listTruyen.totalPages >1}">
+						<c:if test="${listTheLoaiTruyen.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${listTruyen.navigationPages}" var="page">
+										<c:forEach items="${listTheLoaiTruyen.navigationPages}"
+											var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_truyen?page=${page}" class="nav-item">${page}</a></li>
+												<li><a href="ql_theloai_truyen?page=${page}"
+													class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
 												<li><a><span> ... </span></a></li>
@@ -109,58 +103,26 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm truyện mới</h4>
+						<h4>Thêm Thể Loại Truyện Mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về truyện</h4>
+						<h4>Nhập thông tin về thể loại truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form:form modelAttribute="truyen"
-									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/them"
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
 									method="post">
 									<div class="form-group">
-										<label>Tên truyện</label> <input class="form-control"
+										<label>Tên thể loại truyện</label> <input class="form-control"
 											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
 									</div>
 									<div class="form-group">
-										<label>Hình Ảnh Về Truyện</label>
-										<form:input path="hinhAnh" type="file" />
-									</div>
-									<div class="form-group">
-										<label>Tác giả</label>
-										<form:select path="IdTacGia" class="form-control">
-											<form:options items="${tacGia}" itemLabel="tenTacGia"
-												itemValue="ID" />
-										</form:select>
-									</div>
-									<div class="form-group">
-										<label>Số chương</label> <input class="form-control"
+										<label>Giới thiệu</label> <input class="form-control"
 											name="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
 									</div>
-									<div class="form-group">
-										<label>Danh mục</label>
-										<form:select path="IdDanhMuc" class="form-control">
-											<form:options items="${danhMuc}" itemLabel="tenDanhMuc"
-												itemValue="id" />
-										</form:select>
-
-
-
-									</div>
-									<div class="form-group">
-										<label>Thể Loại</label>
-										<form:select path="IDTheLoai" class="form-control">
-											<form:options items="${theLoai}" itemLabel="tenTheLoai"
-												itemValue="id" />
-										</form:select>
-									</div>
-									<div class="form-group">
-										<label>Giới thiệu chung</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về truyện">
-									</div>
 									<button type="submit" class="btn btn-primary">Thêm
-										truyện mới</button>
-								</form:form>
+										thể loại</button>
+								</form>
 							</div>
 						</div>
 					</div>

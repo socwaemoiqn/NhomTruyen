@@ -19,11 +19,13 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.tacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.userAccountsDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.chuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.tacGiaImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.truyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.userAccountsImpl;
@@ -106,5 +108,9 @@ public class ApplicationContextConfig {
 		@Bean(name = "chuongDAO")
 		public chuongDAO getChuongDAO() {
 			return new chuongImpl();
+		}
+		@Bean(name = "tacGiaDAO")
+		public tacGiaDAO getTacGiaDAO() {
+			return new tacGiaImpl();
 		}
 }

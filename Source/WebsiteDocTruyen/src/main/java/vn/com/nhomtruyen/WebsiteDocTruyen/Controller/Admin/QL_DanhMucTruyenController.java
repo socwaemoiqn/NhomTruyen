@@ -2,6 +2,7 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,4 +62,8 @@ public class QL_DanhMucTruyenController {
 		}
 		return "redirect:/quan-tri/ql_danhmuc_truyen";
 	}
+	
+	
+	
+	
 }

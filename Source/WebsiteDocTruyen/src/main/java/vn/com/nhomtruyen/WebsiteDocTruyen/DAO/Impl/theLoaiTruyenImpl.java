@@ -1,19 +1,36 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.danhMucTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.theLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.theLoaiTruyenInfo;
 
 public class theLoaiTruyenImpl implements theLoaiTruyenDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
+	
+	
+	@Override
+	public List<theLoaiTruyenInfo> dsTheLoai() {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + theLoaiTruyenInfo.class.getName()
+				+ "(a.id, a.tenTheLoai, a.gioiThieu, a.trangThai, a.ngayTao)" + " from "
+				+ theLoaiTruyenEntity.class.getName() + " a";
+
+		Query query = se.createQuery(sql);
+		return query.list();
+	}
 	
 	@Override
 	public PaginationResult<theLoaiTruyenInfo> listTheLoaiTruyen(int page, int maxResult, int maxNavigationPage) {
@@ -43,5 +60,7 @@ public class theLoaiTruyenImpl implements theLoaiTruyenDAO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 }
