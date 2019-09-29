@@ -19,7 +19,7 @@ Phần Các Mô hình phân tích
 Việt:
 - Quản lý tất cả truyện
 -Tùy chỉnh giao diện đọc
-- Thảo luận ý kiến
+- Bình luận ý kiến
 Toàn:
 - QL Nhóm dịch
 - Tìm kiếm truyện
