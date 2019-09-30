@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <decorators defaultdir="/masterPage">
-    <decorator name="trang-chu" page="client.jsp">
-       <pattern>/*</pattern>
-    </decorator>
-    
-    <decorator name="admin" page="admin.jsp">
-       <pattern>/quan-tri*</pattern>
-    </decorator>
+	<decorator name="trang-chu" page="client.jsp">
+		<pattern>/*</pattern>
+	</decorator>
 
+	<decorator name="admin" page="admin.jsp">
+		<pattern>/quan-tri*</pattern>
+	</decorator>
+
+	<decorator name="translate" page="translate_team.jsp">
+		<pattern>/nhom-dich*</pattern>
+	</decorator>
+	<decorator name="translate" page="translate_team_members.jsp">
+		<pattern>/nhom-dich/thanh-vien*</pattern>
+	</decorator>
+	
 </decorators>

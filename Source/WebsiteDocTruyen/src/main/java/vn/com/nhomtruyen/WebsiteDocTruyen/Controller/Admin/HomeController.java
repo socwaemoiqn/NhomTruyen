@@ -94,11 +94,15 @@ public class HomeController {
 		}
 		final int Max_Result = 3;
 		final int Max_Navigation = 4;
+		
 		PaginationResult<truyenSelectInfo> listTruyen= truyenDao.litTruyen(page, Max_Result, Max_Navigation);
 		
 		model.addAttribute("listTruyen", listTruyen);
+		
+		
 		truyenInfo truyen = new truyenInfo();
 		model.addAttribute("truyen", truyen);
+		
 		return "admin/ql_truyen";
 	}
 	

@@ -120,7 +120,7 @@
 									method="post">
 									<div class="form-group">
 										<label>Tên truyện</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
+											name="tenDanhMuc" placeholder="Nhập tên truyện">
 									</div>
 									<div class="form-group">
 										<label>Hình Ảnh Về Truyện</label>
@@ -135,7 +135,7 @@
 									</div>
 									<div class="form-group">
 										<label>Số chương</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
+											name="gioiThieu" placeholder="Nhập số chương">
 									</div>
 									<div class="form-group">
 										<label>Danh mục</label>
