@@ -11,7 +11,7 @@
 	<decorator name="translate" page="translate_team.jsp">
 		<pattern>/nhom-dich*</pattern>
 	</decorator>
-	<decorator name="translate" page="translate_team_members.jsp">
+	<decorator name="translateMenBer" page="translate_team_members.jsp">
 		<pattern>/nhom-dich/thanh-vien*</pattern>
 	</decorator>
 	
