@@ -26,21 +26,23 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPage(Model model, @RequestParam("userName") String userName,
 			@RequestParam("passWord") String passWord, HttpSession session) {
-		String request="";
+		String request = "";
 		userAccountsInfo user = userAccountsDAO.login(userName, passWord);
 		if (user != null) {
 			String role = user.getRole();
 			if (role.equals("admin")) {
-				session.setAttribute("admin",user);
-				request="redirect:/quan-tri";
+				session.setAttribute("admin", user);
+				request = "redirect:/quan-tri";
+			} else if (role.equals("tlt")) {
+				request = "redirect:/nhom-dich";
 			} else {
 				session.setAttribute("client", user);
-				request= "redirect:/user_Info";
+				request = "redirect:/user_Info";
 			}
 
 		} else {
-			model.addAttribute("loi","loi");
-			request= "redirect:/index";
+			model.addAttribute("loi", "loi");
+			request = "redirect:/index";
 		}
 		return request;
 
