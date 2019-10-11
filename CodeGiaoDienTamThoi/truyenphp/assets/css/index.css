@@ -55,7 +55,7 @@
  .content{
     padding: 5px 1%;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .hide-slide-right-to-left{
