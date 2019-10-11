@@ -12,7 +12,7 @@
 </head>
 <body id="body">
 <div class="topnav" id="myTopnav">
-    <a href="#home" id="home">
+    <a href="index.html" id="home">
             <span class="fa-stack">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
@@ -116,7 +116,7 @@
                         <div class="content">
                             <table>
                                 <tr>
-                                    <td><a href="#"><i class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br> (Chương 1998)</a></td>
+                                    <td><a href="info-truyen.html"><i class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br> (Chương 1998)</a></td>
                                 </tr>
                                 <tr>
                                         <td><a href="#"><i class="fas fa-book-reader"></i> Đế tôn <br> (Chương 203)</a></a></td>
@@ -379,136 +379,15 @@
 </div>
  <div class="cover-login"></div>
 <!-- JS phần login -->
-<script type="text/javascript">
-    var user = document.getElementById("user");
-    var input = document.querySelectorAll(".txtb input");
-    var container_login = document.getElementById("container-login");
-    var exit_login = document.querySelector("#container-login i");
-    var cover_login = document.querySelector("div.cover-login");    
-    exit_login.onclick = function(){
-        container_login.classList.remove("show-login");
-        cover_login.classList.remove("cover-login-show");
-        
-    };
-    input[0].onfocus = function(){
-        this.classList.add("focus");
-    };
-    input[0].onblur = function(){
-        if(this.value == "")
-       this.classList.remove("focus");
-    };
-    input[1].onfocus = function(){
-        this.classList.add("focus");
-    };
-    input[1].onblur = function(){
-        if(this.value == "")
-       this.classList.remove("focus");
-    };
-    user.onclick = function(){
-        container_login.classList.add("show-login");
-        cover_login.classList.add("cover-login-show");
-    };
-
+<script src="assets/js/login.js">
 </script>
 <!-- JS phần login -->
 <!-- JS phần menu và responsive -->
-<script>
-    var y = document.getElementById("user");
-    var z = document.getElementById("search");
-    var danhMuc = document.getElementById("danhMuc");
-    var theLoai =  document.getElementById("theLoai");
-    var topnav = document.getElementById("myTopnav");
-    var slideLeft = document.querySelector("#truyen-de-cu .fa-chevron-left");
-    var slideRight = document.querySelector("#truyen-de-cu .fa-chevron-right");
-    var itemSlide = document.querySelectorAll("#truyen-de-cu .content .item");
-    danhMuc.onmouseover = function(){
-        ScrollToTop();
-    };
-    theLoai.onmouseover = function(){
-        ScrollToTop();
-    };
-    function ScrollToTop()
-    {
-        if(topnav.classList.length == 1)
-        window.scrollTo(0,0);
-    }
-    window.onscroll = function(){
-        if (document.body.scrollTop  > 0  || document.documentElement.scrollTop > 0) {
-            topnav.style.position = "fixed";
-        } else {
-            topnav.style.position = "static";  
-        }
-    };
-    window.onload = function(){
-        resize();
-    };
-    window.onresize = function () {
-        resize();
-    };
-    function resize()
-    {
-        
-        if(screen.width > 1131 && document.body.clientWidth > 1131)
-        {
-            y.style.position = "absolute";
-        }
-        else
-        {
-            y.style.position = "static";
-        }
-        if(screen.width <= 351 && document.body.clientWidth <= 351)
-        {
-            z.style.width = "250px";
-        }
-        else
-        {
-            z.style.width = "300px";
-        }
-    }
-    function myFunction() {
-
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-
-        } else {
-            x.className = "topnav";
-
-        }
-    }
-    // Xử lí phần slide Truyện đề cử
-    slideLeft.onclick = function(){
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].classList.add("hide-slide-right-to-left");    
-        }
-        setTimeout(function(){},2000);
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "right"; 
-            itemSlide[i].classList.add("hien-slide-right-to-left");     
-        }    
-     };
-    slideRight.onclick = function(){
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "right";
-            itemSlide[i].classList.add("hide-slide-left-to-right");
-            itemSlide[i].classList.remove("hide-slide-left-to-right");
-            
-        }    
-        setTimeout(function(){},2000);
-       for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "left"; 
-            itemSlide[i].classList.add("hien-slide-right-to-left");  
-            itemSlide[i].classList.remove("hien-slide-right-to-left");   
-        } 
-           
-    };
-    
-</script>
+<script src="assets/js/menu-responsive.js"></script>
 <!-- JS phần menu và responsive -->
+<!-- JS phần index -->
+<script src="assets/js/index.js"></script>
+<!-- JS phần index -->
 </body>
 </html>
 

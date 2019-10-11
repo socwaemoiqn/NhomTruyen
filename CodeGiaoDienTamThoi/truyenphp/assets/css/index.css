@@ -1,7 +1,7 @@
-.main
-{ 
-    padding: 10px 10%;
-}
+    .row
+    { 
+        padding: 10px 10%;
+    }
 .col-7,.col-3,.col-10{
     border: 1px solid gray;
     min-height: 330px;
@@ -120,7 +120,8 @@
     width: 31.3%;
     height: 280px;
     border: 1px solid gray;
-    float: left;   margin: 0 1%;
+    float: left;  
+     margin: 0 1%;
 
 }
 .content .item img{

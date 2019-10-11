@@ -59,8 +59,21 @@
         left: 50%;
     }
 }
+@-webkit-keyframes pingBall2{
+    0%{
+        opacity: 1;
+        left:50%;
+    }   
+    100%{
+        opacity: 0;
+        left:100%;
+    }
+}
 .show-login{
-    animation: pingBall 2s forwards;
+    animation: pingBall 1.5s forwards;
+}
+.hide-login{
+    animation: pingBall2 1.5s forwards;
 }
 form{
     position: absolute;
