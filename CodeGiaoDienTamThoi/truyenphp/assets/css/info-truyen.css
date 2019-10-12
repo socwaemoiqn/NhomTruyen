@@ -1,21 +1,8 @@
 .main
 { 
     height: 100vh;
-    /* background: rgb(201,208,201);
-    background: linear-gradient(180deg, rgba(201,208,201,1) 4%, rgba(222,236,235,1) 96%, rgba(223,231,231,1) 100%); */
-    
 }
-#path{
-    color: #4e4e4e;
-    background: #ececec;
-    font-size: 14px;
-    line-height: 30px;
-    box-shadow: 0 5px 8px gray;
-    padding: 0 10%;
-}
-.path{
-    color: #b4b9b4;
-}
+
 .info-picture,.info-content{
     min-height: 350px;
     float:left;

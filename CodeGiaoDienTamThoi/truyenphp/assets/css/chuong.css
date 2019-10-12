@@ -1,0 +1,81 @@
+#chuong{
+    border-radius: 10px; 
+    background: #f4f4f4;
+}
+#title-chuong{
+    text-align: center;
+    line-height: 35px;
+}
+#title-chuong i{
+    font-size: 30px;
+    color: gray;
+}
+#title-chuong span.chuong-redirect,#title-chuong span.chuong-list,#title-chuong span.chuong-phanhoi,#title-chuong span.chuong-binhluan{
+    display: inline-block;
+    background: green;
+    color: white;
+    outline: none;
+    border: none;
+    text-align: center; 
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+#title-chuong span.chuong-redirect{
+    width: 150px;
+    height: 40px;
+    line-height: 35px;
+}
+#title-chuong span.chuong-redirect i{
+    font-size: 16px;
+    color:white;
+    vertical-align: middle;
+}
+#title-chuong span.chuong-phanhoi,#title-chuong span.chuong-binhluan{
+    width: 120px;
+    height: 40px;
+    line-height: 35px;
+    border-radius: 3px;
+}
+#title-chuong span.chuong-phanhoi{
+   background:  orange;
+}
+#title-chuong span.chuong-binhluan{
+    background: #5bc0de;
+}
+#title-chuong span.chuong-redirect#redirect-pre{
+    border-radius: 3px 0px 0px 3px;
+}
+#title-chuong span.chuong-redirect#redirect-next{
+    border-radius: 0px 3px 3px 0px;
+}
+#title-chuong span.chuong-list{
+    width: 40px;
+    height: 40px;
+}
+#title-chuong span.chuong-list i{
+    color: white;
+    font-size: 22px;
+    vertical-align: middle;
+}
+#title-chuong span.chuong-tips{
+    border: 1px dashed;
+    padding: 3px 10px;
+    font-size: 14px;
+}
+#title-chuong span.chuong-redirect:hover{
+    opacity: 0.9;
+}
+#title-chuong span.chuong-list:hover{
+    opacity: 0.9;
+}
+#title-chuong span.chuong-phanhoi:hover{
+    opacity: 0.9;
+}
+#title-chuong span.chuong-binhluan:hover{
+    opacity: 0.9;
+}
+#content-chuong{
+    color:#2b2b2b;
+    line-height: 42px;
+    padding: 15px 25px;
+}

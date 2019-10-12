@@ -1,7 +1,7 @@
-    .row
-    { 
-        padding: 10px 10%;
-    }
+.row
+{ 
+        padding: 10px 8%;
+}
 .col-7,.col-3,.col-10{
     border: 1px solid gray;
     background: #4f4e52;
@@ -141,7 +141,7 @@
 #truyen-de-cu .content .fa-chevron-left,#truyen-de-cu .content .fa-chevron-right{
     position: absolute;
     top: 50%;   
-    z-index: 4;
+    z-index: 5;
     color: gray;
     opacity: 0.9;
     cursor: pointer;
@@ -172,7 +172,7 @@
 #truyen-de-cu .content .item{
     position: relative;
     width: 31.3%;
-    height: 280px;
+    height: 350px;
     border: 1px solid gray; 
      margin: 0 1%;
      float: left;
