@@ -14,6 +14,8 @@
     <title>Phàm nhân tu tiên</title>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v4.0&appId=942286492784632&autoLogAppEvents=1"></script>
     <div class="topnav" id="myTopnav">
         <a href="index.html" id="home">
                 <span class="fa-stack">
@@ -98,14 +100,10 @@
                 /</span> <span class="path-truyen">Phàm nhân tu tiên</span>
         </div>
         <div class="row">
-                <div class="col-7" id="truyen-de-cu">
+                <div class="col-7" id="thong-tin-truyen">
                         <div class="title"><i class="fas fa-info-circle"></i> THÔNG TIN TRUYỆN </div>
                         <div class="content">
-                                <!-- <i class="fas fa-chevron-left fa-4x"></i> -->
-                            <!-- <div class="item"> -->
                             <div class="info-picture">
-                                <!-- <div class="item-status"><i class="fab fa-hotjar"></i> Full</div>
-                                <div class="item-title"><a href="#">Phàm nhân tu tiên</a></div> -->
                                 <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg"/>
                                 <div class="info-picture-content">
                                     Tác giả: Lê thiên <br>
@@ -143,16 +141,6 @@
                                         Mạch truyện luôn bình thản nhưng không kém phần gay cấn, tình tiết logic xuyên suốt từ đầu đến cuối, các tình tiết đan xen lẫn nhau luôn được đẩy lên cao trào khiến độc giả bị cuốn vào mạch truyện. Đương nhiên vẫn như các bộ truyện khác kết thúc của Lê Thiên rất có hậu
                                     </div>
                             </div>
-                            <!-- <div class="item">
-                                <div class="item-status"><i class="fab fa-hotjar"></i>  Chương 1997</div>
-                                <div class="item-title"><a href="#">Đế tôn</a></div>
-                                <img src="https://cdnaz.truyenfull.vn/cover/eJwN0ccWY1AAANAvcibaw2IWgugl6mPj6KKTKM_Xz9xfuENL_tHLEXElOF5cmhlw3MKwSJY8S0qvccVjpS9Gfvw2vSo-CJ4HVgScvKQOpayvsDOQseJoEZvt4N1f57DwUGfhktV5Uw72Yb1tMSoyDkrv0_RyTB1GY7sZ5opbQcPMwu4MqTi9GZr9lJqyyELFlG7jkCqyJ77UmZuh46v9_dHiEgRzsne0Mw-PJ6lnLypUImlpZkbbrY4ZePILRqCHJB9LF52nXVoNjsYBce8rm_ZcubdnFsZgib7UYqPok11U20jQdWsK8Isgf71xrW6aVCCWBpqHsMqaBk5EEWlX5DKqHjwr-Q6I6L26GGHT8IUZk9k_5NasGkACYplUxwIjdYGfFX73u_bFw4FJy6yH3wZ84spLZo01_zwk7aGGAekx0d77ugBEEGthY3xiihVUOsPis7evoVbzI3K4ShPTBeOD_0MusxLnOrHD4zyQuWMsp_66hCjTTI4qxNH5JOL65G3f9F2nm-PCm8XJ-mW5eaYNdxk0WfMxvE6AP-rAUISWwNUs16-wsRO4UGoTi2Zmc7MUg9_lrEeNyh_fRCfVvZUn2O18Xng27zyHz-ozBX0hD49Tzug5hkdn_IxBgrx3ozDMW-zxhRfu3m_rXyw7vAZH3C-VxDI6Ez__njjBYS3OEf8A1lXWpw==/quan-khi.jpg"/></div>
-                            <div class="item">
-                                <div class="item-status"><i class="fab fa-hotjar"></i>  Chương 89</div>
-                                <div class="item-title"><a href="#">Tiên nghịch</a></div>
-                                <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg"/>
-                            </div> -->
-                            <!-- <i class="fas fa-chevron-right fa-4x"></i> -->
                         </div>
                 </div>
                 <div class="col-3" id="truyen-vua-doc">
@@ -168,162 +156,136 @@
                                         <tr>
                                                 <td><a href="#"><i class="fas fa-book-reader"></i> Thiên mệnh chân tử <br> (Chương 2032)</a></a></td>
                                         </tr>
+                                        <tr>
+                                                <td><a href="#"><i class="fas fa-book-reader"></i> Đế tôn <br> (Chương 203)</a></a></td>
+                                        </tr>
                                     </table>
                             </div>
-
                 </div>
-                <div class="col-3" id="truyen-dang-hot">
-                    <div class="title">TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i></div>
+                <div class="col-3" id="truyen-cung-tac-gia">
+                    <div class="title">TRUYỆN CÙNG TÁC GIẢ <i class="fas fa-arrow-circle-down"></i></div>
                         <div class="content">
-                            <table cellspacing="5">
+                            <table>
                                 <tr>
-                                    <td style="padding-left: 5%;padding-right: 5%;"><span class="type-time">Ngày</span><span class="type-time">Tháng</span><span class="type-time">Năm</span></td>
+                                    <td><a href="info-truyen.html"><i class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br> (Chương 1998)</a></td>
                                 </tr>
                                 <tr>
-                                    <td><span class="index" id="one">1</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
+                                        <td><a href="#"><i class="fas fa-book-reader"></i> Đế tôn <br> (Chương 203)</a></a></td>
                                 </tr>
                                 <tr>
-                                    <td><span class="index" id="two">2</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="three">3</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">4</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">5</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">6</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">7</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">8</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">9</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-                                </tr>
-                                <tr>
-                                    <td><span class="index" id="all">10</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                        <td><a href="#"><i class="fas fa-book-reader"></i> Thiên mệnh chân tử <br> (Chương 2032)</a></a></td>
                                 </tr>
                             </table>
                     </div>
-
-        </div>
-
-                <div class="col-7" id="truyen-moi-cap-nhat">
-                    <div class="title">TRUYỆN MỚI CẬP NHẬT <i class="fas fa-arrow-circle-down"></i></div>
-                    <div class="content">
-                    <table>
-                            <tr>
-                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                <td>3 phút trước</td>
-                            </tr>
-                            <tr>
-                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                    <td><a href="#" class="chuong">Chương 201</a></td>
-                                    <td>3 phút trước</td>
-                                </tr> <tr>
-                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                        <td><a href="#" class="chuong">Chương 201</a></td>
-                                        <td>3 phút trước</td>
+                </div>
+                <div class="col-3" id="truyen-dang-hot">
+                        <div class="title">TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i></div>
+                            <div class="content">
+                                <table cellspacing="5">
+                                    <tr>
+                                        <td style="padding-left: 5%;padding-right: 5%;"><span class="type-time">Ngày</span><span class="type-time">Tháng</span><span class="type-time">Năm</span></td>
                                     </tr>
                                     <tr>
-                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                            <td><a href="#" class="chuong">Chương 201</a></td>
-                                            <td>3 phút trước</td>
+                                        <td><span class="index" id="one">1</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="two">2</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="three">3</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">4</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">5</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">6</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">7</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">8</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">9</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">10</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                </table>
+                        </div>
+                            </div>
+                <div class="col-7" id="danh-sach-chuong">
+                    <div class="title">DANH SÁCH CHƯƠNG <i class="fas fa-arrow-circle-down"></i></div>
+                    <div class="content">
+                        <div class="list-chuong">
+                                <table>
+                                        <tr>
+                                            <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
                                         </tr>
                                         <tr>
-                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                                <td>3 phút trước</td>
-                                            </tr> <tr>
-                                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                    <td><a href="#" class="chuong">Chương 201</a></td>
-                                                    <td>3 phút trước</td>
+                                                <td><i class="fas fa-certificate"></i> <a href="#">Chương 2: Vô địch thật tịch mịch</a></td>
+                                            </tr>
+                                            <tr>
+                                                    <td><i class="fas fa-certificate"></i> <a href="#">Chương 3: Vô địch thật tịch mịch</a></td>
                                                 </tr>
                                                 <tr>
-                                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                        <td><a href="#" class="chuong">Chương 201</a></td>
-                                                        <td>3 phút trước</td>
+                                                        <td><i class="fas fa-certificate"></i> <a href="#">Chương 4: Vô địch thật tịch mịch</a></td>
                                                     </tr>
                                                     <tr>
-                                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                            <td><a href="#" class="chuong">Chương 201</a></td>
-                                                            <td>3 phút trước</td>
-                                                        </tr> <tr>
-                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                <td>3 phút trước</td>
+                                                            <td><i class="fas fa-certificate"></i> <a href="#">Chương 5: Vô địch thật tịch mịch</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><i class="fas fa-certificate"></i> <a href="#">Chương 6: Vô địch thật tịch mịch</a></td>
                                                             </tr>
                                                             <tr>
-                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                <td>3 phút trước</td>
-                                                            </tr>
-                                                            <tr>
-                                                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                    <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                    <td>3 phút trước</td>
-                                                                </tr> <tr>
-                                                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                        <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                        <td>3 phút trước</td>
+                                                                    <td><i class="fas fa-certificate"></i> <a href="#">Chương 7: Vô địch thật tịch mịch</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td><i class="fas fa-certificate"></i> <a href="#">Chương 8: Vô địch thật tịch mịch</a></td>
                                                                     </tr>
-                                                                    <tr>
-                                                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                            <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                            <td>3 phút trước</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                                <td>3 phút trước</td>
-                                                                            </tr> <tr>
-                                                                                    <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                                    <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                                    <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                                    <td>3 phút trước</td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                        <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                                        <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                                        <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                                        <td>3 phút trước</td>
-                                                                                    </tr>
-                                                                                    <tr>
-                                                                                            <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                                            <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                                            <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                                            <td>3 phút trước</td>
-                                                                                        </tr> <tr>
-                                                                                                <td><i class="fas fa-chevron-right"></i> <a href="#">Vô địch thật tịch mịch</a></td>
-                                                                                                <td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-                                                                                                <td><a href="#" class="chuong">Chương 201</a></td>
-                                                                                                <td>3 phút trước</td>
-                                                                                            </tr>
-                    </table>
+                                </table>
+                        </div>
+                        <div class="list-chuong">
+                                    <table>
+                                        <tr>
+                                            <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                        </tr>
+                                        <tr>
+                                                <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                            </tr>
+                                            <tr>
+                                                    <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                </tr>
+                                                <tr>
+                                                        <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td><i class="fas fa-certificate"></i> <a href="#">Chương 1: Vô địch thật tịch mịch</a></td>
+                                                                    </tr>
+                                </table>
+                        </div>
+                 
                     </div>
+                </div>
+                <div class="col-7" id="binh-luan" style="background: #fff;">
+                    <div class="title"><i class="fas fa-comments"></i> BÌNH LUẬN </div>
+                    <div class="content" style="padding: 5px;">
+                            <div class="fb-comments" data-href="http://localhost:5500/info-truyen.html"  style="border: none; visibility: visible; width: 100%;" data-colorscheme="" data-width="" data-numposts="5"></div>
+                        </div>
         </div>
-            </div>
     </div>
     <div class="footer">
         <div class="footer-left">
@@ -390,7 +352,33 @@
             </div>
             <input type="button" value="Đăng nhập">
             <div class="bottom-text">
-               Chưa có tài khoản? <a HREF="#">Đăng ký</a>
+               Chưa có tài khoản? <a HREF="#" id="btn-logup">Đăng ký</a>
+            </div>
+     </form>
+    </div>
+    <div id="container-logup">
+        <i class="fas fa-times-circle fa-lg"></i>
+        <form action="#" method="post">
+            <h1 id="abac">Đăng ký</h1>
+            <div class="txtb">
+                <input type="text">
+                <span data-placeholder="Tài khoản"></span>
+            </div>
+            <div class="txtb">
+                <input type="password">
+                <span data-placeholder="Mật khẩu"></span>
+            </div>
+            <div class="txtb">
+                <input type="password">
+                <span data-placeholder="Xác nhận mật khẩu"></span>
+            </div>
+            <div class="txtb">
+                <input type="text">
+                <span data-placeholder="Email"></span>
+            </div>
+            <input type="button" value="Đăng ký">
+            <div class="bottom-text">
+               Đã có tài khoản? <a HREF="#" id="btn-login">Quay lại</a>
             </div>
      </form>
     </div>

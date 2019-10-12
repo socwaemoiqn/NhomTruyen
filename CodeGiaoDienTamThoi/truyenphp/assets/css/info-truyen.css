@@ -57,6 +57,12 @@
     font-size:14px;
     line-height: 23px;
 }
+#truyen-cung-tac-gia table td{
+    padding: 0 5px;
+}
+#truyen-cung-tac-gia table td i{
+    color: black;
+}
 #truyen-dang-hot table td{
    padding: 5px;
 }
@@ -104,4 +110,30 @@
 #truyen-dang-hot table td span.name{
     width: auto;
     padding: 0px 0px 0px 4px;
+}
+#danh-sach-chuong .list-chuong{
+    float:left;
+    width: 50%;
+}
+#danh-sach-chuong table{
+    width: 100%;
+}
+#danh-sach-chuong table td{
+   border: 1px dashed gray;
+   padding: 5px;
+   font-size: 15.5px;
+}
+#danh-sach-chuong table td a{
+text-decoration: none;
+}
+
+#danh-sach-chuong table td a:hover{
+   color:gray;
+}
+#danh-sach-chuong table td i{
+    color: black;
+    font-size:10px;
+}
+.fb-comments{
+    width: 100% !important;
 }
