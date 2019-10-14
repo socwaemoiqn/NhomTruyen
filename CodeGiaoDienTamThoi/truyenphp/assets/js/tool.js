@@ -2,6 +2,14 @@ var tool_item_top = document.getElementById("tool-item-top");
 var btnGoTop = document.querySelector(".tool-item .fa-arrow-alt-circle-up");
 var btnPhanHoi = document.querySelector(".tool-item .fa-envelope");
 var content_PhanHoi = "";
+var btnKhung_Full = document.getElementById("config-khung-full");
+var btnKhung_NotFull = document.getElementById("config-khung-notfull");
+var btnConfigTextSize = document.getElementById("config-text-size");
+var btnConfigFont = document.getElementById("config-font");
+var AllSpanOfContentChuong = document.querySelectorAll("#content-chuong p span");
+/// Chạy cấu hình giao diện khi lần đầu load trang
+config_Tool_default();
+/// Chạy cấu hình giao diện khi lần đầu load trang
 btnGoTop.onclick = function(){
     window.scrollTo({
         top: 0,
@@ -17,6 +25,24 @@ window.onload = function(){
 window.onscroll = function(){
     showBtnPhanHoi();
 };
+btnKhung_Full.onclick = function(){
+    let row_khung = document.querySelector(".main .row");
+    localStorage.setItem("khung","10px 0%");
+    row_khung.style.padding = localStorage.getItem("khung");
+};
+btnKhung_NotFull.onclick = function(){  
+    let row_khung = document.querySelector(".main .row");
+    localStorage.setItem("khung","10px 8%");
+    row_khung.style.padding = localStorage.getItem("khung");
+};
+btnConfigTextSize.onchange = function(){
+    localStorage.setItem("fontSize",this.value);
+    AllSpanOfContentChuong[0].style.fontSize = ""+this.value+"px";
+};
+btnConfigFont.onchange = function(){
+    localStorage.setItem("fontFamily",this.value);
+    AllSpanOfContentChuong[1].style.fontFamily = ""+this.value;
+};
 function showBtnPhanHoi()
 {
     if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0)
@@ -31,3 +57,29 @@ function showBtnPhanHoi()
          tool_item_top.style.display = "none";
     }
 }
+function config_Tool_default(){
+    // Cấu hình khung 
+    let row_khung = document.querySelector(".main .row");
+    row_khung.style.padding = ""+localStorage.getItem("khung");
+    if(localStorage.getItem("khung") == "10px 8%")
+        btnKhung_NotFull.checked = true;
+    else
+        btnKhung_Full.checked = true;   
+    ///////////////////////////////
+    // Cấu hình text size
+    AllSpanOfContentChuong[0].style.fontSize = ""+localStorage.getItem("fontSize")+"px";
+    btnConfigTextSize.value = localStorage.getItem("fontSize");
+    ///////////////////////////////
+     // Cấu hình font family
+     AllSpanOfContentChuong[1].style.fontFamily = ""+localStorage.getItem("fontFamily");
+     btnConfigFont.value = localStorage.getItem("fontFamily");
+     ///////////////////////////////
+    //  let contentChuong = document.querySelector(".content#content-chuong");
+    //  contentChuong.style.background = "red";
+    //  for(var i = 0; i < AllSpanOfContentChuong.length; i++)
+    //  {
+    //      AllSpanOfContentChuong[i].style.background = "red";
+    //      AllSpanOfContentChuong[i].style.color = "white";
+    //  }
+}
+
