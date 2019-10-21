@@ -112,7 +112,7 @@
                      <span class="chuong-redirect" id="redirect-next">Chương sau <i class="fas fa-chevron-right"></i></span>
                 </div>
                 <div class="content" id="content-chuong">
-                    <p><span style="font-size:22px"><span style="font-family:Times New Roman,Times,serif"><em>&quot;Đấu lực, ba đoạn&quot;</em><br />
+                    <p><span style="font-size:22px;"><span style="font-family:Times New Roman,Times,serif;"><em>&quot;Đấu lực, ba đoạn&quot;</em><br />
                         <br />
                         <span style="background-color:#f4f4f4; color:#2b2b2b">Nh&igrave;n năm chữ to lớn c&oacute; ch&uacute;t ch&oacute;i mắt tr&ecirc;n trắc nghiệm ma thạch, thiếu ni&ecirc;n mặt kh&ocirc;ng ch&uacute;t thay đổi, thần sắc tự giễu, nắm chặt tay, bởi v&igrave; d&ugrave;ng lực qu&aacute; mạnh l&agrave;m m&oacute;ng tay đ&acirc;m thật s&acirc;u v&agrave;o trong l&ograve;ng b&agrave;n tay, mang đến từng trận trận đau đớn trong t&acirc;m hồn...</span><br />
                         <br />
@@ -243,28 +243,39 @@
                 <table border="1">
                     <tr>
                         <td>Màu nền</td>
-                        <td><select name="" id="">
-                            <option>Xám nhạt</option>
+                        <td><select name="" id="config-background-color">
+                            <option value="#f4f4f4-#4e4e4e">Xám nhạt</option>
+                            <option value="#f4f4e4-#4e4e4e">Vàng nhạt</option>
+                            <option value="#eae4d3-#4e4e4e">Màu sepia</option>
+                            <option value="#d5d8dc-#4e4e4e">Xanh đậm</option>
+                            <option value="#efefab-#2b2b2b">Vàng ố</option>
+                            <option value="#c2b49b-#4e4e4e">Sách cũ</option>
+                            <option value="#232323-#DDDDDD">Màu tối</option>
                         </select></td>
                     </tr>
                     <tr>
                             <td>Font chữ</td>
-                            <td><select name="" id="">
-                                <option>Tahoma</option>
+                            <td><select name="" id="config-font">
+                                <option value="Time New Roman">Time New Roman</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Roboto Cendensed">Roboto Condensed</option>
+                                <option value="Verdana, Geneva, Tahoma, sans-serif">Verdana</option>
                             </select></td>
                         </tr>
                         <tr>
                                 <td>Size chữ</td>
-                                <td><select name="" id="">
-                                    <option>22</option>
+                                <td><select name="" id="config-text-size">
+                                    <option value="16">16</option>
+                                    <option value="18">18</option>
+                                    <option value="20">20</option>
+                                    <option value="22">22</option>
+                                    <option value="24">24</option>
+                                    <option value="26">26</option>
+                                    <option value="28">28</option>
+                                    <option value="30">30</option>
                                 </select></td>
                             </tr>
-                            <tr>
-                                    <td>Chiều cao dòng</td>
-                                    <td><select name="" id="">
-                                        <option>180%</option>
-                                    </select></td>
-                                </tr>
                                 <tr>
                                     <td>Full khung</td>
                                     <td>
@@ -377,7 +388,6 @@
     <!-- JS phần login -->
 <script src="assets/js/login.js">
 </script>
-
 <!-- JS phần login -->
 <!-- JS phần menu và responsive -->
 <script src="assets/js/menu-responsive.js">

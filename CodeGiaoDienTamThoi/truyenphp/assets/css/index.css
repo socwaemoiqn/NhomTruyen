@@ -118,15 +118,6 @@
     }
 }
 @-webkit-keyframes hienRightToLeft{
-    /* 0%{
-        left: -100%;
-        opacity: 0;
-    }
-    100%{
-        left: 0%;
-        opacity: 1;
-    
-    } */
     from{
         left: 100%;
         transform: scale(0);
@@ -141,7 +132,7 @@
 #truyen-de-cu .content .fa-chevron-left,#truyen-de-cu .content .fa-chevron-right{
     position: absolute;
     top: 50%;   
-    z-index: 5;
+    z-index: 4;
     color: gray;
     opacity: 0.9;
     cursor: pointer;

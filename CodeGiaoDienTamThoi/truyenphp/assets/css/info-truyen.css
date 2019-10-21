@@ -37,8 +37,19 @@
     border: 0.5px solid gray;
 }
 .info-content-rate{
-    font-size: 10px;
+    font-size: 13px;
     text-align: center;
+}
+.info-content-rate span{
+    font-size: 11px;
+    line-height: 15px;
+}
+.info-content-rate i{
+    cursor: pointer;
+}
+
+.info-content-rate i:hover{
+    color:yellow;
 }
 .info-content-content{
     font-size:14px;
