@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbtacgia")
+@Table(name="tbTACGIA")
 public class tacGiaEntity {
 	private int ID;
 	private String tenTacGia;
@@ -15,7 +15,7 @@ public class tacGiaEntity {
 	private String ngayTao;
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="MaTacGia")
 	public int getID() {
 		return ID;
 	}

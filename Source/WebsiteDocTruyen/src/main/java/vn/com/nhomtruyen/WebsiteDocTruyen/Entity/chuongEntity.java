@@ -6,32 +6,32 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="tbchuong")
+@Table(name="tbCHUONG")
 public class chuongEntity {
 	
 	private int id;
-	private int IDTruyen;
+	private int maTruyen;
 	private String tieuDe;
 	private String noiDung;
 	private String trangThai;
 	private String ngayTao;
 	
 	@Id
-	@Column(name="ID")
+	@Column(name="MaChuong")
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	@Column(name="IDTruyen")
+	@Column(name="MaTruyen")
 	public int getIDTruyen() {
-		return IDTruyen;
+		return maTruyen;
 	}
 	public void setIDTruyen(int iDTruyen) {
-		IDTruyen = iDTruyen;
+		maTruyen = iDTruyen;
 	}
-	@Column(name="TieuDe")
+	@Column(name="TenChuong")
 	public String getTieuDe() {
 		return tieuDe;
 	}

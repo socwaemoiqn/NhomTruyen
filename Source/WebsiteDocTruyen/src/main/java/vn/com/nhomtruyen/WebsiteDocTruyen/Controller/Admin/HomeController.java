@@ -86,20 +86,20 @@ public class HomeController {
 
 	@RequestMapping(value = "/ql_truyen", method = RequestMethod.GET)
 	public String QlTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 3;
-		final int Max_Navigation = 4;
-		
-		PaginationResult<truyenSelectInfo> listTruyen= truyenDao.litTruyen(page, Max_Result, Max_Navigation);
-		
-		model.addAttribute("listTruyen", listTruyen);
-		
-		
+//		int page = 1;
+//		try {
+//			page = Integer.parseInt(pageStr);
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//		}
+//		final int Max_Result = 3;
+//		final int Max_Navigation = 4;
+//		
+//		PaginationResult<truyenSelectInfo> listTruyen= truyenDao.litTruyen(page, Max_Result, Max_Navigation);
+//		
+//		model.addAttribute("listTruyen", listTruyen);
+//		
+//		
 		truyenInfo truyen = new truyenInfo();
 		model.addAttribute("truyen", truyen);
 		

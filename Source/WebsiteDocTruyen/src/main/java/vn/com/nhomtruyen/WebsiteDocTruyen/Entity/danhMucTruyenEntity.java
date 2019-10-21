@@ -16,7 +16,7 @@ public class danhMucTruyenEntity {
 	private String ngayTao;
 	
 	@Id
-	@Column(name = "IDDanhMuc")
+	@Column(name = "MaDanhMuc")
 	public String getId() {
 		return id;
 	}

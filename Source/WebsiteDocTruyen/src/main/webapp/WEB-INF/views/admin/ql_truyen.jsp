@@ -44,6 +44,7 @@
 									<th>Tên Truyện</th>
 									<th>Tên Tác Giả</th>
 									<th>Thể Loại Truyện</th>
+									<th>Nhóm dịch</th>
 									<th>Số Chương</th>
 									<th>Lượt Xem</th>
 									<th>Trạng Thái</th>
@@ -51,7 +52,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTruyen.list}" var="us"
+								<%-- <c:forEach items="${listTruyen.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
@@ -98,6 +99,7 @@
 							</div>
 						</c:if>
 					</div>
+					 --%>
 				</div>
 			</div>
 		</div>

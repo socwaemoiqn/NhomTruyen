@@ -22,13 +22,13 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.tacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.userAccountsDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.taiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.chuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.tacGiaImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.truyenImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.userAccountsImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.taiKhoanImpl;
 
 @Configuration
 @ComponentScan(" vn.com.nhomtruyen.WebsiteDocTruyen.*")
@@ -97,8 +97,8 @@ public class ApplicationContextConfig {
 			return new theLoaiTruyenImpl();
 		}
 		@Bean(name = "userAccountsDAO")
-		public userAccountsDAO getUserAccountDAO() {
-			return new userAccountsImpl();
+		public taiKhoanDAO getUserAccountDAO() {
+			return new taiKhoanImpl();
 		}
 		@Bean(name = "truyenDAO")
 		public truyenDAO getTruyenDAO() {

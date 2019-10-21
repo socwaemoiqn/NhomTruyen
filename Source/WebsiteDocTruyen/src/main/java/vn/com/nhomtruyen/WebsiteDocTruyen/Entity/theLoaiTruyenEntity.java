@@ -15,7 +15,7 @@ public class theLoaiTruyenEntity {
 	private String ngayTao;
 	
 	@Id
-	@Column(name = "IDTheLoai")
+	@Column(name = "MaTheLoai")
 	public String getId() {
 		return id;
 	}
