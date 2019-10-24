@@ -10,8 +10,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.chiTietDanhMucEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.danhMucTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
 
 public class danhMucTruyenImpl implements danhMucTruyenDAO {
@@ -44,7 +46,7 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 	}
 
 	@Override
-	public danhMucTruyenEntity findDanhMucTruyenEntity(String id) {
+	public danhMucTruyenEntity findDanhMucTruyenEntity(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Criteria crit = session.createCriteria(danhMucTruyenEntity.class);
 		crit.add(Restrictions.eq("id", id));
@@ -52,7 +54,7 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 	}
 
 	@Override
-	public danhMucTruyenInfo findDanhMucTruyenInfo(String id) {
+	public danhMucTruyenInfo findDanhMucTruyenInfo(int id) {
 		danhMucTruyenEntity danhMucTruyenEntity= this.findDanhMucTruyenEntity(id);
 		if(danhMucTruyenEntity ==null) {
 			return null;
@@ -63,11 +65,11 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 
 	@Override
 	public void insertDanhMucTruyen(danhMucTruyenInfo danhMucTruyenInfo) {
-		String id = danhMucTruyenInfo.getId();
+		int id = danhMucTruyenInfo.getId();
 		danhMucTruyenEntity danhMucTruyenEntity = null;
-		if (id != null) {
+		
 			danhMucTruyenEntity = this.findDanhMucTruyenEntity(id);
-		}
+		
 		boolean isNew = false;
 		if (danhMucTruyenEntity == null) {
 			isNew = true;
@@ -86,12 +88,40 @@ public class danhMucTruyenImpl implements danhMucTruyenDAO {
 	}
 
 	@Override
-	public void deleteDanhMucTruyen(String id) {
+	public void deleteDanhMucTruyen(int id) {
 		danhMucTruyenEntity danhMucTruyenEntity = this.findDanhMucTruyenEntity(id);
 		if (danhMucTruyenEntity != null) {
 			this.sessionFactory.getCurrentSession().delete(danhMucTruyenEntity);
 		}
 
+	}
+
+	@Override
+	public List<chiTietDanhMucTruyenInfo> listTenDMByMaTruyen(int maTruyen) {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + chiTietDanhMucTruyenInfo.class.getName()
+				+ "(a.id, a.maTruyen,d.tenDanhMuc)" + " from "
+				+ chiTietDanhMucEntity.class.getName() +" a, "+ danhMucTruyenEntity.class.getName() + " d "
+				+ " where a.maDanhMuc=d.id and a.maTruyen =: mt";
+
+		Query query = se.createQuery(sql);
+		query.setParameter("mt", maTruyen);
+		return query.list();
+	}
+
+	@Override
+	public List<chiTietDanhMucTruyenInfo> listTenDM() {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + chiTietDanhMucTruyenInfo.class.getName()
+				+ "(a.id, a.maTruyen,d.tenDanhMuc)" + " from "
+				+ chiTietDanhMucEntity.class.getName() +" a, "+ danhMucTruyenEntity.class.getName() + " d "
+				+ " where a.maDanhMuc=d.id ";
+
+		Query query = se.createQuery(sql);
+	
+		return query.list();
 	}
 
 }

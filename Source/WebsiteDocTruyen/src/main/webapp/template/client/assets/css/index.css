@@ -1,13 +1,18 @@
-.main
+.row
 { 
-    padding: 10px 10%;
+        padding: 10px 8%;
 }
 .col-7,.col-3,.col-10{
     border: 1px solid gray;
-    min-height: 330px;
     background: #4f4e52;
     outline: none;
     margin-bottom: 20px;
+}
+.col-7,.col-10{
+    min-height: 330px;
+}
+.col-3{
+   min-height: 200px;
 }
 .col-10{
     width: 100%;
@@ -58,40 +63,70 @@
     overflow: hidden;
 }
 
-.hide-slide-right-to-left{
-    float:left;
-    animation: anTruyenDeCu 1s forwards;
-}
+/* Nút slide phải */
 .hide-slide-left-to-right{
-    float:right;
-    animation: anTruyenDeCu 1s forwards;
-}
-.hien-slide-right-to-left{
-    float:right;
-    animation: hienTruyenDeCu 1s forwards;
+    animation: anLelfToRight 1s forwards;
 }
 .hien-slide-left-to-right{
-    float:left;
-    animation: hienTruyenDeCu 1s forwards;
+    animation: hienLelfToRight 1s forwards;
 }
-@-webkit-keyframes anTruyenDeCu{
+.hide-slide-right-to-left{
+    animation: anRightToLeft 1s forwards;
+}
+.hien-slide-right-to-left{
+    animation: hienRightToLeft 1s forwards;
+}
+@-webkit-keyframes anLelfToRight{
     0%{
-        width: 31.3%;
+        left:0%;
         opacity: 1;
     }
     100%{
-        width: 0%;
+        left:100%;
         opacity: 0;
     }
 }
-@-webkit-keyframes hienTruyenDeCu{
-    0%{
-        width: 0%;
+@-webkit-keyframes hienLelfToRight{
+    /* 0%{
+        left: -100%;
         opacity: 0;
     }
     100%{
-        width: 31.3%;
+        left: 0%;
         opacity: 1;
+    
+    } */
+    from{
+        left: -100%;
+        transform: scale(0);
+        opacity: 0;
+    }
+    to{
+        left: 0%;
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+@-webkit-keyframes anRightToLeft{
+    0%{
+       left:0%;
+        opacity: 1;
+    }
+    100%{
+        left:-100%;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes hienRightToLeft{
+    from{
+        left: 100%;
+        transform: scale(0);
+        opacity: 0;
+    }
+    to{
+        left: 0%;
+        opacity: 1;
+        transform: scale(1);
     }
 }
 #truyen-de-cu .content .fa-chevron-left,#truyen-de-cu .content .fa-chevron-right{
@@ -103,6 +138,9 @@
     cursor: pointer;
     transform: translateY(-50%);
 } 
+.disable-click{
+    pointer-events: none;
+}
 #truyen-de-cu .content .fa-chevron-right{
     right: 1px;
 } 
@@ -115,21 +153,28 @@
 #truyen-de-cu .content .fa-chevron-left:hover{
     opacity: 1;
 }
+#truyen-de-cu .content #content-item,#truyen-de-cu .content #content-item2{
+    position: relative;
+    left: 0%;
+}
+#truyen-de-cu .content #content-item2{
+   display: none;
+}
 #truyen-de-cu .content .item{
     position: relative;
     width: 31.3%;
-    height: 280px;
-    border: 1px solid gray;
-    float: left;   margin: 0 1%;
-
+    height: 350px;
+    border: 1px solid gray; 
+     margin: 0 1%;
+     float: left;
 }
-.content .item img{
+.content img{
     width: 100%;
     height: 100%;
     transition: .15s;
     cursor: pointer;
 }
-.content .item .item-title{
+.content .item-title{
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -142,10 +187,10 @@
     text-align: center;
     line-height: 30px;
 }
- .content .item .item-title a{
+ .content .item-title a{
     text-decoration: none;
 }
- .content .item .item-status{
+ .content .item-status{
     position: absolute;
     z-index: 1;
     height: 25px;
@@ -157,10 +202,10 @@
     font-size: 13px;
     padding: 2px 7px;
 }
- .content .item .item-status i{
+ .content  .item-status i{
     color: #a21d0a;
 }
- .content .item .item-status::after{
+ .content .item-status::after{
     content: "";
     position: absolute;
     top: 0px;
@@ -171,12 +216,12 @@
     opacity: 0.9;
 
 }
-.content .item .item-title:hover + img{
+.content .item-title:hover + img{
     width: 103%;
     height: 103%;
    
 }
-.content .item .item-title:hover{
+.content .item-title:hover{
     width: 103%;
 }
 .col-3 .content table{

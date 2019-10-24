@@ -4,12 +4,14 @@ public class truyenInfo {
 
 	private int ID;
 	private String tenTruyen;
-	private int IdTacGia;
-	private int IdDanhMuc;
-	private int IDTheLoai;
+	private String tenTacGia;
+	private int matacgia;
+	private int maDanhMuc;
+	private int maTheLoai;
 	private int soChuong;
 	private String gioiThieu;
-	private double luotXem;
+	private int luotXem;
+	private String nguon;
 	private String hinhAnh;
 	private String trangThai;
 	private String ngayTao;
@@ -17,17 +19,20 @@ public class truyenInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public truyenInfo(int iD, String tenTruyen, int idTacGia, int idDanhMuc, int iDTheLoai, int soChuong,
-			String gioiThieu, double luotXem, String hinhAnh, String trangThai, String ngayTao) {
+	public truyenInfo(int iD, String tenTruyen, String tenTacGia, int matacgia, int maDanhMuc, int maTheLoai,
+			int soChuong, String gioiThieu, int luotXem, String nguon, String hinhAnh, String trangThai,
+			String ngayTao) {
 		super();
 		ID = iD;
 		this.tenTruyen = tenTruyen;
-		IdTacGia = idTacGia;
-		IdDanhMuc = idDanhMuc;
-		IDTheLoai = iDTheLoai;
+		this.tenTacGia = tenTacGia;
+		this.matacgia = matacgia;
+		this.maDanhMuc = maDanhMuc;
+		this.maTheLoai = maTheLoai;
 		this.soChuong = soChuong;
 		this.gioiThieu = gioiThieu;
 		this.luotXem = luotXem;
+		this.nguon = nguon;
 		this.hinhAnh = hinhAnh;
 		this.trangThai = trangThai;
 		this.ngayTao = ngayTao;
@@ -44,23 +49,29 @@ public class truyenInfo {
 	public void setTenTruyen(String tenTruyen) {
 		this.tenTruyen = tenTruyen;
 	}
-	public int getIdTacGia() {
-		return IdTacGia;
+	public String getTenTacGia() {
+		return tenTacGia;
 	}
-	public void setIdTacGia(int idTacGia) {
-		IdTacGia = idTacGia;
+	public void setTenTacGia(String tenTacGia) {
+		this.tenTacGia = tenTacGia;
 	}
-	public int getIdDanhMuc() {
-		return IdDanhMuc;
+	public int getMatacgia() {
+		return matacgia;
 	}
-	public void setIdDanhMuc(int idDanhMuc) {
-		IdDanhMuc = idDanhMuc;
+	public void setMatacgia(int matacgia) {
+		this.matacgia = matacgia;
 	}
-	public int getIDTheLoai() {
-		return IDTheLoai;
+	public int getMaDanhMuc() {
+		return maDanhMuc;
 	}
-	public void setIDTheLoai(int iDTheLoai) {
-		IDTheLoai = iDTheLoai;
+	public void setMaDanhMuc(int maDanhMuc) {
+		this.maDanhMuc = maDanhMuc;
+	}
+	public int getMaTheLoai() {
+		return maTheLoai;
+	}
+	public void setMaTheLoai(int maTheLoai) {
+		this.maTheLoai = maTheLoai;
 	}
 	public int getSoChuong() {
 		return soChuong;
@@ -74,11 +85,17 @@ public class truyenInfo {
 	public void setGioiThieu(String gioiThieu) {
 		this.gioiThieu = gioiThieu;
 	}
-	public double getLuotXem() {
+	public int getLuotXem() {
 		return luotXem;
 	}
-	public void setLuotXem(double luotXem) {
+	public void setLuotXem(int luotXem) {
 		this.luotXem = luotXem;
+	}
+	public String getNguon() {
+		return nguon;
+	}
+	public void setNguon(String nguon) {
+		this.nguon = nguon;
 	}
 	public String getHinhAnh() {
 		return hinhAnh;
@@ -98,5 +115,6 @@ public class truyenInfo {
 	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
 	}
+	
 	
 }

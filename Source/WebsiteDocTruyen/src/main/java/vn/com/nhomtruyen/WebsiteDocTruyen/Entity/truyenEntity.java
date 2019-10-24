@@ -15,7 +15,7 @@ public class truyenEntity {
 	private int maNhomDich;
 	private int soChuong;
 	private String gioiThieu;
-	private double luotXem;
+	private int luotXem;
 	private String nguon;
 	private String hinhAnh;
 	private String trangThai;
@@ -66,10 +66,10 @@ public class truyenEntity {
 		this.gioiThieu = gioiThieu;
 	}
 	@Column(name="LuotXem")	
-	public double getLuotXem() {
+	public int getLuotXem() {
 		return luotXem;
 	}
-	public void setLuotXem(double luotXem) {
+	public void setLuotXem(int luotXem) {
 		this.luotXem = luotXem;
 	}
 	@Column(name="Nguon")	

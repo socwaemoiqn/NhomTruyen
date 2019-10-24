@@ -55,6 +55,17 @@ public class chuongImpl implements chuongDAO{
 		else
 		return false;
 	}
+	@Override
+	public List<chuongInfo> listChuongByIdTruyen(int matruyen) {
+		Session session =this.sessionFactory.getCurrentSession();
+		String sql=" Select new " + chuongInfo.class.getName()
+				+"(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)"
+				+ " from "+chuongEntity.class.getName() + " ch where ch.IDTruyen  = :id";
+		
+		Query query = session.createQuery(sql);
+		query.setParameter("id", matruyen);
+		return query.list();
+	}
 	
 
 }

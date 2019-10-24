@@ -30,7 +30,7 @@ public class QL_DanhMucTruyenController {
 	public String themDMTruyenPage(Model model, HttpServletRequest request) {
 		Random rand = new Random();
 		Calendar cal = Calendar.getInstance();
-		String id =""+rand.nextInt(1000); 
+		int id =rand.nextInt(1000); 
 		String tenDanhMuc=request.getParameter("tenDanhMuc");
 		String gioiThieu=request.getParameter("gioiThieu");
 		String trangThai="1";
@@ -41,8 +41,8 @@ public class QL_DanhMucTruyenController {
 		return "redirect:/quan-tri/ql_danhmuc_truyen";
 	}
 	@RequestMapping(value="/xoa", method=RequestMethod.GET)
-	public String xoaDanhMuc(Model model, @RequestParam("id") String id) {
-		if(id!=null) {
+	public String xoaDanhMuc(Model model, @RequestParam("id") int id) {
+		if(id!=0) {
 			danhMucTruyenDAO.deleteDanhMucTruyen(id);
 		}
 		return "redirect:/quan-tri/ql_danhmuc_truyen";
@@ -51,10 +51,10 @@ public class QL_DanhMucTruyenController {
 	
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
-	public String updataDanhMuc(Model model, @RequestParam("id") String id) {
+	public String updataDanhMuc(Model model, @RequestParam("id") int id) {
 		danhMucTruyenInfo danhMucTruyenInfo=null;
 		
-		if(id!=null) {
+		if(id!= 0) {
 			danhMucTruyenInfo=danhMucTruyenDAO.findDanhMucTruyenInfo(id);
 		}
 		if(danhMucTruyenInfo!=null) {

@@ -12,4 +12,5 @@ public interface chuongDAO {
 	public PaginationResult<chuongInfo> listChuongOfTruyen(int idTruyen,int page, int maxResult, int maxNavigationPage);
 	public chuongInfo chuongOfID(int idChuong);
 	public boolean upDataChuong(String nd, int idChuong);
+	public List<chuongInfo> listChuongByIdTruyen(int matruyen);
 }

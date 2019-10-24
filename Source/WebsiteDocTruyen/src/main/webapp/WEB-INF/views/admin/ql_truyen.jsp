@@ -43,8 +43,7 @@
 									<th>Hình Ảnh</th>
 									<th>Tên Truyện</th>
 									<th>Tên Tác Giả</th>
-									<th>Thể Loại Truyện</th>
-									<th>Nhóm dịch</th>
+									<th>Số Chương</th>
 									<th>Số Chương</th>
 									<th>Lượt Xem</th>
 									<th>Trạng Thái</th>
@@ -52,21 +51,33 @@
 								</tr>
 							</thead>
 							<tbody>
-								<%-- <c:forEach items="${listTruyen.list}" var="us"
+								<c:forEach items="${listTruyen.list}" var="us"
 									varStatus="status">
-									<tr class="odd gradeX">
+									<tr class="odd gradeA">
 										<td scope="row">${status.index + 1}</td>
 										<td class="center">${us.hinhAnh}</td>
 										<td>${us.tenTruyen}</td>
 										<td class="center">${us.tenTacGia }</td>
-										<td class="center">${us.tenTheLoai }</td>
-										<td class="center">${us.soChuong }</td>
-										<td class="center">${us.luotXem }</td>
-										<td class="center">....</td>
-										<td class="center"><a class="btn btn-primary btn-circle"
-											title="Tất cả chương"
+
+										<td><c:forEach items="${dmt}" var="dm"
+												varStatus="status">
+												
+												<c:if test="${us.ID == dm.maTruyen}">
+												${dm.tenDanhMuc},</c:if>
+											</c:forEach></td>
+
+										<td style="text-align: center"><a title="Tất cả chương"
 											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?idtruyen=${us.ID}">
-												<i class="fa fa-list-ul"></i>
+												${us.soChuong } </a></td>
+										<td style="text-align: center">${us.luotXem }</td>
+										<td style="text-align: center"><c:choose>
+												<c:when test="${us.trangThai == '1' }"> Full</c:when>
+												<c:otherwise>Đang cập nhật</c:otherwise>
+											</c:choose></td>
+										<td class="center"><a class="btn btn-warning btn-circle"
+											title="Xem trước"
+											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_truyen?idtruyen=${us.ID}">
+												<i class="fa fa-eye"></i>
 										</a> <a data-toggle="modal" data-target="#sua"
 											class="btn btn-success btn-circle"
 											title="Chỉnh sửa thông tin truyện"
@@ -99,7 +110,7 @@
 							</div>
 						</c:if>
 					</div>
-					 --%>
+
 				</div>
 			</div>
 		</div>
@@ -117,7 +128,7 @@
 						<h4>Nhập thông tin về truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form:form modelAttribute="truyen"
+								<form:form modelAttribute="truyen" enctype="multipart/form-data"
 									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/them"
 									method="post">
 									<div class="form-group">
@@ -130,7 +141,7 @@
 									</div>
 									<div class="form-group">
 										<label>Tác giả</label>
-										<form:select path="IdTacGia" class="form-control">
+										<form:select path="matacgia" class="form-control">
 											<form:options items="${tacGia}" itemLabel="tenTacGia"
 												itemValue="ID" />
 										</form:select>
@@ -141,7 +152,7 @@
 									</div>
 									<div class="form-group">
 										<label>Danh mục</label>
-										<form:select path="IdDanhMuc" class="form-control">
+										<form:select path="maDanhMuc" class="form-control">
 											<form:options items="${danhMuc}" itemLabel="tenDanhMuc"
 												itemValue="id" />
 										</form:select>
@@ -151,7 +162,7 @@
 									</div>
 									<div class="form-group">
 										<label>Thể Loại</label>
-										<form:select path="IDTheLoai" class="form-control">
+										<form:select path="maTheLoai" class="form-control">
 											<form:options items="${theLoai}" itemLabel="tenTheLoai"
 												itemValue="id" />
 										</form:select>

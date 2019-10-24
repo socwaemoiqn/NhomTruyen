@@ -7,4 +7,6 @@ encoding//src/main/webapp/WEB-INF/views/admin/ql_tacgia.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_ql_chuong.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_suachuong.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_themchuong.jsp=UTF-8
-encoding//src/main/webapp/common/client/footer.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_xemtruyen.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/info_truyen.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/xem_chuong.jsp=UTF-8

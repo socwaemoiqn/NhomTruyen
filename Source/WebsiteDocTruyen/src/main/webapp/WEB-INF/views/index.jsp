@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,44 +11,78 @@
 <body>
 
 
-${loi}
+	${loi}
 	<div class="main">
 		<div class="row">
-			<div class="col-7" id="truyen-de-cu">
+			<div class="col-7" id="truyen-de-cu" style="overflow: hidden;">
 				<div class="title">
 					TRUYỆN ĐỀ CỬ <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<i class="fas fa-chevron-left fa-4x"></i>
-					<div class="item">
-						<div class="item-status">
-							<i class="fab fa-hotjar"></i> Full
+					<div id="content-item">
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Full
+							</div>
+							<div class="item-title">
+								<a href="#">Phàm nhân tu tiên</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg" />
 						</div>
-						<div class="item-title">
-							<a href="#">Phàm nhân tu tiên</a>
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Chương 1997
+							</div>
+							<div class="item-title">
+								<a href="#">Đế tôn</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/eJwN0ccWY1AAANAvcibaw2IWgugl6mPj6KKTKM_Xz9xfuENL_tHLEXElOF5cmhlw3MKwSJY8S0qvccVjpS9Gfvw2vSo-CJ4HVgScvKQOpayvsDOQseJoEZvt4N1f57DwUGfhktV5Uw72Yb1tMSoyDkrv0_RyTB1GY7sZ5opbQcPMwu4MqTi9GZr9lJqyyELFlG7jkCqyJ77UmZuh46v9_dHiEgRzsne0Mw-PJ6lnLypUImlpZkbbrY4ZePILRqCHJB9LF52nXVoNjsYBce8rm_ZcubdnFsZgib7UYqPok11U20jQdWsK8Isgf71xrW6aVCCWBpqHsMqaBk5EEWlX5DKqHjwr-Q6I6L26GGHT8IUZk9k_5NasGkACYplUxwIjdYGfFX73u_bFw4FJy6yH3wZ84spLZo01_zwk7aGGAekx0d77ugBEEGthY3xiihVUOsPis7evoVbzI3K4ShPTBeOD_0MusxLnOrHD4zyQuWMsp_66hCjTTI4qxNH5JOL65G3f9F2nm-PCm8XJ-mW5eaYNdxk0WfMxvE6AP-rAUISWwNUs16-wsRO4UGoTi2Zmc7MUg9_lrEeNyh_fRCfVvZUn2O18Xng27zyHz-ozBX0hD49Tzug5hkdn_IxBgrx3ozDMW-zxhRfu3m_rXyw7vAZH3C-VxDI6Ez__njjBYS3OEf8A1lXWpw==/quan-khi.jpg" />
 						</div>
-						<img
-							src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg" />
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Chương 89
+							</div>
+							<div class="item-title">
+								<a href="#">Tiên nghịch</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg" />
+						</div>
 					</div>
-					<div class="item">
-						<div class="item-status">
-							<i class="fab fa-hotjar"></i> Chương 1997
+					<div id="content-item2">
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Full
+							</div>
+							<div class="item-title">
+								<a href="#">Tối cường thần thoại đế hoàng</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg" />
 						</div>
-						<div class="item-title">
-							<a href="#">Đế tôn</a>
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Chương 1997
+							</div>
+							<div class="item-title">
+								<a href="#">Đế tôn</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/eJwN0ccWY1AAANAvcibaw2IWgugl6mPj6KKTKM_Xz9xfuENL_tHLEXElOF5cmhlw3MKwSJY8S0qvccVjpS9Gfvw2vSo-CJ4HVgScvKQOpayvsDOQseJoEZvt4N1f57DwUGfhktV5Uw72Yb1tMSoyDkrv0_RyTB1GY7sZ5opbQcPMwu4MqTi9GZr9lJqyyELFlG7jkCqyJ77UmZuh46v9_dHiEgRzsne0Mw-PJ6lnLypUImlpZkbbrY4ZePILRqCHJB9LF52nXVoNjsYBce8rm_ZcubdnFsZgib7UYqPok11U20jQdWsK8Isgf71xrW6aVCCWBpqHsMqaBk5EEWlX5DKqHjwr-Q6I6L26GGHT8IUZk9k_5NasGkACYplUxwIjdYGfFX73u_bFw4FJy6yH3wZ84spLZo01_zwk7aGGAekx0d77ugBEEGthY3xiihVUOsPis7evoVbzI3K4ShPTBeOD_0MusxLnOrHD4zyQuWMsp_66hCjTTI4qxNH5JOL65G3f9F2nm-PCm8XJ-mW5eaYNdxk0WfMxvE6AP-rAUISWwNUs16-wsRO4UGoTi2Zmc7MUg9_lrEeNyh_fRCfVvZUn2O18Xng27zyHz-ozBX0hD49Tzug5hkdn_IxBgrx3ozDMW-zxhRfu3m_rXyw7vAZH3C-VxDI6Ez__njjBYS3OEf8A1lXWpw==/quan-khi.jpg" />
 						</div>
-						<img
-							src="https://cdnaz.truyenfull.vn/cover/eJwN0ccWY1AAANAvcibaw2IWgugl6mPj6KKTKM_Xz9xfuENL_tHLEXElOF5cmhlw3MKwSJY8S0qvccVjpS9Gfvw2vSo-CJ4HVgScvKQOpayvsDOQseJoEZvt4N1f57DwUGfhktV5Uw72Yb1tMSoyDkrv0_RyTB1GY7sZ5opbQcPMwu4MqTi9GZr9lJqyyELFlG7jkCqyJ77UmZuh46v9_dHiEgRzsne0Mw-PJ6lnLypUImlpZkbbrY4ZePILRqCHJB9LF52nXVoNjsYBce8rm_ZcubdnFsZgib7UYqPok11U20jQdWsK8Isgf71xrW6aVCCWBpqHsMqaBk5EEWlX5DKqHjwr-Q6I6L26GGHT8IUZk9k_5NasGkACYplUxwIjdYGfFX73u_bFw4FJy6yH3wZ84spLZo01_zwk7aGGAekx0d77ugBEEGthY3xiihVUOsPis7evoVbzI3K4ShPTBeOD_0MusxLnOrHD4zyQuWMsp_66hCjTTI4qxNH5JOL65G3f9F2nm-PCm8XJ-mW5eaYNdxk0WfMxvE6AP-rAUISWwNUs16-wsRO4UGoTi2Zmc7MUg9_lrEeNyh_fRCfVvZUn2O18Xng27zyHz-ozBX0hD49Tzug5hkdn_IxBgrx3ozDMW-zxhRfu3m_rXyw7vAZH3C-VxDI6Ez__njjBYS3OEf8A1lXWpw==/quan-khi.jpg" />
-					</div>
-					<div class="item">
-						<div class="item-status">
-							<i class="fab fa-hotjar"></i> Chương 89
+						<div class="item">
+							<div class="item-status">
+								<i class="fab fa-hotjar"></i> Chương 89
+							</div>
+							<div class="item-title">
+								<a href="#">Tiên nghịch</a>
+							</div>
+							<img
+								src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg" />
 						</div>
-						<div class="item-title">
-							<a href="#">Tiên nghịch</a>
-						</div>
-						<img
-							src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDW1zU0SY8vN010dcrL1w9LyjeKysh28Uvz1HeEgnyDdP2yogif9BIfT19dR_1yQyNL3QxDSyNdz2QTIwC5kxPL/phi-thien.jpg" />
 					</div>
 					<i class="fas fa-chevron-right fa-4x"></i>
 				</div>
@@ -58,8 +94,9 @@ ${loi}
 				<div class="content">
 					<table>
 						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Tối
-									cường thần thoại đế hoàng <br> (Chương 1998)</a></td>
+							<td><a href="info-truyen.html"><i
+									class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br>
+									(Chương 1998)</a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><i class="fas fa-book-reader"></i> Đế
@@ -79,6 +116,16 @@ ${loi}
 				</div>
 				<div class="content">
 					<table>
+						<c:forEach items="${truyen}" var="tr" varStatus="status">
+							
+							<tr>
+							<td><i class="fas fa-chevron-right"></i> 
+							<a href="${pageContext.request.contextPath}/truyen?idTruyen=${tr.ID}">${tr.tenTruyen }</a></td>
+							<td><a href="#">${tr.tenTacGia }</a> </td>
+							<td><a href="#" class="chuong">${tr.soChuong } Chương</a></td>
+							<td>3 phút trước</td>
+						</tr>
+						</c:forEach>
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
 									địch thật tịch mịch</a></td>
@@ -156,20 +203,7 @@ ${loi}
 							<td><a href="#" class="chuong">Chương 201</a></td>
 							<td>3 phút trước</td>
 						</tr>
-						<tr>
-							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
-									địch thật tịch mịch</a></td>
-							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-							<td><a href="#" class="chuong">Chương 201</a></td>
-							<td>3 phút trước</td>
-						</tr>
-						<tr>
-							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
-									địch thật tịch mịch</a></td>
-							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-							<td><a href="#" class="chuong">Chương 201</a></td>
-							<td>3 phút trước</td>
-						</tr>
+						
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
 									địch thật tịch mịch</a></td>
@@ -350,101 +384,12 @@ ${loi}
 		</div>
 	</div>
 	<!-- JS phần menu và responsive -->
-	<script>
-    var y = document.getElementById("user");
-    var z = document.getElementById("search");
-    var danhMuc = document.getElementById("danhMuc");
-    var theLoai =  document.getElementById("theLoai");
-    var topnav = document.getElementById("myTopnav");
-    var slideLeft = document.querySelector("#truyen-de-cu .fa-chevron-left");
-    var slideRight = document.querySelector("#truyen-de-cu .fa-chevron-right");
-    var itemSlide = document.querySelectorAll("#truyen-de-cu .content .item");
-    danhMuc.onmouseover = function(){
-        ScrollToTop();
-    };
-    theLoai.onmouseover = function(){
-        ScrollToTop();
-    };
-    function ScrollToTop()
-    {
-        if(topnav.classList.length == 1)
-        window.scrollTo(0,0);
-    }
-    window.onscroll = function(){
-        if (document.body.scrollTop  > 0  || document.documentElement.scrollTop > 0) {
-            topnav.style.position = "fixed";
-        } else {
-            topnav.style.position = "static";  
-        }
-    };
-    window.onload = function(){
-        resize();
-    };
-    window.onresize = function () {
-        resize();
-    };
-    function resize()
-    {
-        
-        if(screen.width > 1131 && document.body.clientWidth > 1131)
-        {
-            y.style.position = "absolute";
-        }
-        else
-        {
-            y.style.position = "static";
-        }
-        if(screen.width <= 351 && document.body.clientWidth <= 351)
-        {
-            z.style.width = "250px";
-        }
-        else
-        {
-            z.style.width = "300px";
-        }
-    }
-    function myFunction() {
-
-        var x = document.getElementById("myTopnav");
-        if (x.className === "topnav") {
-            x.className += " responsive";
-
-        } else {
-            x.className = "topnav";
-
-        }
-    }
-    // Xử lí phần slide Truyện đề cử
-    slideLeft.onclick = function(){
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].classList.add("hide-slide-right-to-left");    
-        }
-        setTimeout(function(){},2000);
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "right"; 
-            itemSlide[i].classList.add("hien-slide-right-to-left");     
-        }    
-     };
-    slideRight.onclick = function(){
-        for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "right";
-            itemSlide[i].classList.add("hide-slide-left-to-right");
-            itemSlide[i].classList.remove("hide-slide-left-to-right");
-            
-        }    
-        setTimeout(function(){},2000);
-       for(var i = 0;i<itemSlide.length;i++)
-        {
-            itemSlide[i].style.float = "left"; 
-            itemSlide[i].classList.add("hien-slide-right-to-left");  
-            itemSlide[i].classList.remove("hien-slide-right-to-left");   
-        } 
-           
-    };
-    
-</script>
+	<script
+		src="${pageContext.request.contextPath}/template/client/assets/js/menu-responsive.js"></script>
+	<!-- JS phần menu và responsive -->
+	<!-- JS phần index -->
+	<script
+		src="${pageContext.request.contextPath}/template/client/assets/js/index.js"></script>
+	<!-- JS phần index -->
 </body>
 </html>

@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfoByTruyen;
 
 @Controller(value = "QL_TruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql_truyen")
@@ -22,11 +26,25 @@ public class QL_TruyenController {
 
 	@Autowired
 	private chuongDAO chuongDao;
+	@Autowired
+	private truyenDAO truyenDao;
+	@Autowired
+	private danhMucTruyenDAO dmtruyenDao;
 	
 	
 	@RequestMapping(value = "/them", method = RequestMethod.POST)
 	private String themTruyenAction(Model model, @ModelAttribute("truyen") truyenInfo truyen ) {
 		return "redirect:/quan-tri/ql_truyen";
+	}
+	@RequestMapping(value = "/xem_truyen", method = RequestMethod.GET)
+	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") int maTruyen ) {
+		
+		truyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
+		List<chiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+		
+		model.addAttribute("truyenById", tr);
+		model.addAttribute("dmById", ctdm);
+		return "admin/ql_truyen_xemtruyen";
 	}
 
 	@RequestMapping(value = "/ql_chuong", method = RequestMethod.GET)

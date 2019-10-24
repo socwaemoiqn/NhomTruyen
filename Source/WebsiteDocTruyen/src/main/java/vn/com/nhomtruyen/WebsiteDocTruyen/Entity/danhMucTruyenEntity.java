@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name = "tbDANHMUCTRUYEN")
 public class danhMucTruyenEntity {
 	
-	private String id;
+	private int id;
 	private String tenDanhMuc;
 	private String gioiThieu;
 	private String trangThai;
@@ -17,10 +17,10 @@ public class danhMucTruyenEntity {
 	
 	@Id
 	@Column(name = "MaDanhMuc")
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	@Column(name = "TenDanhMuc")
