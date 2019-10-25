@@ -54,4 +54,21 @@ function icon_rate_default()
             icon_rate[i].style.color = "yellow";
         }   
 }
+/// Xử li kích chọn time truyện đang hot
+var ele = document.querySelectorAll("#truyen-dang-hot table td span.type-time");
+for(var i = 0; i < ele.length ;i++)
+{
+    ele[i].setAttribute("onclick","type_time_active(this)");
+  
+}
+function type_time_active(e){
+    ele.forEach(function(item){
+        item.classList.remove("type-time-active");
+        if(!item.classList.contains("type-time-unactive"))
+             item.classList.add("type-time-unactive");
+    });
+     e.classList.add("type-time-active");
+     e.classList.remove("type-time-unactive");
+}
+
 

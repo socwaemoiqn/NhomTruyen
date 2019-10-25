@@ -9,10 +9,10 @@
     margin-bottom: 20px;
 }
 .col-7,.col-10{
-    min-height: 330px;
+    min-height: 300px;
 }
 .col-3{
-   min-height: 200px;
+   min-height: 170px;
 }
 .col-10{
     width: 100%;
