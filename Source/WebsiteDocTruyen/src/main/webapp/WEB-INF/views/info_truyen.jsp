@@ -10,9 +10,6 @@
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/template/client/assets/css/info-truyen.css">
 	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/template/client/assets/css/path.css">
-	
-	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/template/client/assets/css/tool.css">
 </head>
 <body>

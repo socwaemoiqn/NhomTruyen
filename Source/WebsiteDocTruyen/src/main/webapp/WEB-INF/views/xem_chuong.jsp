@@ -10,10 +10,7 @@
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/css/read.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/template/client/assets/css/tool.css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/template/client/assets/css/path.css">
+
 
 </head>
 <body>
@@ -134,8 +131,8 @@
 		src="${pageContext.request.contextPath}/template/client/assets/js/read.js">
 		
 	</script>
-	<script
-		src="${pageContext.request.contextPath}/template/client/assets/js/tool.js"></script>
 	<!-- JS phần menu và responsive -->
+	
+	<script src="${pageContext.request.contextPath}/template/client/assets/js/tool-read.js"></script>
 </body>
 </html>
