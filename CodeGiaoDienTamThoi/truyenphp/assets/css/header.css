@@ -27,7 +27,7 @@ b:hover,.dropdown-content strong:hover{
     background: none;
 }
 .dropdown-content a b{
-    color: red;
+    color: #8eb3fd;
 }
 #myTopnav input[type=text] {
     padding: 10px 10px;
@@ -112,11 +112,11 @@ button[type=submit] {
     border-radius: 0px 10px 10px 10px;
     border: 2px solid #555;
     outline: none;
-    opacity: 0.9;
+    opacity: 1;
     
     
 }
-.dropdown-content a {
+#danhMuc .dropdown-content a {
     float: none;
     color: black;
     padding: 10px 16px;
@@ -125,7 +125,15 @@ button[type=submit] {
     text-align: left;
     background: linear-gradient(120deg,#3399FF,lightslategray,lightslategray,lightslategray,lightslategray,#3399FF);
 }
-
+#theLoai .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 3px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    background: none;
+}
 
 .topnav a:hover, .dropdown:hover .dropbtn {
     background-color: #555;

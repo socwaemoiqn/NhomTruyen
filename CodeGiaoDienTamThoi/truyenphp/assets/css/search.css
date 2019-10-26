@@ -1,5 +1,5 @@
 #tim-kiem-truyen{
-    min-height: 700px;
+    min-height: 1500px;
 }
 #tim-kiem-truyen .search-item{
     width: 100%;
@@ -45,6 +45,10 @@
 .search-item-infor .search-item-infor-name b span#search-item-status-hot{
     border: 1px solid #fd8383;
     color: #fd8383;
+}
+.search-item-infor .search-item-infor-name b span#search-item-status-new{
+    border: 1px solid #8eb3fd;
+    color: #8eb3fd;
 }
 .search-item-infor .search-item-infor-name b i{
     color: #FF9933;
