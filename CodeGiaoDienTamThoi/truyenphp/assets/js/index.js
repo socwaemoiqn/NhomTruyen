@@ -17,13 +17,6 @@ function ScrollToTop()
     if(topnav.classList.length == 1)
     window.scrollTo(0,0);
 }
-window.onscroll = function(){
-    if (document.body.scrollTop  > 0  || document.documentElement.scrollTop > 0 && screen.width > 1131 && document.body.clientWidth > 1131) {
-        topnav.style.position = "fixed";
-    } else {
-        topnav.style.position = "static";  
-    }
-};
 slideRight.onclick = function(){
     slideRight.classList.add("disable-click");
     if(content_item_current == 1)

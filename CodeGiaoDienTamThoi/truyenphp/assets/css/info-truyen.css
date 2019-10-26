@@ -117,6 +117,13 @@
     width: auto;
     padding: 0px 0px 0px 4px;
 }
+#danh-sach-chuong .title{
+    position: relative;
+}
+#danh-sach-chuong .title span{
+    position: absolute;
+    right: 12px;
+}
 #danh-sach-chuong .list-chuong{
     float:left;
     width: 50%;
