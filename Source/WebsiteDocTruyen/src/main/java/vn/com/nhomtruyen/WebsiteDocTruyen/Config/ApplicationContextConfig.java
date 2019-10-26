@@ -17,18 +17,18 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.tacGiaDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.taiKhoanDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.chuongImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.danhMucTruyenImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.tacGiaImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.theLoaiTruyenImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.truyenImpl;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.taiKhoanImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.ChuongImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.DanhMucTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TacGiaImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TheLoaiTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TaiKhoanImpl;
 
 @Configuration
 @ComponentScan(" vn.com.nhomtruyen.WebsiteDocTruyen.*")
@@ -88,29 +88,29 @@ public class ApplicationContextConfig {
 		}
 
 		@Bean(name = "danhMucTruyenDAO")
-		public danhMucTruyenDAO getApplicantDAO() {
-			return new danhMucTruyenImpl();
+		public DanhMucTruyenDAO getApplicantDAO() {
+			return new DanhMucTruyenImpl();
 		}
 		
 		@Bean(name = "theLoaiTruyenDAO")
-		public theLoaiTruyenDAO getTheLoaiTruyenDAO() {
-			return new theLoaiTruyenImpl();
+		public TheLoaiTruyenDAO getTheLoaiTruyenDAO() {
+			return new TheLoaiTruyenImpl();
 		}
 		@Bean(name = "userAccountsDAO")
-		public taiKhoanDAO getUserAccountDAO() {
-			return new taiKhoanImpl();
+		public TaiKhoanDAO getUserAccountDAO() {
+			return new TaiKhoanImpl();
 		}
 		@Bean(name = "truyenDAO")
-		public truyenDAO getTruyenDAO() {
-			return new truyenImpl();
+		public TruyenDAO getTruyenDAO() {
+			return new TruyenImpl();
 		}
 		
 		@Bean(name = "chuongDAO")
-		public chuongDAO getChuongDAO() {
-			return new chuongImpl();
+		public ChuongDAO getChuongDAO() {
+			return new ChuongImpl();
 		}
 		@Bean(name = "tacGiaDAO")
-		public tacGiaDAO getTacGiaDAO() {
-			return new tacGiaImpl();
+		public TacGiaDAO getTacGiaDAO() {
+			return new TacGiaImpl();
 		}
 }

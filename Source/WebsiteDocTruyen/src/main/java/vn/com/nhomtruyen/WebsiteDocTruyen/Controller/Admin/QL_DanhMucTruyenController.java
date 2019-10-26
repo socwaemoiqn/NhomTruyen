@@ -16,15 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 
 @Controller(value = "QL_DanhMucTruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql_danhmuc_truyen")
 public class QL_DanhMucTruyenController {
 	
 	@Autowired
-	private danhMucTruyenDAO danhMucTruyenDAO;
+	private DanhMucTruyenDAO danhMucTruyenDAO;
 	
 	@RequestMapping(value = "/them", method = RequestMethod.POST)
 	public String themDMTruyenPage(Model model, HttpServletRequest request) {
@@ -35,7 +35,7 @@ public class QL_DanhMucTruyenController {
 		String gioiThieu=request.getParameter("gioiThieu");
 		String trangThai="1";
 		String ngayTao=cal.get(Calendar.YEAR)+"/"+(cal.get(Calendar.MONTH)+1)+"/"+cal.get(Calendar.DAY_OF_MONTH);
-		danhMucTruyenInfo danhMucTruyenInfo= new danhMucTruyenInfo(id,tenDanhMuc,gioiThieu,trangThai, ngayTao);
+		DanhMucTruyenInfo danhMucTruyenInfo= new DanhMucTruyenInfo(id,tenDanhMuc,gioiThieu,trangThai, ngayTao);
 		danhMucTruyenDAO.insertDanhMucTruyen(danhMucTruyenInfo);
 		
 		return "redirect:/quan-tri/ql_danhmuc_truyen";
@@ -52,7 +52,7 @@ public class QL_DanhMucTruyenController {
 	
 	@RequestMapping(value="/edit", method=RequestMethod.GET)
 	public String updataDanhMuc(Model model, @RequestParam("id") int id) {
-		danhMucTruyenInfo danhMucTruyenInfo=null;
+		DanhMucTruyenInfo danhMucTruyenInfo=null;
 		
 		if(id!= 0) {
 			danhMucTruyenInfo=danhMucTruyenDAO.findDanhMucTruyenInfo(id);

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
+<%@ page import="java.io.*,java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,7 @@
 	href="${pageContext.request.contextPath}/template/client/assets/css/responsive.css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/css/login.css">
-<dec:head/>
+<dec:head />
 </head>
 <body>
 	<div class="topnav" id="myTopnav">
@@ -136,7 +137,24 @@
 			<span>Đề tài:</span> Xây dựng ứng dụng web đọc truyện online <br>
 			<span>Môn:</span> Phát triển phần mềm chuyên nghiệp <br> Thành
 			viên: <br> - Võ Văn Việt <br> - Nguyễn Công Toàn <br>-
-			Phạn Ngọc Văn <br> <span>Liên hệ:</span> <a href="#"><i
+			Phạn Ngọc Văn <br> Giờ:
+			<%
+				// Set refresh, autoload time as 5 seconds
+				response.setIntHeader("Refresh", 5);
+				// Get current time
+				Calendar calendar = new GregorianCalendar();
+				String am_pm;
+				int hour = calendar.get(Calendar.HOUR);
+				int minute = calendar.get(Calendar.MINUTE);
+				int second = calendar.get(Calendar.SECOND);
+				if (calendar.get(Calendar.AM_PM) == 0)
+					am_pm = "AM";
+				else
+					am_pm = "PM";
+				String CT = hour + ":" + minute + ":" + second + " " + am_pm;
+				out.println(" " + CT + "\n");
+			%>
+			<br> <span>Liên hệ:</span> <a href="#"><i
 				class="fab fa-facebook"></i></a href="#"><i class="fas fa-envelope-square"></i></a>
 		</div>
 	</div>

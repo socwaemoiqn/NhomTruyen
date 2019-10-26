@@ -10,33 +10,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.tacGiaDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.theLoaiTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chiTietDanhMucTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.tacGiaInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.theLoaiTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenSelectInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
 
 @Controller(value = "HomeControllerOfAdmin")
 @RequestMapping(value = "/quan-tri")
 public class HomeController {
 
 	@Autowired
-	private danhMucTruyenDAO danhMucTruyenDAO;
+	private DanhMucTruyenDAO danhMucTruyenDAO;
 
 	@Autowired
-	private theLoaiTruyenDAO theLoaiTruyenDAO;
+	private TheLoaiTruyenDAO theLoaiTruyenDAO;
 	
 	@Autowired
-	private truyenDAO truyenDao;
+	private TruyenDAO truyenDao;
 	
 	@Autowired
-	private tacGiaDAO tacGiaDao;
+	private TacGiaDAO tacGiaDao;
 
 	@RequestMapping(value = { "/", "home", "" }, method = RequestMethod.GET)
 	public String indexAdminPage(Model model) {
@@ -55,8 +55,8 @@ public class HomeController {
 			// TODO: handle exception
 		}
 		final int Max_Result = 2;
-		final int Max_Navigation = 1;
-		PaginationResult<danhMucTruyenInfo> listDanhMuc = danhMucTruyenDAO.listDanhMucTruyen(page, Max_Result,
+		final int Max_Navigation = 2;
+		PaginationResult<DanhMucTruyenInfo> listDanhMuc = danhMucTruyenDAO.listDanhMucTruyen(page, Max_Result,
 				Max_Navigation);
 
 		model.addAttribute("danhMucTruyen", listDanhMuc);
@@ -77,7 +77,7 @@ public class HomeController {
 		final int Max_Result = 3;
 		final int Max_Navigation = 4;
 
-		PaginationResult<theLoaiTruyenInfo> listTheLoaiTruyen = theLoaiTruyenDAO.listTheLoaiTruyen(page, Max_Result,
+		PaginationResult<TheLoaiTruyenInfo> listTheLoaiTruyen = theLoaiTruyenDAO.listTheLoaiTruyen(page, Max_Result,
 				Max_Navigation);
 
 		model.addAttribute("listTheLoaiTruyen", listTheLoaiTruyen);
@@ -96,15 +96,15 @@ public class HomeController {
 		final int Max_Result = 2;
 		final int Max_Navigation = 3;
 		
-		PaginationResult<truyenSelectInfo> listTruyen= truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
+		PaginationResult<TruyenSelectInfo> listTruyen= truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
 		
 		model.addAttribute("listTruyen", listTruyen);
 		
 		
-		truyenInfo truyen = new truyenInfo();
+		TruyenInfo truyen = new TruyenInfo();
 		model.addAttribute("truyen", truyen);
 		
-		List<chiTietDanhMucTruyenInfo> dmtruyen=danhMucTruyenDAO.listTenDM();
+		List<ChiTietDanhMucTruyenInfo> dmtruyen=danhMucTruyenDAO.listTenDM();
 		model.addAttribute("dmt", dmtruyen);
 		
 		
@@ -124,20 +124,20 @@ public class HomeController {
 	}
 	
 	@ModelAttribute("danhMuc")
-	public List<danhMucTruyenInfo> getDanhMuc(){
-		List<danhMucTruyenInfo> danhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
+	public List<DanhMucTruyenInfo> getDanhMuc(){
+		List<DanhMucTruyenInfo> danhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
 		return danhMuc;	
 	}
 	
 	@ModelAttribute("tacGia")
-	public List<tacGiaInfo> getTacGia(){
-		List<tacGiaInfo> tacGia= tacGiaDao.listTacGia();
+	public List<TacGiaInfo> getTacGia(){
+		List<TacGiaInfo> tacGia= tacGiaDao.listTacGia();
 		return tacGia;	
 	}
 	
 	@ModelAttribute("theLoai")
-	public List<theLoaiTruyenInfo> getTheLoai(){
-		List<theLoaiTruyenInfo> theLoai=theLoaiTruyenDAO.dsTheLoai(); 
+	public List<TheLoaiTruyenInfo> getTheLoai(){
+		List<TheLoaiTruyenInfo> theLoai=theLoaiTruyenDAO.dsTheLoai(); 
 		return theLoai;	
 	}
 

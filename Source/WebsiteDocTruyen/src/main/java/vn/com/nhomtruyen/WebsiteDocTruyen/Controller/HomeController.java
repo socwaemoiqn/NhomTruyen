@@ -11,32 +11,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.taiKhoanDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chiTietDanhMucTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chuongInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.taiKhoanInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfoByTruyen;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenSelectInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.userAccountsInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.UserAccountsInfo;
 
 @Controller
 public class HomeController {
 
 	@Autowired
-	private taiKhoanDAO userAccountsDAO;
+	private TaiKhoanDAO userAccountsDAO;
 	@Autowired
-	private truyenDAO truyenDao;
+	private TruyenDAO truyenDao;
 	@Autowired
-	private danhMucTruyenDAO dmtruyenDao;
+	private DanhMucTruyenDAO dmtruyenDao;
 	@Autowired
-	private chuongDAO chuongDao;
+	private ChuongDAO chuongDao;
 
 	@RequestMapping(value = { "/", "index", "home" }, method = RequestMethod.GET)
 	public String indexPage(Model model) {
-		List<truyenSelectInfo> truyen=truyenDao.listTR();
+		List<TruyenSelectInfo> truyen=truyenDao.listTR();
 		model.addAttribute("truyen", truyen);
 		return "index";
 	}
@@ -46,7 +46,7 @@ public class HomeController {
 			@RequestParam("passWord") String passWord, HttpSession session) {
 		String request = "";
 		//userAccountsInfo user = userAccountsDAO.login(userName, passWord);
-		taiKhoanInfo tk=userAccountsDAO.ck_login(userName, passWord);
+		TaiKhoanInfo tk=userAccountsDAO.ck_login(userName, passWord);
 		if (tk != null) {
 			String role = tk.getTenRole();
 			if (role.equals("Admin")) {
@@ -80,9 +80,9 @@ public class HomeController {
 	@RequestMapping(value = "/truyen", method = RequestMethod.GET)
 	public String truyenInfoPage(Model model, @RequestParam("idTruyen")  int maTruyen) {
 		
-		truyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
-		List<chiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		List<chuongInfo> listChuong = chuongDao.listChuongByIdTruyen(maTruyen); 
+		TruyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
+		List<ChiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+		List<ChuongInfo> listChuong = chuongDao.listChuongByIdTruyen(maTruyen); 
 		
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
@@ -93,7 +93,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/truyen/chuong", method = RequestMethod.GET)
 	public String chuongPage(Model model, @RequestParam("id") int id) {
-		chuongInfo chuongOfId=chuongDao.chuongOfID(id);
+		ChuongInfo chuongOfId=chuongDao.chuongOfID(id);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		return "xem_chuong";

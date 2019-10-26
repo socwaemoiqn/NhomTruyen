@@ -10,37 +10,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.chuongDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.danhMucTruyenDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.truyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chiTietDanhMucTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.chuongInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.danhMucTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.truyenInfoByTruyen;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
 
 @Controller(value = "QL_TruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql_truyen")
 public class QL_TruyenController {
 
 	@Autowired
-	private chuongDAO chuongDao;
+	private ChuongDAO chuongDao;
 	@Autowired
-	private truyenDAO truyenDao;
+	private TruyenDAO truyenDao;
 	@Autowired
-	private danhMucTruyenDAO dmtruyenDao;
+	private DanhMucTruyenDAO dmtruyenDao;
 	
 	
 	@RequestMapping(value = "/them", method = RequestMethod.POST)
-	private String themTruyenAction(Model model, @ModelAttribute("truyen") truyenInfo truyen ) {
+	private String themTruyenAction(Model model, @ModelAttribute("truyen") TruyenInfo truyen ) {
 		return "redirect:/quan-tri/ql_truyen";
 	}
+	
+	
 	@RequestMapping(value = "/xem_truyen", method = RequestMethod.GET)
 	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") int maTruyen ) {
 		
-		truyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
-		List<chiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+		TruyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
+		List<ChiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
 		
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
@@ -58,7 +60,7 @@ public class QL_TruyenController {
 		}
 		final int Max_Result = 3;
 		final int Max_Navigation = 3;
-		PaginationResult<chuongInfo> listChuongOfTruyen = chuongDao.listChuongOfTruyen(idTruyen, page, Max_Result,
+		PaginationResult<ChuongInfo> listChuongOfTruyen = chuongDao.listChuongOfTruyen(idTruyen, page, Max_Result,
 				Max_Navigation);
 		// List<chuongInfo> listChuongOfTruyen = chuongDao.dsDanhMucTruyen(idTruyen);
 		model.addAttribute("listChuongOfTruyen", listChuongOfTruyen);
@@ -76,7 +78,7 @@ public class QL_TruyenController {
 
 	@RequestMapping(value = "/ql_chuong/xem_chuong", method = RequestMethod.GET)
 	public String xemChuongPage(Model model, @RequestParam("idChuong") int idChuong) {
-		chuongInfo chuongOfId=chuongDao.chuongOfID(idChuong);
+		ChuongInfo chuongOfId=chuongDao.chuongOfID(idChuong);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		return "admin/ql_truyen_xemchuong";
@@ -85,7 +87,7 @@ public class QL_TruyenController {
 	
 	@RequestMapping(value = "/ql_chuong/sua_chuong", method = RequestMethod.GET)
 	public String editChuongPage(Model model, @RequestParam("idChuong") int idChuong) {
-		chuongInfo chuongOfId=chuongDao.chuongOfID(idChuong);
+		ChuongInfo chuongOfId=chuongDao.chuongOfID(idChuong);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("id", chuongOfId.getId());

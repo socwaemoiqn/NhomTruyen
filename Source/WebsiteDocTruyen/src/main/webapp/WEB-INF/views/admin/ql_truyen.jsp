@@ -43,7 +43,7 @@
 									<th>Hình Ảnh</th>
 									<th>Tên Truyện</th>
 									<th>Tên Tác Giả</th>
-									<th>Số Chương</th>
+									<th>Danh mục</th>
 									<th>Số Chương</th>
 									<th>Lượt Xem</th>
 									<th>Trạng Thái</th>
@@ -58,14 +58,12 @@
 										<td class="center">${us.hinhAnh}</td>
 										<td>${us.tenTruyen}</td>
 										<td class="center">${us.tenTacGia }</td>
-
 										<td><c:forEach items="${dmt}" var="dm"
 												varStatus="status">
 												
 												<c:if test="${us.ID == dm.maTruyen}">
 												${dm.tenDanhMuc},</c:if>
 											</c:forEach></td>
-
 										<td style="text-align: center"><a title="Tất cả chương"
 											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?idtruyen=${us.ID}">
 												${us.soChuong } </a></td>
