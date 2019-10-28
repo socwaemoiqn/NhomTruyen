@@ -31,10 +31,10 @@
 						<div class="search-item-infor">
 							<span class="search-item-infor-name"> <b> <a href="#"><i
 										class="fas fa-book"></i> Ma thiên ký</a> <span
-									id="search-item-status-full">Full</span> <span
-									id="search-item-status-hot">Hot</span>
-							</b> <br>
-							<i class="fas fa-pencil-alt"></i> Vong ngữ
+									class="index-item-status" id="index-item-status-full">Full</span>
+									<span class="index-item-status" id="index-item-status-hot">Hot</span>
+									<span class="index-item-status" id="index-item-status-new">New</span>
+							</b> <br> <i class="fas fa-pencil-alt"></i> Vong ngữ
 							</span> <span class="search-item-infor-chuong"><a href="#">Chương
 									1</a></span>
 						</div>
@@ -47,9 +47,10 @@
 						<div class="search-item-infor">
 							<span class="search-item-infor-name"> <b> <a href="#"><i
 										class="fas fa-book"></i> Ma thiên ký</a> <span
-									id="search-item-status-new">New</span>
-							</b> <br>
-							<i class="fas fa-pencil-alt"></i> Vong ngữ
+									class="index-item-status" id="index-item-status-full">Full</span>
+									<span class="index-item-status" id="index-item-status-hot">Hot</span>
+									<span class="index-item-status" id="index-item-status-new">New</span>
+							</b> <br> <i class="fas fa-pencil-alt"></i> Vong ngữ
 							</span> <span class="search-item-infor-chuong"><a href="#">Chương
 									1</a></span>
 						</div>
@@ -62,10 +63,10 @@
 						<div class="search-item-infor">
 							<span class="search-item-infor-name"> <b> <a href="#"><i
 										class="fas fa-book"></i> Ma thiên ký</a> <span
-									id="search-item-status-full">Full</span> <span
-									id="search-item-status-hot">Hot</span>
-							</b> <br>
-							<i class="fas fa-pencil-alt"></i> Vong ngữ
+									class="index-item-status" id="index-item-status-full">Full</span>
+									<span class="index-item-status" id="index-item-status-hot">Hot</span>
+									<span class="index-item-status" id="index-item-status-new">New</span>
+							</b> <br> <i class="fas fa-pencil-alt"></i> Vong ngữ
 							</span> <span class="search-item-infor-chuong"><a href="#">Chương
 									1</a></span>
 						</div>

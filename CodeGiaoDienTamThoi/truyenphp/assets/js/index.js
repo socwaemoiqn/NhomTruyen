@@ -4,19 +4,7 @@ var content_item1 = document.getElementById("content-item");
 var content_item2 = document.getElementById("content-item2"); 
 var danhMuc = document.getElementById("danhMuc");
 var theLoai =  document.getElementById("theLoai");
-var topnav = document.getElementById("myTopnav");
 var content_item_current = 1;
-danhMuc.onmouseover = function(){
-    ScrollToTop();
-};
-theLoai.onmouseover = function(){
-    ScrollToTop();
-};
-function ScrollToTop()
-{
-    if(topnav.classList.length == 1)
-    window.scrollTo(0,0);
-}
 slideRight.onclick = function(){
     slideRight.classList.add("disable-click");
     if(content_item_current == 1)

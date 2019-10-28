@@ -128,7 +128,10 @@
 						</c:forEach>
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
-									địch thật tịch mịch</a></td>
+									địch thật tịch mịch</a>
+									<span class="index-item-status" id="index-item-status-full">Full</span>
+                                    <span class="index-item-status" id="index-item-status-hot">Hot</span>
+                                     <span class="index-item-status" id="index-item-status-new">New</span></td>
 							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
 							<td><a href="#" class="chuong">Chương 201</a></td>
 							<td>3 phút trước</td>
