@@ -242,9 +242,8 @@
     /* width: 103%; */
     animation: scaleImg 0.15s forwards;
 }
-.col-3 .content table.list{
-	float:left;
-    width: 50%;
+.col-3 .content table{
+    width: 100%;
 }
 .col-3 .content table td{
     border: 1px dashed gray;
@@ -295,3 +294,20 @@
     color:gray;
 }
 
+.index-item-status{
+    padding: 4px;
+    font-size: 11px;
+    margin-left: 2px;
+}
+.index-item-status#index-item-status-full{
+    border: 1px solid #86ad86;
+    color: #86ad86;
+}
+.index-item-status#index-item-status-hot{
+    border: 1px solid #fd8383;
+    color: #fd8383;
+}
+.index-item-status#index-item-status-new{
+    border: 1px solid #8eb3fd;
+    color: #8eb3fd;
+}

@@ -33,23 +33,7 @@
 .search-item-infor .search-item-infor-name b{
     font-size: 20px;
 }
-.search-item-infor .search-item-infor-name b span{
-    padding: 4px;
-    font-size: 11px;
-    margin-left: -5px;
-}
-.search-item-infor .search-item-infor-name b span#search-item-status-full{
-    border: 1px solid #86ad86;
-    color: #86ad86;
-}
-.search-item-infor .search-item-infor-name b span#search-item-status-hot{
-    border: 1px solid #fd8383;
-    color: #fd8383;
-}
-.search-item-infor .search-item-infor-name b span#search-item-status-new{
-    border: 1px solid #8eb3fd;
-    color: #8eb3fd;
-}
+
 .search-item-infor .search-item-infor-name b i{
     color: #FF9933;
 }
