@@ -2,6 +2,7 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.UserAccountsInfo;
@@ -33,11 +37,22 @@ public class HomeController {
 	private DanhMucTruyenDAO dmtruyenDao;
 	@Autowired
 	private ChuongDAO chuongDao;
+	@Autowired
+	private TheLoaiTruyenDAO theLoaiTruyenDao;
 
 	@RequestMapping(value = { "/", "index", "home" }, method = RequestMethod.GET)
-	public String indexPage(Model model) {
+	public String indexPage(Model model,HttpServletRequest request) {
 		List<TruyenSelectInfo> truyen=truyenDao.listTR();
+		List<DanhMucTruyenInfo> danhMuc=dmtruyenDao.dsDanhMucTruyen();
+		List<TheLoaiTruyenInfo> theLoaiTruyen=theLoaiTruyenDao.dsTheLoai();
 		model.addAttribute("truyen", truyen);
+		model.addAttribute("danhMuc",  danhMuc);
+		model.addAttribute("theLoaiTruyen",  theLoaiTruyen);
+		
+		
+		int sltl= theLoaiTruyen.size();
+		model.addAttribute("sltl",  sltl);
+		
 		return "index";
 	}
 

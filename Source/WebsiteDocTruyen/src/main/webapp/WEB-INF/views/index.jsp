@@ -117,14 +117,14 @@
 				<div class="content">
 					<table>
 						<c:forEach items="${truyen}" var="tr" varStatus="status">
-							
+
 							<tr>
-							<td><i class="fas fa-chevron-right"></i> 
-							<a href="${pageContext.request.contextPath}/truyen?idTruyen=${tr.ID}">${tr.tenTruyen }</a></td>
-							<td><a href="#">${tr.tenTacGia }</a> </td>
-							<td><a href="#" class="chuong">${tr.soChuong } Chương</a></td>
-							<td>3 phút trước</td>
-						</tr>
+								<td><i class="fas fa-chevron-right"></i> <a
+									href="${pageContext.request.contextPath}/truyen?idTruyen=${tr.ID}">${tr.tenTruyen }</a></td>
+								<td><a href="#">${tr.tenTacGia }</a></td>
+								<td><a href="#" class="chuong">${tr.soChuong } Chương</a></td>
+								<td>3 phút trước</td>
+							</tr>
 						</c:forEach>
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
@@ -203,7 +203,7 @@
 							<td><a href="#" class="chuong">Chương 201</a></td>
 							<td>3 phút trước</td>
 						</tr>
-						
+
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
 									địch thật tịch mịch</a></td>
@@ -247,29 +247,18 @@
 					THỂ LOẠI TRUYỆN <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
-					<table>
-						<tr>
-							<td><a href="#"><strong><i class="far fa-star"></i>
-										Tiên hiệp<span data-placeholder="Truyện full"></span></strong></a></td>
-							<td><a href="#"><strong><i class="far fa-star"></i>
-										Kiếm hiệp<span data-placeholder="Truyện full"></span></strong></a></a></td>
-						</tr>
-						<tr>
-							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
-							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
-						</tr>
-						<tr>
-							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
-							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
-						</tr>
-
-
-
-					</table>
+					<c:forEach var="i" begin="1" end="${(sltl/12)+1}">
+						<table class="list">
+							<c:forEach items="${theLoaiTruyen}" var="d" begin="${12*(i-1)}"
+								end="${(12*i)-1}">
+								<tr>
+									<td><a href="#"><strong><i
+												class="far fa-star"></i> ${d.tenTheLoai }<span
+												data-placeholder="${d.tenTheLoai }"></span></strong></a></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</c:forEach>
 				</div>
 
 			</div>
