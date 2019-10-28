@@ -26,7 +26,7 @@ CREATE TABLE `tbtheloaitruyen` (
   `MaTheLoai` int(11) NOT NULL AUTO_INCREMENT,
   `TenTheLoai` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `GioiThieu` text COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `TrangThai` int(11) DEFAULT (1),
+  `TrangThai` int(11) DEFAULT NULL,
   `NgayTao` date DEFAULT NULL,
   PRIMARY KEY (`MaTheLoai`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-28 16:28:50
+-- Dump completed on 2019-10-28 16:40:56
