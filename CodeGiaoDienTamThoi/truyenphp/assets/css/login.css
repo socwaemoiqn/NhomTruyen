@@ -84,7 +84,7 @@
 .hide-login{
     animation: pingBall2 1.5s forwards;
 }
-form{
+#container-logup form,#container-login form{
     position: absolute;
     border: none;
     outline: none;
@@ -105,7 +105,7 @@ form{
     width: 250px;
     height: 400px;
 }
-h1{
+#container-login h1,#container-logup h1{
     text-align: center;
    
     text-shadow: 0 5px 15px gray;
@@ -169,7 +169,7 @@ h1{
 .txtb input:hover + span::after{
     width: 100%;
 }
-input[type=button]{
+#container-login input[type=button],#container-logup input[type=button]{
     width: 100%;
     height: 50px;
     outline: none;
@@ -183,7 +183,10 @@ input[type=button]{
     transition: .5s;
     font-size: 17px;
 }
-input[type=button]:hover{
+#container-login input[type=button]:hover{
+    background-position: right;
+}
+#container-logup input[type=button]:hover{
     background-position: right;
 }
 .bottom-text{

@@ -43,6 +43,7 @@
     color: #dacb46;
 }
 .footer-right{
+      position: relative;
     font-size: 15px;
     width: 30%;
     padding: 10px;
@@ -60,4 +61,22 @@
     color :#FFFFFF;
     font-size:25px;
     margin-left: 5px;
+}
+.footer-right span#footer-right-term{
+    position: absolute;
+    font-size: 12.5px;
+    right: 0px;
+    bottom: 35px;
+    color: #CCCCCC;
+}
+.footer-right span#footer-right-term a{
+    text-decoration: none;
+}
+.footer-right span#footer-right-term a:hover{
+    text-decoration-line: underline;
+}
+.footer-right span#footer-right-term i{
+    font-size: 18px;
+    vertical-align: middle;
+    padding-bottom: 3px;
 }
