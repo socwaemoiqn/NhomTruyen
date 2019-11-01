@@ -14,6 +14,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Form.TruyenAddForm;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
@@ -31,10 +32,10 @@ public class HomeController {
 
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDAO;
-	
+
 	@Autowired
 	private TruyenDAO truyenDao;
-	
+
 	@Autowired
 	private TacGiaDAO tacGiaDao;
 
@@ -60,8 +61,6 @@ public class HomeController {
 				Max_Navigation);
 
 		model.addAttribute("danhMucTruyen", listDanhMuc);
-		
-		
 
 		return "admin/ql_danhmuctruyen";
 	}
@@ -95,50 +94,47 @@ public class HomeController {
 		}
 		final int Max_Result = 2;
 		final int Max_Navigation = 3;
-		
-		PaginationResult<TruyenSelectInfo> listTruyen= truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
-		
+
+		PaginationResult<TruyenSelectInfo> listTruyen = truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
+
 		model.addAttribute("listTruyen", listTruyen);
-		
-		
-		TruyenInfo truyen = new TruyenInfo();
-		model.addAttribute("truyen", truyen);
-		
-		List<ChiTietDanhMucTruyenInfo> dmtruyen=danhMucTruyenDAO.listTenDM();
+
+		List<ChiTietDanhMucTruyenInfo> dmtruyen = danhMucTruyenDAO.listTenDM();
 		model.addAttribute("dmt", dmtruyen);
-		
-		
+		TruyenAddForm truyen = new TruyenAddForm();
+		model.addAttribute("truyenAddForm", truyen);
+
 		return "admin/ql_truyen";
 	}
-	
+
 	@RequestMapping(value = "/ql_nhomdich", method = RequestMethod.GET)
 	public String QlNhomDichPage(Model model) {
 
 		return "admin/ql_nhomdich";
 	}
-	
+
 	@RequestMapping(value = "/ql_tacgia", method = RequestMethod.GET)
 	public String QlTacGiaPage(Model model) {
 
 		return "admin/ql_tacgia";
 	}
-	
+
 	@ModelAttribute("danhMuc")
-	public List<DanhMucTruyenInfo> getDanhMuc(){
-		List<DanhMucTruyenInfo> danhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
-		return danhMuc;	
+	public List<DanhMucTruyenInfo> getDanhMuc() {
+		List<DanhMucTruyenInfo> danhMuc = danhMucTruyenDAO.dsDanhMucTruyen();
+		return danhMuc;
 	}
-	
+
 	@ModelAttribute("tacGia")
-	public List<TacGiaInfo> getTacGia(){
-		List<TacGiaInfo> tacGia= tacGiaDao.listTacGia();
-		return tacGia;	
+	public List<TacGiaInfo> getTacGia() {
+		List<TacGiaInfo> tacGia = tacGiaDao.listTacGia();
+		return tacGia;
 	}
-	
+
 	@ModelAttribute("theLoai")
-	public List<TheLoaiTruyenInfo> getTheLoai(){
-		List<TheLoaiTruyenInfo> theLoai=theLoaiTruyenDAO.dsTheLoai(); 
-		return theLoai;	
+	public List<TheLoaiTruyenInfo> getTheLoai() {
+		List<TheLoaiTruyenInfo> theLoai = theLoaiTruyenDAO.dsTheLoai();
+		return theLoai;
 	}
 
 }

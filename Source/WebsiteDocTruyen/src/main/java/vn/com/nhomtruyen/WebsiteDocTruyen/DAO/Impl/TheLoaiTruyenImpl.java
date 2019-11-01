@@ -8,9 +8,11 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChiTietTheLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.DanhMucTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TheLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietTheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 
@@ -60,6 +62,29 @@ public class TheLoaiTruyenImpl implements TheLoaiTruyenDAO {
 		// TODO Auto-generated method stub
 		
 	}
+	@Override
+	public List<ChiTietTheLoaiTruyenInfo> dsTenTheLoai() {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + ChiTietTheLoaiTruyenInfo.class.getName()
+				+ "(ct.id, ct.maTruyen,ct.maTheLoai,tl.tenTheLoai)" + " from "
+				+ ChiTietTheLoaiTruyenEntity.class.getName() +" ct, "+ TheLoaiTruyenEntity.class.getName() + " tl "
+				+ " where ct.maTheLoai = tl.id ";
+
+		Query query = se.createQuery(sql);
+	
+		return query.list();
+	}
+	@Override
+	public void insertChiTietTheLoai(ChiTietTheLoaiTruyenInfo chiTietTheLoaiTruyenInfo) {
+		ChiTietTheLoaiTruyenEntity chiTietTheLoaiTruyenEntity = new ChiTietTheLoaiTruyenEntity();
+		chiTietTheLoaiTruyenEntity.setMaTruyen(chiTietTheLoaiTruyenInfo.getMaTruyen());
+		chiTietTheLoaiTruyenEntity.setMaTheLoai(chiTietTheLoaiTruyenInfo.getMaTheLoai());
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(chiTietTheLoaiTruyenEntity);
+	}
+
+	
 
 	
 

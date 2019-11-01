@@ -115,13 +115,22 @@ public class DanhMucTruyenImpl implements DanhMucTruyenDAO {
 		Session se = this.sessionFactory.getCurrentSession();
 
 		String sql = " Select new " + ChiTietDanhMucTruyenInfo.class.getName()
-				+ "(a.id, a.maTruyen,d.tenDanhMuc)" + " from "
+				+ "(a.id, a.maTruyen,a.maDanhMuc,d.tenDanhMuc)" + " from "
 				+ ChiTietDanhMucEntity.class.getName() +" a, "+ DanhMucTruyenEntity.class.getName() + " d "
 				+ " where a.maDanhMuc=d.id ";
 
 		Query query = se.createQuery(sql);
 	
 		return query.list();
+	}
+
+	@Override
+	public void InsertChiTietDanhMuc(ChiTietDanhMucTruyenInfo chiTietDanhMucTruyenInfo) {
+		ChiTietDanhMucEntity  chiTietDanhMuc = new ChiTietDanhMucEntity();
+		chiTietDanhMuc.setMaTruyen(chiTietDanhMucTruyenInfo.getMaTruyen());
+		chiTietDanhMuc.setMaDanhMuc(chiTietDanhMucTruyenInfo.getMaDanhMuc());
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(chiTietDanhMuc);
 	}
 
 }

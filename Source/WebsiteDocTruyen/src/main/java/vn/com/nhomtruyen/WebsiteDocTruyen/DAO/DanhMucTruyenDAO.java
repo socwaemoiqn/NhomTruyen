@@ -20,4 +20,7 @@ public interface DanhMucTruyenDAO {
 	public void deleteDanhMucTruyen(int id);
 	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(int maTruyen);
 	public List<ChiTietDanhMucTruyenInfo> listTenDM();
+	
+
+	public void InsertChiTietDanhMuc(ChiTietDanhMucTruyenInfo chiTietDanhMucTruyenInfo);
 }

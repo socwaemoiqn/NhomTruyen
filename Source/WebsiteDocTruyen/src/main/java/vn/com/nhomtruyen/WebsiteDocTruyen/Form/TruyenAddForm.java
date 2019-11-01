@@ -2,7 +2,8 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Form;
 
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-public class DanhMucAddForm {
+public class TruyenAddForm {
+
 	private String tenTruyen;
 	// Upload files.
     private CommonsMultipartFile[] hinhAnh;
@@ -66,5 +67,4 @@ public class DanhMucAddForm {
 	}
     
 	
-    
 }

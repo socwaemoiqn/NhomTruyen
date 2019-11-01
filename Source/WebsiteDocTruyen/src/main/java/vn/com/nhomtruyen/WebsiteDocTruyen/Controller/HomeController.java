@@ -18,6 +18,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietTheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
@@ -40,19 +41,27 @@ public class HomeController {
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDao;
 
-	@RequestMapping(value = { "/", "index", "home" }, method = RequestMethod.GET)
-	public String indexPage(Model model,HttpServletRequest request) {
-		List<TruyenSelectInfo> truyen=truyenDao.listTR();
+	public void loadTLandDM(Model model) {
 		List<DanhMucTruyenInfo> danhMuc=dmtruyenDao.dsDanhMucTruyen();
 		List<TheLoaiTruyenInfo> theLoaiTruyen=theLoaiTruyenDao.dsTheLoai();
-		model.addAttribute("truyen", truyen);
+		
 		model.addAttribute("danhMuc",  danhMuc);
 		model.addAttribute("theLoaiTruyen",  theLoaiTruyen);
 		
 		
 		int sltl= theLoaiTruyen.size();
 		model.addAttribute("sltl",  sltl);
+	}
+	
+	@RequestMapping(value = { "/", "index", "home" }, method = RequestMethod.GET)
+	public String indexPage(Model model,HttpServletRequest request) {
+		List<TruyenSelectInfo> truyen=truyenDao.listTR();
+		model.addAttribute("truyen", truyen);
 		
+		List<ChiTietTheLoaiTruyenInfo> tenTheLoai= theLoaiTruyenDao.dsTenTheLoai();
+		model.addAttribute("tenTheLoai", tenTheLoai);
+		
+		loadTLandDM(model);	
 		return "index";
 	}
 
@@ -102,7 +111,7 @@ public class HomeController {
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
 		model.addAttribute("listChuong", listChuong);
-		
+		loadTLandDM(model);
 		
 		return "info_truyen";
 	}
@@ -111,6 +120,8 @@ public class HomeController {
 		ChuongInfo chuongOfId=chuongDao.chuongOfID(id);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
+		
+		loadTLandDM(model);
 		return "xem_chuong";
 	}
 }

@@ -55,7 +55,7 @@
 									varStatus="status">
 									<tr class="odd gradeA">
 										<td scope="row">${status.index + 1}</td>
-										<td class="center">${us.hinhAnh}</td>
+										<td class="center"><img heigth="100px" width="100px" src="${pageContext.request.contextPath}/truyen/img/${us.hinhAnh}"/></td>
 										<td>${us.tenTruyen}</td>
 										<td class="center">${us.tenTacGia }</td>
 										<td><c:forEach items="${dmt}" var="dm"
@@ -126,12 +126,14 @@
 						<h4>Nhập thông tin về truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form:form modelAttribute="truyen" enctype="multipart/form-data"
+								<form:form modelAttribute="truyenAddForm"
+									enctype="multipart/form-data"
 									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/them"
-									method="post">
+									method="POST">
 									<div class="form-group">
-										<label>Tên truyện</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên truyện">
+										<label>Tên truyện</label>
+										<form:input path="tenTruyen" class="form-control"
+											placeholder="Nhập tên truyện" />
 									</div>
 									<div class="form-group">
 										<label>Hình Ảnh Về Truyện</label>
@@ -139,38 +141,46 @@
 									</div>
 									<div class="form-group">
 										<label>Tác giả</label>
-										<form:select path="matacgia" class="form-control">
+										<form:select path="maTacGia" class="form-control">
 											<form:options items="${tacGia}" itemLabel="tenTacGia"
 												itemValue="ID" />
 										</form:select>
 									</div>
 									<div class="form-group">
-										<label>Số chương</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập số chương">
+										<label>Số chương</label>
+										<form:input path="soChuong" class="form-control"
+											placeholder="Nhập tên truyện" />
+
 									</div>
 									<div class="form-group">
 										<label>Danh mục</label>
-										<form:select path="maDanhMuc" class="form-control">
+										<form:select multiple="true" path="maDanhMuc" class="form-control">
 											<form:options items="${danhMuc}" itemLabel="tenDanhMuc"
 												itemValue="id" />
 										</form:select>
-
-
-
 									</div>
 									<div class="form-group">
 										<label>Thể Loại</label>
-										<form:select path="maTheLoai" class="form-control">
+										(Nhấn Ctrl để chọn hơn một mục !)
+										<form:select multiple="true" path="maTheLoai" class="form-control" >
 											<form:options items="${theLoai}" itemLabel="tenTheLoai"
 												itemValue="id" />
 										</form:select>
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu chung</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về truyện">
+										<label>Nguồn</label>
+										<form:input path="nguon" class="form-control"
+											placeholder="Nhập nguồn của truyện" />
+
+									</div>
+									<div class="form-group">
+										<label>Giới thiệu chung</label>
+										<form:textarea path="gioiThieu" class="form-control"
+											placeholder="Nhập giới thiệu về truyện" />
+
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm
-										truyện mới</button>
+										Truyện Mới</button>
 								</form:form>
 							</div>
 						</div>

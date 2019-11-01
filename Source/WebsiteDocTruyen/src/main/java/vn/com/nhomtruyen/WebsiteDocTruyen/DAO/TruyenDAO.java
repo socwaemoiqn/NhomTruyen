@@ -15,4 +15,5 @@ public interface TruyenDAO   {
 	public PaginationResult<TruyenSelectInfo> litsTruyen(int page, int maxResult, int maxNavigationPage);
 	public TruyenInfoByTruyen SelectTruyenByMa(int maTruyen);
 	public List<TruyenSelectInfo> listTR();
+	public void InsertTruyen(TruyenInfo truyenInfo);
 }

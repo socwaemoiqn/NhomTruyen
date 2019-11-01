@@ -70,4 +70,24 @@ public class TruyenImpl implements TruyenDAO {
 		return query.list();
 	}
 
+	@Override
+	public void InsertTruyen(TruyenInfo truyenInfo) {
+
+		TruyenEntity truyen = new TruyenEntity();
+		truyen.setID(truyenInfo.getID());
+		truyen.setTenTruyen(truyenInfo.getTenTruyen());
+		truyen.setMaTacGia(truyenInfo.getMaTacGia());
+		truyen.setMaNhomDich(truyenInfo.getMaNhomDich());
+		truyen.setSoChuong(truyenInfo.getSoChuong());
+		truyen.setGioiThieu(truyenInfo.getGioiThieu());
+		truyen.setLuotXem(truyenInfo.getLuotXem());
+		truyen.setNguon(truyenInfo.getNguon());
+		truyen.setHinhAnh(truyenInfo.getHinhAnh());
+		truyen.setTrangThai(truyenInfo.getTrangThai());
+		truyen.setNgayTao(truyenInfo.getNgayTao());
+
+		Session session = this.sessionFactory.getCurrentSession();
+		session.persist(truyen);
+	}
+
 }

@@ -121,17 +121,23 @@
 							<tr>
 								<td><i class="fas fa-chevron-right"></i> <a
 									href="${pageContext.request.contextPath}/truyen?idTruyen=${tr.ID}">${tr.tenTruyen }</a></td>
-								<td><a href="#">${tr.tenTacGia }</a></td>
+								<td><a href="#"><c:forEach items="${tenTheLoai}"
+											var="tl" varStatus="status">
+
+											<c:if test="${tr.ID == tl.maTruyen}">
+													${tl.tenTheLoai},
+												</c:if>
+										</c:forEach></a></td>
 								<td><a href="#" class="chuong">${tr.soChuong } Chương</a></td>
 								<td>3 phút trước</td>
 							</tr>
 						</c:forEach>
 						<tr>
 							<td><i class="fas fa-chevron-right"></i> <a href="#">Vô
-									địch thật tịch mịch</a>
-									<span class="index-item-status" id="index-item-status-full">Full</span>
-                                    <span class="index-item-status" id="index-item-status-hot">Hot</span>
-                                     <span class="index-item-status" id="index-item-status-new">New</span></td>
+									địch thật tịch mịch</a> <span class="index-item-status"
+								id="index-item-status-full">Full</span> <span
+								class="index-item-status" id="index-item-status-hot">Hot</span>
+								<span class="index-item-status" id="index-item-status-new">New</span></td>
 							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
 							<td><a href="#" class="chuong">Chương 201</a></td>
 							<td>3 phút trước</td>
@@ -255,8 +261,9 @@
 							<c:forEach items="${theLoaiTruyen}" var="d" begin="${12*(i-1)}"
 								end="${(12*i)-1}">
 								<tr>
-									<td><a href="#"><strong><i
-												class="far fa-star"></i> ${d.tenTheLoai }<span
+									<td><a href="#"><strong><c:if test="${d.id ==1 || d.id == 13}">
+										<i class="far fa-star"></i>
+									</c:if> ${d.tenTheLoai }<span
 												data-placeholder="${d.tenTheLoai }"></span></strong></a></td>
 								</tr>
 							</c:forEach>
