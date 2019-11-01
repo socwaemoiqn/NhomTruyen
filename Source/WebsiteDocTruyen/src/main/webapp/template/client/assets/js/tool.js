@@ -1,6 +1,5 @@
 var tool_item_top = document.getElementById("tool-item-top");
 var btnGoTop = document.querySelector(".tool-item .fa-arrow-alt-circle-up");
-var btnPhanHoi = document.querySelector(".tool-item .fa-envelope");
 var content_PhanHoi = "";
 /// Chạy cấu hình giao diện khi lần đầu load trang
 
@@ -10,9 +9,6 @@ btnGoTop.onclick = function(){
         top: 0,
         behavior: 'smooth',
     });
-};
-btnPhanHoi.onclick = function(){
-     content_PhanHoi = prompt("Vui lòng mô tả nội dung cần phản hồi:");
 };
 window.onload = function(){
     showBtnPhanHoi();

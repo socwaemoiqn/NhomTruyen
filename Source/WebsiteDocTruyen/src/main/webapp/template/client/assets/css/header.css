@@ -50,6 +50,7 @@ button[type=submit] {
     cursor: pointer;
     border-radius: 0px 4px 4px 0px;
     outline: none;
+
 }
 button.btn{
 	 width: 100%;
@@ -64,6 +65,7 @@ button.btn{
     color: #fff;
     transition: .5s;
     font-size: 17px;
+    margin-bottom: 15px;
 }
 button.btn:hover{
 	 background-position: right;
@@ -143,6 +145,15 @@ button.btn:hover{
     display: block;
     text-align: left;
     background: #555;
+}
+#danhMuc .danhMucFull{
+    color: #86ad86;
+}
+#danhMuc .danhMucHot{
+    color: #fd8383;
+}
+#danhMuc .danhMucNew{
+    color: #8eb3fd;
 }
 #theLoai .dropdown-content a {
     float: none;

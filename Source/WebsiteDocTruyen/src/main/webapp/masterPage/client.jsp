@@ -46,18 +46,18 @@
 					</strong>
 					</a>
 				</c:forEach>
-				//phần tĩnh <a href="danhmuc.html?id=full"> <strong
-					style="color: #86ad86;">Truyện full <span
-						data-placeholder="Truyện full"></span>
-				</strong> </b>
-				</a> <a href="danhmuc.html?id=hot"> <strong style="color: #fd8383;">Truyện
-						hot <span data-placeholder="Truyện hot"></span>
-				</strong></a> <a href="#"> <strong style="color: #8eb3fd;">Truyện
-						New <span data-placeholder="Truyện new"></span>
-				</strong>
-				</a> <a href="#"><strong>Truyện mới cập nhật <span
-						data-placeholder="Truyện mới cập nhập"></span>
-				</strong></a> //kết thúc phần tĩnh
+				//phần tĩnh   <a href="danhmuc.html?id=full"><strong class="danhMucFull">Truyện full
+                    <span data-placeholder="Truyện full"></strong></span>
+            </b></a>
+            <a href="danhmuc.html?id=hot"><strong  class="danhMucHot">Truyện hot
+                    <span data-placeholder="Truyện hot"></span>
+            </strong></a>
+            <a href="#"><strong class="danhMucNew">Truyện New
+                    <span data-placeholder="Truyện new"></span>
+            </strong></a>
+            <a href="#"><strong>Truyện mới cập nhật
+                    <span data-placeholder="Truyện mới cập nhập"></span>
+            </strong></a> //kết thúc phần tĩnh
 			</div>
 		</div>
 		<div class="dropdown" id="theLoai">
@@ -95,64 +95,63 @@
 		<a style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 	</div>
 	<dec:body />
-	<div class="tool">
-		<span class="tool-item" id="tool-item-top"><span
-			class="tool-mota">Về đầu trang</span><i
-			class="far fa-arrow-alt-circle-up"></i></span> <span class="tool-item"><span
-			class="tool-mota">Liên hệ Facebook</span><a target="_blank"
-			href="https://facebook.com"><i class="fab fa-facebook-f"></i></a></span> <span
-			class="tool-item"><span class="tool-mota">Phản hồi</span><i
-			class="far fa-envelope"></i></span>
-	</div>
-	<div class="footer">
-		<div class="footer-left">
-			<a href="#home" id="home"> <span class="fa-stack"> <i
-					class="fa fa-circle fa-stack-2x"></i> <i
-					class="fa fa-book-open fa-spin fa-stack-1x fa-inverse"
-					style="color: black;"></i>
-			</span> TRUYỆN PHP
-			</a>
-		</div>
-		<div class="footer-mid">
-			<table>
-				<thead>
-					<tr>
-						<td>Truyện full</td>
-						<td>Truyện mới cập nhật</td>
-						<td>Truyện hot</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><a href="#">Thiên hạ vô song</a></td>
-						<td><a href="#">Duy ngã độc tôn</a></td>
-						<td><a href="#">Vô địch thiên hạ</a></td>
-					</tr>
-					<tr>
-						<td><a href="#">Thiên hạ vô song</a></td>
-						<td><a href="#">Duy ngã độc tôn</a></td>
-						<td><a href="#">Vô địch thiên hạ</a></td>
-					</tr>
-					<tr>
-						<td><a href="#">Thiên hạ vô song</a></td>
-						<td><a href="#">Duy ngã độc tôn</a></td>
-						<td><a href="#">Vô địch thiên hạ</a></td>
-					</tr>
-					<tr>
-						<td><a href="#">Thiên hạ vô song</a></td>
-						<td><a href="#">Duy ngã độc tôn</a></td>
-						<td><a href="#">Vô địch thiên hạ</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div class="footer-right">
-			<span>Đề tài:</span> Xây dựng ứng dụng web đọc truyện online <br>
-			<span>Môn:</span> Phát triển phần mềm chuyên nghiệp <br> Thành
-			viên: <br> - Võ Văn Việt <br> - Nguyễn Công Toàn <br>
-			- Phạm Ngọc Văn
-		</div>
-	</div>
+<div class="tool">
+        <span class="tool-item" id="tool-item-top"><span class="tool-mota">Về đầu trang</span><i class="far fa-arrow-alt-circle-up"></i></span>
+        <span class="tool-item"><span class="tool-mota">Liên hệ Facebook</span><a target="_blank" href="https://facebook.com"><i class="fab fa-facebook-f"></i></a></span>
+        <span class="tool-item"><span class="tool-mota">Phản hồi</span><a target="_blank" href="${pageContext.request.contextPath}/contact"><i class="far fa-envelope"></i></a></span>
+</div>
+<div class="footer">
+    <div class="footer-left">
+            <a href="#home" id="home">
+                    <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
+                    </span>
+            TRUYỆN PHP</a>
+    </div>
+    <div class="footer-mid">
+        <table>
+            <thead>
+                <tr>
+                    <td>Truyện full</td>
+                    <td>Truyện mới cập nhật</td>
+                    <td>Truyện hot</td>
+                </tr>
+            </thead>
+           <tbody>
+                <tr>
+                    <td><a href="#">Thiên hạ vô song</a></td>
+                    <td><a href="#">Duy ngã độc tôn</a></td>
+                    <td><a href="#">Vô địch thiên hạ</a></td>
+                </tr> 
+                <tr>
+                        <td><a href="#">Thiên hạ vô song</a></td>
+                        <td><a href="#">Duy ngã độc tôn</a></td>
+                        <td><a href="#">Vô địch thiên hạ</a></td>
+                    </tr> 
+                    <tr>
+                            <td><a href="#">Thiên hạ vô song</a></td>
+                            <td><a href="#">Duy ngã độc tôn</a></td>
+                            <td><a href="#">Vô địch thiên hạ</a></td>
+                        </tr> 
+                        <tr>
+                                <td><a href="#">Thiên hạ vô song</a></td>
+                                <td><a href="#">Duy ngã độc tôn</a></td>
+                                <td><a href="#">Vô địch thiên hạ</a></td>
+                            </tr> 
+           </tbody>
+        </table>
+    </div>
+    <div class="footer-right">
+        <span>Đề tài:</span> Xây dựng ứng dụng web đọc truyện online <br>
+        <span>Môn:</span> Phát triển phần mềm chuyên nghiệp <br>
+        Thành viên: <br>
+         - Võ Văn Việt <br>
+         - Nguyễn Công Toàn <br>
+         - Phạm Ngọc Văn
+         <span id="footer-right-term"><i class="fab fa-steam-symbol"></i> <a href="${pageContext.request.contextPath}/term">Terms of Service</a></span> 
+    </div>
+</div>
 	<div id="container-login">
 		<i class="fas fa-times-circle fa-lg"></i>
 		<form action="login" method="post">

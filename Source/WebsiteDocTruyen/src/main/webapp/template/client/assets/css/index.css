@@ -255,6 +255,10 @@
 .col-3 .content table td a:hover{
     color: gray;
 }
+#the-loai-truyen table {
+    width: 50%;
+    float:left;
+}
 #the-loai-truyen table td a strong{
     font-weight: normal;
     position: relative;
