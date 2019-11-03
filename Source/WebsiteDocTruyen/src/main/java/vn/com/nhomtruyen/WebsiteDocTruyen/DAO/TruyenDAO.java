@@ -13,7 +13,8 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
 public interface TruyenDAO   {
 	//public PaginationResult<truyenSelectInfo> litTruyen(int page, int maxResult, int maxNavigationPage);
 	public PaginationResult<TruyenSelectInfo> litsTruyen(int page, int maxResult, int maxNavigationPage);
-	public TruyenInfoByTruyen SelectTruyenByMa(int maTruyen);
+	public TruyenInfoByTruyen SelectTruyenByMa(String maTruyen);
 	public List<TruyenSelectInfo> listTR();
 	public void InsertTruyen(TruyenInfo truyenInfo);
+	public int getSLTruyenofTacGia(int maTacGia);
 }

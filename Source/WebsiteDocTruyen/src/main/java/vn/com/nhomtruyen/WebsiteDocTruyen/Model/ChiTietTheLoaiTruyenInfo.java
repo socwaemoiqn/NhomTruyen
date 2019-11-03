@@ -2,19 +2,19 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class ChiTietTheLoaiTruyenInfo {
 	private int id;
-	private int maTruyen;
+	private String maTruyen;
 	private int maTheLoai;
 	private String tenTheLoai;
 	public ChiTietTheLoaiTruyenInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChiTietTheLoaiTruyenInfo(int maTruyen, int maTheLoai) {
+	public ChiTietTheLoaiTruyenInfo(String maTruyen, int maTheLoai) {
 		super();
 		this.maTruyen = maTruyen;
 		this.maTheLoai = maTheLoai;
 	}
-	public ChiTietTheLoaiTruyenInfo(int id, int maTruyen, int maTheLoai, String tenTheLoai) {
+	public ChiTietTheLoaiTruyenInfo(int id, String maTruyen, int maTheLoai, String tenTheLoai) {
 		super();
 		this.id = id;
 		this.maTruyen = maTruyen;
@@ -29,10 +29,10 @@ public class ChiTietTheLoaiTruyenInfo {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMaTruyen() {
+	public String getMaTruyen() {
 		return maTruyen;
 	}
-	public void setMaTruyen(int maTruyen) {
+	public void setMaTruyen(String maTruyen) {
 		this.maTruyen = maTruyen;
 	}
 	public int getMaTheLoai() {

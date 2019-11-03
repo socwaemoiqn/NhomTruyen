@@ -117,7 +117,7 @@
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="col-lg-12">
-				<div class="panel panel-green">
+				<div class="panel panel-primary">
 
 					<div class="panel-heading">
 						<h4>Thêm truyện mới</h4>

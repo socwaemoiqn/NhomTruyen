@@ -1,6 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
@@ -59,8 +60,20 @@ public class HomeController {
 		model.addAttribute("truyen", truyen);
 		
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai= theLoaiTruyenDao.dsTenTheLoai();
-		model.addAttribute("tenTheLoai", tenTheLoai);
 		
+		String ngayhethong=Helper.getCurrentDateAndTime();
+		
+		Map<String, String> map= new HashMap<String, String>();
+		
+		
+		for(TruyenSelectInfo tr: truyen) {
+			String ngay=tr.getNgayTao();
+			String truoc=Helper.compareTime(ngay, ngayhethong);
+			map.put(tr.getID(), truoc);
+		}
+		model.addAttribute("truoc", map);
+		model.addAttribute("tenTheLoai", tenTheLoai);
+		System.out.println(map);
 		loadTLandDM(model);	
 		return "index";
 	}
@@ -102,7 +115,7 @@ public class HomeController {
 		return "user_info";
 	}
 	@RequestMapping(value = "/truyen", method = RequestMethod.GET)
-	public String truyenInfoPage(Model model, @RequestParam("idTruyen")  int maTruyen) {
+	public String truyenInfoPage(Model model, @RequestParam("idTruyen") String maTruyen) {
 		
 		TruyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);

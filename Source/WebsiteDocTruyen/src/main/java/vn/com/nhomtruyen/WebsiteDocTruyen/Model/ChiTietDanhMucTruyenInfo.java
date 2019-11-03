@@ -1,9 +1,9 @@
-package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
+	package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class ChiTietDanhMucTruyenInfo {
 
 	private int id;
-	private int maTruyen;
+	private String maTruyen;
 	private int maDanhMuc;
 	private String tenDanhMuc;
 	
@@ -12,13 +12,13 @@ public class ChiTietDanhMucTruyenInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChiTietDanhMucTruyenInfo(int maTruyen, int maDanhMuc, String tenDanhMuc) {
+	public ChiTietDanhMucTruyenInfo(String maTruyen, int maDanhMuc, String tenDanhMuc) {
 		super();
 		this.maTruyen = maTruyen;
 		this.maDanhMuc = maDanhMuc;
 		this.tenDanhMuc = tenDanhMuc;
 	}
-	public ChiTietDanhMucTruyenInfo(int id, int maTruyen, int maDanhMuc, String tenDanhMuc) {
+	public ChiTietDanhMucTruyenInfo(int id, String maTruyen, int maDanhMuc, String tenDanhMuc) {
 		super();
 		this.id = id;
 		this.maTruyen = maTruyen;
@@ -26,7 +26,7 @@ public class ChiTietDanhMucTruyenInfo {
 		this.tenDanhMuc = tenDanhMuc;
 	}
 	
-	public ChiTietDanhMucTruyenInfo(int maTruyen, int maDanhMuc) {
+	public ChiTietDanhMucTruyenInfo(String maTruyen, int maDanhMuc) {
 		super();
 		this.maTruyen = maTruyen;
 		this.maDanhMuc = maDanhMuc;
@@ -37,10 +37,10 @@ public class ChiTietDanhMucTruyenInfo {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getMaTruyen() {
+	public String getMaTruyen() {
 		return maTruyen;
 	}
-	public void setMaTruyen(int maTruyen) {
+	public void setMaTruyen(String maTruyen) {
 		this.maTruyen = maTruyen;
 	}
 	public int getMaDanhMuc() {

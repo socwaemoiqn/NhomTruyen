@@ -8,7 +8,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbTAIKHOAN")
 public class TaiKhoanEntity {
-	private int maTaiKhoan;
+	private String maTaiKhoan;
 	private String tenTaiKhoan;
 	private String matKhau;
 	private String maRole;
@@ -16,11 +16,11 @@ public class TaiKhoanEntity {
 
 	@Id
 	@Column(name = "MaTaiKhoan")
-	public int getMaTaiKhoan() {
+	public String getMaTaiKhoan() {
 		return maTaiKhoan;
 	}
 
-	public void setMaTaiKhoan(int maTaiKhoan) {
+	public void setMaTaiKhoan(String maTaiKhoan) {
 		this.maTaiKhoan = maTaiKhoan;
 	}
 

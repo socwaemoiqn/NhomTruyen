@@ -1,7 +1,7 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class TruyenInfoByTruyen {
-	private int ID;
+	private String ID;
 	private String tenTruyen;
 	private String tenTacGia;
 	private int soChuong;
@@ -16,7 +16,7 @@ public class TruyenInfoByTruyen {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TruyenInfoByTruyen(int iD, String tenTruyen, String tenTacGia, int soChuong, String gioiThieu,
+	public TruyenInfoByTruyen(String iD, String tenTruyen, String tenTacGia, int soChuong, String gioiThieu,
 			String tenNhomDich, int luotXem, String nguon, String hinhAnh, String trangThai, String ngayTao) {
 		super();
 		ID = iD;
@@ -31,10 +31,10 @@ public class TruyenInfoByTruyen {
 		this.trangThai = trangThai;
 		this.ngayTao = ngayTao;
 	}
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
-	public void setID(int iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	public String getTenTruyen() {

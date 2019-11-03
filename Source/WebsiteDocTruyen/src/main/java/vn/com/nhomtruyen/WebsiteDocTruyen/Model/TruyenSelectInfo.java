@@ -2,18 +2,20 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class TruyenSelectInfo {
 	private String hinhAnh;
-	private int ID;
+	private String ID;
 	private String tenTruyen;
 	private String tenTacGia;
 	private int soChuong;
 	private int luotXem;
 	private String trangThai;
+	private String ngayTao;
 	public TruyenSelectInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TruyenSelectInfo(String hinhAnh, int iD, String tenTruyen, String tenTacGia, int soChuong, int luotXem,
-			String trangThai) {
+	
+	public TruyenSelectInfo(String hinhAnh, String iD, String tenTruyen, String tenTacGia, int soChuong, int luotXem,
+			String trangThai, String ngayTao) {
 		super();
 		this.hinhAnh = hinhAnh;
 		ID = iD;
@@ -22,17 +24,19 @@ public class TruyenSelectInfo {
 		this.soChuong = soChuong;
 		this.luotXem = luotXem;
 		this.trangThai = trangThai;
+		this.ngayTao = ngayTao;
 	}
+
 	public String getHinhAnh() {
 		return hinhAnh;
 	}
 	public void setHinhAnh(String hinhAnh) {
 		this.hinhAnh = hinhAnh;
 	}
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
-	public void setID(int iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	public String getTenTruyen() {
@@ -65,5 +69,14 @@ public class TruyenSelectInfo {
 	public void setTrangThai(String trangThai) {
 		this.trangThai = trangThai;
 	}
+
+	public String getNgayTao() {
+		return ngayTao;
+	}
+
+	public void setNgayTao(String ngayTao) {
+		this.ngayTao = ngayTao;
+	}
+	
 	
 }

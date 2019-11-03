@@ -129,7 +129,14 @@
 												</c:if>
 										</c:forEach></a></td>
 								<td><a href="#" class="chuong">${tr.soChuong } Chương</a></td>
-								<td>3 phút trước</td>
+
+								<td><c:set var="maTruyen" value="${tr.ID}" /> 
+								<c:forEach
+										var="t" items="${truoc}">
+										<c:if test="${t.key == tr.ID}">
+											${t.value }
+										</c:if>
+									</c:forEach> </td>
 							</tr>
 						</c:forEach>
 						<tr>
@@ -261,10 +268,10 @@
 							<c:forEach items="${theLoaiTruyen}" var="d" begin="${12*(i-1)}"
 								end="${(12*i)-1}">
 								<tr>
-									<td><a href="#"><strong><c:if test="${d.id ==1 || d.id == 13}">
-										<i class="far fa-star"></i>
-									</c:if> ${d.tenTheLoai }<span
-												data-placeholder="${d.tenTheLoai }"></span></strong></a></td>
+									<td><a href="#"><strong><c:if
+													test="${d.id ==1 || d.id == 13}">
+													<i class="far fa-star"></i>
+												</c:if> ${d.tenTheLoai }<span data-placeholder="${d.tenTheLoai }"></span></strong></a></td>
 								</tr>
 							</c:forEach>
 						</table>

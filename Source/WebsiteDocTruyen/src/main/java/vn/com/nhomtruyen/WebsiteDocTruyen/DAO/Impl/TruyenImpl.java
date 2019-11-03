@@ -13,6 +13,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.NhomDichEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
@@ -39,7 +40,7 @@ public class TruyenImpl implements TruyenDAO {
 	public PaginationResult<TruyenSelectInfo> litsTruyen(int page, int maxResult, int maxNavigationPage) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + TruyenSelectInfo.class.getName()
-				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai) "
+				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai,tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr ," + TacGiaEntity.class.getName() + " tg"
 				+ " where tr.maTacGia = tg.ID GROUP BY tr.id";
 		Query query = session.createQuery(sql);
@@ -47,13 +48,13 @@ public class TruyenImpl implements TruyenDAO {
 	}
 
 	@Override
-	public TruyenInfoByTruyen SelectTruyenByMa(int maTruyen) {
+	public TruyenInfoByTruyen SelectTruyenByMa(String maTruyen) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " +TruyenInfoByTruyen.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong,tr.gioiThieu,nd.tenNhomDich, tr.luotXem,tr.nguon,tr.hinhAnh, tr.trangThai, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong,tr.gioiThieu,nd.tenNhomDich, tr.luotXem, tr.nguon,tr.hinhAnh, tr.trangThai, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+NhomDichEntity.class.getName() + " nd "
-				+ " where  tr.maTacGia = tg.ID and tr.maNhomDich=nd.maNhomDich and tr.ID =: mt ";
+				+ " where tr.maTacGia = tg.ID and tr.maNhomDich= nd.maNhomDich and tr.ID =: mt ";
 		Query query = session.createQuery(sql);
 		query.setParameter("mt", maTruyen);
 		return (TruyenInfoByTruyen) query.uniqueResult();
@@ -63,9 +64,9 @@ public class TruyenImpl implements TruyenDAO {
 	public List<TruyenSelectInfo> listTR() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + TruyenSelectInfo.class.getName()
-				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai) "
+				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr ," + TacGiaEntity.class.getName() + " tg"
-				+ " where tr.maTacGia = tg.ID GROUP BY tr.id";
+				+ " where tr.maTacGia = tg.ID GROUP BY tr.id ORDER BY tr.ngayTao DESC";
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
@@ -88,6 +89,15 @@ public class TruyenImpl implements TruyenDAO {
 
 		Session session = this.sessionFactory.getCurrentSession();
 		session.persist(truyen);
+	}
+
+	@Override
+	public int getSLTruyenofTacGia(int maTacGia) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " ";
+		Query query = session.createQuery(sql);
+		query.setParameter("tacgia", maTacGia);
+		return query.list().size();
 	}
 
 }

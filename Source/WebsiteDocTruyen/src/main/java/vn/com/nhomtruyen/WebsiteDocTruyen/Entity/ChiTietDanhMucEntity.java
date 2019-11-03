@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class ChiTietDanhMucEntity {
 
 	private int maChiTiet;
-	private int maTruyen;
+	private String maTruyen;
 	private int maDanhMuc;
 	
 	@Id
@@ -22,10 +22,10 @@ public class ChiTietDanhMucEntity {
 		this.maChiTiet = maChiTiet;
 	}
 	@Column(name ="MaTruyen")
-	public int getMaTruyen() {
+	public String getMaTruyen() {
 		return maTruyen;
 	}
-	public void setMaTruyen(int maTruyen) {
+	public void setMaTruyen(String maTruyen) {
 		this.maTruyen = maTruyen;
 	}
 	@Column(name ="MaDanhMuc")

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 @Table(name="tbtruyen")
 public class TruyenEntity {
 
-	private int ID;
+	private String ID;
 	private String tenTruyen;
 	private int maTacGia;
 	private int maNhomDich;
@@ -24,10 +24,10 @@ public class TruyenEntity {
 
 	@Id
 	@Column(name="MaTruyen")	
-	public int getID() {
+	public String getID() {
 		return ID;
 	}
-	public void setID(int iD) {
+	public void setID(String iD) {
 		ID = iD;
 	}
 	@Column(name="TenTruyen")	

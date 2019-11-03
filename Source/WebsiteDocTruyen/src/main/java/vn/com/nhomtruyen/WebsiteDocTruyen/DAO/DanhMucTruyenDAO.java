@@ -18,7 +18,7 @@ public interface DanhMucTruyenDAO {
 	public DanhMucTruyenInfo findDanhMucTruyenInfo(int id);
 	public void insertDanhMucTruyen(DanhMucTruyenInfo danhMucTruyenInfo); 
 	public void deleteDanhMucTruyen(int id);
-	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(int maTruyen);
+	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(String maTruyen);
 	public List<ChiTietDanhMucTruyenInfo> listTenDM();
 	
 

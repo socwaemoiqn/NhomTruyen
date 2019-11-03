@@ -3,7 +3,7 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 public class ChuongInfo {
 
 	private int id;
-	private int IDTruyen;
+	private String IDTruyen;
 	private String tieuDe;
 	private String noiDung;
 	private String trangThai;
@@ -12,7 +12,7 @@ public class ChuongInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChuongInfo(int id, int iDTruyen, String tieuDe, String noiDung, String trangThai, String ngayTao) {
+	public ChuongInfo(int id, String iDTruyen, String tieuDe, String noiDung, String trangThai, String ngayTao) {
 		super();
 		this.id = id;
 		IDTruyen = iDTruyen;
@@ -27,10 +27,10 @@ public class ChuongInfo {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getIDTruyen() {
+	public String getIDTruyen() {
 		return IDTruyen;
 	}
-	public void setIDTruyen(int iDTruyen) {
+	public void setIDTruyen(String iDTruyen) {
 		IDTruyen = iDTruyen;
 	}
 	public String getTieuDe() {

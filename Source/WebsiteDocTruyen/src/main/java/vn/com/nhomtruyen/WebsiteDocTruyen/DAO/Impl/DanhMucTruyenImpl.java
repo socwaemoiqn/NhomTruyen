@@ -97,11 +97,11 @@ public class DanhMucTruyenImpl implements DanhMucTruyenDAO {
 	}
 
 	@Override
-	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(int maTruyen) {
+	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(String maTruyen) {
 		Session se = this.sessionFactory.getCurrentSession();
 
 		String sql = " Select new " + ChiTietDanhMucTruyenInfo.class.getName()
-				+ "(a.id, a.maTruyen,d.tenDanhMuc)" + " from "
+				+ "(a.id, a.maTruyen,a.maDanhMuc,d.tenDanhMuc)" + " from "
 				+ ChiTietDanhMucEntity.class.getName() +" a, "+ DanhMucTruyenEntity.class.getName() + " d "
 				+ " where a.maDanhMuc=d.id and a.maTruyen =: mt";
 

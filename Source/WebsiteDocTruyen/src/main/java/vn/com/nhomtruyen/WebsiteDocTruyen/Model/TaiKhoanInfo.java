@@ -2,7 +2,7 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class TaiKhoanInfo {
 
-	private int maTaiKhoan;
+	private String maTaiKhoan;
 	private String tenTaiKhoan;
 	private String matKhau;
 	private String tenRole;
@@ -11,7 +11,7 @@ public class TaiKhoanInfo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TaiKhoanInfo(int maTaiKhoan, String tenTaiKhoan, String matKhau, String tenRole, String ngayTao) {
+	public TaiKhoanInfo(String maTaiKhoan, String tenTaiKhoan, String matKhau, String tenRole, String ngayTao) {
 		super();
 		this.maTaiKhoan = maTaiKhoan;
 		this.tenTaiKhoan = tenTaiKhoan;
@@ -19,10 +19,10 @@ public class TaiKhoanInfo {
 		this.tenRole = tenRole;
 		this.ngayTao = ngayTao;
 	}
-	public int getMaTaiKhoan() {
+	public String getMaTaiKhoan() {
 		return maTaiKhoan;
 	}
-	public void setMaTaiKhoan(int maTaiKhoan) {
+	public void setMaTaiKhoan(String maTaiKhoan) {
 		this.maTaiKhoan = maTaiKhoan;
 	}
 	public String getTenTaiKhoan() {

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
@@ -66,14 +67,12 @@ public class QL_TruyenController {
 	@RequestMapping(value = "/them", method = RequestMethod.POST)
 	private String themTruyenAction(HttpServletRequest request, Model model,
 			@ModelAttribute("truyen") TruyenAddForm truyenAddForm) {
-		Calendar cal = Calendar.getInstance();
-		String ngay = cal.get(Calendar.DAY_OF_MONTH) + "" + cal.get(Calendar.HOUR_OF_DAY) + ""
-				+ cal.get(Calendar.MINUTE) + "" + cal.get(Calendar.SECOND) + "" + cal.get(Calendar.MILLISECOND);
-		int maTruyen = Integer.parseInt(ngay);
+		
+		String maTruyen = Helper.CreateId("TR");
 
 		String tenTruyen = truyenAddForm.getTenTruyen();
 		int maTacGia = truyenAddForm.getMaTacGia();
-		int maNhomDich = 0;
+		int maNhomDich = 1;
 		int soChuong = truyenAddForm.getSoChuong();
 		String gioiThieu = truyenAddForm.getGioiThieu();
 		int luotXem = 0;
@@ -87,8 +86,7 @@ public class QL_TruyenController {
 		}
 
 		String trangThai = "1";
-		String ngayTao = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
-				+ cal.get(Calendar.DAY_OF_MONTH);
+		String ngayTao = Helper.getCurrentDateAndTime();
 
 		TruyenInfo truyenInfo = new TruyenInfo(maTruyen, tenTruyen, maTacGia, maNhomDich, soChuong, gioiThieu, luotXem,
 				nguon, hinhAnh, trangThai, ngayTao);
@@ -104,14 +102,14 @@ public class QL_TruyenController {
 		return "redirect:/quan-tri/ql_truyen";
 	}
 
-	private void insertChitietTheLoai(int maTruyen, int[] matheLoai) {
+	private void insertChitietTheLoai(String maTruyen, int[] matheLoai) {
 		for (int ma : matheLoai) {
 			ChiTietTheLoaiTruyenInfo chiTietTheLoaiTruyenInfo = new ChiTietTheLoaiTruyenInfo(maTruyen, ma);
 			theLoaiTruyenDao.insertChiTietTheLoai(chiTietTheLoaiTruyenInfo);
 		}
 	}
 
-	private void insertChiTietDanhMuc(int maTruyen, int[] maDanhMuc) {
+	private void insertChiTietDanhMuc(String maTruyen, int[] maDanhMuc) {
 		for (int ma : maDanhMuc) {
 			ChiTietDanhMucTruyenInfo chiTietDanhMucTruyenInfo = new ChiTietDanhMucTruyenInfo(maTruyen, ma);
 			dmtruyenDao.InsertChiTietDanhMuc(chiTietDanhMucTruyenInfo);
@@ -161,13 +159,18 @@ public class QL_TruyenController {
 	}
 
 	@RequestMapping(value = "/xem_truyen", method = RequestMethod.GET)
-	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") int maTruyen) {
+	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") String maTruyen) {
 
 		TruyenInfoByTruyen tr = truyenDao.SelectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-
+		
+		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongByIdTruyen(maTruyen);
+		int slChuong=listChuongByTruyen.size();
+		
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
+		model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
+		model.addAttribute("slChuong", slChuong);
 		return "admin/ql_truyen_xemtruyen";
 	}
 
