@@ -77,8 +77,4 @@ public class Helper {
 		System.out.println("" + compareTime(dateStart, dateStop));
 
 	}
-	public static void ABC()
-	{
-		
-	}
 }
