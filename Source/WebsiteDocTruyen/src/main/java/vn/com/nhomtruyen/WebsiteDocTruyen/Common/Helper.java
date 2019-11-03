@@ -77,4 +77,8 @@ public class Helper {
 		System.out.println("" + compareTime(dateStart, dateStop));
 
 	}
+	
+	public static int soNguyen() {
+		return 1;
+	}
 }
