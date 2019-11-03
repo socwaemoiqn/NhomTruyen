@@ -1,6 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -109,13 +109,29 @@ public class HomeController {
 
 	@RequestMapping(value = "/ql_nhomdich", method = RequestMethod.GET)
 	public String QlNhomDichPage(Model model) {
-
+			
 		return "admin/ql_nhomdich";
 	}
 
 	@RequestMapping(value = "/ql_tacgia", method = RequestMethod.GET)
-	public String QlTacGiaPage(Model model) {
-
+	public String QlTacGiaPage(Model model, @RequestParam(value="page",defaultValue = "1")String pageStr) {
+		int page = 1;
+		try {
+			page = Integer.parseInt(pageStr);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		final int Max_Result = 2;
+		final int Max_Navigation = 3;
+		PaginationResult<TacGiaInfo> listTacGia = tacGiaDao.paginationListTacGia(page, Max_Result, Max_Navigation);
+		model.addAttribute("listTacGia",listTacGia);
+		Map<Integer, Integer> listSL = new HashMap<Integer, Integer>();
+		for(TacGiaInfo tg : listTacGia.getList()) {
+			int maTacGia = tg.getID();
+			int soluong = tacGiaDao.getSoLuongTacGiaByTruyen(maTacGia);
+			listSL.put(maTacGia,soluong);
+		}
+		model.addAttribute("listSL",listSL);
 		return "admin/ql_tacgia";
 	}
 
