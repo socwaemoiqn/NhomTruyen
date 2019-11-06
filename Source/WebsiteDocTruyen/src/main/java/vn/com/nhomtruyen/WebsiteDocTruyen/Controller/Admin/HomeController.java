@@ -92,7 +92,7 @@ public class HomeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		final int Max_Result = 2;
+		final int Max_Result = 10;
 		final int Max_Navigation = 3;
 
 		PaginationResult<TruyenSelectInfo> listTruyen = truyenDao.litsTruyen(page, Max_Result, Max_Navigation);

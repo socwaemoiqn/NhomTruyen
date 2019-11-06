@@ -67,7 +67,7 @@ public class QL_TruyenController {
 	@RequestMapping(value = "/them", method = RequestMethod.POST)
 	private String themTruyenAction(HttpServletRequest request, Model model,
 			@ModelAttribute("truyen") TruyenAddForm truyenAddForm) {
-		
+
 		String maTruyen = Helper.CreateId("TR");
 
 		String tenTruyen = truyenAddForm.getTenTruyen();
@@ -157,16 +157,25 @@ public class QL_TruyenController {
 		}
 
 	}
+	
+	@RequestMapping(value = "/editTruyen", method = RequestMethod.POST)
+	private String editTruyen(HttpServletRequest request, Model model) {
+		return "";
+	}
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	private String deleteTruyen(HttpServletRequest request, Model model) {
+		return "";
+	}
 
 	@RequestMapping(value = "/xem_truyen", method = RequestMethod.GET)
 	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") String maTruyen) {
 
 		TruyenInfoByTruyen tr = truyenDao.SelectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		
+
 		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongByIdTruyen(maTruyen);
-		int slChuong=listChuongByTruyen.size();
-		
+		int slChuong = listChuongByTruyen.size();
+
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
 		model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
@@ -174,63 +183,38 @@ public class QL_TruyenController {
 		return "admin/ql_truyen_xemtruyen";
 	}
 
-	@RequestMapping(value = "/ql_chuong", method = RequestMethod.GET)
-	public String qlChuongPage(Model model, @RequestParam("idtruyen") int idTruyen,
-			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 3;
-		final int Max_Navigation = 3;
-		PaginationResult<ChuongInfo> listChuongOfTruyen = chuongDao.listChuongOfTruyen(idTruyen, page, Max_Result,
-				Max_Navigation);
-		// List<chuongInfo> listChuongOfTruyen = chuongDao.dsDanhMucTruyen(idTruyen);
-		model.addAttribute("listChuongOfTruyen", listChuongOfTruyen);
-		model.addAttribute("idt", idTruyen);
-
-		return "admin/ql_truyen_ql_chuong";
-	}
-
-	@RequestMapping(value = "/ql_chuong/them_chuong", method = RequestMethod.GET)
-	public String themtruyenPage(Model model) {
-		String noi = "";
-		model.addAttribute("noi", noi);
-		return "admin/ql_truyen_themchuong";
-	}
-
-	@RequestMapping(value = "/ql_chuong/xem_chuong", method = RequestMethod.GET)
-	public String xemChuongPage(Model model, @RequestParam("idChuong") int idChuong) {
-		ChuongInfo chuongOfId = chuongDao.chuongOfID(idChuong);
-		model.addAttribute("noiDung", chuongOfId.getNoiDung());
-		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
-		return "admin/ql_truyen_xemchuong";
-	}
-
-	@RequestMapping(value = "/ql_chuong/sua_chuong", method = RequestMethod.GET)
-	public String editChuongPage(Model model, @RequestParam("idChuong") int idChuong) {
+	@RequestMapping(value = "/xem_chuong", method = RequestMethod.GET)
+	public String xemChuongPage(Model model, @RequestParam("idChuong") String idChuong) {
 		ChuongInfo chuongOfId = chuongDao.chuongOfID(idChuong);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("id", chuongOfId.getId());
-		return "admin/ql_truyen_suachuong";
-	}
-
-	@RequestMapping(value = "/ql_chuong/addChuong", method = RequestMethod.POST)
-	public String addChuongPage(Model model) {
-
 		return "admin/ql_truyen_xemchuong";
 	}
 
-	@RequestMapping(value = "/ql_chuong/editChuong", method = RequestMethod.POST)
-	public String editChuongForm(Model model, @RequestParam("noidung") String nd, @RequestParam("idChuong") int id) {
-		boolean kt = chuongDao.upDataChuong(nd, id);
+	@RequestMapping(value = "/xem_chuong/addChuong", method = RequestMethod.POST)
+	public String addChuongPage(Model model, @RequestParam("idtruyen") String idTruyen, HttpServletRequest request) {
+		String idChuong = Helper.CreateId("CH");
+		String tieuDe = request.getParameter("ten");
+		String noiDung = request.getParameter("noiDung");
+		int trangThai = 1;
+		String ngayTao = Helper.getCurrentDateAndTime();
+		// tạo 1 đối tượng
+		ChuongInfo newChuong = new ChuongInfo(idChuong, idTruyen, tieuDe, noiDung, trangThai, ngayTao);
+		// insert vào csdl
+		chuongDao.insertChuong(newChuong);
+
+		return "redirect:/quan-tri/ql_truyen/xem_chuong?idChuong=" + idChuong;
+	}
+
+	@RequestMapping(value = "/xem_chuong/editChuong", method = RequestMethod.POST)
+	public String editChuongForm(Model model, @RequestParam("ten") String ten, @RequestParam("noidung") String nd,
+			@RequestParam("idChuong") String id) {
+		boolean kt = chuongDao.upDataChuong(ten, nd, id);
 		if (kt)
-			return "redirect:/admin/ql_chuong";
+			return "redirect:/admin/ql_truyen";
 		else
-			return "redirect:/quan-tri/ql_truyen/ql_chuong/xem_chuong?idChuong=" + id;
+			return "redirect:/quan-tri/ql_truyen/xem_chuong?idChuong=" + id;
 	}
 
 }

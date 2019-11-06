@@ -31,11 +31,9 @@
 						<li><a href="#thongtinkhac" data-toggle="tab">Thông tin
 								khác</a></li>
 						<li><a href="#chuong" data-toggle="tab">Chương</a></li>
-						<div style="float: right;">
-							<a href="" class="btn btn-success" data-toggle="modal"
-								data-target="#editThongTinTruyen">Chỉnh Sửa Thông Tin</a>
-						</div>
+
 					</ul>
+
 					<!-- Tab panes -->
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="home">
@@ -47,9 +45,14 @@
 											width="99%" />
 									</div>
 								</div>
+
 							</div>
 
 							<h3>${truyenById.tenTruyen }</h3>
+							<div style="float: right;">
+								<a href="" class="btn btn-success" data-toggle="modal"
+									data-target="#editThongTinTruyen">Chỉnh Sửa Thông Tin</a>
+							</div>
 							<p>
 								Danh Mục:
 								<c:forEach items="${dmById}" var="d" varStatus="status">
@@ -70,10 +73,7 @@
 							</p>
 							<p>Giới thiệu:</p>
 							<p>${truyenById.gioiThieu }</p>
-
 						</div>
-
-
 						<div class="tab-pane fade" id="thongtinkhac">
 							<h4>Một số thông tin khác</h4>
 							<p>
@@ -95,87 +95,71 @@
 						</div>
 						<div class="tab-pane fade" id="chuong">
 							<h4>Tất cả chương của truyện: ${truyenById.tenTruyen }</h4>
+							<p style="float: right;">
+								<a
+									href="#" data-toggle="modal"
+									data-target="#addChuong"
+									class="btn btn-primary">Thêm Chương Mới</a>
+							</p>
+							<div class="clearfix"></div>
 
 							<div class="panel-group" id="accordion">
-							<c:forEach var="i" begin="1" end="${(slChuong/2)+1}">
-								<div class="panel panel-default">
+								<c:forEach var="i" begin="1" end="${(slChuong/25)+1}">
+									<div class="panel panel-default">
+										<c:choose>
+											<c:when test="${i ==1}">
+												<c:set value="in" var="in" />
+											</c:when>
+											<c:otherwise>
+												<c:set value="collapse" var="in" />
+											</c:otherwise>
+										</c:choose>
+										<div id="collapse${i}" class="panel-collapse ${in } ">
 
-									<div id="collapseOne" class="panel-collapse collapse collapse">
-										<div class="panel-body">
-											<table class="table table-striped table-bordered table-hover"
-												id="dataTables-example">
-												<thead>
-													<tr>
-														<th>STT</th>
-														<th>Tên Chương</th>
-														<th>Trạng Thái</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-													
-												</tbody>
-											</table>
+											<div class="panel-body">
+												<table
+													class="table table-striped table-bordered table-hover"
+													id="dataTables-example">
+													<thead>
+														<tr>
+															<th>STT</th>
+															<th>Tên Chương</th>
+															<th>Trạng Thái</th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<c:forEach items="${listChuongOfTruyen}" var="us"
+															begin="${25*(i-1)}" end="${(25*i)-1}" varStatus="status">
+															<tr class="odd gradeX">
+																<td scope="row">${status.index + 1}</td>
+																<td>${us.tieuDe}</td>
+																<td class="center">dùng check</td>
+																<td class="center"><a
+																	class="btn btn-primary btn-circle" title="Xem trước"
+																	href="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_chuong?idChuong=${us.id}">
+																		<i class="fa fa-eye"></i>
+																</a> <a class="btn btn-danger btn-circle" title="Xóa chương"
+																	href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
+																		class="fa fa-close"></i></a></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</div>
 										</div>
+
+
 									</div>
-								</div>
-							</c:forEach>
-							
-								
-								<div class="panel panel-default">
-
-									<div id="collapseTwo" class="panel-collapse collapse">
-										<div class="panel-body">
-											<table class="table table-striped table-bordered table-hover"
-												id="dataTables-example">
-												<thead>
-													<tr>
-														<th>STT</th>
-														<th>Tên Chương</th>
-														<th>Trạng Thái</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
-								<div class="panel panel-default">
-
-									<div id="collapseThree" class="panel-collapse collapse">
-										<div class="panel-body">
-											<table class="table table-striped table-bordered table-hover"
-												id="dataTables-example">
-												<thead>
-													<tr>
-														<th>STT</th>
-														<th>Tên Chương</th>
-														<th>Trạng Thái</th>
-														<th></th>
-													</tr>
-												</thead>
-												<tbody>
-
-												</tbody>
-											</table>
-										</div>
-									</div>
-								</div>
+								</c:forEach>
 								<div class="grid_3 grid_5 agileits">
 									<div class="col-md-6">
 										<nav>
 											<ul class="pagination pagination-lg">
-
-												<li><a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseOne">1</a></li>
-												<li><a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseTwo">2</a></li>
-												<li><a data-toggle="collapse" data-parent="#accordion"
-													href="#collapseThree">3</a></li>
-
+												<c:forEach var="i" begin="1" end="${(slChuong/25)+1}">
+													<li><a data-toggle="collapse" data-parent="#accordion"
+														href="#collapse${i}">${i}</a></li>
+												</c:forEach>
 											</ul>
 										</nav>
 									</div>
@@ -221,6 +205,47 @@
 				</div>
 			</div>
 			<!-- //Modal content-->
+		</div>
+	</div>
+	
+	<div class="modal fade" id="addChuong" tabindex="-1" role="dialog">
+		<div class="modal-dialog-editchuong">
+			<!-- Modal content-->
+			<div class="col-lg-12">
+				<div class="panel panel-primary">
+
+					<div class="panel-heading">
+						<h3>Thêm chương mới</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_chuong/addChuong?idtruyen=${truyenById.ID}"
+									method="post">
+									<div class="form-group">
+										<label>Nhập lại tên chương</label>
+										<input class="form-control" type="text" name="ten"
+											placeholder="Nhập tên chương">
+									</div>
+									<div class="form-group">
+										<label>Nhập nội dung của chương</label> <textarea name="noiDung" id="noidung" ></textarea>
+										 <script>
+											CKEDITOR.replace('noidung');
+											CKEDITOR.addCss('form-control')
+										</script>
+									</div>
+									<button type="submit" class="btn panel-primary">Đồng ý</button>
+								</form>
+							</div>
+
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+
 		</div>
 	</div>
 

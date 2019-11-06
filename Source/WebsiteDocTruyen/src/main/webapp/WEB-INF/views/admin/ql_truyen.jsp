@@ -64,26 +64,23 @@
 												<c:if test="${us.ID == dm.maTruyen}">
 												${dm.tenDanhMuc},</c:if>
 											</c:forEach></td>
-										<td style="text-align: center"><a title="Tất cả chương"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/ql_chuong?idtruyen=${us.ID}">
-												${us.soChuong } </a></td>
+										<td style="text-align: center">
+												${us.soChuong }</td>
 										<td style="text-align: center">${us.luotXem }</td>
 										<td style="text-align: center"><c:choose>
 												<c:when test="${us.trangThai == '1' }"> Full</c:when>
 												<c:otherwise>Đang cập nhật</c:otherwise>
 											</c:choose></td>
-										<td class="center"><a class="btn btn-warning btn-circle"
+										<td style="width: 9%; text-align:center;"><a class="btn btn-warning btn-circle"
 											title="Xem trước"
 											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_truyen?idtruyen=${us.ID}">
 												<i class="fa fa-eye"></i>
-										</a> <a data-toggle="modal" data-target="#sua"
-											class="btn btn-success btn-circle"
-											title="Chỉnh sửa thông tin truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
-												<i class="fa  fa-edit"></i>
-										</a> <a class="btn btn-danger btn-circle" title="Xóa truyện"
-											href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.ID}"><i
-												class="fa fa-close"></i></a></td>
+										</a> <a
+											class="btn btn-danger btn-circle"
+											title="Xóa truyện"
+											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/delete?idtruyen=${us.ID}">
+												<i class="fa fa-close"></i>
+										</a> </td>
 									</tr>
 								</c:forEach>
 

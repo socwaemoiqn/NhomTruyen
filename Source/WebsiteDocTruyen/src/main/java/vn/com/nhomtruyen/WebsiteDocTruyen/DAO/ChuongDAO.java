@@ -9,9 +9,11 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 
 @Transactional
 public interface ChuongDAO {
-	public PaginationResult<ChuongInfo> listChuongOfTruyen(int idTruyen,int page, int maxResult, int maxNavigationPage);
-	public List<ChuongInfo> listChuongOfTruyen(int maTruyen);
-	public ChuongInfo chuongOfID(int idChuong);
-	public boolean upDataChuong(String nd, int idChuong);
+	public PaginationResult<ChuongInfo> listChuongOfTruyen(String idTruyen,int page, int maxResult, int maxNavigationPage);
+	public List<ChuongInfo> listChuongOfTruyen(String maTruyen);
+	public ChuongInfo chuongOfID(String idChuong);
+	public void insertChuong(ChuongInfo chuongInfo);
+	public boolean upDataChuong(String tieuDe,String nd, String idChuong);
 	public List<ChuongInfo> listChuongByIdTruyen(String matruyen);
+	
 }

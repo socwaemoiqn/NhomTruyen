@@ -129,7 +129,7 @@ public class HomeController {
 		return "info_truyen";
 	}
 	@RequestMapping(value = "/truyen/chuong", method = RequestMethod.GET)
-	public String chuongPage(Model model, @RequestParam("id") int id) {
+	public String chuongPage(Model model, @RequestParam("id") String id) {
 		ChuongInfo chuongOfId=chuongDao.chuongOfID(id);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());

@@ -2,17 +2,17 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class ChuongInfo {
 
-	private int id;
+	private String id;
 	private String IDTruyen;
 	private String tieuDe;
 	private String noiDung;
-	private String trangThai;
+	private int trangThai;
 	private String ngayTao;
 	public ChuongInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public ChuongInfo(int id, String iDTruyen, String tieuDe, String noiDung, String trangThai, String ngayTao) {
+	public ChuongInfo(String id, String iDTruyen, String tieuDe, String noiDung, int trangThai, String ngayTao) {
 		super();
 		this.id = id;
 		IDTruyen = iDTruyen;
@@ -21,10 +21,11 @@ public class ChuongInfo {
 		this.trangThai = trangThai;
 		this.ngayTao = ngayTao;
 	}
-	public int getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getIDTruyen() {
@@ -45,10 +46,10 @@ public class ChuongInfo {
 	public void setNoiDung(String noiDung) {
 		this.noiDung = noiDung;
 	}
-	public String getTrangThai() {
+	public int getTrangThai() {
 		return trangThai;
 	}
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
 	}
 	public String getNgayTao() {
@@ -57,6 +58,5 @@ public class ChuongInfo {
 	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
 	}
-	
 	
 }

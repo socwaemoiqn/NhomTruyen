@@ -9,20 +9,20 @@ import javax.persistence.Table;
 @Table(name = "tbCHUONG")
 public class ChuongEntity {
 
-	private int id;
+	private String id;
 	private String maTruyen;
 	private String tieuDe;
 	private String noiDung;
-	private String trangThai;
+	private int trangThai;
 	private String ngayTao;
 
 	@Id
 	@Column(name = "MaChuong")
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -54,11 +54,11 @@ public class ChuongEntity {
 	}
 
 	@Column(name = "TrangThai")
-	public String getTrangThai() {
+	public int getTrangThai() {
 		return trangThai;
 	}
 
-	public void setTrangThai(String trangThai) {
+	public void setTrangThai(int trangThai) {
 		this.trangThai = trangThai;
 	}
 

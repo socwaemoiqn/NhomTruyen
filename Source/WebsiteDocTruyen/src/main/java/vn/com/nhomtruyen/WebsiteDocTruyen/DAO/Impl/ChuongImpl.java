@@ -19,7 +19,7 @@ public class ChuongImpl implements ChuongDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public PaginationResult<ChuongInfo> listChuongOfTruyen(int idTruyen, int page, int maxResult,
+	public PaginationResult<ChuongInfo> listChuongOfTruyen(String idTruyen, int page, int maxResult,
 			int maxNavigationPage) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
@@ -32,7 +32,7 @@ public class ChuongImpl implements ChuongDAO {
 	}
 
 	@Override
-	public List<ChuongInfo> listChuongOfTruyen(int maTruyen) {
+	public List<ChuongInfo> listChuongOfTruyen(String maTruyen) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
@@ -44,7 +44,7 @@ public class ChuongImpl implements ChuongDAO {
 	}
 
 	@Override
-	public ChuongInfo chuongOfID(int idChuong) {
+	public ChuongInfo chuongOfID(String idChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
@@ -56,13 +56,14 @@ public class ChuongImpl implements ChuongDAO {
 	}
 
 	@Override
-	public boolean upDataChuong(String nd, int idChuong) {
+	public boolean upDataChuong(String tieuDe, String nd, String idChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
-		String sql = " update " + ChuongEntity.class.getName() + " ch set ch.noiDung =: nd  where ch.id =: id";
+		String sql = " update " + ChuongEntity.class.getName() + " ch set ch.tieuDe =:td , ch.noiDung =: nd where ch.id =: id";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", idChuong);
 		query.setParameter("nd", nd);
+		query.setParameter("td",tieuDe);
 
 		if (query.executeUpdate() > 1)
 			return true;
@@ -80,6 +81,20 @@ public class ChuongImpl implements ChuongDAO {
 		Query query = session.createQuery(sql);
 		query.setParameter("id", matruyen);
 		return query.list();
+	}
+
+	@Override
+	public void insertChuong(ChuongInfo chuongInfo) {
+		ChuongEntity chuong= new ChuongEntity();
+		chuong.setId(chuongInfo.getId());
+		chuong.setIDTruyen(chuongInfo.getIDTruyen());
+		chuong.setTieuDe(chuongInfo.getTieuDe());
+		chuong.setNoiDung(chuongInfo.getNoiDung());
+		chuong.setTrangThai(chuongInfo.getTrangThai());
+		chuong.setNgayTao(chuongInfo.getNgayTao());
+		Session session = sessionFactory.getCurrentSession();
+		session.persist(chuong);
+		
 	}
 
 }
