@@ -45,7 +45,7 @@ public class TacGiaImpl implements TacGiaDAO {
 	}
 
 	@Override
-	public int getSoLuongTacGiaByTruyen(int maTacGia) {
+	public int getSoLuongTruyenById(int maTacGia) {
 		Session se = this.sessionFactory.getCurrentSession();
 
 		String sql = " Select new " + TruyenInfo.class.getName()
@@ -55,6 +55,19 @@ public class TacGiaImpl implements TacGiaDAO {
 		Query query = se.createQuery(sql);
 		query.setParameter("maTacGia", maTacGia);
 		return query.list().size();
+	}
+
+	@Override
+	public TacGiaInfo getTacGiaById(int maTacGia) {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + TacGiaInfo.class.getName()
+				+ "(a.ID, a.tenTacGia, a.gioiThieu, a.trangThai, a.ngayTao)" + " from "
+				+ TacGiaEntity.class.getName() + " a" +  " where a.ID =: maTacGia";
+
+		Query query = se.createQuery(sql);
+		query.setParameter("maTacGia", maTacGia);
+		return (TacGiaInfo) query.uniqueResult();
 	}
 
 }

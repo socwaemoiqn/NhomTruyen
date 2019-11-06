@@ -12,5 +12,6 @@ public interface TacGiaDAO {
 	
 	public List<TacGiaInfo> listTacGia();
 	public PaginationResult<TacGiaInfo> paginationListTacGia(int page,int Max_Result, int Max_Navigation);
-	public int getSoLuongTacGiaByTruyen(int maTacGia);
+	public int getSoLuongTruyenById(int maTacGia);
+	public TacGiaInfo getTacGiaById(int maTacGia);
 }

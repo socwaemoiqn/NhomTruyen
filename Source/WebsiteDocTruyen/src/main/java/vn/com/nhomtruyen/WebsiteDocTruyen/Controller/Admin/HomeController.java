@@ -128,7 +128,7 @@ public class HomeController {
 		Map<Integer, Integer> listSL = new HashMap<Integer, Integer>();
 		for(TacGiaInfo tg : listTacGia.getList()) {
 			int maTacGia = tg.getID();
-			int soluong = tacGiaDao.getSoLuongTacGiaByTruyen(maTacGia);
+			int soluong = tacGiaDao.getSoLuongTruyenById(maTacGia);
 			listSL.put(maTacGia,soluong);
 		}
 		model.addAttribute("listSL",listSL);
