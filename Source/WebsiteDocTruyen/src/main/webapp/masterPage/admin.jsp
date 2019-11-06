@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Quản Trị</title>
-
+	<script src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
 
 <!-- Bootstrap Core CSS -->
 <link href="${pageContext.request.contextPath}/template/admin/css/bootstrap.min.css" rel="stylesheet">
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<!-- jQuery -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
+	
 
 	<!-- Bootstrap Core JavaScript -->
 	<script src="${pageContext.request.contextPath}/template/admin/js/bootstrap.min.js"></script>

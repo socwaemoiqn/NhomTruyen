@@ -47,24 +47,29 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTheLoaiTruyen.list}" var="us"
+								<c:forEach items="${listTacGia.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
 										<td scope="row">${status.index + 1}</td>
-										<td>${us.id}</td>
-										<td>${us.tenTheLoai}</td>
-										<td class="center">4</td>
-										<td class="center">dùng check</td>
+										<td>${us.ID}</td>
+										<td>${us.tenTacGia}</td>
+										<td class="center">
+											<c:forEach items="${listSL}" var="sl">
+											 	<c:if test="${ sl.key == us.ID }">
+											 		${sl.value }
+											 	</c:if>
+											</c:forEach>
+										</td>
+										<td class="center">${us.trangThai }</td>
 										<td class="center"><a class="btn btn-primary btn-circle"
 											title="Tất cả truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
 												<i class="fa fa-list-ul"></i>
-										</a> <a data-toggle="modal" data-target="#sua"
-											class="btn btn-success btn-circle" title="Chỉnh sửa danh mục"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
+										</a> <a data-toggle="modal" id="${us.ID }" data-target="#sua"
+											class="btn btn-success btn-circle btn-sua" title="Chỉnh sửa danh mục">
 												<i class="fa  fa-edit"></i>
 										</a> <a class="btn btn-danger btn-circle" title="Xóa danh mục"
-											href="${pageContext.request.contextPath}/quan-tri/ql_theloai_truyen/xoa?id=${us.id}"><i
+											href="${pageContext.request.contextPath}/quan-tri/ql_theloai_truyen/xoa?id=${us.ID}"><i
 												class="fa fa-close"></i></a></td>
 									</tr>
 								</c:forEach>
@@ -73,14 +78,14 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits">
-						<c:if test="${listTheLoaiTruyen.totalPages >1}">
+						<c:if test="${listTacGia.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${listTheLoaiTruyen.navigationPages}"
+										<c:forEach items="${listTacGia.navigationPages}"
 											var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_theloai_truyen?page=${page}"
+												<li><a href="ql_tacgia?page=${page}"
 													class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
@@ -132,5 +137,76 @@
 			<!-- //Modal content-->
 		</div>
 	</div>
+	<div class="modal fade" id="sua" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="col-lg-12">
+				<div class="panel panel-green">
+
+					<div class="panel-heading">
+						<h4>Sửa Thể Loại Truyện Mới</h4>
+					</div>
+					<div class="panel-body">
+						<h4>Nhập thông tin về thể loại truyện</h4>
+						<div class="row">
+							<div class="col-lg-12">
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+									method="post">
+									<div class="form-group">
+										<label>Tên Tác giả truyện</label> <input class="form-control"
+											name="tenDanhMuc" id="tenTacGia" placeholder="Nhập tên danh mục truyện">
+									</div>
+									<div class="form-group">
+										<label>Giới thiệu</label> <input class="form-control"
+											name="gioiThieu" id="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
+									</div>
+									<div class="form-group">
+										<label>Trạng thái</label>
+										 <input class="form-control"
+											name="trangThai" id="trangThai1" type="radio"> Enable
+											 <input class="form-control"
+											name="trangThai" id="trangThai0" type="radio"> Disable
+									</div>
+									<button type="submit" class="btn btn-primary">Sửa
+										thể loại</button>
+								</form>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+		</div>
+	</div>
+	<c:url var="home" value="${pageContext.request.contextPath}/quan-tri/ql_tacgia/" scope="request" />
+	<script>
+		$(document).ready(function() {
+			$(document).on('click','.btn-sua',function(){
+				let id = $(this).attr("id");
+				$.ajax({
+					url: "${pageContext.request.contextPath}/quan-tri/ql_tacgia/ajax",
+					type: "POST",
+					dataType: "json",
+					data: { id: id },
+					success: function(data){
+						$("#sua #tenTacGia").val(data.tenTacGia);
+						$("#sua #gioiThieu").val(data.gioiThieu);
+						if(data.trangThai == "1")
+							{
+								$("#sua #trangThai1").prop("checked","true");
+							}
+						else
+							$("#sua #trangThai0").prop("checked","true");
+					},
+					error: function (error) {
+						alert(error);
+					}
+				});
+			});
+		});
+	</script>
 </body>
+
 </html>
