@@ -1,3 +1,4 @@
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
@@ -10,27 +11,43 @@
 <body>
 <div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý</h1>
+			<h1 class="page-header">Quản lý Tác Giả</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Tác Giả</div>
+				<div class="panel-heading">
+				<% Map<String,String> mess = (Map<String,String>)request.getSession().getAttribute("mess"); %>			
+							<c:if test="${not empty mess}">
+							<div class="alert alert-success">
+								<ul>
+									<li>${mess.status }	</li>							
+									<li>${mess.name }</li>
+								</ul>				
+							</div>
+				<% request.getSession().removeAttribute("mess"); %>
+							</c:if>
+				</div> <!--  Hiển thị mess = ['status'=> 'value','name'='value'] -->
 				<div class="panel-body">
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover"
 							border="0">
 							<tbody>
 								<tr>
-									<td><input class="form-control" type="text"
+									<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/search" method="get">
+										<td><input class="form-control" type="text" name="key"
 										placeholder="Nhập nội dung tìm kiếm"></td>
-									<td><input class="btn btn-default" type="submit"
-										value="Tìm kiếm"></td>
-
-									<td><a href="" class="btn btn-primary" data-toggle="modal"
+										<td><input class="btn btn-success" type="submit"
+										value="Tìm kiếm"> 
+										<a class="btn btn-default" href="${pageContext.request.contextPath}/quan-tri/ql-tacgia">Trở lại</a></td>
+									</form>	
+									
+										<td><a href="" class="btn btn-primary" data-toggle="modal"
 										data-target="#themmoi">Thêm Mới</a></td>
+								
+									
 								</tr>
 							</tbody>
 						</table>
@@ -85,7 +102,7 @@
 										<c:forEach items="${listTacGia.navigationPages}"
 											var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_tacgia?page=${page}"
+												<li><a href="ql-tacgia?page=${page}"
 													class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
@@ -111,22 +128,22 @@
 						<h4>Thêm Thể Loại Truyện Mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về thể loại truyện</h4>
+						<h4>Nhập thông tin về tác giả truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/insert"
 									method="post">
 									<div class="form-group">
-										<label>Tên thể loại truyện</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
+										<label>Tên tác giả truyện</label> <input class="form-control"
+											name="tenTacGia" placeholder="Nhập tên tác giả truyện">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
+											name="gioiThieu" placeholder="Nhập giới thiệu về tác giả">
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm
-										thể loại</button>
+										tác giả</button>
 								</form>
 							</div>
 						</div>
@@ -144,36 +161,38 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h4>Sửa Thể Loại Truyện Mới</h4>
+						<h4>Sửa tác giả truyện</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về thể loại truyện</h4>
+						<h4>Nhập thông tin về tác giả truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/sua"
+								<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/edit"
 									method="post">
 									<div class="form-group">
+										<label>ID tác giả:</label> <input class="form-control"
+											name="id" id="id" readonly>
+									</div>
+									<div class="form-group">
 										<label>Tên Tác giả truyện</label> <input class="form-control"
-											name="tenDanhMuc" id="tenTacGia" placeholder="Nhập tên danh mục truyện">
+											name="tenTacGia" id="tenTacGia" placeholder="Nhập tên danh mục truyện">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"
 											name="gioiThieu" id="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
 									</div>
 									<div class="form-group">
-										<label>Trạng Thái</label>
-										<div class="radio">
-											<label> <input type="radio" name="optionsRadios" id="enable"
-												value="" checked>Enable
-											</label>
-										</div>
-										<div class="radio">
-											<label> <input type="radio" name="optionsRadios"
-												id="disable" value="">Disable
-											</label>
-										</div>
-									</div>
-									<button type="submit" class="btn btn-primary">Sửa
+                                                   
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="trangThai" id="trangThai1" value="1"> Enable
+                                                    </label>
+                                              
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="trangThai" id="trangThai0" value="0"> Disable
+                                                    </label>
+                                                   
+                                                </div>
+									<button type="submit" class="btn btn-success">Sửa
 										thể loại</button>
 								</form>
 							</div>
@@ -196,14 +215,15 @@
 					dataType: "json",
 					data: { id: id },
 					success: function(data){
+						$("#sua #id").val(id);
 						$("#sua #tenTacGia").val(data.tenTacGia);
 						$("#sua #gioiThieu").val(data.gioiThieu);
 						if(data.trangThai == "1")
 							{
-								$("#sua #enable").prop("checked","true");
+								$("#sua #trangThai1").prop("checked","true");
 							}
 						else
-							$("#sua #disable").prop("checked","true");
+							$("#sua #trangThai0").prop("checked","true");
 					},
 					error: function (error) {
 						alert(error);

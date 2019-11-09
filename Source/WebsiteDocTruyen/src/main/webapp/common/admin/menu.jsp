@@ -21,7 +21,7 @@
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-danhmuc-truyen?page=0">QL Danh Mục Truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-theloai-truyen">QL Thể Loại truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-truyen">QL Truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-tacgia">QL Tác Giả</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-tacgia/">QL Tác Giả</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-nhomdich">QL Nhóm dịch</a></li>
 				</ul></li>
 			<li><a href="#"><i class="fa fa-folder fa-fw"></i>Báo Cáo<span

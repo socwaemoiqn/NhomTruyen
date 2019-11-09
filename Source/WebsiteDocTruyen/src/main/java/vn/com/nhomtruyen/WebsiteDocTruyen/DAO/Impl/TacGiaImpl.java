@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
@@ -68,6 +69,50 @@ public class TacGiaImpl implements TacGiaDAO {
 		Query query = se.createQuery(sql);
 		query.setParameter("maTacGia", maTacGia);
 		return (TacGiaInfo) query.uniqueResult();
+	}
+
+	@Override
+	public PaginationResult<TacGiaInfo> getTacGiaByTen(int page,int Max_Result, int Max_Navigation,String ten) {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + TacGiaInfo.class.getName()
+				+ "(a.ID, a.tenTacGia, a.gioiThieu, a.trangThai, a.ngayTao)" + " from "
+				+ TacGiaEntity.class.getName() + " a" +  " where a.tenTacGia like :ten";
+
+		Query query = se.createQuery(sql);
+		query.setParameter("ten", "%"+ten+"%");
+		return  new PaginationResult<TacGiaInfo>(query, page, Max_Result, Max_Navigation);
+//		return null;
+	}
+
+	@Override
+	public TacGiaEntity insert(TacGiaInfo tacGiaInfo) {
+		Session se = this.sessionFactory.getCurrentSession();
+		TacGiaEntity tacgia = new TacGiaEntity();
+		tacgia.setTenTacGia(tacGiaInfo.getTenTacGia());
+		tacgia.setGioiThieu(tacGiaInfo.getGioiThieu());
+		tacgia.setTrangThai("1");
+		tacgia.setNgayTao(Helper.getCurrentDateAndTime());
+		se.persist(tacgia);
+		return tacgia;
+	}
+
+	@Override
+	public Boolean edit(TacGiaInfo tacGiaInfo) {
+		Session se = this.sessionFactory.getCurrentSession();
+		String sql = "Update "+TacGiaEntity.class.getName()+" tg set tg.tenTacGia =: tenTacGia, tg.gioiThieu =: gioiThieu"
+				+ ", tg.trangThai =: trangThai, tg.ngayTao =: ngayTao where tg.ID =: id";
+		Query query = se.createQuery(sql);
+		query.setParameter("id", tacGiaInfo.getID());
+		query.setParameter("tenTacGia", tacGiaInfo.getTenTacGia());
+		query.setParameter("gioiThieu", tacGiaInfo.getGioiThieu());
+		query.setParameter("trangThai", tacGiaInfo.getTrangThai());
+		query.setParameter("ngayTao", Helper.getCurrentDateAndTime());
+		if(query.executeUpdate() > 0)
+		{
+			return true;
+		}
+		return false;
 	}
 
 }

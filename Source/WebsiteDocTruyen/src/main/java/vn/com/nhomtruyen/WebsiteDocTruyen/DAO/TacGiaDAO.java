@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 
@@ -14,4 +16,8 @@ public interface TacGiaDAO {
 	public PaginationResult<TacGiaInfo> paginationListTacGia(int page,int Max_Result, int Max_Navigation);
 	public int getSoLuongTruyenById(int maTacGia);
 	public TacGiaInfo getTacGiaById(int maTacGia);
+	public PaginationResult<TacGiaInfo> getTacGiaByTen(int page,int Max_Result, int Max_Navigation,String ten);
+	public TacGiaEntity insert(TacGiaInfo tacGiaInfo);
+	public Boolean edit(TacGiaInfo tacGiaInfo);
 }
+
