@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChuongEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 
 @Transactional
@@ -15,5 +16,7 @@ public interface ChuongDAO {
 	public void insertChuong(ChuongInfo chuongInfo);
 	public boolean upDataChuong(String tieuDe,String nd, String idChuong);
 	public List<ChuongInfo> listChuongByIdTruyen(String matruyen);
+	public ChuongEntity findChuongEntity(String idChuong);
+	public void deleteChuong(String idChuong);
 	
 }

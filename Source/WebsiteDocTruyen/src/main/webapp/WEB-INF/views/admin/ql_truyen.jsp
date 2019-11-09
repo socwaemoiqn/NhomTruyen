@@ -73,12 +73,12 @@
 											</c:choose></td>
 										<td style="width: 9%; text-align:center;"><a class="btn btn-warning btn-circle"
 											title="Xem trước"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_truyen?idtruyen=${us.ID}">
+											href="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-truyen?idtruyen=${us.ID}">
 												<i class="fa fa-eye"></i>
 										</a> <a
 											class="btn btn-danger btn-circle"
 											title="Xóa truyện"
-											href="${pageContext.request.contextPath}/quan-tri/ql_truyen/delete?idtruyen=${us.ID}">
+											href="${pageContext.request.contextPath}/quan-tri/ql-truyen/delete?idtruyen=${us.ID}">
 												<i class="fa fa-close"></i>
 										</a> </td>
 									</tr>
@@ -94,7 +94,7 @@
 									<ul class="pagination pagination-lg">
 										<c:forEach items="${listTruyen.navigationPages}" var="page">
 											<c:if test="${page != -1 }">
-												<li><a href="ql_truyen?page=${page}" class="nav-item">${page}</a></li>
+												<li><a href="ql-truyen?page=${page}" class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
 												<li><a><span> ... </span></a></li>
@@ -125,7 +125,7 @@
 							<div class="col-lg-12">
 								<form:form modelAttribute="truyenAddForm"
 									enctype="multipart/form-data"
-									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/them"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/them"
 									method="POST">
 									<div class="form-group">
 										<label>Tên truyện</label>

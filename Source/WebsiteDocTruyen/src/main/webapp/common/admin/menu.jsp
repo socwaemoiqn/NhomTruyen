@@ -18,11 +18,11 @@
 			<li><a href="#"><i class="fa fa-table fa-fw"></i>Quản Lý<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen?page=0">QL Danh Mục Truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_theloai_truyen">QL Thể Loại truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_truyen">QL Truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_tacgia">QL Tác Giả</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql_nhomdich">QL Nhóm dịch</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-danhmuc-truyen?page=0">QL Danh Mục Truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-theloai-truyen">QL Thể Loại truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-truyen">QL Truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-tacgia">QL Tác Giả</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-nhomdich">QL Nhóm dịch</a></li>
 				</ul></li>
 			<li><a href="#"><i class="fa fa-folder fa-fw"></i>Báo Cáo<span
 					class="fa arrow"></span></a>

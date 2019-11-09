@@ -96,9 +96,7 @@
 						<div class="tab-pane fade" id="chuong">
 							<h4>Tất cả chương của truyện: ${truyenById.tenTruyen }</h4>
 							<p style="float: right;">
-								<a
-									href="#" data-toggle="modal"
-									data-target="#addChuong"
+								<a href="#" data-toggle="modal" data-target="#addChuong"
 									class="btn btn-primary">Thêm Chương Mới</a>
 							</p>
 							<div class="clearfix"></div>
@@ -137,10 +135,10 @@
 																<td class="center">dùng check</td>
 																<td class="center"><a
 																	class="btn btn-primary btn-circle" title="Xem trước"
-																	href="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_chuong?idChuong=${us.id}">
+																	href="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong?idChuong=${us.id}">
 																		<i class="fa fa-eye"></i>
-																</a> <a class="btn btn-danger btn-circle" title="Xóa chương"
-																	href="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/xoa?id=${us.id}"><i
+																</a> <a class="btn btn-danger btn-circle btn-xoa" title="Xóa chương" id="${us.id}"
+																	data-toggle="modal" data-target="#xoaChuong" href=""><i
 																		class="fa fa-close"></i></a></td>
 															</tr>
 														</c:forEach>
@@ -148,8 +146,6 @@
 												</table>
 											</div>
 										</div>
-
-
 									</div>
 								</c:forEach>
 								<div class="grid_3 grid_5 agileits">
@@ -207,7 +203,7 @@
 			<!-- //Modal content-->
 		</div>
 	</div>
-	
+
 	<div class="modal fade" id="addChuong" tabindex="-1" role="dialog">
 		<div class="modal-dialog-editchuong">
 			<!-- Modal content-->
@@ -221,16 +217,16 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_chuong/addChuong?idtruyen=${truyenById.ID}"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/addChuong?idtruyen=${truyenById.ID}"
 									method="post">
 									<div class="form-group">
-										<label>Nhập lại tên chương</label>
-										<input class="form-control" type="text" name="ten"
-											placeholder="Nhập tên chương">
+										<label>Nhập lại tên chương</label> <input class="form-control"
+											type="text" name="ten" placeholder="Nhập tên chương">
 									</div>
 									<div class="form-group">
-										<label>Nhập nội dung của chương</label> <textarea name="noiDung" id="noidung" ></textarea>
-										 <script>
+										<label>Nhập nội dung của chương</label>
+										<textarea name="noiDung" id="noidung"></textarea>
+										<script>
 											CKEDITOR.replace('noidung');
 											CKEDITOR.addCss('form-control')
 										</script>
@@ -248,6 +244,65 @@
 
 		</div>
 	</div>
+	<div class="modal fade" id="xoaChuong" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="col-lg-12">
+				<div class="panel panel-red">
 
+					<div class="panel-heading">
+						<h3>Xóa chương</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/xoachuong"
+									method="post">
+									<div class="form-group">
+										<label>Bạn muốn xóa bỏ chương:  </label>
+										<h4 id="tenChuong"></h4>
+									</div>
+									<input type="text" name="idChuong" id="idChuong" value=""
+										style="width: 0px; height: 0px; border:none; background: transparent;"
+										 />
+									<div class="form-group">
+										<label>Nhấn "Đồng ý" để xác nhận xóa chương!</label>
+										
+									</div>
+									<button type="submit" class="btn panel-primary">Đồng ý</button>
+								</form>
+							</div>
+
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+
+		</div>
+	</div>
+	<script>
+		$(document).ready(function() {
+			$(document).on('click','.btn-xoa',function(){
+				let id = $(this).attr("id");
+				$.ajax({
+					url: "${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/ajax",
+					type: "POST",
+					dataType: "json",
+					data: { id: id },
+					success: function(data){
+						var tieuDe = " " + data.tieuDe;
+						$("#xoaChuong #tenChuong").html(tieuDe);
+						$("#xoaChuong #idChuong").val(data.id);
+					},
+					error: function (error) {
+						alert(error);
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>

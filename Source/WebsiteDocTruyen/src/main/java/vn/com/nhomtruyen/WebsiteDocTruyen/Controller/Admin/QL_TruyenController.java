@@ -18,8 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
@@ -36,7 +40,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
 
 @Controller(value = "QL_TruyenControllerOfAdmin")
-@RequestMapping(value = "/quan-tri/ql_truyen")
+@RequestMapping(value = "/quan-tri/ql-truyen")
 public class QL_TruyenController {
 
 	@Autowired
@@ -99,7 +103,7 @@ public class QL_TruyenController {
 		doUpload(request, truyenAddForm);
 		truyenDao.InsertTruyen(truyenInfo);
 
-		return "redirect:/quan-tri/ql_truyen";
+		return "redirect:/quan-tri/ql-truyen";
 	}
 
 	private void insertChitietTheLoai(String maTruyen, int[] matheLoai) {
@@ -167,7 +171,7 @@ public class QL_TruyenController {
 		return "";
 	}
 
-	@RequestMapping(value = "/xem_truyen", method = RequestMethod.GET)
+	@RequestMapping(value = "/xem-truyen", method = RequestMethod.GET)
 	private String xemTruyenPage(Model model, @ModelAttribute("idtruyen") String maTruyen) {
 
 		TruyenInfoByTruyen tr = truyenDao.SelectTruyenByMa(maTruyen);
@@ -175,7 +179,8 @@ public class QL_TruyenController {
 
 		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongByIdTruyen(maTruyen);
 		int slChuong = listChuongByTruyen.size();
-
+		
+		
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
 		model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
@@ -183,7 +188,7 @@ public class QL_TruyenController {
 		return "admin/ql_truyen_xemtruyen";
 	}
 
-	@RequestMapping(value = "/xem_chuong", method = RequestMethod.GET)
+	@RequestMapping(value = "/xem-chuong", method = RequestMethod.GET)
 	public String xemChuongPage(Model model, @RequestParam("idChuong") String idChuong) {
 		ChuongInfo chuongOfId = chuongDao.chuongOfID(idChuong);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
@@ -192,7 +197,7 @@ public class QL_TruyenController {
 		return "admin/ql_truyen_xemchuong";
 	}
 
-	@RequestMapping(value = "/xem_chuong/addChuong", method = RequestMethod.POST)
+	@RequestMapping(value = "/xem-chuong/addChuong", method = RequestMethod.POST)
 	public String addChuongPage(Model model, @RequestParam("idtruyen") String idTruyen, HttpServletRequest request) {
 		String idChuong = Helper.CreateId("CH");
 		String tieuDe = request.getParameter("ten");
@@ -204,17 +209,35 @@ public class QL_TruyenController {
 		// insert vào csdl
 		chuongDao.insertChuong(newChuong);
 
-		return "redirect:/quan-tri/ql_truyen/xem_chuong?idChuong=" + idChuong;
+		return "redirect:/quan-tri/ql-truyen/xem-truyen?idtruyen=" + idTruyen;
 	}
 
-	@RequestMapping(value = "/xem_chuong/editChuong", method = RequestMethod.POST)
+	@RequestMapping(value = "/xem-chuong/editChuong", method = RequestMethod.POST)
 	public String editChuongForm(Model model, @RequestParam("ten") String ten, @RequestParam("noidung") String nd,
 			@RequestParam("idChuong") String id) {
 		boolean kt = chuongDao.upDataChuong(ten, nd, id);
 		if (kt)
-			return "redirect:/admin/ql_truyen";
+			return "redirect:/admin/ql-truyen";
 		else
-			return "redirect:/quan-tri/ql_truyen/xem_chuong?idChuong=" + id;
+			return "redirect:/quan-tri/ql-truyen/xem-chuong?idChuong=" + id;
+	}
+	
+	@RequestMapping(value = "/xem-chuong/ajax", method = RequestMethod.POST)
+	public @ResponseBody String getChuong(Model model, HttpServletRequest request) throws JsonProcessingException
+	 {
+		String idChuong= request.getParameter("id");
+		ChuongInfo  chuong = chuongDao.chuongOfID(idChuong);
+		ObjectMapper mapper= new ObjectMapper();
+		String json=mapper.writeValueAsString(chuong);
+		return json;
+	}
+	
+	@RequestMapping(value = "/xem-chuong/xoachuong", method = RequestMethod.POST)
+	public String deleteChuongForm(Model model, @RequestParam("idChuong") String idChuong, HttpServletRequest request)
+	 {
+		chuongDao.deleteChuong(idChuong);
+	    String referer = request.getHeader("Referer");	
+	    return "redirect:"+ referer;
 	}
 
 }

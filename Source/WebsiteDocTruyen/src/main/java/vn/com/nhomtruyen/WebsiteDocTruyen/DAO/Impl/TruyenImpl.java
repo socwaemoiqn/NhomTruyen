@@ -12,6 +12,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.NhomDichEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Form.TruyenAddForm;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
@@ -99,5 +100,7 @@ public class TruyenImpl implements TruyenDAO {
 		query.setParameter("tacgia", maTacGia);
 		return query.list().size();
 	}
+
+
 
 }

@@ -2,13 +2,16 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChuongEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.DanhMucTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
@@ -96,5 +99,21 @@ public class ChuongImpl implements ChuongDAO {
 		session.persist(chuong);
 		
 	}
+	@Override
+	public ChuongEntity findChuongEntity(String idChuong) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria crit = session.createCriteria(ChuongEntity.class);
+		crit.add(Restrictions.eq("id", idChuong));
+		return (ChuongEntity) crit.uniqueResult();
+	}
+	@Override
+	public void deleteChuong(String idChuong) {
+		ChuongEntity chuongEntity= this.findChuongEntity(idChuong);
+		if(chuongEntity != null) {
+			this.sessionFactory.getCurrentSession().delete(chuongEntity);
+		}
+	}
+
+	
 
 }

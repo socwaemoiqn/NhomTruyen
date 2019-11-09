@@ -65,7 +65,7 @@
 											title="Tất cả truyện"
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
 												<i class="fa fa-list-ul"></i>
-										</a> <a data-toggle="modal" id="${us.ID }" data-target="#sua"
+										</a> <a data-toggle="modal" id="${us.ID}" data-target="#sua"
 											class="btn btn-success btn-circle btn-sua" title="Chỉnh sửa danh mục">
 												<i class="fa  fa-edit"></i>
 										</a> <a class="btn btn-danger btn-circle" title="Xóa danh mục"
@@ -141,7 +141,7 @@
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="col-lg-12">
-				<div class="panel panel-green">
+				<div class="panel panel-success">
 
 					<div class="panel-heading">
 						<h4>Sửa Thể Loại Truyện Mới</h4>
@@ -150,8 +150,7 @@
 						<h4>Nhập thông tin về thể loại truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
+								<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/sua"
 									method="post">
 									<div class="form-group">
 										<label>Tên Tác giả truyện</label> <input class="form-control"
@@ -162,11 +161,17 @@
 											name="gioiThieu" id="gioiThieu" placeholder="Nhập giới thiệu về danh mục">
 									</div>
 									<div class="form-group">
-										<label>Trạng thái</label>
-										 <input class="form-control"
-											name="trangThai" id="trangThai1" type="radio"> Enable
-											 <input class="form-control"
-											name="trangThai" id="trangThai0" type="radio"> Disable
+										<label>Trạng Thái</label>
+										<div class="radio">
+											<label> <input type="radio" name="optionsRadios" id="enable"
+												value="" checked>Enable
+											</label>
+										</div>
+										<div class="radio">
+											<label> <input type="radio" name="optionsRadios"
+												id="disable" value="">Disable
+											</label>
+										</div>
 									</div>
 									<button type="submit" class="btn btn-primary">Sửa
 										thể loại</button>
@@ -180,13 +185,13 @@
 			<!-- //Modal content-->
 		</div>
 	</div>
-	<c:url var="home" value="${pageContext.request.contextPath}/quan-tri/ql_tacgia/" scope="request" />
+	<c:url var="home" value="${pageContext.request.contextPath}/quan-tri/ql-tacgia/" scope="request" />
 	<script>
 		$(document).ready(function() {
 			$(document).on('click','.btn-sua',function(){
 				let id = $(this).attr("id");
 				$.ajax({
-					url: "${pageContext.request.contextPath}/quan-tri/ql_tacgia/ajax",
+					url: "${pageContext.request.contextPath}/quan-tri/ql-tacgia/ajax",
 					type: "POST",
 					dataType: "json",
 					data: { id: id },
@@ -195,10 +200,10 @@
 						$("#sua #gioiThieu").val(data.gioiThieu);
 						if(data.trangThai == "1")
 							{
-								$("#sua #trangThai1").prop("checked","true");
+								$("#sua #enable").prop("checked","true");
 							}
 						else
-							$("#sua #trangThai0").prop("checked","true");
+							$("#sua #disable").prop("checked","true");
 					},
 					error: function (error) {
 						alert(error);

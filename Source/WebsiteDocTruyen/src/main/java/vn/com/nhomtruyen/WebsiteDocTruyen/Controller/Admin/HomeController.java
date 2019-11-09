@@ -44,7 +44,7 @@ public class HomeController {
 		return "admin/home";
 	}
 
-	@RequestMapping(value = "/ql_danhmuc_truyen", method = RequestMethod.GET)
+	@RequestMapping(value = "/ql-danhmuc-truyen", method = RequestMethod.GET)
 	public String QlDanhMucTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
 
 		// List<danhMucTruyenInfo> listDanhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
@@ -65,7 +65,7 @@ public class HomeController {
 		return "admin/ql_danhmuctruyen";
 	}
 
-	@RequestMapping(value = "/ql_theloai_truyen", method = RequestMethod.GET)
+	@RequestMapping(value = "/ql-theloai-truyen", method = RequestMethod.GET)
 	public String QlTheLoaiTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
 		int page = 1;
 		try {
@@ -84,7 +84,7 @@ public class HomeController {
 		return "admin/ql_theloaitruyen";
 	}
 
-	@RequestMapping(value = "/ql_truyen", method = RequestMethod.GET)
+	@RequestMapping(value = "/ql-truyen", method = RequestMethod.GET)
 	public String QlTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
 		int page = 1;
 		try {
@@ -107,13 +107,13 @@ public class HomeController {
 		return "admin/ql_truyen";
 	}
 
-	@RequestMapping(value = "/ql_nhomdich", method = RequestMethod.GET)
+	@RequestMapping(value = "/ql-nhomdich", method = RequestMethod.GET)
 	public String QlNhomDichPage(Model model) {
 			
 		return "admin/ql_nhomdich";
 	}
 
-	@RequestMapping(value = "/ql_tacgia", method = RequestMethod.GET)
+	@RequestMapping(value = "/ql-tacgia", method = RequestMethod.GET)
 	public String QlTacGiaPage(Model model, @RequestParam(value="page",defaultValue = "1")String pageStr) {
 		int page = 1;
 		try {

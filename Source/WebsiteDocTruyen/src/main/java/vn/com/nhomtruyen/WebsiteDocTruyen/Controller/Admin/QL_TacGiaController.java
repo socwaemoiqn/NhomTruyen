@@ -15,13 +15,12 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 
 @Controller
-@RequestMapping(value = "/quan-tri/ql_tacgia")
+@RequestMapping(value = "/quan-tri/ql-tacgia")
 public class QL_TacGiaController {
 	@Autowired
 	private TacGiaDAO tacGiaDAO;
+	
 	@RequestMapping(value = "/ajax",method = RequestMethod.POST)
-	
-	
 	public @ResponseBody String getTacGiaById(HttpServletRequest request) throws JsonProcessingException
 	{
 		int id = Integer.parseInt(request.getParameter("id"));

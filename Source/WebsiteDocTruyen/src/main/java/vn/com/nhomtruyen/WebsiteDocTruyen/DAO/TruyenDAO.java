@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Form.TruyenAddForm;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
