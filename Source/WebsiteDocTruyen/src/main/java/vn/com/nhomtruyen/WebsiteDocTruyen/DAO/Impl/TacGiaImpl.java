@@ -2,8 +2,10 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -115,4 +117,30 @@ public class TacGiaImpl implements TacGiaDAO {
 		return false;
 	}
 
+	@Override
+	public void xoa(int maTacGia) {
+		TacGiaEntity tacGiaEntity= this.findTacGiaEntity(maTacGia);
+		if(tacGiaEntity != null)
+		{
+			this.sessionFactory.getCurrentSession().delete(tacGiaEntity);
+		}
+	}
+	@Override
+	public TacGiaEntity findTacGiaEntity(int maTacGia) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria crit= session.createCriteria(TacGiaEntity.class);
+		crit.add(Restrictions.eq("id", maTacGia));
+		return (TacGiaEntity) crit.uniqueResult();
+	}
+
+	@Override
+	public void updateTrangThai(TacGiaInfo tacGiaInfo) {
+		TacGiaEntity tacGiaEntity= this.findTacGiaEntity(tacGiaInfo.getID());
+		tacGiaEntity.setTrangThai(tacGiaInfo.getTrangThai());
+		if(tacGiaEntity != null)
+		{
+			this.sessionFactory.getCurrentSession().update(tacGiaEntity);;
+		}
+		
+	}
 }

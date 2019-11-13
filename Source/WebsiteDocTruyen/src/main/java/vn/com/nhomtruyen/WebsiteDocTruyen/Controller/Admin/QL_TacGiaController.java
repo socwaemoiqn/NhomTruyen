@@ -1,6 +1,8 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -12,12 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
@@ -145,6 +150,60 @@ public class QL_TacGiaController {
 			}
 			session.setAttribute("mess", mess);
 		}
+		String back = request.getHeader("Referer");
+		return "redirect:"+back;
+	}
+	@RequestMapping(value="/xoa/{id}",method = RequestMethod.POST)
+	public String xoa(HttpServletRequest request, HttpSession session,@PathVariable(value="id")String id)
+	{
+		int maTacGia = Integer.parseInt(id);
+		TacGiaInfo tacGiaInfo = tacGiaDAO.getTacGiaById(maTacGia);
+		tacGiaDAO.xoa(maTacGia);
+		Map<String,String> mess = new HashMap<String, String>();
+		mess.put("status", "Xóa tác giả thành công!");
+		mess.put("name","Tác giả vừa được xóa: "+tacGiaInfo.getTenTacGia());
+		session.setAttribute("mess", mess);
+		String back = request.getHeader("Referer");
+		return "redirect:"+back;
+	}
+	@RequestMapping(value = "/select-all/{action}",method = RequestMethod.POST)
+	public String selectAll(HttpServletRequest request,HttpSession session,@PathVariable(value="action")String action) throws JsonParseException, JsonMappingException, IOException
+	{
+		String json = request.getParameter("array_id");
+		ObjectMapper mapper = new ObjectMapper();	
+		String[] array_id = mapper.readValue(json, String[].class);
+		Map<String,String> mess = new HashMap<String, String>();
+		TacGiaInfo tacGiaInfo = new TacGiaInfo();
+		switch (action) {
+		case "enable":
+			for (String id : array_id) {
+				tacGiaInfo.setID(Integer.parseInt(id));
+				tacGiaInfo.setTrangThai("1");
+				tacGiaDAO.updateTrangThai(tacGiaInfo);
+				mess.put("status", "Kích hoạt thành công!");
+				mess.put("name","Kích hoạt: "+array_id.length+" tác giả");
+			}
+			break;
+		case "disable":			
+			for (String id : array_id) {
+				tacGiaInfo.setID(Integer.parseInt(id));
+				tacGiaInfo.setTrangThai("0");
+				tacGiaDAO.updateTrangThai(tacGiaInfo);
+				mess.put("status", "Vô hiệu hóa thành công!");
+				mess.put("name","Vô hiệu: "+array_id.length+" tác giả");
+			}
+			break;
+		case "delete":
+			for (String id : array_id) {
+				tacGiaDAO.xoa(Integer.parseInt(id));
+				mess.put("status", "Xóa thành công!");
+				mess.put("name","Vừa xóa: "+array_id.length+" tác giả");
+			}
+			break;
+		default:
+			break;
+		}
+		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
 	}
