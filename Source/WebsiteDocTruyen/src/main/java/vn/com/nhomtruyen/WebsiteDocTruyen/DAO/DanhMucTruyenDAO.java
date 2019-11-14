@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChiTietDanhMucEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.DanhMucTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
@@ -18,6 +19,7 @@ public interface DanhMucTruyenDAO {
 	public DanhMucTruyenInfo findDanhMucTruyenInfo(int id);
 	public void insertDanhMucTruyen(DanhMucTruyenInfo danhMucTruyenInfo); 
 	public void deleteDanhMucTruyen(int id);
+	public void deleteChiTietDanhMuc(ChiTietDanhMucEntity chiTietDanhMucEntity);
 	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(String maTruyen);
 	public List<ChiTietDanhMucTruyenInfo> listTenDM();
 	

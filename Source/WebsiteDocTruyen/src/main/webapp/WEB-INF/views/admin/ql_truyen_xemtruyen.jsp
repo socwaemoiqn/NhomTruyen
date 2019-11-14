@@ -12,7 +12,7 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý</h1>
+			<h2 class="page-header">Thông tin truyện : ${truyenById.tenTruyen }</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -21,17 +21,34 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Thông tin</div>
+				<div class="panel-heading">
+				<c:if test="${not empty sessionScope.themChuong}">
+                    	<div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                
+                                	 Đã thêm chương:
+                                	  <a href="" class="alert-link">${sessionScope.themChuong}</a>.<i> Nhấn tab <a href="#chuong" data-toggle="tab">Chương</a> để xem chi tiết.</i> 
+                               
+                           </div>
+					</c:if>
+					
+					<%
+					        request.getSession().removeAttribute("themChuong");
+							request.getSession().removeAttribute("name_truyen_add");
+					%>
+				
+				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#home" data-toggle="tab">Cơ
-								bản</a></li>
-						<li><a href="#thongtinkhac" data-toggle="tab">Thông tin
-								khác</a></li>
-						<li><a href="#chuong" data-toggle="tab">Chương</a></li>
-
+							
+							<li class="active"><a href="#home" data-toggle="tab">Cơ
+									bản</a></li>
+							<li><a href="#thongtinkhac" data-toggle="tab">Thông tin
+									khác</a></li>
+							<li><a href="#chuong" data-toggle="tab">Chương</a></li>
+				
 					</ul>
 
 					<!-- Tab panes -->
@@ -61,15 +78,18 @@
 							</p>
 							<p>
 								Thể loại:
-								<%-- <c:forEach items="${dmById}" var="d" varStatus="status">
-									<a>${d.tenDanhMuc }</a>,
-								</c:forEach> --%>
+								 <c:forEach items="${temtl}" var="d" varStatus="status">
+									<a>${d.tenTheLoai }</a>,
+								</c:forEach> 
 							</p>
 							<p>
 								Tác giả: <a> ${truyenById.tenTacGia }</a>
 							</p>
 							<p>
 								Nhóm dịch: <a> ${truyenById.tenNhomDich }</a>
+							</p>
+							<p>
+								Nguồn: <a> ${truyenById.nguon }</a>
 							</p>
 							<p>Giới thiệu:</p>
 							<p>${truyenById.gioiThieu }</p>
@@ -83,18 +103,11 @@
 								Lượt xem: <a> ${truyenById.luotXem }</a>
 							</p>
 							<p>
-								Trạng thái: <a> <c:choose>
-										<c:when test="${truyenById.trangThai == '1' }"> Full</c:when>
-										<c:otherwise>Đang cập nhật</c:otherwise>
-									</c:choose>
-								</a>
-							</p>
-							<p>
 								Ngày tạo: <a> ${truyenById.ngayTao }</a>
 							</p>
 						</div>
 						<div class="tab-pane fade" id="chuong">
-							<h4>Tất cả chương của truyện: ${truyenById.tenTruyen }</h4>
+							<h4> <i>${truyenById.tenTruyen } hiện có </i> : ${truyenById.soChuong } chương. </h4>
 							<p style="float: right;">
 								<a href="#" data-toggle="modal" data-target="#addChuong"
 									class="btn btn-primary">Thêm Chương Mới</a>
@@ -105,7 +118,7 @@
 								<c:forEach var="i" begin="1" end="${(slChuong/25)+1}">
 									<div class="panel panel-default">
 										<c:choose>
-											<c:when test="${i ==1}">
+											<c:when test="${i == 1}">
 												<c:set value="in" var="in" />
 											</c:when>
 											<c:otherwise>
@@ -133,13 +146,20 @@
 																<td scope="row">${status.index + 1}</td>
 																<td>${us.tieuDe}</td>
 																<td class="center">dùng check</td>
-																<td class="center"><a
-																	class="btn btn-primary btn-circle" title="Xem trước"
-																	href="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong?idChuong=${us.id}">
-																		<i class="fa fa-eye"></i>
-																</a> <a class="btn btn-danger btn-circle btn-xoa" title="Xóa chương" id="${us.id}"
-																	data-toggle="modal" data-target="#xoaChuong" href=""><i
-																		class="fa fa-close"></i></a></td>
+																<c:forEach items="${urlChuong}" var="ch">
+																	
+																	<c:if test="${ch.value==us.id }">
+																	
+																		<td class="center"><a
+																			class="btn btn-primary btn-circle" title="Xem trước"
+																			href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
+																				<i class="fa fa-eye"></i>
+																		</a> <a class="btn btn-danger btn-circle btn-xoa"
+																			title="Xóa chương" id="${us.id}" data-toggle="modal"
+																			data-target="#xoaChuong" href=""><i
+																			class="fa fa-close"></i></a></td>
+																	</c:if>
+																</c:forEach>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -186,13 +206,60 @@
 						<h4>Nhập lại thông tin về truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form action="#" method="post">
+								<form:form modelAttribute="truyenEditForm"
+									enctype="multipart/form-data"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/edit-truyen"
+									method="POST">
 									<div class="form-group">
-										<label>Giới thiệu chung</label>
+										<label>Nhập lại tên truyện</label>
+										<form:input path="tenTruyen" class="form-control"
+											placeholder="Nhập lại tên truyện" />
+									</div>
+									<div class="form-group">
+										<label>Chọn hình ảnh mới</label>
+										<form:input path="hinhAnh" type="file" />
+									</div>
+									<div class="form-group">
+										<label>Tác giả cũ: <i>${truyenById.tenTacGia }</i></label><br>
+										<label>Chọn lại tác giả: </label>
+										<form:select path="maTacGia" class="form-control">
+											<form:options items="${tacGia}" itemLabel="tenTacGia"
+												itemValue="ID" />
+										</form:select>
+									</div>
+									
+									<div class="form-group">
+										<label>Thể Loại cũ
+										<c:forEach items="${temtl}" var="d" varStatus="status">
+											<i><a>${d.tenTheLoai }</a>,</i>
+										</c:forEach>
+										</label> <br>
+										<label>Chọn thể loại mới:</label>
+										<form:select multiple="true" path="maTheLoai"
+											class="form-control">
+											<form:options items="${theLoai}" itemLabel="tenTheLoai"
+												itemValue="id" />
+										</form:select>
+										(Nhấn Ctrl để chọn hơn một thể loại mới !)
+									</div>
+									<div class="form-group">
+										<label>Nguồn cũ:  <i>"${truyenById.nguon }"</i>
+										</label><br>
+										<label>Nhập lại nguồn mới</label>
+										<form:input path="nguon" class="form-control"
+											placeholder="Nhập nguồn của truyện" />
 
 									</div>
-									<button type="submit" class="btn btn-success">Đồng ý</button>
-								</form>
+									<div class="form-group">
+										<label>Giới thiệu chung
+										</label>
+										<form:textarea path="gioiThieu" class="form-control"
+											placeholder="${truyenById.gioiThieu }"/>
+
+									</div>
+									<button type="submit" class="btn btn-primary">Thêm
+										Truyện Mới</button>
+								</form:form>
 							</div>
 
 						</div>
@@ -217,7 +284,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/addChuong?idtruyen=${truyenById.ID}"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/addChuong"
 									method="post">
 									<div class="form-group">
 										<label>Nhập lại tên chương</label> <input class="form-control"
@@ -257,20 +324,21 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/xoachuong"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/xoachuong"
 									method="post">
 									<div class="form-group">
-										<label>Bạn muốn xóa bỏ chương:  </label>
+										<label>Bạn muốn xóa bỏ chương: </label>
 										<h4 id="tenChuong"></h4>
 									</div>
 									<input type="text" name="idChuong" id="idChuong" value=""
-										style="width: 0px; height: 0px; border:none; background: transparent;"
-										 />
+										style="width: 0px; height: 0px; border: none; background: transparent;" />
 									<div class="form-group">
 										<label>Nhấn "Đồng ý" để xác nhận xóa chương!</label>
-										
+
 									</div>
-									<button type="submit" class="btn panel-primary">Đồng ý</button>
+									<button type="submit" class="btn btn-danger">Đồng ý</button>
+									<button type="button" class="btn btn-warning"
+										data-dismiss="modal">Hủy</button>
 								</form>
 							</div>
 
@@ -283,26 +351,30 @@
 
 		</div>
 	</div>
-	<script>
-		$(document).ready(function() {
-			$(document).on('click','.btn-xoa',function(){
-				let id = $(this).attr("id");
-				$.ajax({
-					url: "${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-chuong/ajax",
-					type: "POST",
-					dataType: "json",
-					data: { id: id },
-					success: function(data){
-						var tieuDe = " " + data.tieuDe;
+	<script>	
+		$(document).ready(function() 
+		{
+			$(document).on('click','.btn-xoa',function() {
+			let id = $(this).attr("id");
+			$.ajax(
+				{
+					url : "${pageContext.request.contextPath}/quan-tri/ql-truyen/get-chuong-ajax",
+					type : "POST",
+					dataType : "json",
+					data : {id : id},
+					success : function(data)
+					{
+						var tieuDe = " "+ data.tieuDe;
 						$("#xoaChuong #tenChuong").html(tieuDe);
 						$("#xoaChuong #idChuong").val(data.id);
 					},
-					error: function (error) {
+					error : function(error)
+					{
 						alert(error);
 					}
 				});
-			});
 		});
+	});
 	</script>
 </body>
 </html>

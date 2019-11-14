@@ -11,7 +11,10 @@ public class TruyenInfo {
 	private int luotXem;
 	private String nguon;
 	private String hinhAnh;
-	private String trangThai;
+	private boolean full;
+	private boolean hot;
+	private boolean news;
+	private boolean hienThi;
 	private String ngayTao;
 
 	public TruyenInfo() {
@@ -20,7 +23,7 @@ public class TruyenInfo {
 	}
 
 	public TruyenInfo(String tenTruyen, int maTacGia, int maNhomDich, int soChuong, String gioiThieu, int luotXem,
-			String nguon, String hinhAnh, String trangThai, String ngayTao) {
+			String nguon, String hinhAnh, boolean hienThi, String ngayTao) {
 		super();
 		this.tenTruyen = tenTruyen;
 		this.maTacGia = maTacGia;
@@ -30,12 +33,12 @@ public class TruyenInfo {
 		this.luotXem = luotXem;
 		this.nguon = nguon;
 		this.hinhAnh = hinhAnh;
-		this.trangThai = trangThai;
+		this.hienThi = hienThi;
 		this.ngayTao = ngayTao;
 	}
 
 	public TruyenInfo(String iD, String tenTruyen, int maTacGia, int maNhomDich, int soChuong, String gioiThieu,
-			int luotXem, String nguon, String hinhAnh, String trangThai, String ngayTao) {
+			int luotXem, String nguon, String hinhAnh, boolean hienThi, String ngayTao) {
 		super();
 		ID = iD;
 		this.tenTruyen = tenTruyen;
@@ -46,8 +49,39 @@ public class TruyenInfo {
 		this.luotXem = luotXem;
 		this.nguon = nguon;
 		this.hinhAnh = hinhAnh;
-		this.trangThai = trangThai;
+		this.hienThi = hienThi;
 		this.ngayTao = ngayTao;
+	}
+	
+	public TruyenInfo(String iD, String tenTruyen, int maTacGia, int maNhomDich, int soChuong, String gioiThieu,
+			int luotXem, String nguon, String hinhAnh, boolean full, boolean hot, boolean news, boolean hienThi,
+			String ngayTao) {
+		super();
+		ID = iD;
+		this.tenTruyen = tenTruyen;
+		this.maTacGia = maTacGia;
+		this.maNhomDich = maNhomDich;
+		this.soChuong = soChuong;
+		this.gioiThieu = gioiThieu;
+		this.luotXem = luotXem;
+		this.nguon = nguon;
+		this.hinhAnh = hinhAnh;
+		this.full = full;
+		this.hot = hot;
+		this.news = news;
+		this.hienThi = hienThi;
+		this.ngayTao = ngayTao;
+	}
+	
+
+	public TruyenInfo(String iD, String tenTruyen, int maTacGia, String gioiThieu, String nguon, String hinhAnh) {
+		super();
+		ID = iD;
+		this.tenTruyen = tenTruyen;
+		this.maTacGia = maTacGia;
+		this.gioiThieu = gioiThieu;
+		this.nguon = nguon;
+		this.hinhAnh = hinhAnh;
 	}
 
 	public String getID() {
@@ -122,12 +156,38 @@ public class TruyenInfo {
 		this.hinhAnh = hinhAnh;
 	}
 
-	public String getTrangThai() {
-		return trangThai;
+	public boolean isFull() {
+		return full;
 	}
 
-	public void setTrangThai(String trangThai) {
-		this.trangThai = trangThai;
+	public void setFull(boolean full) {
+		this.full = full;
+	}
+
+	public boolean isHot() {
+		return hot;
+	}
+
+	public void setHot(boolean hot) {
+		this.hot = hot;
+	}
+
+	public boolean isNews() {
+		return news;
+	}
+
+	public void setNews(boolean news) {
+		this.news = news;
+	}
+
+	
+
+	public boolean isHienThi() {
+		return hienThi;
+	}
+
+	public void setHienThi(boolean hienThi) {
+		this.hienThi = hienThi;
 	}
 
 	public String getNgayTao() {

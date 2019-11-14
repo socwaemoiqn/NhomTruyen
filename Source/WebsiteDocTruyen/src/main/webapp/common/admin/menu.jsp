@@ -22,8 +22,16 @@
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-theloai-truyen">QL Thể Loại truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-truyen">QL Truyện</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-tacgia">QL Tác Giả</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-nhomdich">QL Nhóm dịch</a></li>
-				</ul></li>
+					<li><a href="#"><i ></i>Ql Nhóm dịch<span class="fa arrow"></span></a>
+					
+						<ul class="nav nav-third-level">
+							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Tất cả nhóm dịch</a></li>
+							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Truyện nhóm dịch</a></li>
+							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">..... nhóm dịch</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
 			<li><a href="#"><i class="fa fa-folder fa-fw"></i>Báo Cáo<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
@@ -44,7 +52,7 @@
 					Người Dùng</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i
 					class="fa fa-support fa-fw"></i>Phản Hồi</a></li>
-			<!--ph?n tiêu đ? menu-->
+			<!--phần tiêu đề menu-->
 			<li><a class="active"><i class="fa fa-fw"></i>Trợ
 					giúp</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i

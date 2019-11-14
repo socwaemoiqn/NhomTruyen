@@ -133,4 +133,10 @@ public class DanhMucTruyenImpl implements DanhMucTruyenDAO {
 		session.persist(chiTietDanhMuc);
 	}
 
+	@Override
+	public void deleteChiTietDanhMuc(ChiTietDanhMucEntity chiTietDanhMucEntity) {
+		this.sessionFactory.getCurrentSession().delete(chiTietDanhMucEntity);
+		
+	}
+
 }

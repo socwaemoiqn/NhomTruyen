@@ -13,7 +13,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
+
 
 public class TacGiaImpl implements TacGiaDAO {
 	

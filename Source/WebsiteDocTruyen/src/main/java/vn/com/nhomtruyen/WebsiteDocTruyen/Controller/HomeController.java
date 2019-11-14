@@ -1,6 +1,8 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,11 +24,9 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietTheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfoByTruyen;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenSelectInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.UserAccountsInfo;
 
 @Controller
 public class HomeController {
@@ -56,7 +56,7 @@ public class HomeController {
 	
 	@RequestMapping(value = { "/", "index", "home" }, method = RequestMethod.GET)
 	public String indexPage(Model model,HttpServletRequest request) {
-		List<TruyenSelectInfo> truyen=truyenDao.listTR();
+		List<SelectTruyenInfo> truyen=truyenDao.listTruyen();
 		model.addAttribute("truyen", truyen);
 		
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai= theLoaiTruyenDao.dsTenTheLoai();
@@ -66,7 +66,7 @@ public class HomeController {
 		Map<String, String> map= new HashMap<String, String>();
 		
 		
-		for(TruyenSelectInfo tr: truyen) {
+		for(SelectTruyenInfo tr: truyen) {
 			String ngay=tr.getNgayTao();
 			String truoc=Helper.compareTime(ngay, ngayhethong);
 			map.put(tr.getID(), truoc);
@@ -117,7 +117,7 @@ public class HomeController {
 	@RequestMapping(value = "/truyen", method = RequestMethod.GET)
 	public String truyenInfoPage(Model model, @RequestParam("idTruyen") String maTruyen) {
 		
-		TruyenInfoByTruyen tr= truyenDao.SelectTruyenByMa(maTruyen);
+		SelectTruyenInfo tr= truyenDao.selectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm= dmtruyenDao.listTenDMByMaTruyen(maTruyen);
 		List<ChuongInfo> listChuong = chuongDao.listChuongByIdTruyen(maTruyen); 
 		
@@ -130,7 +130,7 @@ public class HomeController {
 	}
 	@RequestMapping(value = "/truyen/chuong", method = RequestMethod.GET)
 	public String chuongPage(Model model, @RequestParam("id") String id) {
-		ChuongInfo chuongOfId=chuongDao.chuongOfID(id);
+		ChuongInfo chuongOfId=chuongDao.chuongInfo(id);
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		

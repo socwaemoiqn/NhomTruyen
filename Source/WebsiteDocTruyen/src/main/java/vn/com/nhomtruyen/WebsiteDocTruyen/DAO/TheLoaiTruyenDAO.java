@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TheLoaiTruyenEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietTheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
@@ -19,4 +20,5 @@ public interface TheLoaiTruyenDAO {
 	public void insertTheLoaiTruyen(TheLoaiTruyenInfo theLoaiTruyenInfo);
 	public List<ChiTietTheLoaiTruyenInfo> dsTenTheLoai();
 	public void insertChiTietTheLoai(ChiTietTheLoaiTruyenInfo chiTietTheLoaiTruyenInfo);
+	public List<ChiTietTheLoaiTruyenInfo> listTenTlOfTruyen(String maTruyen);
 }

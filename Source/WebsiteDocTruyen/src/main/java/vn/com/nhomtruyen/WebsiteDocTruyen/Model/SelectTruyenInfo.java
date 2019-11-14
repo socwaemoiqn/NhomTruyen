@@ -1,6 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
-public class TruyenInfoByTruyen {
+public class SelectTruyenInfo {
 	private String ID;
 	private String tenTruyen;
 	private String tenTacGia;
@@ -10,14 +10,18 @@ public class TruyenInfoByTruyen {
 	private int luotXem;
 	private String nguon;
 	private String hinhAnh;
-	private String trangThai;
+	private boolean full;
+	private boolean hot;
+	private boolean news;
+	private boolean hienThi;
 	private String ngayTao;
-	public TruyenInfoByTruyen() {
+	public SelectTruyenInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TruyenInfoByTruyen(String iD, String tenTruyen, String tenTacGia, int soChuong, String gioiThieu,
-			String tenNhomDich, int luotXem, String nguon, String hinhAnh, String trangThai, String ngayTao) {
+	public SelectTruyenInfo(String iD, String tenTruyen, String tenTacGia, int soChuong, String gioiThieu,
+			String tenNhomDich, int luotXem, String nguon, String hinhAnh, boolean full, boolean hot, boolean news,
+			boolean hienThi, String ngayTao) {
 		super();
 		ID = iD;
 		this.tenTruyen = tenTruyen;
@@ -28,7 +32,10 @@ public class TruyenInfoByTruyen {
 		this.luotXem = luotXem;
 		this.nguon = nguon;
 		this.hinhAnh = hinhAnh;
-		this.trangThai = trangThai;
+		this.full = full;
+		this.hot = hot;
+		this.news = news;
+		this.hienThi = hienThi;
 		this.ngayTao = ngayTao;
 	}
 	public String getID() {
@@ -85,11 +92,29 @@ public class TruyenInfoByTruyen {
 	public void setHinhAnh(String hinhAnh) {
 		this.hinhAnh = hinhAnh;
 	}
-	public String getTrangThai() {
-		return trangThai;
+	public boolean isFull() {
+		return full;
 	}
-	public void setTrangThai(String trangThai) {
-		this.trangThai = trangThai;
+	public void setFull(boolean full) {
+		this.full = full;
+	}
+	public boolean isHot() {
+		return hot;
+	}
+	public void setHot(boolean hot) {
+		this.hot = hot;
+	}
+	public boolean isNews() {
+		return news;
+	}
+	public void setNews(boolean news) {
+		this.news = news;
+	}
+	public boolean isHienThi() {
+		return hienThi;
+	}
+	public void setHienThi(boolean hienThi) {
+		this.hienThi = hienThi;
 	}
 	public String getNgayTao() {
 		return ngayTao;

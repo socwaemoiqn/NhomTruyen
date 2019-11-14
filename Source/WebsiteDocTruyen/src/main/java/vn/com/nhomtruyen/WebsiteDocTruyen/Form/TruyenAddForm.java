@@ -10,7 +10,6 @@ public class TruyenAddForm {
     
     private int maTacGia;
     private int soChuong;
-    private int maDanhMuc[];
     private int maTheLoai[];
     private String nguon;
     private String gioiThieu;
@@ -46,13 +45,6 @@ public class TruyenAddForm {
 	public void setSoChuong(int soChuong) {
 		this.soChuong = soChuong;
 	}
-	public int[] getMaDanhMuc() {
-		return maDanhMuc;
-	}
-	public void setMaDanhMuc(int[] maDanhMuc) {
-		this.maDanhMuc = maDanhMuc;
-	}
-	
 	public int[] getMaTheLoai() {
 		return maTheLoai;
 	}

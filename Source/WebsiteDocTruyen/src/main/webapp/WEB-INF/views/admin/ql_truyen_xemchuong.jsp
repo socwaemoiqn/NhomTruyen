@@ -17,7 +17,7 @@
 
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h3>Chương: ${tieuDe }</h3> </div>
+				<div class="panel-heading"><h3>Chương: ${chuongInfo.tieuDe }</h3> </div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<!-- Nav tabs -->
@@ -34,7 +34,7 @@
 						<div class="tab-pane fade in active" id="home">
 
 
-							<h3>${noiDung}</h3>
+							<h3>${chuongInfo.noiDung}</h3>
 
 						</div>
 					</div>
@@ -54,13 +54,13 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h3>Chỉnh sửa thông tin chương: ${tieuDe }</h3>
+						<h3>Chỉnh sửa thông tin chương: ${chuongInfo.tieuDe }</h3>
 					</div>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql_truyen/xem_chuong/editChuong?idChuong=${id}"
+									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen }/editChuong/${tenChuong}"
 									method="post">
 									<div class="form-group">
 										<label>Nhập lại tên chương</label>
@@ -68,7 +68,7 @@
 											placeholder="Nhập tên chương">
 									</div>
 									<div class="form-group">
-										<label>Nhập lại nội dung của chương</label> <textarea name="noidung" id="noidung" >${noiDung}</textarea>
+										<label>Nhập lại nội dung của chương</label> <textarea name="noidung" id="noidung" >${chuongInfo.noiDung}</textarea>
 										 <script>
 											CKEDITOR.replace('noidung');
 											CKEDITOR.addCss('form-control')

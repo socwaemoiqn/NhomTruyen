@@ -1,6 +1,8 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -9,12 +11,11 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChuongEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.DanhMucTruyenEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 
 public class ChuongImpl implements ChuongDAO {
 
@@ -45,9 +46,24 @@ public class ChuongImpl implements ChuongDAO {
 		query.setParameter("id", maTruyen);
 		return query.list();
 	}
-
 	@Override
-	public ChuongInfo chuongOfID(String idChuong) {
+	public Map<String, String> listPathVariableString(String maTruyen) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = " Select new " + ChuongInfo.class.getName()
+				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id";
+
+		Query query = session.createQuery(sql);
+		query.setParameter("id", maTruyen);
+		List<ChuongInfo> list= query.list();
+		Map<String, String> maps= new HashMap<String, String>();
+		for(ChuongInfo ch: list) {
+			maps.put(Helper.pathVariableString(ch.getTieuDe()), ch.getId());
+		}
+		return maps;
+	}
+	@Override
+	public ChuongInfo chuongInfo(String idChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
@@ -79,7 +95,7 @@ public class ChuongImpl implements ChuongDAO {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id  ORDER BY ch.ngayTao DESC ";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", matruyen);
@@ -113,6 +129,8 @@ public class ChuongImpl implements ChuongDAO {
 			this.sessionFactory.getCurrentSession().delete(chuongEntity);
 		}
 	}
+
+	
 
 	
 

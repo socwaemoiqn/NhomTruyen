@@ -18,10 +18,12 @@ public class TruyenEntity {
 	private int luotXem;
 	private String nguon;
 	private String hinhAnh;
-	private String trangThai;
+	private boolean full;
+	private boolean hot;
+	private boolean news;
+	private boolean hienThi;
 	private String ngayTao;
 	
-
 	@Id
 	@Column(name="MaTruyen")	
 	public String getID() {
@@ -86,12 +88,33 @@ public class TruyenEntity {
 	public void setHinhAnh(String hinhAnh) {
 		this.hinhAnh = hinhAnh;
 	}
-	@Column(name="TrangThai")	
-	public String getTrangThai() {
-		return trangThai;
+	@Column(name="Full")	
+	public boolean isFull() {
+		return full;
 	}
-	public void setTrangThai(String trangThai) {
-		this.trangThai = trangThai;
+	public void setFull(boolean full) {
+		this.full = full;
+	}
+	@Column(name="Hot")	
+	public boolean isHot() {
+		return hot;
+	}
+	public void setHot(boolean hot) {
+		this.hot = hot;
+	}
+	@Column(name="New")	
+	public boolean isNews() {
+		return news;
+	}
+	public void setNews(boolean news) {
+		this.news = news;
+	}
+	@Column(name="HienThi")	
+	public boolean getHienThi() {
+		return hienThi;
+	}
+	public void setHienThi(boolean trangThai) {
+		this.hienThi = trangThai;
 	}
 	@Column(name="NgayTao")	
 	public String getNgayTao() {

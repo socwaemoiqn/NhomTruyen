@@ -84,6 +84,20 @@ public class TheLoaiTruyenImpl implements TheLoaiTruyenDAO {
 		session.persist(chiTietTheLoaiTruyenEntity);
 	}
 
+	@Override
+	public List<ChiTietTheLoaiTruyenInfo> listTenTlOfTruyen(String maTruyen) {
+		Session se = this.sessionFactory.getCurrentSession();
+
+		String sql = " Select new " + ChiTietTheLoaiTruyenInfo.class.getName()
+				+ "(ct.id, ct.maTruyen,ct.maTheLoai,tl.tenTheLoai)" + " from "
+				+ ChiTietTheLoaiTruyenEntity.class.getName() +" ct, "+ TheLoaiTruyenEntity.class.getName() + " tl "
+				+ " where ct.maTheLoai = tl.id and ct.maTruyen =: maTruyen ";
+
+		Query query = se.createQuery(sql);
+		query.setParameter("maTruyen", maTruyen);
+		return query.list();
+	}
+
 	
 
 	

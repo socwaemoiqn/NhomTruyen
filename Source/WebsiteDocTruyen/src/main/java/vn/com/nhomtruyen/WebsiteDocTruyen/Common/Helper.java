@@ -8,6 +8,9 @@ import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import java.text.Normalizer;
+import java.util.regex.Pattern;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
@@ -30,11 +33,12 @@ public class Helper {
 		cal = Calendar.getInstance();
 		return cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/" + cal.get(Calendar.DAY_OF_MONTH);
 	}
+
 	public static String getCurrentDateAndTime() {
 		cal = Calendar.getInstance();
-		return cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH)
-				+ " " + cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
-				
+		return cal.get(Calendar.YEAR) + "-" + (cal.get(Calendar.MONTH) + 1) + "-" + cal.get(Calendar.DAY_OF_MONTH) + " "
+				+ cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE) + ":" + cal.get(Calendar.SECOND);
+
 	}
 
 	public static String compareTime(String timeAgo, String today) {
@@ -55,26 +59,40 @@ public class Helper {
 		long day = TimeUnit.MILLISECONDS.toDays(diff);
 		if (day == 0) {
 			if (hour == 0) {
-				return minutes+" phút trước";
+				return minutes + " phút trước";
 			} else
-				return hour+" giờ trước";
+				return hour + " giờ trước";
 		} else
-			return day+" ngày trước";
+			return day + " ngày trước";
 	}
-	
+
 	@Autowired
 	private static TruyenDAO truyenDao;
+
 	public static int sumSLTruyenOfTacGia(int maTacGia) {
-		
-		return truyenDao.getSLTruyenofTacGia(maTacGia);
+
+		return truyenDao.sumSoLuongTruyenOfTacGia(maTacGia);
+	}
+
+	public static String pathVariableString(String name) {
+		 try {
+	            String temp = Normalizer.normalize(name, Normalizer.Form.NFD);
+	            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+	            return pattern.matcher(temp).replaceAll("").toLowerCase().replaceAll(" ", "-").replaceAll("đ", "d");
+	      } catch (Exception ex) {
+	            ex.printStackTrace();
+	      }
+	      return null;
 	}
 
 	public static void main(String[] args) throws ParseException {
-		String dateStart = "2017-10-28 21:29:58";
-		cal = Calendar.getInstance();
-		String dateStop =getCurrentDateAndTime();
+//		String dateStart = "2017-10-28 21:29:58";
+//		cal = Calendar.getInstance();
+//		String dateStop = getCurrentDateAndTime();
 
-		System.out.println("" + compareTime(dateStart, dateStop));
-
+		//System.out.println("" + compareTime(dateStart, dateStop));
+		
+		System.out.println(pathVariableString("Sinh Viên Công Nghệ Thông Tin trƯờnG Đh qUy Nhơn"));
+		
 	}
 }
