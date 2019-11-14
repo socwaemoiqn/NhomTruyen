@@ -17,7 +17,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChuongEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 
-public class ChuongImpl implements ChuongDAO {
+public class ChuongImpl implements ChuongDAO{
 
 	@Autowired
 	private SessionFactory sessionFactory;

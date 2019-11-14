@@ -7,10 +7,11 @@
 <meta charset="UTF-8">
 <title>Quản Trị</title>
 	<script src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/js/jquery-confirm.js"></script>
 
 <!-- Bootstrap Core CSS -->
 <link href="${pageContext.request.contextPath}/template/admin/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" rel="stylesheet">
 <!-- MetisMenu CSS -->
 <link href="${pageContext.request.contextPath}/template/admin/css/metisMenu.min.css" rel="stylesheet">
 
