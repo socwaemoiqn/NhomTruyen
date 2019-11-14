@@ -53,15 +53,19 @@
 							<tbody>
 								<tr>
 									<td>
-										<form action="">
-											<input class="form-control" type="text"
-												placeholder="Nhập nội dung tìm kiếm">
+										<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen"
+											class="btn btn-warning" title="Trở lại"> 
+											<i class="fa  fa-arrow-left fa-1x"></i>
+										</a>
 									</td>
-									<td><input class="btn btn-primary" type="submit"
-										value="Tìm kiếm">
-										</form> <a
-										href="${pageContext.request.contextPath}/quan-tri/ql-truyen"
-										class="btn btn-default">Trở lại</a></td>
+									<td>
+										<form action="">
+											<input class="form-control" type="text" placeholder="Nhập nội dung tìm kiếm">
+									</td>
+									<td>
+										<input class="btn btn-primary" type="submit" value="Tìm kiếm">
+										</form>
+									</td>
 
 
 									<td><a href="" class="btn btn-primary" data-toggle="modal"

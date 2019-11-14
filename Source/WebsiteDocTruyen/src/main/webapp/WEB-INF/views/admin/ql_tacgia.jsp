@@ -41,8 +41,7 @@
 							border="0">
 							<tbody>
 								<tr>
-									<form
-										action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/search"
+									<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/search"
 										method="get">
 										<td><a
 											href="${pageContext.request.contextPath}/quan-tri/ql-tacgia"
