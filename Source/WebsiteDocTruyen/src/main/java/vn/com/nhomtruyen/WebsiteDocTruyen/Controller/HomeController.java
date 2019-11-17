@@ -78,32 +78,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPage(Model model, @RequestParam("userName") String userName,
-			@RequestParam("passWord") String passWord, HttpSession session) {
-		String request = "";
-		//userAccountsInfo user = userAccountsDAO.login(userName, passWord);
-		TaiKhoanInfo tk=userAccountsDAO.ck_login(userName, passWord);
-		if (tk != null) {
-			String role = tk.getTenRole();
-			if (role.equals("Admin")) {
-				session.setAttribute("admin", tk);
-				request = "redirect:/quan-tri";
-			} else if (role.equals("tlt")) {
-				session.setAttribute("tlt",tk);
-				request = "redirect:/nhom-dich";
-			} else {
-				session.setAttribute("client", tk);
-				request = "redirect:/user_Info";
-			}
 
-		} else {
-			model.addAttribute("loi", "loi");
-			request = "redirect:/index";
-		}
-		return request;
-
-	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logoutPage(Model model) {

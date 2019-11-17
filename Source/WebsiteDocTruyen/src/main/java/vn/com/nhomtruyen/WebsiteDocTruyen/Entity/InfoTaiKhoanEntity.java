@@ -9,9 +9,8 @@ import javax.persistence.Table;
 @Table(name = "tbinfotaikhoan")
 public class InfoTaiKhoanEntity {
 	private int id;
-	private String maTaiKhoan;
+	private int maTaiKhoan;
 	private String hoTen;
-	private String mail;
 	private String sdt;
 	private String ngayTao;
 	@Id
@@ -23,10 +22,10 @@ public class InfoTaiKhoanEntity {
 		this.id = id;
 	}
 	@Column(name = "MaTaiKhoan")
-	public String getMaTaiKhoan() {
+	public int getMaTaiKhoan() {
 		return maTaiKhoan;
 	}
-	public void setMaTaiKhoan(String string) {
+	public void setMaTaiKhoan(int string) {
 		this.maTaiKhoan = string;
 	}
 	@Column(name = "HoVaTen")
@@ -35,13 +34,6 @@ public class InfoTaiKhoanEntity {
 	}
 	public void setHoTen(String hoTen) {
 		this.hoTen = hoTen;
-	}
-	@Column(name = "Mail")
-	public String getMail() {
-		return mail;
-	}
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 	@Column(name = "SDT")
 	public String getSdt() {

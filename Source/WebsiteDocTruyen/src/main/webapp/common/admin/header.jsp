@@ -8,14 +8,14 @@
 </button>
 
 <ul class="nav navbar-nav navbar-left navbar-top-links">
-	<li><a href="${pageContext.request.contextPath}/home"><i class="fa fa-home fa-fw"></i>Nhóm Truyện</a></li>
+	<li><a href="${pageContext.request.contextPath}/home"><i class="fa fa-home fa-fw"></i>Nhóm tài khoản</a></li>
 </ul>
 
 <ul class="nav navbar-right navbar-top-links">
 
 
 	<li class="dropdown"><a class="dropdown-toggle"
-		data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>${sessionScope.admin.tenTaiKhoan}
+		data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>${sessionScope.admin.tentaikhoan}
 			<b class="caret"></b>
 	</a>
 		<ul class="dropdown-menu dropdown-user">

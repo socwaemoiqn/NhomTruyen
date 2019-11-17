@@ -8,19 +8,21 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tbTAIKHOAN")
 public class TaiKhoanEntity {
-	private String maTaiKhoan;
+	private int maTaiKhoan;
 	private String tenTaiKhoan;
 	private String matKhau;
-	private String maRole;
+	private int maRole;
+	private boolean trangThai;
+	private String email;
 	private String ngayTao;
 
 	@Id
 	@Column(name = "MaTaiKhoan")
-	public String getMaTaiKhoan() {
+	public int getMaTaiKhoan() {
 		return maTaiKhoan;
 	}
 
-	public void setMaTaiKhoan(String maTaiKhoan) {
+	public void setMaTaiKhoan(int maTaiKhoan) {
 		this.maTaiKhoan = maTaiKhoan;
 	}
 
@@ -43,11 +45,11 @@ public class TaiKhoanEntity {
 	}
 
 	@Column(name = "MaRole")
-	public String getMaRole() {
+	public int getMaRole() {
 		return maRole;
 	}
 
-	public void setMaRole(String maRole) {
+	public void setMaRole(int maRole) {
 		this.maRole = maRole;
 	}
 
@@ -59,5 +61,20 @@ public class TaiKhoanEntity {
 	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
 	}
+	@Column(name = "TrangThai")
+	public boolean isTrangThai() {
+		return trangThai;
+	}
 
+	public void setTrangThai(boolean trangThai) {
+		this.trangThai = trangThai;
+	}
+	@Column(name = "Email")
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
 }

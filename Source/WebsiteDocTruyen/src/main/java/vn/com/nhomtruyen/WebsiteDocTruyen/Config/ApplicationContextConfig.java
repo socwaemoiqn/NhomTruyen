@@ -21,12 +21,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.InfoTaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.ChuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.DanhMucTruyenImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.InfoTaiKhoanImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TacGiaImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TheLoaiTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TruyenImpl;
@@ -109,8 +111,11 @@ public class ApplicationContextConfig {
 	public TheLoaiTruyenDAO getTheLoaiTruyenDAO() {
 		return new TheLoaiTruyenImpl();
 	}
-
-	@Bean(name = "userAccountsDAO")
+	@Bean(name = "infoTaiKhoanDAO")
+	public InfoTaiKhoanDAO getInfoTaiKhoanDAO() {
+		return new InfoTaiKhoanImpl();
+	}
+	@Bean(name = "taiKhoanDAO")
 	public TaiKhoanDAO getUserAccountDAO() {
 		return new TaiKhoanImpl();
 	}

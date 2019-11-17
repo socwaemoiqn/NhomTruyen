@@ -18,15 +18,15 @@
 			<li><a href="#"><i class="fa fa-table fa-fw"></i>Quản Lý<span
 					class="fa arrow"></span></a>
 				<ul class="nav nav-second-level">
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-danhmuc-truyen?page=0">QL Danh Mục Truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-theloai-truyen">QL Thể Loại truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-truyen">QL Truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-danhmuc-truyen?page=0">QL Danh Mục tài khoản</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-theloai-truyen">QL Thể Loại tài khoản</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-truyen">QL tài khoản</a></li>
 					<li><a href="${pageContext.request.contextPath}/quan-tri/ql-tacgia">QL Tác Giả</a></li>
 					<li><a href="#"><i ></i>Ql Nhóm dịch<span class="fa arrow"></span></a>
 					
 						<ul class="nav nav-third-level">
 							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Tất cả nhóm dịch</a></li>
-							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Truyện nhóm dịch</a></li>
+							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">tài khoản nhóm dịch</a></li>
 							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">..... nhóm dịch</a></li>
 						</ul>
 					</li>
@@ -46,10 +46,10 @@
 				</ul> <!-- /.nav-second-level --></li>
 			<li><a href="#" class="active"><i class="fa fa-fw"></i>Người
 					dùng</a></li>
-			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i class="fa fa-users fa-fw"></i>Người
-					Dùng</a></li>
+			<li><a href="${pageContext.request.contextPath}/quan-tri/tai-khoan"><i class="fa fa-users fa-fw"></i>Quản lý người
+					dùng</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i class="fa fa-bolt fa-fw"></i>Quyền
-					Người Dùng</a></li>
+					tài khoản</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i
 					class="fa fa-support fa-fw"></i>Phản Hồi</a></li>
 			<!--phần tiêu đề menu-->

@@ -2,6 +2,7 @@ eclipse.preferences.version=1
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Common/Helper.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Config/ApplicationContextConfig.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TacGiaController.java=UTF-8
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoanController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TruyenController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/DAO/Impl/DanhMucTruyenImpl.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/PaginationResult.java=UTF-8

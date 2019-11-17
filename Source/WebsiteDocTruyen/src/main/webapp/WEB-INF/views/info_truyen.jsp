@@ -15,13 +15,13 @@
 <body>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
+			<i class="fa fa-home"></i> tài khoản <span class="path"> /</span> <span
 				class="path-truyen">${truyenById.tenTruyen }</span>
 		</div>
 		<div class="row">
 			<div class="col-7" id="thong-tin-truyen">
 				<div class="title">
-					<i class="fas fa-info-circle"></i> THÔNG TIN TRUYỆN
+					<i class="fas fa-info-circle"></i> THÔNG TIN tài khoản
 				</div>
 				<div class="content">
 					<div class="info-picture">
@@ -62,7 +62,7 @@
 			</div>
 			<div class="col-3" id="truyen-vua-doc">
 				<div class="title">
-					TRUYỆN VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
+					tài khoản VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
@@ -88,7 +88,7 @@
 			</div>
 			<div class="col-3" id="truyen-cung-tac-gia">
 				<div class="title">
-					TRUYỆN CÙNG TÁC GIẢ <i class="fas fa-arrow-circle-down"></i>
+					tài khoản CÙNG TÁC GIẢ <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
@@ -110,7 +110,7 @@
 			</div>
 			<div class="col-3" id="truyen-dang-hot">
 				<div class="title">
-					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
+					tài khoản ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table cellspacing="5">

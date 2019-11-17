@@ -17,7 +17,7 @@
 								Quản lý <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 							<ul class="gn-submenu">
 								<li class="mini_list_agile"><a href="buttons.html"><i
-										class="fa fa-caret-right" aria-hidden="true"></i>QL truyện dịch</a></li>
+										class="fa fa-caret-right" aria-hidden="true"></i>QL tài khoản dịch</a></li>
 								<li class="mini_list_w3"><a href="grids.html"> <i
 										class="fa fa-caret-right" aria-hidden="true"></i>QL ....
 									
@@ -29,7 +29,7 @@
 								<li class="mini_list_agile"><a href="typo.html"><i
 										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng lượt xem</a></li>
 								<li class="mini_list_w3"><a href="icons.html"> <i
-										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng truyện đã dịch
+										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng tài khoản đã dịch
 								</a></li>
 								<li class="mini_list_w3"><a href="icons.html"> <i
 										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng .....

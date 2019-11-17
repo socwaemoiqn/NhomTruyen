@@ -18,7 +18,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Danh Mục Truyện</div>
+				<div class="panel-heading">Danh Mục tài khoản</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div class="table-responsive">
@@ -45,7 +45,7 @@
 									<th>STT</th>
 									<th>ID Danh mục</th>
 									<th>Tên Danh Mục</th>
-									<th>Số lượng Truyện</th>
+									<th>Số lượng tài khoản</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
@@ -62,7 +62,7 @@
 										dùng check
 										</td>
 										<td class="center">
-											<a class="btn btn-primary btn-circle" title="Tất cả truyện"
+											<a class="btn btn-primary btn-circle" title="Tất cả tài khoản"
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
 												<i class="fa fa-list-ul"></i>
 											</a> 
@@ -112,18 +112,18 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm danh mục truyện mới</h4>
+						<h4>Thêm danh mục tài khoản mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về danh mục truyện</h4>
+						<h4>Nhập thông tin về danh mục tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
 									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
 									method="post">
 									<div class="form-group">
-										<label>Tên danh mục truyện</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
+										<label>Tên danh mục tài khoản</label> <input class="form-control"
+											name="tenDanhMuc" placeholder="Nhập tên danh mục tài khoản">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"
@@ -148,18 +148,18 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm danh mục truyện mới</h4>
+						<h4>Thêm danh mục tài khoản mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về danh mục truyện</h4>
+						<h4>Nhập thông tin về danh mục tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
 									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
 									method="post">
 									<div class="form-group">
-										<label>Tên danh mục truyện</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên danh mục truyện">
+										<label>Tên danh mục tài khoản</label> <input class="form-control"
+											name="tenDanhMuc" placeholder="Nhập tên danh mục tài khoản">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"

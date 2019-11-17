@@ -22,7 +22,7 @@
 							<div class="huge">
 								4
 							</div>
-							<div>Truyện</div>
+							<div>tài khoản</div>
 						</div>
 					</div>
 				</div>
@@ -71,7 +71,7 @@
 							<div class="huge">
 								sd
 							</div>
-							<div>Truyện đang viết</div>
+							<div>tài khoản đang viết</div>
 						</div>
 					</div>
 				</div>
@@ -113,7 +113,7 @@
 	<div class="row">
 		<div class="col-lg-8">
 			<div class="panel panel-default">
-				<div class="panel-heading">Top truyện trong tuần</div>
+				<div class="panel-heading">Top tài khoản trong tuần</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<div id="morris-area-chart">

@@ -110,23 +110,31 @@ public class QL_TacGiaController {
 	{
 		String tenTacGia = request.getParameter("tenTacGia");
 		String gioiThieu = request.getParameter("gioiThieu");
+		Map<String,String> mess = new HashMap<String, String>();
 		if(tenTacGia.length() > 0 && tenTacGia.length() <= 50)
 		{
 			TacGiaInfo tacgiainfo = new TacGiaInfo();
 			tacgiainfo.setGioiThieu(gioiThieu);
 			tacgiainfo.setTenTacGia(tenTacGia);
 			TacGiaEntity tacgia = tacGiaDAO.insert(tacgiainfo);
-			Map<String,String> mess = new HashMap<String, String>();
+		
 			mess.put("status", "Thêm tác giả thành công!");
 			mess.put("name","Tác giả vừa được thêm: "+tenTacGia);
-			session.setAttribute("mess", mess);
+			
 		}
+		else
+		{	mess.put("status", "Thêm tác giả không thành công!");
+			mess.put("name","Độ dài tên tác giả 50 ký tự và không để trống");
+			
+		}
+		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
 	} 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String edit(HttpServletRequest request,HttpSession session)
 	{
+		Map<String,String> mess = new HashMap<String, String>();
 		int id = Integer.parseInt(request.getParameter("id"));
 		String tenTacGia = request.getParameter("tenTacGia");
 		String gioiThieu = request.getParameter("gioiThieu");
@@ -138,7 +146,7 @@ public class QL_TacGiaController {
 			tacgiainfo.setTenTacGia(tenTacGia);
 			tacgiainfo.setTrangThai(trangThai);
 			tacgiainfo.setID(id);
-			Map<String,String> mess = new HashMap<String, String>();
+			
 			if(tacGiaDAO.edit(tacgiainfo))
 			{
 				mess.put("status", "Sửa tác giả thành công!");
@@ -148,8 +156,13 @@ public class QL_TacGiaController {
 			{
 				mess.put("status", "Sửa tác giả không thành công!");
 			}
-			session.setAttribute("mess", mess);
+		
 		}
+		else {
+			mess.put("status", "Thêm tác giả không thành công!");
+			mess.put("name","Độ dài tên tác giả 50 ký tự và không để trống");
+		}
+		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
 	}

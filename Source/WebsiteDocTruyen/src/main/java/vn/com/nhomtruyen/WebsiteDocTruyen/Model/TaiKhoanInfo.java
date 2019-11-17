@@ -2,16 +2,18 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 public class TaiKhoanInfo {
 
-	private String maTaiKhoan;
+	private int maTaiKhoan;
 	private String tenTaiKhoan;
 	private String matKhau;
+	private String email;
+	private boolean trangThai;
 	private String tenRole;
 	private String ngayTao;
 	public TaiKhoanInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public TaiKhoanInfo(String maTaiKhoan, String tenTaiKhoan, String matKhau, String tenRole, String ngayTao) {
+	public TaiKhoanInfo(int maTaiKhoan, String tenTaiKhoan, String matKhau, String tenRole, String ngayTao) {
 		super();
 		this.maTaiKhoan = maTaiKhoan;
 		this.tenTaiKhoan = tenTaiKhoan;
@@ -19,10 +21,21 @@ public class TaiKhoanInfo {
 		this.tenRole = tenRole;
 		this.ngayTao = ngayTao;
 	}
-	public String getMaTaiKhoan() {
+	public TaiKhoanInfo(int maTaiKhoan, String tenTaiKhoan, String matKhau, String email, boolean trangThai,
+			String tenRole, String ngayTao) {
+		super();
+		this.maTaiKhoan = maTaiKhoan;
+		this.tenTaiKhoan = tenTaiKhoan;
+		this.matKhau = matKhau;
+		this.email = email;
+		this.trangThai = trangThai;
+		this.tenRole = tenRole;
+		this.ngayTao = ngayTao;
+	}
+	public int getMaTaiKhoan() {
 		return maTaiKhoan;
 	}
-	public void setMaTaiKhoan(String maTaiKhoan) {
+	public void setMaTaiKhoan(int maTaiKhoan) {
 		this.maTaiKhoan = maTaiKhoan;
 	}
 	public String getTenTaiKhoan() {
@@ -48,6 +61,18 @@ public class TaiKhoanInfo {
 	}
 	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public boolean isTrangThai() {
+		return trangThai;
+	}
+	public void setTrangThai(boolean trangThai) {
+		this.trangThai = trangThai;
 	}
 	
 }

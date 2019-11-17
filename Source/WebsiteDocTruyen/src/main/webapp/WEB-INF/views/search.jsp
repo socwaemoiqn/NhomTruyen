@@ -13,14 +13,14 @@
 <body>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> Truyện <span class="path">/</span> <span
+			<i class="fa fa-home"></i> tài khoản <span class="path">/</span> <span
 				class="path-search">Tìm kiếm </span> <span class="path"> /</span> <span
 				class="path-search-value">Vong Ngữ </span>
 		</div>
 		<div class="row">
 			<div class="col-7" id="tim-kiem-truyen">
 				<div class="title">
-					<i class="fas fa-search"></i> TÌM TRUYỆN VỚI TỪ KHOÁ: VONG NGỮ
+					<i class="fas fa-search"></i> TÌM tài khoản VỚI TỪ KHOÁ: VONG NGỮ
 				</div>
 				<div class="content">
 					<div class="search-item">
@@ -77,7 +77,7 @@
 				<div class="content">
 					<table>
 						<tr>
-							<td>Danh sách truyện có liên quan tới từ khoá <span>Vong
+							<td>Danh sách tài khoản có liên quan tới từ khoá <span>Vong
 									ngữ</span></td>
 						</tr>
 					</table>
@@ -85,63 +85,63 @@
 			</div>
 			<div class="col-3" id="the-loai-truyen">
 				<div class="title">
-					THỂ LOẠI TRUYỆN <i class="fas fa-arrow-circle-down"></i>
+					THỂ LOẠI tài khoản <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
 						<tr>
 							<td><a href="#"><strong><i class="far fa-star"></i>
-										Tiên hiệp<span data-placeholder="Truyện full"></span></strong></a></td>
+										Tiên hiệp<span data-placeholder="tài khoản full"></span></strong></a></td>
 							<td><a href="#"><strong><i class="far fa-star"></i>
-										Kiếm hiệp<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Kiếm hiệp<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Huyền huyễn<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Xuyên không<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Tu chuân<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Đô thị<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Tu chuân<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Đô thị<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Huyền huyễn<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Xuyên không<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Huyền huyễn<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Xuyên không<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Tu chuân<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Đô thị<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Tu chuân<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Đô thị<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 						<tr>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Huyền huyễn<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 							<td><a href="#"><strong><i class="fas fa-tags"></i>
-										Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+										Xuyên không<span data-placeholder="tài khoản full"></span></strong></a></a></td>
 						</tr>
 
 					</table>
@@ -150,7 +150,7 @@
 			</div>
 			<div class="col-3" id="truyen-dang-hot">
 				<div class="title">
-					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
+					tài khoản ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table cellspacing="5">

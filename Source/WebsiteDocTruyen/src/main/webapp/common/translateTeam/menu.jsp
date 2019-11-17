@@ -19,7 +19,7 @@
 								<li class="mini_list_agile"><a href="buttons.html"><i
 										class="fa fa-caret-right" aria-hidden="true"></i>QL thành viên</a></li>
 								<li class="mini_list_w3"><a href="grids.html"> <i
-										class="fa fa-caret-right" aria-hidden="true"></i>QL truyện của
+										class="fa fa-caret-right" aria-hidden="true"></i>QL tài khoản của
 										nhóm
 								</a></li>
 							</ul></li>
@@ -29,7 +29,7 @@
 								<li class="mini_list_agile"><a href="typo.html"><i
 										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng lượt xem</a></li>
 								<li class="mini_list_w3"><a href="icons.html"> <i
-										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng truyện nhóm đã dịch
+										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng tài khoản nhóm đã dịch
 								</a></li>
 								<li class="mini_list_w3"><a href="icons.html"> <i
 										class="fa fa-caret-right" aria-hidden="true"></i> Số lượng .....

@@ -11,7 +11,7 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý Tác Giả</h1>
+			<h1 class="page-header">Quản lý tài khoản</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -41,10 +41,10 @@
 							border="0">
 							<tbody>
 								<tr>
-									<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/search"
+									<form action="${pageContext.request.contextPath}/quan-tri/tai-khoan/search"
 										method="get">
 										<td><a
-											href="${pageContext.request.contextPath}/quan-tri/ql-tacgia"
+											href="${pageContext.request.contextPath}/quan-tri/tai-khoan"
 											class="btn btn-warning" title="Trở lại"> <i
 												class="fa  fa-arrow-left fa-1x"></i></a></td>
 										<td><input class="form-control" type="text" name="key"
@@ -59,7 +59,7 @@
                                     class="btn btn-primary" id="btn-all">Chọn tất cả </label>        
                                 </td>
 									<td>
-										<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/select-all"
+										<form action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/select-all"
 											method="Post">
 											<input type="hidden" name="array_id" value=""> <select
 												id="select-all" class="form-control" disabled>
@@ -72,7 +72,7 @@
 
 									</td>
 									<td><label class="btn btn-danger" disabled>Hiện
-											có: ${listTacGia.totalRecords} tác giả </label></td>
+											có: ${listTaiKhoan.totalRecords} tài khoản </label></td>
 
 								</tr>
 							</tbody>
@@ -83,46 +83,42 @@
 								<tr>
 								  <th class="text-center">Chọn</th>
 									<th>STT</th>
-									<th>ID Tác Giả</th>
-									<th>Tên Tác Giả</th>
-									<th>Số lượng tài khoản</th>
+									<th>ID tài khoản</th>
+									<th>Tên tài khoản</th>
+									<th>Vai trò</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTacGia.list}" var="us"
+								<c:forEach items="${listTaiKhoan.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
-									 <td class="text-center"><input type="checkbox" name="" id="${us.ID}"></td>
+									 <td class="text-center"><input type="checkbox" name="" id="${us.maTaiKhoan}"></td>
 										<td scope="row">${status.index + 1}</td>
-										<td>${us.ID}</td>
-										<td>${us.tenTacGia}</td>
-										<td class="center"><c:forEach items="${listSL}" var="sl">
-												<c:if test="${ sl.key == us.ID }">
-											 		${sl.value }
-											 	</c:if>
-											</c:forEach></td>
+										<td>${us.maTaiKhoan}</td>
+										<td>${us.tenTaiKhoan}</td>
+										<td class="center">${us.tenRole }</td>
 										<td class="center">
-										<c:if test="${us.trangThai == '1'}">
+										<c:if test="${us.trangThai == true}">
 											Enable
 										</c:if>
-										<c:if test="${us.trangThai == '0'}">
+										<c:if test="${us.trangThai == false}">
 											Disable
 										</c:if>
 										</td>
 										<td class="center">
-										<form id="form${us.ID}" action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/xoa/${us.ID}" method="post">
+										<form id="form${us.maTaiKhoan}" action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/xoa/${us.maTaiKhoan}" method="post">
 										<a class="btn btn-primary btn-circle"
 											title="Tất cả tài khoản"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
+											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.maTaiKhoan}">
 												<i class="fa fa-list-ul"></i>
-										</a> <a data-toggle="modal" id="${us.ID}" data-target="#sua"
+										</a> <a data-toggle="modal" id="${us.maTaiKhoan}" data-target="#sua"
 											class="btn btn-success btn-circle btn-sua"
 											title="Chỉnh sửa danh mục"> <i class="fa  fa-edit"></i>
 										</a>
 										
-										<a id="${us.ID }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
+										<a id="${us.maTaiKhoan }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
 										><i
 												class="fa fa-close"></i></a>
 										</form> 
@@ -134,11 +130,11 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits ">
-						<c:if test="${listTacGia.totalPages >1}">
+						<c:if test="${listTaiKhoan.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${listTacGia.navigationPages}" var="page">
+										<c:forEach items="${listTaiKhoan.navigationPages}" var="page">
 											<c:if test="${page != -1 }">
 												<li><a href="?page=${page}" class="nav-item">${page}</a></li>
 											</c:if>
@@ -162,25 +158,28 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm Thể Loại tài khoản Mới</h4>
+						<h4>Thêm tài khoản Mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về tác giả tài khoản</h4>
+						<h4>Nhập thông tin về tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/insert"
+									action="${pageContext.request.contextPath}/quan-tri/tai-khoan/insert"
 									method="post">
 									<div class="form-group">
-										<label>Tên tác giả tài khoản</label> <input class="form-control"
-											name="tenTacGia" placeholder="Nhập tên tác giả tài khoản">
+										<label>Tên tài khoản:</label> <input class="form-control"
+											name="tentaikhoan" placeholder="Nhập tên tài khoản">
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về tác giả">
+										<label>Mật khẩu: </label> <input class="form-control"
+											name="matkhau" placeholder="Nhập mật khẩu">
 									</div>
-									<button type="submit" class="btn btn-primary">Thêm tác
-										giả</button>
+									<div class="form-group">
+										<label>Email: </label> <input class="form-control"
+											name="email" placeholder="Nhập email của bạn">
+									</div>
+									<button type="submit" class="btn btn-primary">Thêm tài khoản</button>
 								</form>
 							</div>
 						</div>
@@ -198,22 +197,22 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h4>Sửa tác giả tài khoản</h4>
+						<h4>Sửa tài khoản tài khoản</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về tác giả tài khoản</h4>
+						<h4>Nhập thông tin về tài khoản tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/edit"
+									action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/edit"
 									method="post">
 									<div class="form-group">
-										<label>ID tác giả:</label> <input class="form-control"
+										<label>ID tài khoản:</label> <input class="form-control"
 											name="id" id="id" readonly>
 									</div>
 									<div class="form-group">
-										<label>Tên Tác giả tài khoản</label> <input class="form-control"
-											name="tenTacGia" id="tenTacGia"
+										<label>Tên tài khoản tài khoản</label> <input class="form-control"
+											name="tentaikhoan" id="tentaikhoan"
 											placeholder="Nhập tên danh mục tài khoản">
 									</div>
 									<div class="form-group">
@@ -243,7 +242,7 @@
 		</div>
 	</div>
 	<c:url var="home"
-		value="${pageContext.request.contextPath}/quan-tri/ql-tacgia/"
+		value="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/"
 		scope="request" />
 	<script>
 		$(document)
@@ -257,7 +256,7 @@
 												let id = $(this).attr("id");
 												$
 														.ajax({
-															url : "${pageContext.request.contextPath}/quan-tri/ql-tacgia/ajax",
+															url : "${pageContext.request.contextPath}/quan-tri/ql-taikhoan/ajax",
 															type : "POST",
 															dataType : "json",
 															data : {
@@ -268,9 +267,9 @@
 																$("#sua #id")
 																		.val(id);
 																$(
-																		"#sua #tenTacGia")
+																		"#sua #tentaikhoan")
 																		.val(
-																				data.tenTacGia);
+																				data.tentaikhoan);
 																$(
 																		"#sua #gioiThieu")
 																		.val(
@@ -299,7 +298,7 @@
 					            let id = $(this).attr('id');
 					            $.confirm({
 					            title: 'Cảnh báo!',
-					            content: 'Xác nhận xóa tác giả này?',
+					            content: 'Xác nhận xóa tài khoản này?',
 					            buttons: {
 					                        confirm: {
 					                        text: 'Xác nhận',
@@ -322,20 +321,20 @@
 					        
 					        // Var checkbox
 					        var array_checkbox = $("input[type=checkbox]"); // Mảng các control checkbox
-					        var array_value_checkbox = new Array(); // Mảng các id của tác giả
+					        var array_value_checkbox = new Array(); // Mảng các id của tài khoản
 					        var array_button = ['select-all']; // Mảng các control button
 					        // Xử lí sự kiện khi click vào 1 checkbox
 					        $(document).on('click','input[type=checkbox]',function(){
 					            let id = $(this).attr('id');   // Lấy id của tac giả được  check
 					            if(ClickCheckbox(this,array_checkbox,array_value_checkbox,array_button)) // Nếu checkbox được check
 					            {
-					                array_value_checkbox.push(id); // Thêm id của tác giả vào arrray
+					                array_value_checkbox.push(id); // Thêm id của tài khoản vào arrray
 					                
 					            }
 					            else
 					            {
-					                var index_checkbox_unchecked = array_value_checkbox.indexOf(id); // Tìm index của id tác giả trong array
-					                array_value_checkbox.splice(index_checkbox_unchecked,1); // Xóa id của tác giả trong arrray theo index
+					                var index_checkbox_unchecked = array_value_checkbox.indexOf(id); // Tìm index của id tài khoản trong array
+					                array_value_checkbox.splice(index_checkbox_unchecked,1); // Xóa id của tài khoản trong arrray theo index
 					            } 
 
 					        });
@@ -445,8 +444,8 @@
 		            for(let i = 0; i < array_checkbox.length; i++) // Duyệt mảng các control checkbox
 		            {
 		                array_checkbox[i].checked = false; // Gán về false (Gỡ check)
-		                var index_checkbox_unchecked = array_value_checkbox.indexOf(array_checkbox[i].getAttribute("id")); // Tìm index của id tác giả trong array 
-		                array_value_checkbox.splice(index_checkbox_unchecked,1); // Xóa id của tác giả trong arrray theo index
+		                var index_checkbox_unchecked = array_value_checkbox.indexOf(array_checkbox[i].getAttribute("id")); // Tìm index của id tài khoản trong array 
+		                array_value_checkbox.splice(index_checkbox_unchecked,1); // Xóa id của tài khoản trong arrray theo index
 		                $("#btn-all").html('Chọn tất cả'); // Đổi tên hiển thị của button 
 		            }
 		            DisableButton(array_button);
@@ -455,7 +454,7 @@
 		        {
 		            for(let i = 0; i < array_checkbox.length; i++)// Duyệt mảng các control checkbox
 		            {
-		                array_value_checkbox.push(array_checkbox[i].getAttribute("id")); // Thêm id của tác giả vào arrray
+		                array_value_checkbox.push(array_checkbox[i].getAttribute("id")); // Thêm id của tài khoản vào arrray
 		                
 		                array_checkbox[i].checked = true;  // Gán về true (check)
 		            }

@@ -1,56 +1,51 @@
-package vn.com.nhomtruyen.WebsiteDocTruyen.Entity;
+package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "tbROLE")
-public class RoleEntity {
+public class RoleInfo {
 	private int maRole;
 	private String tenRole;
 	private String gioiThieu;
 	private boolean trangThai;
+	public RoleInfo() {}
+	public RoleInfo(int maRole, String tenRole, String gioiThieu, boolean trangThai, Date ngayTao) {
+		super();
+		this.maRole = maRole;
+		this.tenRole = tenRole;
+		this.gioiThieu = gioiThieu;
+		this.trangThai = trangThai;
+		this.ngayTao = ngayTao;
+	}
 	private Date ngayTao;
 	
-	@Id
-	@Column(name = "MaRole")
 	public int getMaRole() {
 		return maRole;
 	}
 	public void setMaRole(int maRole) {
 		this.maRole = maRole;
 	}
-	@Column(name = "TenRole")
 	public String getTenRole() {
 		return tenRole;
 	}
 	public void setTenRole(String tenRole) {
 		this.tenRole = tenRole;
 	}
-	@Column(name = "GioiThieu")
 	public String getGioiThieu() {
 		return gioiThieu;
 	}
 	public void setGioiThieu(String gioiThieu) {
 		this.gioiThieu = gioiThieu;
 	}
-	@Column(name = "TrangThai")
 	public boolean isTrangThai() {
 		return trangThai;
 	}
 	public void setTrangThai(boolean trangThai) {
 		this.trangThai = trangThai;
 	}
-	@Column(name = "NgayTao")
 	public Date getNgayTao() {
 		return ngayTao;
 	}
 	public void setNgayTao(Date ngayTao) {
 		this.ngayTao = ngayTao;
 	}
-	
 }
