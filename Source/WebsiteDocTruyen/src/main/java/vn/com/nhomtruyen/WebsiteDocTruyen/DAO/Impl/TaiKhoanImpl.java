@@ -2,8 +2,10 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -89,9 +91,13 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 	}
 	
 	@Override
-	public Boolean edit(TaiKhoanInfo TaiKhoanInfo) {
-
-		return false;
+	public void edit(TaiKhoanInfo TaiKhoanInfo) {
+		TaiKhoanEntity taikhoan = this.findTaiKhoanEntity(TaiKhoanInfo.getMaTaiKhoan());
+		taikhoan.setMatKhau(TaiKhoanInfo.getMatKhau());
+		taikhoan.setEmail(TaiKhoanInfo.getEmail());
+		taikhoan.setTrangThai(TaiKhoanInfo.isTrangThai());
+		taikhoan.setMaRole(TaiKhoanInfo.getMaRole());
+		this.sessionFactory.getCurrentSession().update(taikhoan);
 	}
 
 	@Override
@@ -100,7 +106,10 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 	}
 	@Override
 	public TaiKhoanEntity findTaiKhoanEntity(int maTaiKhoan) {
-		return null;
+		Session se = this.sessionFactory.getCurrentSession();
+		Criteria crit = se.createCriteria(TaiKhoanEntity.class);
+		crit.add(Restrictions.eq("id", maTaiKhoan));
+		return (TaiKhoanEntity) crit.uniqueResult();
 	}
 
 	@Override

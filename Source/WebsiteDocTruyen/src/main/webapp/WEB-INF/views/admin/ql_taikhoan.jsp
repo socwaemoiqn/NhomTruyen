@@ -203,15 +203,15 @@
 						<h4>Nhập thông tin về tài khoản tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form:form  modelAttribute="listRole"
-									action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/edit"
+								<form
+									action="${pageContext.request.contextPath}/quan-tri/tai-khoan/edit"
 									method="post">
 									<div class="form-group">
 										<label>ID tài khoản:</label> <input class="form-control"
 											name="id" id="id" readonly>
 									</div>
 									<div class="form-group">
-										<label>Tên tài khoản</label> <input class="form-control"
+										<label>Tên tài khoản</label> <input class="form-control" readonly
 											name="tentaikhoan" id="tenTaiKhoan"
 											placeholder="Nhập tên tài khoản">
 									</div>
@@ -227,20 +227,21 @@
 									</div>
 									<div class="form-group">
 										<label>Role: </label> 
-										<form:select path="maRole" class="form-control">
-											<form:options items="${listRole}" itemLabel="tenRole"
-												itemValue="maRole" />
-										</form:select>
+										<select id="role" name="role" class="form-control">
+											<c:forEach items="${listRole}" var="item">
+												<option value="${item.maRole }">${item.tenRole }</option>
+											</c:forEach>
+										</select>	
 									</div>
 									<div class="form-group">
 										<label class="radio-inline"> <input type="radio"
-											name="trangThai" id="trangThai1" value="1"> Enable
+											name="trangthai" id="trangThai1" value="True"> Enable
 										</label> <label class="radio-inline"> <input type="radio"
-											name="trangThai" id="trangThai0" value="0"> Disable
+											name="trangthai" id="trangThai0" value="False"> Disable
 										</label>
 									</div>
 									<button type="submit" class="btn btn-success">Sửa tài khoản</button>
-								</form:form>
+								</form>
 							</div>
 						</div>
 					</div>
@@ -275,18 +276,22 @@
 																	data) {
 																$("#sua #id")
 																		.val(id);
-																$(
+																$	(
 																		"#sua #tenTaiKhoan")
 																		.val(
 																				data.tenTaiKhoan);
-																$(
-																		"#sua #matKhau")
-																		.val(
-																				data.matKhau);
-																$(
-																"#sua #email")
+																let matKhau = data.matKhau != "123456" ? $(
+																"#sua #matKhau")
 																.val(
-																		data.email);
+																		data.matKhau): $(
+																		"#sua #matKhau")
+																		.attr('placeholder','Mật khẩu mặc định là: '+data.matKhau) ;
+																let email = data.email != "Chưa có" ? $(
+																		"#sua #email")
+																		.val(
+																				data.email): $(
+																				"#sua #email")
+																				.attr('placeholder','Chưa có email') ;
 																if (data.trangThai == "1") {
 																	$(
 																			"#sua #trangThai1")

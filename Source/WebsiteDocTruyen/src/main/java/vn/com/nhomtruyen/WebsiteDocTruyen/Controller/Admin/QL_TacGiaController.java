@@ -2,16 +2,12 @@ package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -135,28 +131,17 @@ public class QL_TacGiaController {
 	public String edit(HttpServletRequest request,HttpSession session)
 	{
 		Map<String,String> mess = new HashMap<String, String>();
-		int id = Integer.parseInt(request.getParameter("id"));
 		String tenTacGia = request.getParameter("tenTacGia");
-		String gioiThieu = request.getParameter("gioiThieu");
-		String trangThai = request.getParameter("trangThai");
 		if(tenTacGia.length() > 0 && tenTacGia.length() <= 50)
 		{
 			TacGiaInfo tacgiainfo = new TacGiaInfo();
-			tacgiainfo.setGioiThieu(gioiThieu);
+			tacgiainfo.setID(Integer.parseInt(request.getParameter("id")));
 			tacgiainfo.setTenTacGia(tenTacGia);
-			tacgiainfo.setTrangThai(trangThai);
-			tacgiainfo.setID(id);
-			
-			if(tacGiaDAO.edit(tacgiainfo))
-			{
-				mess.put("status", "Sửa tác giả thành công!");
-				mess.put("name","Tác giả vừa được sửa: "+tenTacGia);
-			}
-			else
-			{
-				mess.put("status", "Sửa tác giả không thành công!");
-			}
-		
+			tacgiainfo.setGioiThieu(request.getParameter("gioiThieu"));
+			tacgiainfo.setTrangThai( request.getParameter("trangThai"));	
+			tacGiaDAO.edit(tacgiainfo);
+			mess.put("status", "Sửa tác giả thành công!");
+			mess.put("name","Tác giả vừa được sửa: "+tenTacGia);
 		}
 		else {
 			mess.put("status", "Thêm tác giả không thành công!");

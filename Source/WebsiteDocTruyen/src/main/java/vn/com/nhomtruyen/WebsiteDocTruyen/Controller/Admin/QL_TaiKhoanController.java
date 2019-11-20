@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +49,7 @@ public class QL_TaiKhoanController {
 	public String taiKhoanPage(Model model,@RequestParam(value = "page",defaultValue = "1")String pageStr) {
 		PaginationResult<TaiKhoanInfo> data = getData(pageStr);
 		model.addAttribute("listTaiKhoan",data);
-		RoleInfo listRole = new RoleInfo();
+		List<RoleInfo> listRole = getListRole();
 		model.addAttribute("listRole",listRole);
 		return "admin/ql_taikhoan";
 	}
@@ -68,7 +67,6 @@ public class QL_TaiKhoanController {
 			taikhoaninfo.setMatKhau(matKhau);
 			taikhoaninfo.setEmail(email);
 			TaiKhoanEntity taikhoan = taiKhoanDao.insert(taikhoaninfo);
-			int id = taikhoan.getMaTaiKhoan();
 			
 			mess.put("status", "Thêm tác giả thành công!");
 			mess.put("name","Tác giả vừa được thêm: "+tenTaiKhoan);
@@ -116,7 +114,26 @@ public class QL_TaiKhoanController {
 		 String json = mapper.writeValueAsString(tg);
 		return json;
 	}
-	@ModelAttribute("listRole")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String sua(HttpServletRequest request, HttpSession session)
+	{
+		String matKhau = request.getParameter("matkhau") != "" ? request.getParameter("matkhau") : "123456";
+		String email = request.getParameter("email")!= "" ? request.getParameter("email"): "Chưa có" ;
+			TaiKhoanInfo taikhoan = new TaiKhoanInfo();
+			taikhoan.setMaTaiKhoan(Integer.parseInt(request.getParameter("id")));
+			taikhoan.setMaRole(Integer.parseInt(request.getParameter("role")));
+			taikhoan.setMatKhau(matKhau);
+			taikhoan.setEmail(email);
+			taikhoan.setTrangThai(Boolean.parseBoolean(request.getParameter("trangthai")));
+			taiKhoanDao.edit(taikhoan);
+			Map<String,String> mess = new HashMap<String, String>();
+			mess.put("status", "Cập nhật thành công!");
+			mess.put("name","Tài khoản vừa được sửa: "+request.getParameter("tentaikhoan"));
+	
+		session.setAttribute("mess", mess);
+		String back = request.getHeader("Referer");
+		return "redirect:"+back;
+	}
 	public List<RoleInfo> getListRole()
 	{
 		List<RoleInfo> listRole = roleDao.getListRole();

@@ -9,6 +9,13 @@ public class TaiKhoanInfo {
 	private boolean trangThai;
 	private String tenRole;
 	private String ngayTao;
+	private int maRole;
+	public int getMaRole() {
+		return maRole;
+	}
+	public void setMaRole(int maRole) {
+		this.maRole = maRole;
+	}
 	public TaiKhoanInfo() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -17,7 +17,7 @@ public interface TacGiaDAO {
 	public TacGiaInfo getTacGiaById(int maTacGia);
 	public PaginationResult<TacGiaInfo> getTacGiaByTen(int page,int Max_Result, int Max_Navigation,String ten);
 	public TacGiaEntity insert(TacGiaInfo tacGiaInfo);
-	public Boolean edit(TacGiaInfo tacGiaInfo);
+	public void edit(TacGiaInfo tacGiaInfo);
 	public void xoa(int maTacGia);
 	public TacGiaEntity findTacGiaEntity(int maTacGia);
 	public void updateTrangThai(TacGiaInfo tacGiaInfo);

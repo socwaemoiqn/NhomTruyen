@@ -100,21 +100,12 @@ public class TacGiaImpl implements TacGiaDAO {
 	}
 
 	@Override
-	public Boolean edit(TacGiaInfo tacGiaInfo) {
-		Session se = this.sessionFactory.getCurrentSession();
-		String sql = "Update "+TacGiaEntity.class.getName()+" tg set tg.tenTacGia =: tenTacGia, tg.gioiThieu =: gioiThieu"
-				+ ", tg.trangThai =: trangThai, tg.ngayTao =: ngayTao where tg.ID =: id";
-		Query query = se.createQuery(sql);
-		query.setParameter("id", tacGiaInfo.getID());
-		query.setParameter("tenTacGia", tacGiaInfo.getTenTacGia());
-		query.setParameter("gioiThieu", tacGiaInfo.getGioiThieu());
-		query.setParameter("trangThai", tacGiaInfo.getTrangThai());
-		query.setParameter("ngayTao", Helper.getCurrentDateAndTime());
-		if(query.executeUpdate() > 0)
-		{
-			return true;
-		}
-		return false;
+	public void edit(TacGiaInfo tacGiaInfo) {
+		TacGiaEntity tacgia = this.findTacGiaEntity(tacGiaInfo.getID());
+		tacgia.setTenTacGia(tacGiaInfo.getTenTacGia());
+		tacgia.setGioiThieu(tacGiaInfo.getGioiThieu());
+		tacgia.setTrangThai(tacGiaInfo.getTrangThai());
+		this.sessionFactory.getCurrentSession().update(tacgia);
 	}
 
 	@Override
