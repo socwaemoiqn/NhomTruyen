@@ -85,7 +85,7 @@
 									<th>STT</th>
 									<th>ID Tác Giả</th>
 									<th>Tên Tác Giả</th>
-									<th>Số lượng tài khoản</th>
+									<th>Số lượng Truyện</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
@@ -114,7 +114,7 @@
 										<td class="center">
 										<form id="form${us.ID}" action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/xoa/${us.ID}" method="post">
 										<a class="btn btn-primary btn-circle"
-											title="Tất cả tài khoản"
+											title="Tất cả Truyện"
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
 												<i class="fa fa-list-ul"></i>
 										</a> <a data-toggle="modal" id="${us.ID}" data-target="#sua"
@@ -162,18 +162,18 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm Thể Loại tài khoản Mới</h4>
+						<h4>Thêm Thể Loại Truyện Mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về tác giả tài khoản</h4>
+						<h4>Nhập thông tin về tác giả Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
 									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/insert"
 									method="post">
 									<div class="form-group">
-										<label>Tên tác giả tài khoản</label> <input class="form-control"
-											name="tenTacGia" placeholder="Nhập tên tác giả tài khoản">
+										<label>Tên tác giả Truyện</label> <input class="form-control"
+											name="tenTacGia" placeholder="Nhập tên tác giả Truyện">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"
@@ -198,10 +198,10 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h4>Sửa tác giả tài khoản</h4>
+						<h4>Sửa tác giả Truyện</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về tác giả tài khoản</h4>
+						<h4>Nhập thông tin về tác giả Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
@@ -212,9 +212,9 @@
 											name="id" id="id" readonly>
 									</div>
 									<div class="form-group">
-										<label>Tên Tác giả tài khoản</label> <input class="form-control"
+										<label>Tên Tác giả Truyện</label> <input class="form-control"
 											name="tenTacGia" id="tenTacGia"
-											placeholder="Nhập tên danh mục tài khoản">
+											placeholder="Nhập tên danh mục Truyện">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"

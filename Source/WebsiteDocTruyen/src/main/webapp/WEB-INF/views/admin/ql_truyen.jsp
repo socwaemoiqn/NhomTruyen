@@ -11,7 +11,7 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản Lý - tài khoản</h1>
+			<h1 class="page-header">Quản Lý - Truyện</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -22,7 +22,7 @@
 					<c:if test="${not empty sessionScope.name_truyen}">
 						<div class="alert alert-success alert-dismissible">
 	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-	                       <h4> Đã xóa tài khoản:</h4>
+	                       <h4> Đã xóa Truyện:</h4>
 	                        <c:forEach var="ten" items="${sessionScope.name_truyen}">
 	                        	<h4> ${ten }</h4>  <br>
 	                        </c:forEach>
@@ -32,7 +32,7 @@
                     	<div class="alert alert-info alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <c:forEach var="tr" items="${sessionScope.name_truyen_add}">
-                                	 Đã thêm tài khoản:
+                                	 Đã thêm Truyện:
                                 	  <a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-truyen?idtruyen=${tr.key}" class="alert-link">${tr.value}</a>.
                                 </c:forEach>
                                
@@ -85,7 +85,7 @@
 									
 									
 									<td><a href="" class="btn btn-danger disabled">Hiện có
-											: ${slt } tài khoản</a></td>
+											: ${slt } Truyện</a></td>
 
 								</tr>
 							</tbody>
@@ -100,14 +100,14 @@
 									</th>
 									<th>STT</th>
 									<th>Hình Ảnh</th>
-									<th>Tên tài khoản</th>
+									<th>Tên Truyện</th>
 									<th>Tên Tác Giả</th>
 									<th>Thể loại</th>
 									<th>Số Chương</th>
 									<th>Lượt Xem</th>
-									<th>tài khoản Full</th>
-									<th>tài khoản Hot</th>
-									<th>tài khoản New</th>
+									<th>Truyện Full</th>
+									<th>Truyện Hot</th>
+									<th>Truyện New</th>
 									<th>Hiển thị</th>
 									<th></th>
 								</tr>
@@ -194,7 +194,7 @@
 													class="btn btn-warning btn-circle" title="Xem trước"
 													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
 														<i class="fa fa-eye"></i>
-												</a> <a class="btn btn-danger btn-circle btn-delete" title="Xóa tài khoản" data-toggle="modal"
+												</a> <a class="btn btn-danger btn-circle btn-delete" title="Xóa Truyện" data-toggle="modal"
 												data-target="#delete" id="${us.ID }">
 														<i class="fa fa-close"></i>
 												</a></td>
@@ -237,10 +237,10 @@
 				<div class="panel panel-primary">
 
 					<div class="panel-heading">
-						<h4>Thêm tài khoản mới</h4>
+						<h4>Thêm Truyện mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về tài khoản</h4>
+						<h4>Nhập thông tin về Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form:form modelAttribute="truyenAddForm"
@@ -248,12 +248,12 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/insert"
 									method="POST">
 									<div class="form-group">
-										<label>Tên tài khoản</label>
+										<label>Tên Truyện</label>
 										<form:input path="tenTruyen" class="form-control"
-											placeholder="Nhập tên tài khoản" />
+											placeholder="Nhập tên Truyện" />
 									</div>
 									<div class="form-group">
-										<label>Hình Ảnh Về tài khoản</label>
+										<label>Hình Ảnh Về Truyện</label>
 										<form:input path="hinhAnh" type="file" />
 									</div>
 									<div class="form-group">
@@ -283,17 +283,17 @@
 									<div class="form-group">
 										<label>Nguồn</label>
 										<form:input path="nguon" class="form-control"
-											placeholder="Nhập nguồn của tài khoản" />
+											placeholder="Nhập nguồn của Truyện" />
 
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu chung</label>
 										<form:textarea path="gioiThieu" class="form-control"
-											placeholder="Nhập giới thiệu về tài khoản" />
+											placeholder="Nhập giới thiệu về Truyện" />
 
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm
-										tài khoản Mới</button>
+										Truyện Mới</button>
 								</form:form>
 							</div>
 						</div>
@@ -312,7 +312,7 @@
 				<div class="panel panel-red">
 
 					<div class="panel-heading">
-						<h3>Xóa tài khoản</h3>
+						<h3>Xóa Truyện</h3>
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -321,14 +321,14 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/delete"
 									method="post">
 									<div class="form-group">
-										<label>Bạn muốn xóa bỏ tài khoản: </label>
+										<label>Bạn muốn xóa bỏ Truyện: </label>
 										<h4 id="tenTruyen"></h4>
 									</div><!-- background: transparent; -->
 									<input type="text" name="idTruyen" id="idTruyen"
 									 style="width: 0px; height: 0px; border: none; background: transparent;" 
 									 />
 									<div class="form-group">
-										<label>Nhấn "Đồng ý" để xác nhận xóa tài khoản!</label>
+										<label>Nhấn "Đồng ý" để xác nhận xóa Truyện!</label>
 									</div>
 									<button type="submit" class="btn btn-danger">Đồng ý</button>
 									<button type="button" class="btn btn-warning"
@@ -413,7 +413,7 @@
 				
 					console.log(array_id.length);
 				});
-			 // lấy id của cột tài khoản full
+			 // lấy id của cột Truyện full
 			 $(document).on("click",'.full',function(){
 					let id = $(this).attr('id');
 					
@@ -443,7 +443,7 @@
 					console.log("No full " +array_id_full_no_check.length);
 					console.log("+"+array_id_full.length);
 				});
-			 // lấy id của cột tài khoản hot
+			 // lấy id của cột Truyện hot
 				$(document).on("click",'.hot',function(){
 					let id = $(this).attr('id');
 					if($(this).is(":checked"))
@@ -472,7 +472,7 @@
 					
 					
 				});
-			 //lấy id của cột tài khoản new
+			 //lấy id của cột Truyện new
 				$(document).on("click",'.new',function(){
 					let id = $(this).attr('id');
 					if($(this).is(":checked"))
@@ -502,7 +502,7 @@
 				});
 				
 			}); 
-		 //lấy id của cột tài khoản show
+		 //lấy id của cột Truyện show
 			$(document).on("click",'.show',function(){
 				let id = $(this).attr('id');
 				if($(this).is(":checked"))

@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.NhomDichEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
@@ -143,6 +141,5 @@ public class TacGiaImpl implements TacGiaDAO {
 		{
 			this.sessionFactory.getCurrentSession().update(tacGiaEntity);;
 		}
-		
 	}
 }

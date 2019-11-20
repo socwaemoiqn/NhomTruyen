@@ -25,17 +25,17 @@
 		<!-- //breadcrumbs -->
 
 		<div class="inner_content_w3_agile_info two_in">
-			<h2 class="w3_inner_tittle">tài khoản</h2>
+			<h2 class="w3_inner_tittle">Truyện</h2>
 			<!-- tables -->
 
 			<div class="agile-tables">
 				<div class="w3l-table-info agile_info_shadow">
-					<h3 class="w3_inner_tittle two">tài khoản đã đang ký dịch của nhóm</h3>
+					<h3 class="w3_inner_tittle two">Truyện đã đang ký dịch của nhóm</h3>
 					<table id="table">
 						<thead>
 							<tr>
 								<th>STT</th>
-								<th>Tên tài khoản</th>
+								<th>Tên Truyện</th>
 								<th>Thể loại</th>
 								<th>Danh mục</th>
 								<th>...</th>
@@ -63,13 +63,13 @@
 			<h2 class="w3_inner_tittle">Chương</h2>
 			<!-- tables -->
 			<div class="w3l-table-info agile_info_shadow">
-				<h3 class="w3_inner_tittle two">Chương tài khoản chưa dịch</h3>
+				<h3 class="w3_inner_tittle two">Chương Truyện chưa dịch</h3>
 				<table id="table-breakpoint">
 					<thead>
 						<tr>
 							<th>STT</th>
 							<th>Tên chương</th>
-							<th>Tên tài khoản</th>
+							<th>Tên Truyện</th>
 							<th>abc</th>
 							<th>abcd</th>
 							<th></th>

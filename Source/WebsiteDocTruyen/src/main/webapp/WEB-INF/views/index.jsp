@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-7" id="truyen-de-cu" style="overflow: hidden;">
 				<div class="title">
-					tài khoản ĐỀ CỬ <i class="fas fa-arrow-circle-down"></i>
+					Truyện ĐỀ CỬ <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<i class="fas fa-chevron-left fa-4x"></i>
@@ -89,7 +89,7 @@
 			</div>
 			<div class="col-3" id="truyen-vua-doc">
 				<div class="title">
-					tài khoản VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
+					Truyện VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
@@ -112,7 +112,7 @@
 			</div>
 			<div class="col-7" id="truyen-moi-cap-nhat">
 				<div class="title">
-					tài khoản MỚI CẬP NHẬT <i class="fas fa-arrow-circle-down"></i>
+					Truyện MỚI CẬP NHẬT <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
@@ -260,7 +260,7 @@
 			</div>
 			<div class="col-3" id="the-loai-truyen">
 				<div class="title">
-					THỂ LOẠI tài khoản <i class="fas fa-arrow-circle-down"></i>
+					THỂ LOẠI Truyện <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<c:forEach var="i" begin="1" end="${(sltl/12)+1}">
@@ -281,7 +281,7 @@
 			</div>
 			<div class="col-10" id="truyen-da-hoan-thanh">
 				<div class="title">
-					tài khoản ĐÃ HOÀN THÀNH <i class="fas fa-arrow-circle-down"></i>
+					Truyện ĐÃ HOÀN THÀNH <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<div class="item">

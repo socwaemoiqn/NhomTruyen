@@ -16,7 +16,7 @@
 <body>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> tài khoản <span class="path"> /</span> <span
+			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
 				class="path-truyen">Phàm nhân tu tiên</span> / <span
 				class="path-chuong">Chương 1</span>
 		</div>

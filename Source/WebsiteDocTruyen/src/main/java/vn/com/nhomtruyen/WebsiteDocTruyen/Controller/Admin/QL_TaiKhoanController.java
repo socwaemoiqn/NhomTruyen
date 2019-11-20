@@ -1,6 +1,7 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,18 +10,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.InfoTaiKhoanDAO;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.InfoTaiKhoanEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TaiKhoanEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.InfoTaiKhoanModel;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 
 @Controller
@@ -29,7 +32,7 @@ public class QL_TaiKhoanController {
 	@Autowired
 	private TaiKhoanDAO taiKhoanDao;
 	@Autowired
-	private InfoTaiKhoanDAO infoTaiKhoanDAO;
+	private RoleDAO roleDao;
 	public PaginationResult<TaiKhoanInfo> getData(String pageStr)
 	{
 		int page = 1;
@@ -47,7 +50,8 @@ public class QL_TaiKhoanController {
 	public String taiKhoanPage(Model model,@RequestParam(value = "page",defaultValue = "1")String pageStr) {
 		PaginationResult<TaiKhoanInfo> data = getData(pageStr);
 		model.addAttribute("listTaiKhoan",data);
-		
+		RoleInfo listRole = new RoleInfo();
+		model.addAttribute("listRole",listRole);
 		return "admin/ql_taikhoan";
 	}
 	@RequestMapping(value = "/insert",method = RequestMethod.POST)
@@ -102,6 +106,21 @@ public class QL_TaiKhoanController {
 			return "admin/ql_taikhoan";
 		}
 		return "redirect:/quan-tri/tai-khoan";
+	}
+	@RequestMapping(value = "/ajax",method = RequestMethod.POST)
+	public @ResponseBody String getTaiKhoanById(HttpServletRequest request) throws JsonProcessingException
+	{
+		int id = Integer.parseInt(request.getParameter("id"));
+		TaiKhoanInfo tg = taiKhoanDao.getTaiKhoanById(id);
+		 ObjectMapper mapper = new ObjectMapper();
+		 String json = mapper.writeValueAsString(tg);
+		return json;
+	}
+	@ModelAttribute("listRole")
+	public List<RoleInfo> getListRole()
+	{
+		List<RoleInfo> listRole = roleDao.getListRole();
+		return listRole;
 	}
 
 }

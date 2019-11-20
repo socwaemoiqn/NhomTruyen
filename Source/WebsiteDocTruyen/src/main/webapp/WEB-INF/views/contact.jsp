@@ -11,7 +11,7 @@
 <body>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> tài khoản <span class="path">/</span> <span
+			<i class="fa fa-home"></i> Truyện <span class="path">/</span> <span
 				class="path-search">Contact - Liên hệ</span>
 		</div>
 		<div class="row">
@@ -48,7 +48,7 @@
 					<i class="fas fa-envelope"></i> Thông tin liên hệ
 				</div>
 				<div class="content">
-					<span> Nhóm tài khoản PHP <br> Email:
+					<span> Nhóm Truyện PHP <br> Email:
 						contact@nhomtruyen.vn <br> Facebook: facebook.com/NhomTruyen
 					</span>
 				</div>

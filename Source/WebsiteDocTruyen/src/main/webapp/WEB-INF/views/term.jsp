@@ -10,7 +10,7 @@
 </head>
 <body>
     <div id="path">
-          <i class="fa fa-home"></i> tài khoản 
+          <i class="fa fa-home"></i> Truyện 
             <span class="path">/</span> 
             <span class="path-search">Privacy & Terms of use - Điều khoản sử dụng</span> 
     </div>

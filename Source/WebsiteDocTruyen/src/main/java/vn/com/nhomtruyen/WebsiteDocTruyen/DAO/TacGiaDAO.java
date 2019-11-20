@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nhóm tài khoản</title>
+<title>Nhóm Truyện</title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
@@ -33,7 +33,7 @@
 				class="fa fa-circle fa-stack-2x"></i> <i
 				class="fa fa-book-open fa-spin fa-stack-1x fa-inverse"
 				style="color: black;"></i>
-		</span> tài khoản PHP
+		</span> Truyện PHP
 		</a>
 		<div class="dropdown" id="danhMuc">
 			<button class="dropbtn">
@@ -46,17 +46,17 @@
 					</strong>
 					</a>
 				</c:forEach>
-				//phần tĩnh   <a href="danhmuc.html?id=full"><strong class="danhMucFull">tài khoản full
-                    <span data-placeholder="tài khoản full"></strong></span>
+				//phần tĩnh   <a href="danhmuc.html?id=full"><strong class="danhMucFull">Truyện full
+                    <span data-placeholder="Truyện full"></strong></span>
             </b></a>
-            <a href="danhmuc.html?id=hot"><strong  class="danhMucHot">tài khoản hot
-                    <span data-placeholder="tài khoản hot"></span>
+            <a href="danhmuc.html?id=hot"><strong  class="danhMucHot">Truyện hot
+                    <span data-placeholder="Truyện hot"></span>
             </strong></a>
-            <a href="#"><strong class="danhMucNew">tài khoản New
-                    <span data-placeholder="tài khoản new"></span>
+            <a href="#"><strong class="danhMucNew">Truyện New
+                    <span data-placeholder="Truyện new"></span>
             </strong></a>
-            <a href="#"><strong>tài khoản mới cập nhật
-                    <span data-placeholder="tài khoản mới cập nhập"></span>
+            <a href="#"><strong>Truyện mới cập nhật
+                    <span data-placeholder="Truyện mới cập nhập"></span>
             </strong></a> //kết thúc phần tĩnh
 			</div>
 		</div>
@@ -107,15 +107,15 @@
                         <i class="fa fa-circle fa-stack-2x"></i>
                         <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
                     </span>
-            tài khoản PHP</a>
+            Truyện PHP</a>
     </div>
     <div class="footer-mid">
         <table>
             <thead>
                 <tr>
-                    <td>tài khoản full</td>
-                    <td>tài khoản mới cập nhật</td>
-                    <td>tài khoản hot</td>
+                    <td>Truyện full</td>
+                    <td>Truyện mới cập nhật</td>
+                    <td>Truyện hot</td>
                 </tr>
             </thead>
            <tbody>
@@ -143,7 +143,7 @@
         </table>
     </div>
     <div class="footer-right">
-        <span>Đề tài:</span> Xây dựng ứng dụng web đọc tài khoản online <br>
+        <span>Đề tài:</span> Xây dựng ứng dụng web đọc Truyện online <br>
         <span>Môn:</span> Phát triển phần mềm chuyên nghiệp <br>
         Thành viên: <br>
          - Võ Văn Việt <br>
@@ -158,7 +158,7 @@
 			<h1 id="abac">Đăng nhập</h1>
 			<div class="txtb">
 				<input type="text" name="userName" required=""> <span
-					data-placeholder="Tài khoản"></span>
+					data-placeholder="Truyện"></span>
 			</div>
 			<div class="txtb" required="">
 				<input type="password" name="passWord"> <span
@@ -166,7 +166,7 @@
 			</div>
 			<button class="btn" type="submit">Đăng Nhâp</button>
 			<div class="bottom-text">
-				Chưa có tài khoản? <a HREF="#" id="btn-logup">Đăng ký</a>
+				Chưa có Truyện? <a HREF="#" id="btn-logup">Đăng ký</a>
 			</div>
 		</form>
 	</div>
@@ -175,7 +175,7 @@
 		<form action="#" method="post">
 			<h1 id="abac">Đăng ký</h1>
 			<div class="txtb">
-				<input type="text"> <span data-placeholder="Tài khoản"></span>
+				<input type="text"> <span data-placeholder="Truyện"></span>
 			</div>
 			<div class="txtb">
 				<input type="password"> <span data-placeholder="Mật khẩu"></span>
@@ -189,7 +189,7 @@
 			</div>
 			<button class="btn" type="submit">Đăng Ký</button>
 			<div class="bottom-text">
-				Đã có tài khoản? <a HREF="#" id="btn-login">Quay lại</a>
+				Đã có Truyện? <a HREF="#" id="btn-login">Quay lại</a>
 			</div>
 		</form>
 	</div>

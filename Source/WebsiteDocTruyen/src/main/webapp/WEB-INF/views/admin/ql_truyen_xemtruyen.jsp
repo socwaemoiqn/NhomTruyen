@@ -12,7 +12,7 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">Thông tin tài khoản : ${truyenById.tenTruyen }</h2>
+			<h2 class="page-header">Thông tin Truyện : ${truyenById.tenTruyen }</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -200,10 +200,10 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h4>Chỉnh sửa thông tin tài khoản</h4>
+						<h4>Chỉnh sửa thông tin Truyện</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập lại thông tin về tài khoản</h4>
+						<h4>Nhập lại thông tin về Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form:form modelAttribute="truyenEditForm"
@@ -211,9 +211,9 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/edit-truyen"
 									method="POST">
 									<div class="form-group">
-										<label>Nhập lại tên tài khoản</label>
+										<label>Nhập lại tên Truyện</label>
 										<form:input path="tenTruyen" class="form-control"
-											placeholder="Nhập lại tên tài khoản" />
+											placeholder="Nhập lại tên Truyện" />
 									</div>
 									<div class="form-group">
 										<label>Chọn hình ảnh mới</label>
@@ -247,7 +247,7 @@
 										</label><br>
 										<label>Nhập lại nguồn mới</label>
 										<form:input path="nguon" class="form-control"
-											placeholder="Nhập nguồn của tài khoản" />
+											placeholder="Nhập nguồn của Truyện" />
 
 									</div>
 									<div class="form-group">
@@ -258,7 +258,7 @@
 
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm
-										tài khoản Mới</button>
+										Truyện Mới</button>
 								</form:form>
 							</div>
 

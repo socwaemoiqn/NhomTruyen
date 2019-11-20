@@ -8,7 +8,7 @@
 </button>
 
 <ul class="nav navbar-nav navbar-left navbar-top-links">
-	<li><a href="${pageContext.request.contextPath}/home"><i class="fa fa-home fa-fw"></i>Nhóm tài khoản</a></li>
+	<li><a href="${pageContext.request.contextPath}/home"><i class="fa fa-home fa-fw"></i>Nhóm Truyện</a></li>
 </ul>
 
 <ul class="nav navbar-right navbar-top-links">

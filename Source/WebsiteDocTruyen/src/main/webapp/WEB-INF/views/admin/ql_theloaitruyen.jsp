@@ -17,7 +17,7 @@
 	<div class="row">
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading">Thể Loại tài khoản</div>
+				<div class="panel-heading">Thể Loại Truyện</div>
 				<div class="panel-body">
 					<div class="table-responsive">
 						<table class="table table-striped table-bordered table-hover"
@@ -41,7 +41,7 @@
 									<th>STT</th>
 									<th>ID Thể Loại</th>
 									<th>Tên Thể loại</th>
-									<th>Số lượng tài khoản</th>
+									<th>Số lượng Truyện</th>
 									<th>Trạng Thái</th>
 									<th></th>
 								</tr>
@@ -56,7 +56,7 @@
 										<td class="center">4</td>
 										<td class="center">dùng check</td>
 										<td class="center"><a class="btn btn-primary btn-circle"
-											title="Tất cả tài khoản"
+											title="Tất cả Truyện"
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.id}">
 												<i class="fa fa-list-ul"></i>
 										</a> <a data-toggle="modal" data-target="#sua"
@@ -103,18 +103,18 @@
 				<div class="panel panel-green">
 
 					<div class="panel-heading">
-						<h4>Thêm Thể Loại tài khoản Mới</h4>
+						<h4>Thêm Thể Loại Truyện Mới</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về thể loại tài khoản</h4>
+						<h4>Nhập thông tin về thể loại Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
 									action="${pageContext.request.contextPath}/quan-tri/ql_danhmuc_truyen/them"
 									method="post">
 									<div class="form-group">
-										<label>Tên thể loại tài khoản</label> <input class="form-control"
-											name="tenDanhMuc" placeholder="Nhập tên danh mục tài khoản">
+										<label>Tên thể loại Truyện</label> <input class="form-control"
+											name="tenDanhMuc" placeholder="Nhập tên danh mục Truyện">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"

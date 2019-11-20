@@ -7,6 +7,9 @@ public class RoleInfo {
 	private String tenRole;
 	private String gioiThieu;
 	private boolean trangThai;
+
+	private Date ngayTao;
+	
 	public RoleInfo() {}
 	public RoleInfo(int maRole, String tenRole, String gioiThieu, boolean trangThai, Date ngayTao) {
 		super();
@@ -16,8 +19,6 @@ public class RoleInfo {
 		this.trangThai = trangThai;
 		this.ngayTao = ngayTao;
 	}
-	private Date ngayTao;
-	
 	public int getMaRole() {
 		return maRole;
 	}

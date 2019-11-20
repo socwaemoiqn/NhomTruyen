@@ -203,7 +203,7 @@
 						<h4>Nhập thông tin về tài khoản tài khoản</h4>
 						<div class="row">
 							<div class="col-lg-12">
-								<form
+								<form:form  modelAttribute="listRole"
 									action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/edit"
 									method="post">
 									<div class="form-group">
@@ -211,27 +211,36 @@
 											name="id" id="id" readonly>
 									</div>
 									<div class="form-group">
-										<label>Tên tài khoản tài khoản</label> <input class="form-control"
-											name="tentaikhoan" id="tentaikhoan"
-											placeholder="Nhập tên danh mục tài khoản">
+										<label>Tên tài khoản</label> <input class="form-control"
+											name="tentaikhoan" id="tenTaiKhoan"
+											placeholder="Nhập tên tài khoản">
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" id="gioiThieu"
-											placeholder="Nhập giới thiệu về danh mục">
+										<label>Mật khẩu:</label> <input class="form-control"
+											name="matkhau" id="matKhau"
+											placeholder="Nhập mật khẩu">
 									</div>
 									<div class="form-group">
-
+										<label>Email: </label> <input class="form-control"
+											name="email" id="email"
+											placeholder="Nhập email">
+									</div>
+									<div class="form-group">
+										<label>Role: </label> 
+										<form:select path="maRole" class="form-control">
+											<form:options items="${listRole}" itemLabel="tenRole"
+												itemValue="maRole" />
+										</form:select>
+									</div>
+									<div class="form-group">
 										<label class="radio-inline"> <input type="radio"
 											name="trangThai" id="trangThai1" value="1"> Enable
 										</label> <label class="radio-inline"> <input type="radio"
 											name="trangThai" id="trangThai0" value="0"> Disable
 										</label>
-
 									</div>
-									<button type="submit" class="btn btn-success">Sửa thể
-										loại</button>
-								</form>
+									<button type="submit" class="btn btn-success">Sửa tài khoản</button>
+								</form:form>
 							</div>
 						</div>
 					</div>
@@ -256,7 +265,7 @@
 												let id = $(this).attr("id");
 												$
 														.ajax({
-															url : "${pageContext.request.contextPath}/quan-tri/ql-taikhoan/ajax",
+															url : "${pageContext.request.contextPath}/quan-tri/tai-khoan/ajax",
 															type : "POST",
 															dataType : "json",
 															data : {
@@ -267,13 +276,17 @@
 																$("#sua #id")
 																		.val(id);
 																$(
-																		"#sua #tentaikhoan")
+																		"#sua #tenTaiKhoan")
 																		.val(
-																				data.tentaikhoan);
+																				data.tenTaiKhoan);
 																$(
-																		"#sua #gioiThieu")
+																		"#sua #matKhau")
 																		.val(
-																				data.gioiThieu);
+																				data.matKhau);
+																$(
+																"#sua #email")
+																.val(
+																		data.email);
 																if (data.trangThai == "1") {
 																	$(
 																			"#sua #trangThai1")
@@ -286,10 +299,6 @@
 																			.prop(
 																					"checked",
 																					"true");
-															},
-															error : function(
-																	error) {
-																alert(error);
 															}
 														});
 											});
