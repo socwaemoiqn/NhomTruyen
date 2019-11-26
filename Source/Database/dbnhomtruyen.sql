@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dbnhomtruyen
 -- ------------------------------------------------------
--- Server version	8.0.18
+-- Server version	8.0.17
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -31,6 +31,15 @@ CREATE TABLE `tbchitietdanhmuc` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbchitietdanhmuc`
+--
+
+LOCK TABLES `tbchitietdanhmuc` WRITE;
+/*!40000 ALTER TABLE `tbchitietdanhmuc` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbchitietdanhmuc` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbchitiettheloai`
 --
 
@@ -44,6 +53,15 @@ CREATE TABLE `tbchitiettheloai` (
   PRIMARY KEY (`MaChiTietTheLoai`)
 ) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbchitiettheloai`
+--
+
+LOCK TABLES `tbchitiettheloai` WRITE;
+/*!40000 ALTER TABLE `tbchitiettheloai` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbchitiettheloai` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbchuong`
@@ -64,6 +82,15 @@ CREATE TABLE `tbchuong` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbchuong`
+--
+
+LOCK TABLES `tbchuong` WRITE;
+/*!40000 ALTER TABLE `tbchuong` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbchuong` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbdanhmuctruyen`
 --
 
@@ -79,6 +106,15 @@ CREATE TABLE `tbdanhmuctruyen` (
   PRIMARY KEY (`MaDanhMuc`)
 ) ENGINE=InnoDB AUTO_INCREMENT=898 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbdanhmuctruyen`
+--
+
+LOCK TABLES `tbdanhmuctruyen` WRITE;
+/*!40000 ALTER TABLE `tbdanhmuctruyen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbdanhmuctruyen` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbinfotaikhoan`
@@ -98,6 +134,15 @@ CREATE TABLE `tbinfotaikhoan` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbinfotaikhoan`
+--
+
+LOCK TABLES `tbinfotaikhoan` WRITE;
+/*!40000 ALTER TABLE `tbinfotaikhoan` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbinfotaikhoan` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbnhomdich`
 --
 
@@ -112,6 +157,15 @@ CREATE TABLE `tbnhomdich` (
   PRIMARY KEY (`MaNhomDich`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbnhomdich`
+--
+
+LOCK TABLES `tbnhomdich` WRITE;
+/*!40000 ALTER TABLE `tbnhomdich` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbnhomdich` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbphanhoi`
@@ -131,6 +185,15 @@ CREATE TABLE `tbphanhoi` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbphanhoi`
+--
+
+LOCK TABLES `tbphanhoi` WRITE;
+/*!40000 ALTER TABLE `tbphanhoi` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbphanhoi` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbrole`
 --
 
@@ -140,12 +203,22 @@ DROP TABLE IF EXISTS `tbrole`;
 CREATE TABLE `tbrole` (
   `MaRole` int(11) NOT NULL AUTO_INCREMENT,
   `TenRole` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `GioiThieu` text COLLATE utf8mb4_vietnamese_ci,
+  `GioiThieu` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci,
   `TrangThai` tinyint(4) DEFAULT '1',
-  `NgayTao` datetime NOT NULL,
+  `NgayTao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`MaRole`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbrole`
+--
+
+LOCK TABLES `tbrole` WRITE;
+/*!40000 ALTER TABLE `tbrole` DISABLE KEYS */;
+INSERT INTO `tbrole` VALUES (1,'Admin',NULL,1,'2019-11-17 23:05:08'),(2,'User',NULL,1,'2019-11-17 23:05:14'),(3,'Translator',NULL,1,'2019-11-17 23:05:19');
+/*!40000 ALTER TABLE `tbrole` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbtacgia`
@@ -161,8 +234,18 @@ CREATE TABLE `tbtacgia` (
   `TrangThai` int(11) DEFAULT NULL,
   `NgayTao` date NOT NULL,
   PRIMARY KEY (`MaTacGia`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbtacgia`
+--
+
+LOCK TABLES `tbtacgia` WRITE;
+/*!40000 ALTER TABLE `tbtacgia` DISABLE KEYS */;
+INSERT INTO `tbtacgia` VALUES (4,'admin','',1,'2019-11-17');
+/*!40000 ALTER TABLE `tbtacgia` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbtaikhoan`
@@ -176,12 +259,22 @@ CREATE TABLE `tbtaikhoan` (
   `TenTaiKhoan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `MatKhau` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `MaRole` int(11) DEFAULT NULL,
-  `Email` varchar(191) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Email` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `TrangThai` tinyint(4) DEFAULT '1',
   `NgayTao` date NOT NULL,
   PRIMARY KEY (`MaTaiKhoan`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbtaikhoan`
+--
+
+LOCK TABLES `tbtaikhoan` WRITE;
+/*!40000 ALTER TABLE `tbtaikhoan` DISABLE KEYS */;
+INSERT INTO `tbtaikhoan` VALUES (5,'admin123','thanhdat',1,'Chưa có',1,'2019-11-17'),(6,'admin123','123456',2,'Chưa có',1,'2019-11-17');
+/*!40000 ALTER TABLE `tbtaikhoan` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbthanhviennhomdich`
@@ -201,6 +294,15 @@ CREATE TABLE `tbthanhviennhomdich` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbthanhviennhomdich`
+--
+
+LOCK TABLES `tbthanhviennhomdich` WRITE;
+/*!40000 ALTER TABLE `tbthanhviennhomdich` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbthanhviennhomdich` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbtheloaitruyen`
 --
 
@@ -216,6 +318,15 @@ CREATE TABLE `tbtheloaitruyen` (
   PRIMARY KEY (`MaTheLoai`)
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbtheloaitruyen`
+--
+
+LOCK TABLES `tbtheloaitruyen` WRITE;
+/*!40000 ALTER TABLE `tbtheloaitruyen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbtheloaitruyen` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tbtruyen`
@@ -244,6 +355,15 @@ CREATE TABLE `tbtruyen` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbtruyen`
+--
+
+LOCK TABLES `tbtruyen` WRITE;
+/*!40000 ALTER TABLE `tbtruyen` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbtruyen` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `tbtruyencuanhomdich`
 --
 
@@ -260,6 +380,15 @@ CREATE TABLE `tbtruyencuanhomdich` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Dumping data for table `tbtruyencuanhomdich`
+--
+
+LOCK TABLES `tbtruyencuanhomdich` WRITE;
+/*!40000 ALTER TABLE `tbtruyencuanhomdich` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbtruyencuanhomdich` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping routines for database 'dbnhomtruyen'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -272,4 +401,4 @@ CREATE TABLE `tbtruyencuanhomdich` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-17 16:05:59
+-- Dump completed on 2019-11-20 23:47:15

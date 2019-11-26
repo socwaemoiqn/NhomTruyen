@@ -19,9 +19,6 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<%
-						Map<String, String> mess = (Map<String, String>) request.getSession().getAttribute("mess");
-					%>
 					<c:if test="${not empty mess}">
 						<div class="alert alert-success">
 							<ul>

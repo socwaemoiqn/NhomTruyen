@@ -48,8 +48,8 @@
 					dùng</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/tai-khoan"><i class="fa fa-users fa-fw"></i>Quản lý người
 					dùng</a></li>
-			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i class="fa fa-bolt fa-fw"></i>Quyền
-					Truyện</a></li>
+			<li><a href="${pageContext.request.contextPath}/quan-tri/tai-khoan/vai-tro"><i class="fa fa-bolt fa-fw"></i>Quyền
+					người dùng</a></li>
 			<li><a href="${pageContext.request.contextPath}/quan-tri/sabhbha"><i
 					class="fa fa-support fa-fw"></i>Phản Hồi</a></li>
 			<!--phần tiêu đề menu-->

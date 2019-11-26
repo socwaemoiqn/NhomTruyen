@@ -19,9 +19,6 @@
 		<div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					<%
-						Map<String, String> mess = (Map<String, String>) request.getSession().getAttribute("mess");
-					%>
 					<c:if test="${not empty mess}">
 						<div class="alert alert-success">
 							<ul>
@@ -59,7 +56,7 @@
                                     class="btn btn-primary" id="btn-all">Chọn tất cả </label>        
                                 </td>
 									<td>
-										<form action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/select-all"
+										<form action="${pageContext.request.contextPath}/quan-tri/tai-khoan/select-all"
 											method="Post">
 											<input type="hidden" name="array_id" value=""> <select
 												id="select-all" class="form-control" disabled>
@@ -108,7 +105,7 @@
 										</c:if>
 										</td>
 										<td class="center">
-										<form id="form${us.maTaiKhoan}" action="${pageContext.request.contextPath}/quan-tri/ql-taikhoan/xoa/${us.maTaiKhoan}" method="post">
+										<form id="form${us.maTaiKhoan}" action="${pageContext.request.contextPath}/quan-tri/tai-khoan/xoa/${us.maTaiKhoan}" method="post">
 										<a class="btn btn-primary btn-circle"
 											title="Tất cả tài khoản"
 											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.maTaiKhoan}">

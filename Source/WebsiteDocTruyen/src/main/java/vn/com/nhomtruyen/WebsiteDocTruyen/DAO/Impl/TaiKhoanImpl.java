@@ -45,12 +45,6 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 		Query query = se.createQuery(sql);
 		return new PaginationResult<TaiKhoanInfo>(query, page, Max_Result, Max_Navigation);
 	}
-
-	@Override
-	public int getSoLuongTruyenById(int maTaiKhoan) {
-			return 1;
-	}
-
 	@Override
 	public TaiKhoanInfo getTaiKhoanById(int maTaiKhoan) {
 		Session se = this.sessionFactory.getCurrentSession();
@@ -102,7 +96,8 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 
 	@Override
 	public void xoa(int maTaiKhoan) {
-
+		TaiKhoanEntity taikhoan = this.findTaiKhoanEntity(maTaiKhoan);
+		this.sessionFactory.getCurrentSession().delete(taikhoan);
 	}
 	@Override
 	public TaiKhoanEntity findTaiKhoanEntity(int maTaiKhoan) {
@@ -114,7 +109,8 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 
 	@Override
 	public void updateTrangThai(TaiKhoanInfo TaiKhoanInfo) {
-
-		
+		TaiKhoanEntity taikhoan = this.findTaiKhoanEntity(TaiKhoanInfo.getMaRole());
+		taikhoan.setTrangThai(TaiKhoanInfo.isTrangThai());
+		this.sessionFactory.getCurrentSession().update(taikhoan);
 	}
 }

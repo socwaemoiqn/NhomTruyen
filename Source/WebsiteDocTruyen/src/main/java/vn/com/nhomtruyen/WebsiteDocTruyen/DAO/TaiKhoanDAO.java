@@ -13,7 +13,6 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 public interface TaiKhoanDAO {
 	public List<TaiKhoanInfo> listTaiKhoan();
 	public PaginationResult<TaiKhoanInfo> paginationListTaiKhoan(int page,int Max_Result, int Max_Navigation);
-	public int getSoLuongTruyenById(int maTaiKhoan);
 	public TaiKhoanInfo getTaiKhoanById(int maTaiKhoan);
 	public PaginationResult<TaiKhoanInfo> getTaiKhoanByTen(int page,int Max_Result, int Max_Navigation,String ten);
 	public TaiKhoanEntity insert(TaiKhoanInfo TaiKhoanInfo);

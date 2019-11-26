@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller.Admin;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,12 +11,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
@@ -23,6 +27,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TaiKhoanEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 
 @Controller
@@ -134,10 +139,63 @@ public class QL_TaiKhoanController {
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
 	}
+	@RequestMapping(value = "/xoa/{id}",method = RequestMethod.POST)
+	public String xoa(HttpServletRequest request, HttpSession session,@PathVariable(value="id")String id)
+	{
+		TaiKhoanInfo taikhoan = taiKhoanDao.getTaiKhoanById(Integer.parseInt(id));
+		Map<String,String> mess = new HashMap<String,String>();
+		mess.put("status", "Xóa thành công!");
+		mess.put("name","Tài khoản vừa được xóa: "+taikhoan.getTenTaiKhoan());
+		session.setAttribute("mess", mess);
+		taiKhoanDao.xoa(Integer.parseInt(id));
+		String back = request.getHeader("Referer");
+		return "redirect:"+back;
+	}
 	public List<RoleInfo> getListRole()
 	{
 		List<RoleInfo> listRole = roleDao.getListRole();
 		return listRole;
+	}
+	@RequestMapping(value = "/select-all/{action}",method = RequestMethod.POST)
+	public String select(HttpServletRequest request,HttpSession session,@PathVariable(value = "action")String action) throws JsonParseException, JsonMappingException, IOException
+	{
+		String json = request.getParameter("array_id");
+		ObjectMapper mapper = new ObjectMapper();	
+		String[] array_id = mapper.readValue(json, String[].class);
+		Map<String,String> mess = new HashMap<String, String>();
+		TaiKhoanInfo taikhoan = new TaiKhoanInfo();
+		switch (action) {
+		case "enable":
+			for (String id : array_id) {
+				taikhoan.setMaRole(Integer.parseInt(id));
+				taikhoan.setTrangThai(true);
+				taiKhoanDao.updateTrangThai(taikhoan);
+				mess.put("status", "Kích hoạt thành công!"); 
+				mess.put("name","Kích hoạt: "+array_id.length+" tài khoản");
+			}
+			break;
+		case "disable":			
+			for (String id : array_id) {
+				taikhoan.setMaRole(Integer.parseInt(id));
+				taikhoan.setTrangThai(false);
+				taiKhoanDao.updateTrangThai(taikhoan);
+				mess.put("status", "Vô hiệu hóa thành công!");
+				mess.put("name","Vô hiệu: "+array_id.length+" tài khoản");
+			}
+			break;
+		case "delete":
+			for (String id : array_id) {
+				taiKhoanDao.xoa(Integer.parseInt(id));
+				mess.put("status", "Xóa thành công!");
+				mess.put("name","Vừa xóa: "+array_id.length+" tài khoản");
+			}
+			break;
+		default:
+			break;
+		}
+		session.setAttribute("mess", mess);
+		String back = request.getHeader("Referer");
+		return "redirect:"+back;
 	}
 
 }
