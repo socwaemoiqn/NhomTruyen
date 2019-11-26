@@ -8,10 +8,10 @@ public class RoleInfo {
 	private String gioiThieu;
 	private boolean trangThai;
 
-	private Date ngayTao;
+	private String ngayTao;
 	
 	public RoleInfo() {}
-	public RoleInfo(int maRole, String tenRole, String gioiThieu, boolean trangThai, Date ngayTao) {
+	public RoleInfo(int maRole, String tenRole, String gioiThieu, boolean trangThai, String ngayTao) {
 		super();
 		this.maRole = maRole;
 		this.tenRole = tenRole;
@@ -43,10 +43,10 @@ public class RoleInfo {
 	public void setTrangThai(boolean trangThai) {
 		this.trangThai = trangThai;
 	}
-	public Date getNgayTao() {
+	public String getNgayTao() {
 		return ngayTao;
 	}
-	public void setNgayTao(Date ngayTao) {
+	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
 	}
 }

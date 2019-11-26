@@ -14,7 +14,7 @@ public class RoleEntity {
 	private String tenRole;
 	private String gioiThieu;
 	private boolean trangThai;
-	private Date ngayTao;
+	private String ngayTao;
 	
 	@Id
 	@Column(name = "MaRole")
@@ -46,10 +46,10 @@ public class RoleEntity {
 		this.trangThai = trangThai;
 	}
 	@Column(name = "NgayTao")
-	public Date getNgayTao() {
+	public String getNgayTao() {
 		return ngayTao;
 	}
-	public void setNgayTao(Date ngayTao) {
+	public void setNgayTao(String ngayTao) {
 		this.ngayTao = ngayTao;
 	}
 	

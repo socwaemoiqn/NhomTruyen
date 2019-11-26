@@ -95,10 +95,10 @@
 										<td>${us.maRole}</td>
 										<td>${us.tenRole}</td>
 										<td class="center">
-										<c:if test="${us.trangThai == '1'}">
+										<c:if test="${us.trangThai == true}">
 											Enable
 										</c:if>
-										<c:if test="${us.trangThai == '0'}">
+										<c:if test="${us.trangThai == false}">
 											Disable
 										</c:if>
 										</td>
@@ -109,7 +109,7 @@
 											title="Chỉnh sửa vai trò"> <i class="fa  fa-edit"></i>
 										</a>
 										
-										<a id="${us.maRole }"class="btn btn-danger btn-circle btn-xoa" title="Xóa vai tròc"
+										<a id="${us.maRole }"class="btn btn-danger btn-circle btn-xoa" title="Xóa vai trò"
 										><i
 												class="fa fa-close"></i></a>
 										</form> 
@@ -160,11 +160,11 @@
 									method="post">
 									<div class="form-group">
 										<label>Tên vai trò:</label> <input class="form-control"
-											name="tenTacGia" placeholder="Nhập tên quyền người dùng">
+											name="tenRole" placeholder="Nhập tên vai trò">
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về quyền người dùng">
+											name="gioiThieu" placeholder="Nhập giới thiệu về vai trò">
 									</div>
 									<button type="submit" class="btn btn-primary">Thêm vai trò
 									</button>
@@ -200,7 +200,7 @@
 									</div>
 									<div class="form-group">
 										<label>Tên vai trò: </label> <input class="form-control"
-											name="tenrole" id="tenRole"
+											name="tenRole" id="tenRole"
 											placeholder="Nhập tên quyền người dùng">
 									</div>
 									<div class="form-group">
@@ -254,9 +254,9 @@
 																$("#sua #id")
 																		.val(id);
 																$(
-																		"#sua #tenTacGia")
+																		"#sua #tenRole")
 																		.val(
-																				data.tenTacGia);
+																				data.tenRole);
 																$(
 																		"#sua #gioiThieu")
 																		.val(

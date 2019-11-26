@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
 --
 -- Host: localhost    Database: dbnhomtruyen
 -- ------------------------------------------------------
--- Server version	8.0.17
+-- Server version	8.0.18
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -176,10 +176,10 @@ DROP TABLE IF EXISTS `tbphanhoi`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tbphanhoi` (
   `MaPhanHoi` int(11) NOT NULL AUTO_INCREMENT,
-  `ThoiGian` date NOT NULL,
-  `MaTruyen` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `NoiDung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `TrangThai` int(11) DEFAULT NULL,
+  `ChuDe` char(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Name` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `NgayTao` datetime NOT NULL,
   PRIMARY KEY (`MaPhanHoi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -207,7 +207,7 @@ CREATE TABLE `tbrole` (
   `TrangThai` tinyint(4) DEFAULT '1',
   `NgayTao` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`MaRole`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -216,7 +216,7 @@ CREATE TABLE `tbrole` (
 
 LOCK TABLES `tbrole` WRITE;
 /*!40000 ALTER TABLE `tbrole` DISABLE KEYS */;
-INSERT INTO `tbrole` VALUES (1,'Admin',NULL,1,'2019-11-17 23:05:08'),(2,'User',NULL,1,'2019-11-17 23:05:14'),(3,'Translator',NULL,1,'2019-11-17 23:05:19');
+INSERT INTO `tbrole` VALUES (1,'Admin','',0,'2019-11-17 23:05:08'),(2,'User','',0,'2019-11-17 23:05:14'),(3,'Translator',NULL,0,'2019-11-17 23:05:19');
 /*!40000 ALTER TABLE `tbrole` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -243,7 +243,6 @@ CREATE TABLE `tbtacgia` (
 
 LOCK TABLES `tbtacgia` WRITE;
 /*!40000 ALTER TABLE `tbtacgia` DISABLE KEYS */;
-INSERT INTO `tbtacgia` VALUES (4,'admin','',1,'2019-11-17');
 /*!40000 ALTER TABLE `tbtacgia` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,7 +262,7 @@ CREATE TABLE `tbtaikhoan` (
   `TrangThai` tinyint(4) DEFAULT '1',
   `NgayTao` date NOT NULL,
   PRIMARY KEY (`MaTaiKhoan`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -272,7 +271,7 @@ CREATE TABLE `tbtaikhoan` (
 
 LOCK TABLES `tbtaikhoan` WRITE;
 /*!40000 ALTER TABLE `tbtaikhoan` DISABLE KEYS */;
-INSERT INTO `tbtaikhoan` VALUES (5,'admin123','thanhdat',1,'Chưa có',1,'2019-11-17'),(6,'admin123','123456',2,'Chưa có',1,'2019-11-17');
+INSERT INTO `tbtaikhoan` VALUES (5,'admin123','thanhdat',1,'vovanviettqt2016@gmail.com',1,'2019-11-17');
 /*!40000 ALTER TABLE `tbtaikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,10 +386,6 @@ LOCK TABLES `tbtruyencuanhomdich` WRITE;
 /*!40000 ALTER TABLE `tbtruyencuanhomdich` DISABLE KEYS */;
 /*!40000 ALTER TABLE `tbtruyencuanhomdich` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'dbnhomtruyen'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -401,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-20 23:47:15
+-- Dump completed on 2019-11-26 10:52:16

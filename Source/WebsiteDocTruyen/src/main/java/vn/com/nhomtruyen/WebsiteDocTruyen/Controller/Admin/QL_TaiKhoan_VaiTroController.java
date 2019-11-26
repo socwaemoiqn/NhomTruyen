@@ -21,17 +21,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
 
 @Controller
 @RequestMapping(value = "/quan-tri/tai-khoan/vai-tro")
-public class QL_TaiKhoan_VaiTro {
+public class QL_TaiKhoan_VaiTroController {
 	@Autowired
-	private TacGiaDAO tacGiaDAO;
-	public PaginationResult<TacGiaInfo> getData(String pageStr)
+	private RoleDAO roleDAO;
+	public PaginationResult<RoleInfo> getData(String pageStr)
 	{
 		int page = 1;
 		try {
@@ -41,35 +40,22 @@ public class QL_TaiKhoan_VaiTro {
 		}
 		final int Max_Result = 10;
 		final int Max_Navigation = 10;
-		PaginationResult<TacGiaInfo> list = tacGiaDAO.paginationListTacGia(page, Max_Result, Max_Navigation);
+		PaginationResult<RoleInfo> list = roleDAO.paginationListRole(page, Max_Result, Max_Navigation);
 		return list;
-	}
-	public Map<Integer, Integer> getDataSL(PaginationResult<TacGiaInfo> list){
-		Map<Integer, Integer> listSL = new HashMap<Integer, Integer>();
-		for(TacGiaInfo tg : list.getList()) {
-			int maTacGia = tg.getID();
-			int soluong = tacGiaDAO.getSoLuongTruyenById(maTacGia);
-			listSL.put(maTacGia,soluong);
-		}
-		return listSL;
 	}
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String quyenNguoDungPage(Model model, @RequestParam(value="page",defaultValue = "1")String pageStr) {
-		/*
-		 * PaginationResult<TacGiaInfo> list = getData(pageStr);
-		 * model.addAttribute("listTacGia",list); Map<Integer, Integer> listSL =
-		 * getDataSL(list); model.addAttribute("listSL",listSL); return
-		 * "admin/ql_tacgia";
-		 */
+		PaginationResult<RoleInfo> list = getData(pageStr);
+		model.addAttribute("listRole",list);
 		return "admin/ql_taikhoan_vaitro";
 	}
 	@RequestMapping(value = "/ajax",method = RequestMethod.POST)
 	public @ResponseBody String getTacGiaById(HttpServletRequest request) throws JsonProcessingException
 	{
 		int id = Integer.parseInt(request.getParameter("id"));
-		TacGiaInfo tg = tacGiaDAO.getTacGiaById(id);
+		RoleInfo role = roleDAO.getRoleById(id);
 		 ObjectMapper mapper = new ObjectMapper();
-		 String json = mapper.writeValueAsString(tg);
+		 String json = mapper.writeValueAsString(role);
 		return json;
 	}
 	@RequestMapping(value = "/search",method = RequestMethod.GET)
@@ -86,43 +72,35 @@ public class QL_TaiKhoan_VaiTro {
 			}
 			final int Max_Result = 100;
 			final int Max_Navigation = 10;
-			PaginationResult<TacGiaInfo> listTacGia = tacGiaDAO.getTacGiaByTen(page, Max_Result, Max_Navigation,key);
-			request.setAttribute("listTacGia",listTacGia);
-			Map<Integer, Integer> listSL = new HashMap<Integer, Integer>();
-			for(TacGiaInfo tg : listTacGia.getList()) {
-				int maTacGia = tg.getID();
-				int soluong = tacGiaDAO.getSoLuongTruyenById(maTacGia);
-				listSL.put(maTacGia,soluong);
-			}
-			request.setAttribute("listSL",listSL);
+			PaginationResult<RoleInfo> listRole = roleDAO.getRoleByTen(page, Max_Result, Max_Navigation,key);
+			request.setAttribute("listRole",listRole);
 			Map<String,String> mess = new HashMap<String, String>();
 			mess.put("status", "Tìm kiếm thành công!");
-			mess.put("name","Tìm được: "+listTacGia.getList().size()+" kết quả!");
+			mess.put("name","Tìm được: "+listRole.getList().size()+" kết quả!");
 			session.setAttribute("mess", mess);
-			return "admin/ql_tacgia";
+			return "admin/ql_taikhoan_vaitro";
 		}
-		return "redirect:/quan-tri/ql-tacgia";
+		return "redirect:/quan-tri/tai-khoan/vai-tro";
 	}
 	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public String insert(HttpServletRequest request,HttpSession session)
 	{
-		String tenTacGia = request.getParameter("tenTacGia");
-		String gioiThieu = request.getParameter("gioiThieu");
+		String tenRole = request.getParameter("tenRole");
 		Map<String,String> mess = new HashMap<String, String>();
-		if(tenTacGia.length() > 0 && tenTacGia.length() <= 50)
+		if(tenRole.length() > 0 && tenRole.length() <= 50)
 		{
-			TacGiaInfo tacgiainfo = new TacGiaInfo();
-			tacgiainfo.setGioiThieu(gioiThieu);
-			tacgiainfo.setTenTacGia(tenTacGia);
-			TacGiaEntity tacgia = tacGiaDAO.insert(tacgiainfo);
+			RoleInfo role = new RoleInfo();
+			role.setTenRole(tenRole);
+			role.setGioiThieu(request.getParameter("gioiThieu"));
+			roleDAO.insert(role);
 		
-			mess.put("status", "Thêm tác giả thành công!");
-			mess.put("name","Tác giả vừa được thêm: "+tenTacGia);
+			mess.put("status", "Thêm vai trò thành công!");
+			mess.put("name","Tác giả vừa được thêm: "+tenRole);
 			
 		}
 		else
-		{	mess.put("status", "Thêm tác giả không thành công!");
-			mess.put("name","Độ dài tên tác giả 50 ký tự và không để trống");
+		{	mess.put("status", "Thêm vai trò không thành công!");
+			mess.put("name","Độ dài tên vai trò ít hơn 50 ký tự và không để trống");
 			
 		}
 		session.setAttribute("mess", mess);
@@ -133,21 +111,21 @@ public class QL_TaiKhoan_VaiTro {
 	public String edit(HttpServletRequest request,HttpSession session)
 	{
 		Map<String,String> mess = new HashMap<String, String>();
-		String tenTacGia = request.getParameter("tenTacGia");
-		if(tenTacGia.length() > 0 && tenTacGia.length() <= 50)
+		String tenRole= request.getParameter("tenRole");
+		if(tenRole.length() > 0 && tenRole.length() <= 50)
 		{
-			TacGiaInfo tacgiainfo = new TacGiaInfo();
-			tacgiainfo.setID(Integer.parseInt(request.getParameter("id")));
-			tacgiainfo.setTenTacGia(tenTacGia);
-			tacgiainfo.setGioiThieu(request.getParameter("gioiThieu"));
-			tacgiainfo.setTrangThai( request.getParameter("trangThai"));	
-			tacGiaDAO.edit(tacgiainfo);
-			mess.put("status", "Sửa tác giả thành công!");
-			mess.put("name","Tác giả vừa được sửa: "+tenTacGia);
+			RoleInfo role = new RoleInfo();
+			role.setMaRole(Integer.parseInt(request.getParameter("id")));
+			role.setTenRole(tenRole);
+			role.setGioiThieu(request.getParameter("gioiThieu"));
+			role.setTrangThai(Boolean.parseBoolean(request.getParameter("trangThai")));	
+			roleDAO.edit(role);
+			mess.put("status", "Sửa vai trò thành công!");
+			mess.put("name","Vai trò vừa được sửa: "+tenRole);
 		}
 		else {
-			mess.put("status", "Thêm tác giả không thành công!");
-			mess.put("name","Độ dài tên tác giả 50 ký tự và không để trống");
+			mess.put("status", "Thêm vai trò không thành công!");
+			mess.put("name","Độ dài tên vai trò 50 ký tự và không để trống");
 		}
 		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
@@ -156,12 +134,12 @@ public class QL_TaiKhoan_VaiTro {
 	@RequestMapping(value="/xoa/{id}",method = RequestMethod.POST)
 	public String xoa(HttpServletRequest request, HttpSession session,@PathVariable(value="id")String id)
 	{
-		int maTacGia = Integer.parseInt(id);
-		TacGiaInfo tacGiaInfo = tacGiaDAO.getTacGiaById(maTacGia);
-		tacGiaDAO.xoa(maTacGia);
+		int maRole = Integer.parseInt(id);
+		RoleInfo role = roleDAO.getRoleById(maRole);
+		roleDAO.xoa(maRole);
 		Map<String,String> mess = new HashMap<String, String>();
-		mess.put("status", "Xóa tác giả thành công!");
-		mess.put("name","Tác giả vừa được xóa: "+tacGiaInfo.getTenTacGia());
+		mess.put("status", "Xóa vai trò thành công!");
+		mess.put("name","Vai trò vừa được xóa: "+role.getTenRole());
 		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
@@ -173,31 +151,31 @@ public class QL_TaiKhoan_VaiTro {
 		ObjectMapper mapper = new ObjectMapper();	
 		String[] array_id = mapper.readValue(json, String[].class);
 		Map<String,String> mess = new HashMap<String, String>();
-		TacGiaInfo tacGiaInfo = new TacGiaInfo();
+		RoleInfo role = new RoleInfo();
 		switch (action) {
 		case "enable":
 			for (String id : array_id) {
-				tacGiaInfo.setID(Integer.parseInt(id));
-				tacGiaInfo.setTrangThai("1");
-				tacGiaDAO.updateTrangThai(tacGiaInfo);
+				role.setMaRole(Integer.parseInt(id));
+				role.setTrangThai(true);
+				roleDAO.updateTrangThai(role);
 				mess.put("status", "Kích hoạt thành công!");
-				mess.put("name","Kích hoạt: "+array_id.length+" tác giả");
+				mess.put("name","Kích hoạt: "+array_id.length+" vai trò");
 			}
 			break;
 		case "disable":			
 			for (String id : array_id) {
-				tacGiaInfo.setID(Integer.parseInt(id));
-				tacGiaInfo.setTrangThai("0");
-				tacGiaDAO.updateTrangThai(tacGiaInfo);
+				role.setMaRole(Integer.parseInt(id));
+				role.setTrangThai(false);
+				roleDAO.updateTrangThai(role);
 				mess.put("status", "Vô hiệu hóa thành công!");
-				mess.put("name","Vô hiệu: "+array_id.length+" tác giả");
+				mess.put("name","Vô hiệu: "+array_id.length+" vai trò");
 			}
 			break;
 		case "delete":
 			for (String id : array_id) {
-				tacGiaDAO.xoa(Integer.parseInt(id));
+				roleDAO.xoa(Integer.parseInt(id));
 				mess.put("status", "Xóa thành công!");
-				mess.put("name","Vừa xóa: "+array_id.length+" tác giả");
+				mess.put("name","Vừa xóa: "+array_id.length+" vai trò");
 			}
 			break;
 		default:
