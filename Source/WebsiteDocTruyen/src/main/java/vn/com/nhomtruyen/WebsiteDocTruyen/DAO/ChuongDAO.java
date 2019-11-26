@@ -12,8 +12,8 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 @Transactional
 public interface ChuongDAO {
 	public PaginationResult<ChuongInfo> listChuongOfTruyen(String idTruyen,int page, int maxResult, int maxNavigationPage);
-	public List<ChuongInfo> listChuongOfTruyen(String maTruyen);
-	public List<ChuongInfo> listChuongByIdTruyen(String matruyen);
+	public List<ChuongInfo> listChuongOfTruyenSortDESC(String maTruyen);
+	public List<ChuongInfo> listChuongOfTruyenSortASC(String matruyen);
 	public Map<String, String> listPathVariableString(String maTruyen);
 	public ChuongEntity findChuongEntity(String idChuong);
 	

@@ -14,8 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChiTietTheLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.NhomDichEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TheLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
@@ -32,51 +34,99 @@ public class TruyenImpl implements TruyenDAO {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
 				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
-				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "+ NhomDichEntity.class.getName() + " nd "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
 		Query query = session.createQuery(sql);
 		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
+	@Override
+	public PaginationResult<SelectTruyenInfo> getTruyenByTen(String tenTruyen, int page, int maxResult,
+			int maxNavigationPage) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen like: ten ";
+		Query query = session.createQuery(sql);
+		query.setParameter("ten", "%" + tenTruyen + "%");
+		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
+	}
+
+	@Override
+	public List<SelectTruyenInfo> searchTruyen(String tenTruyen) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen like: ten ";
+		Query query = session.createQuery(sql);
+		query.setParameter("ten", "%" + tenTruyen + "%");
+		return query.list();
+	}
 
 	@Override
 	public List<SelectTruyenInfo> listTruyen() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
 				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
-				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "+ NhomDichEntity.class.getName() + " nd "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
+
 	@Override
 	public Map<String, String> listPathVariableString() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
 				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
-				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "+ NhomDichEntity.class.getName() + " nd "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
 		Query query = session.createQuery(sql);
-		List<SelectTruyenInfo> truyen= query.list();
-		Map<String, String> url= new HashMap<String, String>();
-		for(SelectTruyenInfo tr: truyen) {
-			url.put(Helper.pathVariableString(tr.getTenTruyen()),tr.getID());
+		List<SelectTruyenInfo> truyen = query.list();
+		Map<String, String> url = new HashMap<String, String>();
+		for (SelectTruyenInfo tr : truyen) {
+			url.put(Helper.pathVariableString(tr.getTenTruyen()), tr.getID());
 		}
-		
+
 		return url;
 	}
+
 	@Override
 	public SelectTruyenInfo selectTruyenByMa(String maTruyen) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
 				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
-				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "+ NhomDichEntity.class.getName() + " nd "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.ID=: id ";
 		Query query = session.createQuery(sql);
 		query.setParameter("id", maTruyen);
 		return (SelectTruyenInfo) query.uniqueResult();
 	}
 
+	@Override
+	public boolean selectTruyenByTen(String tenTruyen) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen =: ten ";
+		Query query = session.createQuery(sql);
+		query.setParameter("ten", tenTruyen);
+
+		if (query.list().size() >= 1) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public int sumSoLuongTruyenOfTacGia(int maTacGia) {
@@ -120,23 +170,25 @@ public class TruyenImpl implements TruyenDAO {
 		session.persist(truyen);
 
 	}
+
 	@Override
 	public void capNhatTruyen(TruyenInfo truyenInfo) {
-		TruyenEntity truyen= findTruyenEntity(truyenInfo.getID());
+		TruyenEntity truyen = findTruyenEntity(truyenInfo.getID());
 		truyen.setTenTruyen(truyenInfo.getTenTruyen());
 		truyen.setHinhAnh(truyenInfo.getHinhAnh());
 		truyen.setNguon(truyenInfo.getNguon());
 		truyen.setGioiThieu(truyenInfo.getGioiThieu());
-		
-		if(truyen!=null) {
+
+		if (truyen != null) {
 			this.sessionFactory.getCurrentSession().update(truyen);
 		}
-		
+
 	}
+
 	@Override
 	public void capNhatTrangThaiTruyen(String maTruyen, String trangThai, boolean value) {
 		Session session = this.sessionFactory.getCurrentSession();
-		String sql = " update " + TruyenEntity.class.getName() + " tr set tr."+ trangThai +" =: tt where tr.ID =: id";
+		String sql = " update " + TruyenEntity.class.getName() + " tr set tr." + trangThai + " =: tt where tr.ID =: id";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", maTruyen);
@@ -144,6 +196,7 @@ public class TruyenImpl implements TruyenDAO {
 		query.executeUpdate();
 
 	}
+
 	@Override
 	public void capNhatSoLuongChuong(String maTruyen, int soChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -163,120 +216,44 @@ public class TruyenImpl implements TruyenDAO {
 		}
 	}
 
+	// select danh cho trang index
+	@Override
+	public List<SelectTruyenInfo> selectAllTruyenByDanhMuc(String danhMuc) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr." + danhMuc + " = 1 ";
+		Query query = session.createQuery(sql);
+		return query.list();
+	}
 
-	
+	@Override
+	public List<SelectTruyenInfo> selectAllTheLoaiTruyen(String tenTheLoai) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd, " + ChiTietTheLoaiTruyenEntity.class.getName() + " cttl, "
+				+ TheLoaiTruyenEntity.class.getName() + " tl "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and cttl.maTruyen=tr.ID and cttl.maTheLoai= tl.id and tl.tenTheLoai = '"
+				+ tenTheLoai+"' ";
+		Query query = session.createQuery(sql);
+		return query.list();
+	}
 
-
-
-
-
-	
-
-//	@Override
-//	public PaginationResult<truyenSelectInfo> litTruyen(int page, int maxResult, int maxNavigationPage) {
-//		Session session = sessionFactory.getCurrentSession();
-//		String sql = " Select new " + truyenSelectInfo.class.getName()
-//				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tl.tenTheLoai, tr.soChuong, tr.luotXem, tr.trangThai) "
-//				+ " from " + truyenEntity.class.getName() + " tr ," + tacGiaEntity.class.getName() + " tg ,"
-//				+ theLoaiTruyenEntity.class.getName() + " tl "
-//				+ " where tr.idTacGia = tg.ID and tr.IDTheLoai=tl.id ORDER BY tr.id";
-//		Query query = session.createQuery(sql);
-//		return new PaginationResult<truyenSelectInfo>(query, page, maxResult, maxNavigationPage);
-//	}
-
-//	@Override
-//	public PaginationResult<TruyenSelectInfo> litsTruyen(int page, int maxResult, int maxNavigationPage) {
-//		Session session = sessionFactory.getCurrentSession();
-//		String sql = " Select new " + TruyenSelectInfo.class.getName()
-//				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai,tr.ngayTao) "
-//				+ " from " + TruyenEntity.class.getName() + " tr ," + TacGiaEntity.class.getName() + " tg"
-//				+ " where tr.maTacGia = tg.ID GROUP BY tr.id";
-//		Query query = session.createQuery(sql);
-//		return new PaginationResult<TruyenSelectInfo>(query, page, maxResult, maxNavigationPage);
-//	}
-//
-//	@Override
-//	public SelectTruyenInfo SelectTruyenByMa(String maTruyen) {
-//		Session session = sessionFactory.getCurrentSession();
-//		String sql = " Select new " +SelectTruyenInfo.class.getName()
-//				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong,tr.gioiThieu,nd.tenNhomDich, tr.luotXem, tr.nguon,tr.hinhAnh, tr.trangThai, tr.ngayTao) "
-//				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
-//				+NhomDichEntity.class.getName() + " nd "
-//				+ " where tr.maTacGia = tg.ID and tr.maNhomDich= nd.maNhomDich and tr.ID =: mt ";
-//		Query query = session.createQuery(sql);
-//		query.setParameter("mt", maTruyen);
-//		return (SelectTruyenInfo) query.uniqueResult();
-//	}
-//
-//	@Override
-//	public List<TruyenSelectInfo> listTR() {
-//		Session session = sessionFactory.getCurrentSession();
-//		String sql = " Select new " + TruyenSelectInfo.class.getName()
-//				+ " (tr.hinhAnh, tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.luotXem, tr.trangThai, tr.ngayTao) "
-//				+ " from " + TruyenEntity.class.getName() + " tr ," + TacGiaEntity.class.getName() + " tg"
-//				+ " where tr.maTacGia = tg.ID GROUP BY tr.id ORDER BY tr.ngayTao DESC";
-//		Query query = session.createQuery(sql);
-//		return query.list();
-//	}
-//
-//	@Override
-//	public void InsertTruyen(TruyenInfo truyenInfo) {
-//
-//		TruyenEntity truyen = new TruyenEntity();
-//		truyen.setID(truyenInfo.getID());
-//		truyen.setTenTruyen(truyenInfo.getTenTruyen());
-//		truyen.setMaTacGia(truyenInfo.getMaTacGia());
-//		truyen.setMaNhomDich(truyenInfo.getMaNhomDich());
-//		truyen.setSoChuong(truyenInfo.getSoChuong());
-//		truyen.setGioiThieu(truyenInfo.getGioiThieu());
-//		truyen.setLuotXem(truyenInfo.getLuotXem());
-//		truyen.setNguon(truyenInfo.getNguon());
-//		truyen.setHinhAnh(truyenInfo.getHinhAnh());
-//		truyen.setTrangThai(truyenInfo.getTrangThai());
-//		truyen.setNgayTao(truyenInfo.getNgayTao());
-//
-//		Session session = this.sessionFactory.getCurrentSession();
-//		session.persist(truyen);
-//	}
-//
-//	@Override
-//	public int getSLTruyenofTacGia(int maTacGia) {
-//		Session session = sessionFactory.getCurrentSession();
-//		String sql = " ";
-//		Query query = session.createQuery(sql);
-//		query.setParameter("tacgia", maTacGia);
-//		return query.list().size();
-//	}
-//
-//	@Override
-//	public TruyenEntity findTruyenEntity(String maTruyen) {
-//		Session session = this.sessionFactory.getCurrentSession();
-//		Criteria crit= session.createCriteria(TruyenEntity.class);
-//		crit.add(Restrictions.eq("id", maTruyen));
-//		return (TruyenEntity) crit.uniqueResult();
-//	}
-//
-//	@Override
-//	public void deleteTruyen(String maTruyen) {
-//		TruyenEntity truyenEntity= this.findTruyenEntity(maTruyen);
-//		if(truyenEntity != null)
-//		{
-//			this.sessionFactory.getCurrentSession().delete(truyenEntity);
-//		}
-//				
-//		
-//	}
-//
-//	@Override
-//	public void upDataTrangThaiTr(String maTruyen, String trangThai) {
-//		Session session = this.sessionFactory.getCurrentSession();
-//		String sql = " update " + TruyenEntity.class.getName() + " tr set tr.trangThai=: tt where tr.ID =: id";
-//
-//		Query query = session.createQuery(sql);
-//		query.setParameter("id", maTruyen);
-//		query.setParameter("tt", trangThai);
-//
-//		query.executeUpdate();
-//	}
+	@Override
+	public List<SelectTruyenInfo> selectAllTruyenByTacGia(String tenTacGia) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tg.tenTacGia =: tenTacGia ";
+		Query query = session.createQuery(sql);
+		query.setParameter("tenTacGia", tenTacGia);
+		return query.list();
+	}
 
 }

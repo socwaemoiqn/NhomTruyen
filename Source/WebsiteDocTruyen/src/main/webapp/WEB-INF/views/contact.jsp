@@ -48,7 +48,7 @@
 					<i class="fas fa-envelope"></i> Thông tin liên hệ
 				</div>
 				<div class="content">
-					<span> Nhóm Truyện PHP <br> Email:
+					<span> Nhóm truyện PHP <br> Email:
 						contact@nhomtruyen.vn <br> Facebook: facebook.com/NhomTruyen
 					</span>
 				</div>

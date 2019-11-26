@@ -12,7 +12,7 @@
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">Thông tin Truyện : ${truyenById.tenTruyen }</h2>
+			<h2 class="page-header">Thông tin truyện : ${truyenById.tenTruyen }</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -134,6 +134,7 @@
 													<thead>
 														<tr>
 															<th>STT</th>
+															<th>Chương</th>
 															<th>Tên Chương</th>
 															<th>Trạng Thái</th>
 															<th></th>
@@ -144,6 +145,13 @@
 															begin="${25*(i-1)}" end="${(25*i)-1}" varStatus="status">
 															<tr class="odd gradeX">
 																<td scope="row">${status.index + 1}</td>
+																<td>
+																	<c:forEach items="${soChuong}" var="sc">
+																		<c:if test="${sc.key==us.id }">
+																			${sc.value }
+																		</c:if>
+																	</c:forEach>
+																</td>
 																<td>${us.tieuDe}</td>
 																<td class="center">dùng check</td>
 																<c:forEach items="${urlChuong}" var="ch">
@@ -200,10 +208,10 @@
 				<div class="panel panel-success">
 
 					<div class="panel-heading">
-						<h4>Chỉnh sửa thông tin Truyện</h4>
+						<h4>Chỉnh sửa thông tin truyện</h4>
 					</div>
 					<div class="panel-body">
-						<h4>Nhập lại thông tin về Truyện</h4>
+						<h4>Nhập lại thông tin về truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form:form modelAttribute="truyenEditForm"
@@ -211,9 +219,9 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/edit-truyen"
 									method="POST">
 									<div class="form-group">
-										<label>Nhập lại tên Truyện</label>
+										<label>Nhập lại tên truyện</label>
 										<form:input path="tenTruyen" class="form-control"
-											placeholder="Nhập lại tên Truyện" />
+											placeholder="Nhập lại tên truyện" />
 									</div>
 									<div class="form-group">
 										<label>Chọn hình ảnh mới</label>
@@ -247,7 +255,7 @@
 										</label><br>
 										<label>Nhập lại nguồn mới</label>
 										<form:input path="nguon" class="form-control"
-											placeholder="Nhập nguồn của Truyện" />
+											placeholder="Nhập nguồn của truyện" />
 
 									</div>
 									<div class="form-group">

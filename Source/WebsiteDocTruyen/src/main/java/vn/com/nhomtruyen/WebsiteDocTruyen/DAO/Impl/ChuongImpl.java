@@ -28,7 +28,7 @@ public class ChuongImpl implements ChuongDAO{
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao ASC";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", idTruyen);
@@ -36,14 +36,26 @@ public class ChuongImpl implements ChuongDAO{
 	}
 
 	@Override
-	public List<ChuongInfo> listChuongOfTruyen(String maTruyen) {
+	public List<ChuongInfo> listChuongOfTruyenSortDESC(String maTruyen) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao DESC ";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", maTruyen);
+		return query.list();
+	}
+	
+	@Override
+	public List<ChuongInfo> listChuongOfTruyenSortASC(String matruyen) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = " Select new " + ChuongInfo.class.getName()
+				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id  ORDER BY ch.ngayTao ASC ";
+
+		Query query = session.createQuery(sql);
+		query.setParameter("id", matruyen);
 		return query.list();
 	}
 	@Override
@@ -90,17 +102,7 @@ public class ChuongImpl implements ChuongDAO{
 			return false;
 	}
 
-	@Override
-	public List<ChuongInfo> listChuongByIdTruyen(String matruyen) {
-		Session session = this.sessionFactory.getCurrentSession();
-		String sql = " Select new " + ChuongInfo.class.getName()
-				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id  ORDER BY ch.ngayTao DESC ";
-
-		Query query = session.createQuery(sql);
-		query.setParameter("id", matruyen);
-		return query.list();
-	}
+	
 
 	@Override
 	public void insertChuong(ChuongInfo chuongInfo) {

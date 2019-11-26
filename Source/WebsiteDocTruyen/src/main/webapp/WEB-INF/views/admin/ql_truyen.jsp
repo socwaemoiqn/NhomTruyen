@@ -22,7 +22,7 @@
 					<c:if test="${not empty sessionScope.name_truyen}">
 						<div class="alert alert-success alert-dismissible">
 	                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-	                       <h4> Đã xóa Truyện:</h4>
+	                       <h4> Đã xóa truyện:</h4>
 	                        <c:forEach var="ten" items="${sessionScope.name_truyen}">
 	                        	<h4> ${ten }</h4>  <br>
 	                        </c:forEach>
@@ -32,8 +32,28 @@
                     	<div class="alert alert-info alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                                 <c:forEach var="tr" items="${sessionScope.name_truyen_add}">
-                                	 Đã thêm Truyện:
+                                	 Đã thêm truyện:
                                 	  <a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/xem-truyen?idtruyen=${tr.key}" class="alert-link">${tr.value}</a>.
+                                </c:forEach>
+                               
+                           </div>
+					</c:if>
+					<c:if test="${not empty sessionScope.tenTacGia}">
+                    	<div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <c:forEach var="tr" items="${sessionScope.tenTacGia}">
+                                	 Đã thêm tác giả:
+                                	  <a href="" class="alert-link">${sessionScope.tenTacGia}</a>.
+                                </c:forEach>
+                               
+                           </div>
+					</c:if>
+					<c:if test="${not empty sessionScope.tuKhoa}">
+                    	<div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                <c:forEach var="tr" items="${sessionScope.tuKhoa}">
+                                	 Kết quả tìm kiếm cho từ khóa
+                                	  <a href="" class="alert-link">${sessionScope.tuKhoa}</a>.
                                 </c:forEach>
                                
                            </div>
@@ -42,6 +62,8 @@
 					<%
 					        request.getSession().removeAttribute("name_truyen");
 							request.getSession().removeAttribute("name_truyen_add");
+							request.getSession().removeAttribute("tenTacGia");
+							request.getSession().removeAttribute("tuKhoa");
 					%>
 					
 				</div>
@@ -59,17 +81,20 @@
 										</a>
 									</td>
 									<td>
-										<form action="">
-											<input class="form-control" type="text" placeholder="Nhập nội dung tìm kiếm">
-									</td>
-									<td>
-										<input class="btn btn-primary" type="submit" value="Tìm kiếm">
+										<form action="${pageContext.request.contextPath}/quan-tri/ql-truyen/tim-kiem/">
+										<div style="float:left">	
+											<input class="form-control" type="text" name="tu-khoa" placeholder="Nhập nội dung tìm kiếm">
+										</div>
+										<div style=" margin-left: 5%;float:left" >
+											<input class="btn btn-primary" type="submit" value="Tìm kiếm" >
+										</div>
+										
 										</form>
 									</td>
 
 
-									<td><a href="" class="btn btn-primary" data-toggle="modal"
-										data-target="#insert">Thêm Mới</a></td>
+									<td><a href="" id="themTruyen" class="btn btn-primary" data-toggle="modal"
+										data-target="#themtruyen">Thêm Mới</a></td>
 									<td>
 										<button type="submit" class="btn btn-primary" id="select_all">Chọn
 											tất cả</button> 
@@ -78,21 +103,22 @@
 									</td>
 									
                                      <td>
-                                         <button type="submit" class="btn btn-success" id="btn_update"">Cập nhật</button>
+                                         <button type="submit" class="btn btn-success" id="btn_update" disabled="disabled">Cập nhật</button>
                                             
-									 	<button type="submit" class="btn btn-danger" id="btn_delete">Delete</button>
+									 	<button type="submit" class="btn btn-danger" id="btn-delete" disabled="disabled"  data-toggle="modal"
+										data-target="#formXoaALlTruyen" >Delete</button>
 									</td>
 									
 									
 									<td><a href="" class="btn btn-danger disabled">Hiện có
-											: ${slt } Truyện</a></td>
+											: ${slt } truyện</a></td>
 
 								</tr>
 							</tbody>
 
 						</table>
 						<table class="table table-striped table-bordered table-hover"
-							id="dataTables-example">
+							id="dataTables-truyen">
 							<thead>
 								<tr>
 									<th>
@@ -194,8 +220,8 @@
 													class="btn btn-warning btn-circle" title="Xem trước"
 													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
 														<i class="fa fa-eye"></i>
-												</a> <a class="btn btn-danger btn-circle btn-delete" title="Xóa Truyện" data-toggle="modal"
-												data-target="#delete" id="${us.ID }">
+												</a> <a class="btn btn-danger btn-circle delete-truyen" title="Xóa truyện" data-toggle="modal"
+												data-target="#formXoaTruyen" id="${us.ID }">
 														<i class="fa fa-close"></i>
 												</a></td>
 											</c:if>
@@ -230,17 +256,19 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="insert" tabindex="-1" role="dialog">
+	<div class="modal fade" id="themtruyen" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="col-lg-12">
 				<div class="panel panel-primary">
 
 					<div class="panel-heading">
-						<h4>Thêm Truyện mới</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="fa fa-close fa-fw" style="color: red;"></i></button>
+						<h4 class="modal-title" >Thêm truyện mới</h4>
+						
 					</div>
 					<div class="panel-body">
-						<h4>Nhập thông tin về Truyện</h4>
+						<h4>Nhập thông tin về truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form:form modelAttribute="truyenAddForm"
@@ -248,9 +276,11 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/insert"
 									method="POST">
 									<div class="form-group">
-										<label>Tên Truyện</label>
+										<label>Tên truyện</label>
 										<form:input path="tenTruyen" class="form-control"
-											placeholder="Nhập tên Truyện" />
+											placeholder="Nhập tên truyện" id="tenTruyen"/>
+										<div id="mess-f" style="display: none;" > <i class="fa fa-close fa-fw" style="color: red;"></i> Tên truyện bị trùng, xin nhập tên truyện khác!</div>
+										<div id="mess-ss"style="display: none;" > <i class="fa  fa-check fa-fw" style="color: #4ae808; "></i> Tên truyện hợp lệ. </div>
 									</div>
 									<div class="form-group">
 										<label>Hình Ảnh Về Truyện</label>
@@ -262,16 +292,14 @@
 											<form:options items="${tacGia}" itemLabel="tenTacGia"
 												itemValue="ID" />
 										</form:select>
+										<br>
+										Nhấn
+                                        <button data-dismiss="modal" type="button" class="btn btn-outline btn-success btn-sm"
+                                        data-toggle="modal" data-target="#themtacgiamoi">
+                                        Thêm tác giả
+                                    	</button> 
+                                   		 để thêm một tác giả mới.                  
 									</div>
-									
-									<%-- <div class="form-group">
-										<label>Danh mục</label>
-										<form:select multiple="true" path="maDanhMuc"
-											class="form-control">
-											<form:options items="${danhMuc}" itemLabel="tenDanhMuc"
-												itemValue="id" />
-										</form:select>
-									</div> --%>
 									<div class="form-group">
 										<label>Thể Loại</label> (Nhấn Ctrl để chọn hơn một mục !)
 										<form:select multiple="true" path="maTheLoai"
@@ -279,25 +307,29 @@
 											<form:options items="${theLoai}" itemLabel="tenTheLoai"
 												itemValue="id" />
 										</form:select>
+										<form:errors path="maTheLoai"/>
 									</div>
 									<div class="form-group">
 										<label>Nguồn</label>
 										<form:input path="nguon" class="form-control"
-											placeholder="Nhập nguồn của Truyện" />
-
+											placeholder="Nhập nguồn của truyện" id="nguon"/>
+									<div id="mess-nguon"style="display: none;" > <i class="fa fa-close fa-fw" style="color: red; "></i> Nguồn không được bỏ trống. </div>
+										
 									</div>
 									<div class="form-group">
 										<label>Giới thiệu chung</label>
-										<form:textarea path="gioiThieu" class="form-control"
-											placeholder="Nhập giới thiệu về Truyện" />
-
+										<form:textarea path="gioiThieu" id="gioiThieu" class="form-control"
+											placeholder="Nhập giới thiệu về truyện"/>
+										<div id="mess-gioiThieu"style="display: none;" > <i class="fa  fa-close fa-fw" style="color: red; "></i> Giới thiệu không được bỏ trống. </div>
+											
 									</div>
-									<button type="submit" class="btn btn-primary">Thêm
+									<button type="submit" id="btn-them-truyen" class="btn btn-primary" >Thêm
 										Truyện Mới</button>
 								</form:form>
 							</div>
 						</div>
 					</div>
+					
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -305,14 +337,44 @@
 		</div>
 	</div>
 	
-	<div class="modal fade" id="delete" tabindex="-1" role="dialog">
+	<div class="modal fade" id="themtacgiamoi" tabindex="-1" role="dialog" >
+         <div class="modal-dialog" role="document">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                     <h4 class="modal-title" id="myModalLabel">Thêm mới tác giả</h4>
+                 </div>
+                 <div class="modal-body">
+                     <form
+						action="${pageContext.request.contextPath}/quan-tri/ql-truyen/them-tac-gia"
+						method="post">
+						<div class="form-group">
+							<label>Tên tác giả truyện</label> <input class="form-control"
+								name="tenTacGia" placeholder="Nhập tên tác giả truyện">
+						</div>
+						<div class="form-group">
+							<label>Giới thiệu</label> <input class="form-control"
+								name="gioiThieu" placeholder="Nhập giới thiệu về tác giả">
+						</div>
+						<button type="submit" class="btn btn-danger">Đồng ý</button>
+						<button type="button" class="btn btn-warning"
+							data-dismiss="modal">Hủy</button>
+					</form>
+                 </div>
+             </div>
+             <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+     </div>
+	
+	<div class="modal fade" id="formXoaTruyen" tabindex="-1" role="dialog" style="text-align: center;">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="col-lg-12">
 				<div class="panel panel-red">
 
 					<div class="panel-heading">
-						<h3>Xóa Truyện</h3>
+						<h3>Xóa truyện</h3>
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -321,14 +383,15 @@
 									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/delete"
 									method="post">
 									<div class="form-group">
-										<label>Bạn muốn xóa bỏ Truyện: </label>
+										<label>Bạn có chắc muốn xóa bỏ truyện: </label>
 										<h4 id="tenTruyen"></h4>
 									</div><!-- background: transparent; -->
 									<input type="text" name="idTruyen" id="idTruyen"
 									 style="width: 0px; height: 0px; border: none; background: transparent;" 
 									 />
 									<div class="form-group">
-										<label>Nhấn "Đồng ý" để xác nhận xóa Truyện!</label>
+										<label>Nhấn "Đồng ý" để xác nhận xóa truyện và tất cả các chương của truyện.<br>
+										 Bạn có chắc chắn đây là lựa chọn của bạn!</label>
 									</div>
 									<button type="submit" class="btn btn-danger">Đồng ý</button>
 									<button type="button" class="btn btn-warning"
@@ -345,11 +408,109 @@
 
 		</div>
 	</div>
+		
+	<div class="modal fade" id="formXoaALlTruyen" tabindex="-1" role="dialog" style="text-align: center;">
+		<div class="modal-dialog">
+			<!-- Modal content-->
+			<div class="col-lg-12">
+				<div class="panel panel-red">
+
+					<div class="panel-heading">
+						<h3>Xóa truyện</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								
+								<div class="form-group">
+									<label>Bạn có chắc muốn xóa bỏ các truyện đã chọn? </label>
+									<h4 id="tenTruyen"></h4>
+								</div>
+								<div class="form-group">
+									<label>Nhấn "Đồng ý" để xác nhận xóa tất cả các truyện đã chọn và tất cả các chương của truyện.<br>
+									 Bạn có chắc chắn đây là lựa chọn của bạn!</label>
+								</div>
+								<button type="submit" class="btn btn-danger"  id="btn-dongy-delete">Đồng ý</button>
+								<button type="button" class="btn btn-warning"
+									data-dismiss="modal">Hủy</button>
+							</div>
+
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<!-- //Modal content-->
+
+		</div>
+	</div>
 	
+	
+	<script type="text/javascript">	
+	
+		$(document).ready(function(){
+		  $("#themtruyen #tenTruyen").blur(function(){
+			  let ten = $(this).val();
+			  $.ajax({
+					url : "${pageContext.request.contextPath}/quan-tri/ql-truyen/kiem-tra-ten",
+					type: 'post',
+					dataType: 'text',
+					data: {
+						ten: ten
+					},
+					success: function(result){
+						
+						if(result=='false'){
+							
+							document.getElementById("mess-f").style.display = 'block'; 
+							document.getElementById("mess-ss").style.display = 'none'; 
+							document.getElementById("btn-them-truyen").disabled = true; 
+						}	
+						else{
+							document.getElementById("mess-f").style.display = 'none'; 
+							document.getElementById("mess-ss").style.display = 'block'; 
+							document.getElementById("btn-them-truyen").disabled = false;
+						}
+					}
+				});
+		  });
+		  
+		  $("#themtruyen #nguon").blur(function(){
+				let nguon = $(this).val();
+				if(nguon==""){
+					document.getElementById("mess-nguon").style.display = 'block'; 
+					document.getElementById("btn-them-truyen").disabled = true;
+				}
+				else{
+					document.getElementById("mess-nguon").style.display = 'none'; 
+					document.getElementById("btn-them-truyen").disabled = false;
+				}
+			});
+			$("#themtruyen #gioiThieu").blur(function(){
+				let nguon = $(this).val();
+				if(nguon==""){
+					document.getElementById("mess-gioiThieu").style.display = 'block'; 
+					document.getElementById("btn-them-truyen").disabled = true;
+				}
+				else{
+					document.getElementById("mess-gioiThieu").style.display = 'none'; 
+					document.getElementById("btn-them-truyen").disabled = false;
+				}
+			});
+		});
+		document.getElementById("themTruyen").onclick = function() {
+			document.getElementById("btn-them-truyen").disabled = true;
+		};
+	
+	</script>
+	
+
 	<script type="text/javascript">
 		// Chức năng chọn hết
 		var array_id = new Array();
 		document.getElementById("select_all").onclick = function() {
+			// hiện nút xóa
+			document.getElementById("btn-delete").disabled = false;
 			// Lấy danh sách checkbox
 			let checkboxes = document.getElementsByName('check[]');
 
@@ -368,6 +529,9 @@
 
 		// Chức năng bỏ chọn hết
 		document.getElementById("disable_select_all").onclick = function() {
+			//disabeld nút xóa
+			document.getElementById("btn-delete").disabled = true;
+			
 			// Lấy danh sách checkbox
 			var checkboxes = document.getElementsByName('check[]');
 
@@ -398,6 +562,7 @@
 		 var array_id_show_no_check= new Array();
 		 //
 		 $(document).ready(function(){
+			
 			 //lấy id của cột all
 			 $(document).on("click",'.all',function(){
 					let id = $(this).attr('id');
@@ -410,11 +575,12 @@
 							let index = array_id.indexOf(id);
 							array_id.splice(index,1);
 						}	
-				
-					console.log(array_id.length);
+					document.getElementById("btn-delete").disabled = false;
+					//console.log(array_id.length);
 				});
-			 // lấy id của cột Truyện full
+			 // lấy id của cột truyện full
 			 $(document).on("click",'.full',function(){
+				 document.getElementById("btn_update").disabled = false;
 					let id = $(this).attr('id');
 					
 					if(this.checked)
@@ -440,11 +606,12 @@
 							array_id_full.splice(index,1);
 							//alert("n"+index);
 						}
-					console.log("No full " +array_id_full_no_check.length);
-					console.log("+"+array_id_full.length);
+					//console.log("No full " +array_id_full_no_check.length);
+					//console.log("+"+array_id_full.length);
 				});
-			 // lấy id của cột Truyện hot
+			 // lấy id của cột truyện hot
 				$(document).on("click",'.hot',function(){
+					document.getElementById("btn_update").disabled = false;
 					let id = $(this).attr('id');
 					if($(this).is(":checked"))
 						{
@@ -467,13 +634,12 @@
 							}
 							array_id_hot.splice(index,1);
 						}	
-					console.log("no hot "+array_id_hot_no_check.length);
-					console.log("+ "+array_id_hot.length);
-					
-					
+					//console.log("no hot "+array_id_hot_no_check.length);
+					//console.log("+ "+array_id_hot.length);		
 				});
-			 //lấy id của cột Truyện new
+			 //lấy id của cột truyện new
 				$(document).on("click",'.new',function(){
+					document.getElementById("btn_update").disabled = false;
 					let id = $(this).attr('id');
 					if($(this).is(":checked"))
 						{
@@ -497,13 +663,14 @@
 							}
 							array_id_new.splice(index,1);
 						}
-					console.log("No new "+array_id_new_no_check.length);
-					console.log("+ "+array_id_new.length);
+					//console.log("No new "+array_id_new_no_check.length);
+					//console.log("+ "+array_id_new.length);
 				});
 				
 			}); 
-		 //lấy id của cột Truyện show
+		 //lấy id của cột truyện show
 			$(document).on("click",'.show',function(){
+				document.getElementById("btn_update").disabled = false;
 				let id = $(this).attr('id');
 				if($(this).is(":checked"))
 					{
@@ -527,8 +694,8 @@
 						}
 						array_id_show.splice(index,1);
 					}
-				console.log("No show "+array_id_show_no_check.length);
-				console.log("+ "+array_id_show.length);
+				//console.log("No show "+array_id_show_no_check.length);
+				//console.log("+ "+array_id_show.length);
 			});
 			
 		 // button cập nhật
@@ -567,7 +734,7 @@
 					});
 				};
 		// button xóa, theo lựa chọn
-			document.getElementById("btn_delete").onclick = function() {
+			document.getElementById("btn-dongy-delete").onclick = function() {
 				// Lấy danh sách checkbox
 				var json = JSON.stringify(array_id);
 				$.ajax({
@@ -585,22 +752,10 @@
 			};
 
 	</script>
-	
-	<script type="text/javascript">
-		/* 
-		document.getElementById("select_danhMuc").onchange = function() {
-			// Lấy danh sách checkbox
-			var vl=this.value;
-			console.log(vl);
-			
-		}; */
-			
-		
-	</script>
 	<script>	
 		$(document).ready(function() 
 		{
-			$(document).on('click','.btn-delete',function() {
+			$(document).on('click','.delete-truyen',function() {
 			let id = $(this).attr("id");
 			$.ajax(
 				{
@@ -611,8 +766,8 @@
 					success : function(data)
 					{
 						var tenTruyen = " "+ data.tenTruyen;
-						$("#delete #tenTruyen").html(tenTruyen);
-						$("#delete #idTruyen").val(data.id);
+						$("#formXoaTruyen #tenTruyen").html(tenTruyen);
+						$("#formXoaTruyen #idTruyen").val(data.id);
 						
 					},
 					error : function(error)

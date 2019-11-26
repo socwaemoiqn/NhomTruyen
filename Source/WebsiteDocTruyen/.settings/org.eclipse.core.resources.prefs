@@ -5,11 +5,9 @@ encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_T
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoanController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoan_VaiTroController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TruyenController.java=UTF-8
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/HomeController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/DAO/Impl/DanhMucTruyenImpl.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/PaginationResult.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_tacgia.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_ql_chuong.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_xemtruyen.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/info_truyen.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/search.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/xem_chuong.jsp=UTF-8

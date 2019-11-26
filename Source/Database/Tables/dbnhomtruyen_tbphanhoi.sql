@@ -24,10 +24,10 @@ DROP TABLE IF EXISTS `tbphanhoi`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tbphanhoi` (
   `MaPhanHoi` int(11) NOT NULL AUTO_INCREMENT,
-  `ThoiGian` date NOT NULL,
-  `MaTruyen` char(50) COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `NoiDung` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `TrangThai` int(11) DEFAULT NULL,
+  `ChuDe` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Name` char(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `NgayTao` datetime NOT NULL,
   PRIMARY KEY (`MaPhanHoi`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_vietnamese_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-14 22:02:18
+-- Dump completed on 2019-11-26 23:20:38

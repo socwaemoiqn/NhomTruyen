@@ -38,7 +38,6 @@ CREATE TABLE `tbdanhmuctruyen` (
 
 LOCK TABLES `tbdanhmuctruyen` WRITE;
 /*!40000 ALTER TABLE `tbdanhmuctruyen` DISABLE KEYS */;
-INSERT INTO `tbdanhmuctruyen` VALUES (1,'Truyện Hot','Danh sách những truyện đang hot, có nhiều người đọc và quan tâm nhất trong tháng này.',1,'2019-10-22'),(2,'Truyện Full','Danh sách những truyện đã hoàn thành, ra đủ chương.',1,'2019-10-17'),(4,'Truyện mới cập nhật','Danh sách truyện chữ được cập nhật (vừa ra mắt, thêm chương mới, sửa nội dung,..) gần đây.',1,'2019-10-17'),(5,'Truyện New','Danh sác truyện mới cập nhật trong ngày',1,'2019-10-27');
 /*!40000 ALTER TABLE `tbdanhmuctruyen` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-14 22:02:17
+-- Dump completed on 2019-11-26 23:20:37

@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `tbtheloaitruyen`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tbtheloaitruyen` (
   `MaTheLoai` int(11) NOT NULL AUTO_INCREMENT,
-  `TenTheLoai` varchar(100) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `GioiThieu` text COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `TenTheLoai` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `GioiThieu` text CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `TrangThai` int(11) DEFAULT NULL,
   `NgayTao` date DEFAULT NULL,
   PRIMARY KEY (`MaTheLoai`)
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-14 22:02:21
+-- Dump completed on 2019-11-26 23:20:40

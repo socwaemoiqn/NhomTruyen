@@ -24,9 +24,8 @@ DROP TABLE IF EXISTS `tbinfotaikhoan`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `tbinfotaikhoan` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `MaTaiKHoan` char(50) COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `MaTaiKHoan` int(11) NOT NULL,
   `HoVaTen` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Mail` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `SDT` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `NgayTao` date NOT NULL,
   PRIMARY KEY (`Id`)
@@ -39,7 +38,6 @@ CREATE TABLE `tbinfotaikhoan` (
 
 LOCK TABLES `tbinfotaikhoan` WRITE;
 /*!40000 ALTER TABLE `tbinfotaikhoan` DISABLE KEYS */;
-INSERT INTO `tbinfotaikhoan` VALUES (1,'TK9620191121621648996','jbsvbbsjhb','jbsvbbsjhb','','2019-11-02'),(2,'TK541201911216220409541','sdffds','sdffds','','2019-11-02'),(3,'TK124201911216227781124','hbdvshhjbvsdb','hbdvshhjbvsdb','','2019-11-02'),(4,'TK73201911216221621973','sbvhjbdsjh','sbvhjbdsjh','','2019-11-02');
 /*!40000 ALTER TABLE `tbinfotaikhoan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-14 22:02:18
+-- Dump completed on 2019-11-26 23:20:38

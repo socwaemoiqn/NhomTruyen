@@ -15,6 +15,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,6 +49,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
+
 
 @Controller(value = "QL_TruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql-truyen")
@@ -94,7 +97,7 @@ public class QL_TruyenController {
 		List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
 
 		Map<String, String> listUrl = truyenDao.listPathVariableString();
-
+		
 		TruyenAddForm truyen = new TruyenAddForm();
 
 		model.addAttribute("tenTheLoai", theLoaiTruyen);
@@ -106,14 +109,51 @@ public class QL_TruyenController {
 		return "admin/ql_truyen";
 	}
 
+	@RequestMapping(value = "tim-kiem/", method = RequestMethod.GET)
+	public String timKiemTruyen(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr,
+			@RequestParam("tu-khoa") String tuKhoa, HttpSession session) {
+		if (!tuKhoa.isEmpty()) {
+			int page = 1;
+			try {
+				page = Integer.parseInt(pageStr);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			final int Max_Result = 10;
+			final int Max_Navigation = 3;
+
+			PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.getTruyenByTen(tuKhoa, page, Max_Result,
+					Max_Navigation);
+			List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
+
+			Map<String, String> listUrl = truyenDao.listPathVariableString();
+
+			TruyenAddForm truyen = new TruyenAddForm();
+
+			model.addAttribute("tenTheLoai", theLoaiTruyen);
+			model.addAttribute("listTruyen", listTruyen);
+			model.addAttribute("url", listUrl);
+			model.addAttribute("truyenAddForm", truyen);
+			model.addAttribute("slt", listTruyen.getTotalRecords());
+			session.setAttribute("tuKhoa", tuKhoa);
+
+			return "admin/ql_truyen";
+		}
+		return "redirect:/quan-tri/ql-truyen";
+	}
+
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	private String themTruyenForm(HttpServletRequest request, Model model,
-			@ModelAttribute("truyenAddForm") TruyenAddForm truyenAddForm, HttpSession session) {
-
+			@ModelAttribute("truyenAddForm") @Validated TruyenAddForm truyenAddForm, BindingResult result,
+			HttpSession session) {
+		if (result.hasErrors()) {
+			return "redirect:/quan-tri/ql-truyen";
+		}
 		String maTruyen = Helper.CreateId("TR");
 
 		String tenTruyen = truyenAddForm.getTenTruyen();
 		int maTacGia = truyenAddForm.getMaTacGia();
+
 		int maNhomDich = 1;
 		int soChuong = 0;
 		String gioiThieu = truyenAddForm.getGioiThieu();
@@ -147,6 +187,22 @@ public class QL_TruyenController {
 		session.setAttribute("name_truyen_add", tr);
 
 		return "redirect:/quan-tri/ql-truyen";
+	}
+
+	@RequestMapping(value = "/them-tac-gia", method = RequestMethod.POST)
+	private String themTacGia(HttpServletRequest request, Model model, HttpSession session) {
+		String tenTacGia = request.getParameter("tenTacGia");
+		String gioiThieu = request.getParameter("gioiThieu");
+		if (tenTacGia.length() > 0 && tenTacGia.length() <= 50) {
+			TacGiaInfo tacgiainfo = new TacGiaInfo();
+			tacgiainfo.setGioiThieu(gioiThieu);
+			tacgiainfo.setTenTacGia(tenTacGia);
+			tacGiaDao.insert(tacgiainfo);
+
+			session.setAttribute("tenTacGia", tenTacGia);
+		}
+		String back = request.getHeader("Referer");
+		return "redirect:" + back;
 	}
 
 	private void themChitietTheLoai(String maTruyen, int[] matheLoai) {
@@ -220,6 +276,12 @@ public class QL_TruyenController {
 		for (String id : idTr) {
 			SelectTruyenInfo tr = truyenDao.selectTruyenByMa(id);
 			truyenDao.xoaTruyen(id);
+			// xóa toàn bộ chương của truyên
+			List<ChuongInfo> danhSachChuongCuaTruyen = chuongDao.listChuongOfTruyenSortDESC(tr.getID());
+			for (ChuongInfo chuong : danhSachChuongCuaTruyen) {
+				chuongDao.deleteChuong(chuong.getId());
+			}
+
 			tenTruyen.add(tr.getTenTruyen());
 		}
 		session.setAttribute("name_truyen", tenTruyen);
@@ -271,6 +333,20 @@ public class QL_TruyenController {
 		return "Update thành công";
 	}
 
+	@RequestMapping(value = "/kiem-tra-ten", method = RequestMethod.POST)
+	private @ResponseBody String kiemTraten(Model model, HttpServletRequest request, HttpSession session)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		String ten = request.getParameter("ten");
+		String ng = request.getParameter("nguon");
+		String gt = request.getParameter("gioithieu");
+		boolean truyen = truyenDao.selectTruyenByTen(ten);
+		if (truyen) {
+			return "false";
+		}
+		return ten;
+	}
+
 	public void upDateTrFull(String[] maTruyen, String trangThai, boolean value) {
 		if (maTruyen != null) {
 			for (String id : maTruyen) {
@@ -287,7 +363,7 @@ public class QL_TruyenController {
 		session.setAttribute("name_truyen", tr.getTenTruyen());
 
 		// xóa toàn bộ chương của truyên
-		List<ChuongInfo> danhSachChuongCuaTruyen = chuongDao.listChuongOfTruyen(tr.getID());
+		List<ChuongInfo> danhSachChuongCuaTruyen = chuongDao.listChuongOfTruyenSortDESC(tr.getID());
 		for (ChuongInfo chuong : danhSachChuongCuaTruyen) {
 			chuongDao.deleteChuong(chuong.getId());
 		}
@@ -300,7 +376,9 @@ public class QL_TruyenController {
 
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
 	private String xemTruyenPage(Model model, @PathVariable("tenTruyen") String tenTruyen) {
-
+		
+		TruyenAddForm truyen = new TruyenAddForm();
+		
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
 
@@ -308,10 +386,18 @@ public class QL_TruyenController {
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
 		List<ChiTietTheLoaiTruyenInfo> cttl = theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
 
-		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongByIdTruyen(maTruyen);
+		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
 		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
+		
+		List<ChuongInfo> listChuong= chuongDao.listChuongOfTruyenSortASC(maTruyen);
+		Map<String, String> soChuong=new HashMap<String, String>();
+		int i=1;
+		for (ChuongInfo ch : listChuong) {
+			
+			soChuong.put(ch.getId(), "Chương "+i);
+			i++;
+		}
 
-		TruyenAddForm truyen = new TruyenAddForm();
 
 		int slChuong = listChuongByTruyen.size();
 
@@ -322,12 +408,13 @@ public class QL_TruyenController {
 		model.addAttribute("slChuong", slChuong);
 		model.addAttribute("tenTruyen", tenTruyen);
 		model.addAttribute("urlChuong", urlChuong);
-
+		model.addAttribute("soChuong", soChuong);
+		
 		model.addAttribute("truyenEditForm", truyen);
 
 		return "admin/ql_truyen_xemtruyen";
 	}
-	
+
 	@RequestMapping(value = "/{tenTruyen}/edit-truyen", method = RequestMethod.POST)
 	private String editTruyen(HttpServletRequest request, @PathVariable("tenTruyen") String tenTruyen, Model model,
 			@ModelAttribute("truyenEditForm") TruyenAddForm truyenAddForm) {
@@ -335,7 +422,7 @@ public class QL_TruyenController {
 		String maTruyen = urlTruyen.get(tenTruyen);
 
 		String tenTruyenMoi = truyenAddForm.getTenTruyen();
-		String hinhAnhMoi="";
+		String hinhAnhMoi = "";
 		CommonsMultipartFile[] fileDatas = truyenAddForm.getHinhAnh();
 		for (CommonsMultipartFile fileData : fileDatas) {
 
@@ -343,16 +430,14 @@ public class QL_TruyenController {
 			hinhAnhMoi = fileData.getOriginalFilename();
 		}
 		int maTacGia = truyenAddForm.getMaTacGia();
-		//xem lai phan cap nhat ma the loai
+		// xem lai phan cap nhat ma the loai
 		int[] matheLoai = truyenAddForm.getMaTheLoai();
-		String nguonMoi=truyenAddForm.getNguon();
-		String gioiThieuMoi= truyenAddForm.getGioiThieu();
+		String nguonMoi = truyenAddForm.getNguon();
+		String gioiThieuMoi = truyenAddForm.getGioiThieu();
 		TruyenInfo truyenInfo = new TruyenInfo(maTruyen, tenTruyenMoi, maTacGia, nguonMoi, gioiThieuMoi, hinhAnhMoi);
 		truyenDao.capNhatTruyen(truyenInfo);
 		return "redirect:/quan-tri/ql-truyen/" + Helper.pathVariableString(tenTruyenMoi);
 	}
-
-	
 
 	@RequestMapping(value = "/{tenTruyen}/{tenChuong}", method = RequestMethod.GET)
 	public String xemChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
@@ -379,14 +464,15 @@ public class QL_TruyenController {
 		String noiDung = request.getParameter("noiDung");
 		int trangThai = 1;
 		String ngayTao = Helper.getCurrentDateAndTime();
-		// tạo 1 đối tượng
 		Map<String, String> url = truyenDao.listPathVariableString();
 		String maTruyen = url.get(tenTruyen);
+		
 		// cap nhat so luong chuong vao bang truyện
-
-		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyen(maTruyen).size() + 1);
-
+		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() + 1);
+		
+		// tạo 1 đối tượng
 		ChuongInfo newChuong = new ChuongInfo(idChuong, maTruyen, tieuDe, noiDung, trangThai, ngayTao);
+		
 		// insert vào csdl
 		chuongDao.insertChuong(newChuong);
 		session.setAttribute("themChuong", tieuDe);
@@ -429,7 +515,7 @@ public class QL_TruyenController {
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
 		// cập nhật số lượng truyện khi xóa chương
-		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyen(maTruyen).size() - 1);
+		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() - 1);
 		// xóa chương trong csdl
 		chuongDao.deleteChuong(idChuong);
 

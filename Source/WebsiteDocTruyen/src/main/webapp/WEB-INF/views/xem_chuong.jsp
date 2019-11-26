@@ -6,56 +6,121 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>${tenTR}-${tieuDe}</title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/css/read.css">
-
+<style>
+		a:link {
+		  text-decoration: none;
+		}
+		a.disabled {
+		  pointer-events: none;
+		  cursor: default;
+		}
+		
+	</style>
 
 </head>
 <body>
 	<div class="main">
 		<div id="path">
 			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
-				class="path-truyen">Phàm nhân tu tiên</span> / <span
-				class="path-chuong">Chương 1</span>
+				class="path-truyen">${tenTR}</span> / <span
+				class="path-chuong">${tieuDe}</span>
 		</div>
 		<div class="row">
 			<div class="col-10" id="chuong" style="position: relative;">
 				<span id="btnHideMenuPath"><i class="fas fa-chevron-up"></i></span>
 				<div class="title" id="title-chuong">
-					PHÀM NHÂN TU TIÊN <br> Chương 1:${tieuDe } <br> <i
-						class="fas fa-bezier-curve"></i><br> <span
-						class="chuong-redirect" id="redirect-pre"><i
-						class="fas fa-chevron-left"></i> Chương trước</span> <select
-						class="chuong-list" name="" id="">
-						<option value="">Chương 1</option>
-						<option value="">Chương 2</option>
-						<option value="">Chương 3</option>
-						<option value="">Chương 4</option>
-					</select> <span class="chuong-redirect" id="redirect-next">Chương sau
-						<i class="fas fa-chevron-right"></i>
-					</span>
+					${tenTR}<br> 
+					Chương ${chuongHienTai }:${tieuDe } <br> 
+					<i	class="fas fa-bezier-curve"></i><br> 
+					<c:choose>
+						<c:when test="${chuongTruoc == 0}">
+							<a href="" class="disabled">
+								<span class="chuong-redirect" id="redirect-pre">
+									<i class="fas fa-chevron-left"></i> Chương trước
+								</span> 
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-${chuongTruoc}">
+								<span class="chuong-redirect" id="redirect-pre">
+									<i class="fas fa-chevron-left"></i> Chương trước
+								</span> 
+							</a>
+						</c:otherwise>
+					</c:choose>
+					
+					<select class="chuong-list" id="chuongLists"> 
+						<option value="">Chương ${chuongHienTai}</option>
+						<c:forEach items="${listChuong }" var="ch" varStatus="stt"> 
+							<option value="${stt.index+1 }" >Chương ${stt.index+1}</option>
+						</c:forEach>
+					</select> 
+					<c:choose>
+						<c:when test="${chuongSau>listChuong.size() }">
+							<a href="" class="disabled" >
+								<span class="chuong-redirect" id="redirect-next">Chương sau
+									<i class="fas fa-chevron-right"></i>
+								</span>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-${chuongSau}">
+								<span class="chuong-redirect" id="redirect-next">Chương sau
+									<i class="fas fa-chevron-right"></i>
+								</span>
+							</a>
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 				<div class="content" id="content-chuong">
 					<p>${noiDung}</p>
 				</div>
 				<div class="title" id="title-chuong">
-					<span class="chuong-redirect" id="redirect-pre"><i
-						class="fas fa-chevron-left"></i> Chương trước</span> <select
-						class="chuong-list" name="" id="">
-						<option value="">Chương 1</option>
-						<option value="">Chương 2</option>
-						<option value="">Chương 3</option>
-						<option value="">Chương 4</option>
-					</select> <span class="chuong-redirect" id="redirect-next">Chương sau
-						<i class="fas fa-chevron-right"></i>
-					</span><br> <span class="chuong-phanhoi">Phản hồi</span> <span
-						class="chuong-binhluan">Bình luận</span> <br> <i
-						class="fas fa-bezier-curve"></i><br> <span
-						class="chuong-tips">Bạn có thể dùng phím mũi tên hoặc WASD
-						để lùi/sang chương.</span>
-
+					<c:choose>
+						<c:when test="${chuongTruoc == 0}">
+							<a href="" class="disabled">
+								<span class="chuong-redirect" id="redirect-pre">
+									<i class="fas fa-chevron-left"></i> Chương trước
+								</span> 
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-${chuongTruoc}">
+								<span class="chuong-redirect" id="redirect-pre">
+									<i class="fas fa-chevron-left"></i> Chương trước
+								</span> 
+							</a>
+						</c:otherwise>
+					</c:choose>
+					
+					<select
+						class="chuong-list" id="chuongListss">
+						<option value="">Chương ${chuongHienTai}</option>
+						<c:forEach items="${listChuong }" var="ch" varStatus="stt"> 
+							<option value="${stt.index+1}">Chương ${stt.index+1}</option>
+						</c:forEach>
+					</select> 
+					<c:choose>
+						<c:when test="${chuongSau>listChuong.size() }">
+							<a href="" class="disabled" >
+								<span class="chuong-redirect" id="redirect-next">Chương sau
+									<i class="fas fa-chevron-right"></i>
+								</span>
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-${chuongSau}">
+								<span class="chuong-redirect" id="redirect-next">Chương sau
+									<i class="fas fa-chevron-right"></i>
+								</span>
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="col-10" id="binh-luan"
@@ -132,6 +197,19 @@
 		
 	</script>
 	<!-- JS phần menu và responsive -->
+	<script type="text/javascript">
+	
+		document.getElementById('chuongLists').onchange = function() {
+		    var value =  this.value;
+		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
+		    //alert(value)
+		};
+		document.getElementById('chuongListss').onchange = function() {
+		    var value =  this.value;
+		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
+		    //alert(value)
+		};
+	</script>
 	
 	<script src="${pageContext.request.contextPath}/template/client/assets/js/tool-read.js"></script>
 </body>

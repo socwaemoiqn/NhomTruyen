@@ -6,11 +6,40 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>${truyenById.tenTruyen }</title>
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/template/client/assets/css/info-truyen.css">
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/template/client/assets/css/tool.css">
+	<style>
+		a:link {
+		  text-decoration: none;
+		}
+		
+		a:hover {
+		  color: lightgreen;
+		}
+		.col-6{
+			text-align:center;
+			position: relative;
+			min-height: 1px;
+			padding-right: 15px;
+			padding-left: 15px
+		}
+		.pagination {
+			display: inline-block;
+			padding-left: 0;
+			margin: 20px 0;
+			border-radius: 4px
+		}
+		
+		.pagination>li {
+			display: inline
+		}
+		
+		
+	</style>
+		
 </head>
 <body>
 	<div class="main">
@@ -21,18 +50,25 @@
 		<div class="row">
 			<div class="col-7" id="thong-tin-truyen">
 				<div class="title">
-					<i class="fas fa-info-circle"></i> THÔNG TIN Truyện
+					<i class="fas fa-info-circle"></i> THÔNG TIN TRUYỆN
 				</div>
 				<div class="content">
 					<div class="info-picture">
-						<img
-							src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg" />
+						<img src="${pageContext.request.contextPath}/truyen/img/${truyenById.hinhAnh}" />
 						<div class="info-picture-content">
-							Tác giả: ${truyenById.tenTacGia } <br> Thể loại: Tiên hiệp,
-							Huyền huyễn <br> Nguồn: ${truyenById.nguon } <br> Trạng
-							thái:
+							Tác giả: <a href="${pageContext.request.contextPath}/tac-gia/${urlTacGia}"> ${truyenById.tenTacGia }</a> <br> 
+							Thể loại: 
+								<c:forEach items="${tenTheLoai}"
+									var="tl">
+									<c:if test="${truyenById.ID == tl.maTruyen}">
+											${tl.tenTheLoai},
+										</c:if>
+								</c:forEach>
+								<br> 
+							Nguồn: ${truyenById.nguon } 
+							<br> Trạng thái:
 							<c:choose>
-								<c:when test="${truyenById.trangThai == '1' }"> Đã Full</c:when>
+								<c:when test="${truyenById.full == true }"> Đã Full</c:when>
 								<c:otherwise>Đang cập nhật</c:otherwise>
 							</c:choose>
 						</div>
@@ -62,13 +98,13 @@
 			</div>
 			<div class="col-3" id="truyen-vua-doc">
 				<div class="title">
-					Truyện VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
+					TRUYỆN VỪA ĐỌC <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table>
 						<tr>
 							<td><a href="info-truyen.html"><i
-									class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br>
+									class="fas fa-book-reader"></i> Phần này chưa phát triên <br>
 									(Chương 1998)</a></td>
 						</tr>
 						<tr>
@@ -88,29 +124,32 @@
 			</div>
 			<div class="col-3" id="truyen-cung-tac-gia">
 				<div class="title">
-					Truyện CÙNG TÁC GIẢ <i class="fas fa-arrow-circle-down"></i>
+					TRUYỆN CÙNG TÁC GIẢ <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
+					
 					<table>
+					<c:forEach items="${truyenCungTacGia}" var="tr" begin="0" end="2" >
 						<tr>
-							<td><a href="info-truyen.html"><i
-									class="fas fa-book-reader"></i> Tối cường thần thoại đế hoàng <br>
-									(Chương 1998)</a></td>
+							<td>
+								<c:forEach items="${urlTruyen }" var="url">
+									<c:if test="${url.value==tr.ID }">
+										<a href="${pageContext.request.contextPath}/${url.key}">
+											<i class="fas fa-book-reader"></i> ${tr.tenTruyen} <br>
+											(Chương 1998)
+										</a>
+									</c:if>
+								</c:forEach>
+								
+							</td>
 						</tr>
-						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Đế
-									tôn <br> (Chương 203)</a></a></td>
-						</tr>
-						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Thiên
-									mệnh chân tử <br> (Chương 2032)</a></a></td>
-						</tr>
+					</c:forEach>
 					</table>
 				</div>
 			</div>
 			<div class="col-3" id="truyen-dang-hot">
 				<div class="title">
-					Truyện ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
+					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table cellspacing="5">
@@ -171,84 +210,56 @@
 						<table>
 
 
-							<c:forEach items="${listChuong}" var="ch" varStatus="status">
+							<c:forEach items="${listChuong.list}" var="ch" varStatus="status">
 								<tr>
 								<td><i class="fas fa-certificate"></i> 
-								<a href="${pageContext.request.contextPath}/truyen/chuong?id=${ch.id}">
-										Chương ${ch.id }:
-										 ${ch.tieuDe }</a></td>
+									<c:forEach items="${urlChuong}" var="url">
+										<c:if test="${url.key==ch.id}">
+											<a href="${pageContext.request.contextPath}/${tenTruyen }/chuong-${url.value}">
+												Chương ${url.value }:
+												 ${ch.tieuDe }</a>
+										</c:if>
+									</c:forEach>
+								</td>
 							</tr>
 							</c:forEach>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="read.html">
-										Chương 1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										2: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										3: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										4: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										5: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										6: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										7: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										8: Vô địch thật tịch mịch</a></td>
-							</tr>
+							
+							
 						</table>
 					</div>
 					<div class="list-chuong">
 						<table>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
+							<c:forEach items="${listChuong.list}" var="ch" varStatus="status">
+								<tr>
+								<td><i class="fas fa-certificate"></i> 
+									<c:forEach items="${urlChuong}" var="url">
+										<c:if test="${url.key==ch.id}">
+											<a href="${pageContext.request.contextPath}/${tenTruyen }/chuong-${url.value}">
+												Chương ${url.value}:
+												 ${ch.tieuDe }</a>
+										</c:if>
+									</c:forEach>
+								</td>
 							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
-							<tr>
-								<td><i class="fas fa-certificate"></i> <a href="#">Chương
-										1: Vô địch thật tịch mịch</a></td>
-							</tr>
+							</c:forEach>
 						</table>
 					</div>
+					<c:if test="${listChuong.totalPages >1}">
+							<div class="col-6">
+								<nav>
+									<ul class="pagination pagination-lg">
+										<c:forEach items="${listChuong.navigationPages}" var="page">
+											<c:if test="${page != -1 }">
+												<li><a href="${tenTruyen }?page=${page}" class="nav-item">${page}</a></li>
+											</c:if>
+											<c:if test="${page == -1 }">
+												<li><a><span> ... </span></a></li>
+											</c:if>
+										</c:forEach>
+									</ul>
+								</nav>
+							</div>
+						</c:if>
 				</div>
 			</div>
 			<div class="col-7" id="binh-luan"
