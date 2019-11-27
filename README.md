@@ -10,6 +10,7 @@
 	Website viết bàng: java (Spring MVC + Hibernate)
 	DÙng hệ quản trị CSDL: MySql.
 # Các chú thích:
-	- Một số ảnh của truyện sẽ bị mất khi pull từ git về nên các bạn cần add các ảnh của truyện trong thư mục Image truyện trong thư mục 2 
+	- Một số ảnh của truyện sẽ bị mất khi pull từ git về nên các bạn cần add 
+	các ảnh của truyện trong thư mục Image truyện trong thư mục 2 
 	vào thư mục server trên máy bạn theo đường dẫn 
 	~\NhomTruyen\Source\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\WebsiteDocTruyen\truyen\img
