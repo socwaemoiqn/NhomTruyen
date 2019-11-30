@@ -1,4 +1,4 @@
-<%@page import="java.util.Map"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
@@ -22,8 +22,8 @@
 					<c:if test="${not empty mess}">
 						<div class="alert alert-success">
 							<ul>
-								<li>${mess.status }</li>
-								<li>${mess.name }</li>
+								<%-- <li>${mess.status }</li> --%>
+								<li>${mess }</li>
 							</ul>
 						</div>
 						<%
@@ -38,42 +38,62 @@
 							border="0">
 							<tbody>
 								<tr>
-									<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/search"
-										method="get">
-										<td><a
-											href="${pageContext.request.contextPath}/quan-tri/ql-tacgia"
+									
+										<td rowspan="2" style="vertical-align: middle;" class="text-center"><a
+											href="${pageContext.request.contextPath}/quan-tri/phan-hoi"
 											class="btn btn-warning" title="Trở lại"> <i
 													class="fa  fa-arrow-left fa-1x"></i></a></td>
 								
-									</form>
-									<td><div class="form-group input-group">
-                                                <input class="form-control" type="text" name="key"
-											placeholder="Nhập nội dung tìm kiếm">
+									
+								
+									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
+										method="get">	<div class="form-group input-group ">
+									
+                                             <input class="form-control" type="text" name="key"
+											placeholder="Nhập nội dung tìm kiếm">   
                                                     <span class="input-group-btn">
                                                          <input class="btn btn-success" type="submit"
 											value="Tìm kiếm">
-                                                      
+                                                     	<input type="hidden" name="type" value="new"/> 
                                                     </span>
-                                                </div></td>
-										<td><label
-                                    class="btn btn-primary" id="btn-all">Chọn tất cả </label>        
+                                                </div></form></td>
+										<td><span
+                                    class="btn btn-primary pull-right" id="btn-all">Chọn tất cả </span>        
                                 </td>
 									<td>
-										<form action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/select-all"
+										<form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/select-all"
 											method="Post">
 											<input type="hidden" name="array_id" value=""> <select
 												id="select-all" class="form-control" disabled>
 												<option value="">Tùy chọn</option>
-												<option value="enable">Kích hoạt</option>
-												<option value="disable">Vô hiệu</option>
 												<option value="delete">Xoá</option>
 											</select>
 										</form>
 
 									</td>
-									<td><label class="btn btn-danger" disabled>Hiện
-											có: ${listTacGia.totalRecords} Phản Hồi </label></td>
-
+									<td rowspan="2" class="text-center" style="vertical-align: middle;"><label class="btn btn-danger" disabled>Hiện
+											có: ${listPhanHoi.totalRecords} Phản Hồi </label></td>
+								</tr>
+								<tr style="background-color:#f9f9f9;">
+									<td><label
+                                    class="btn btn-primary pull-right">Hiển thị theo: </label></td>
+									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/show-by"
+											method="get">
+											<select name="type"
+												 class="form-control">
+												<option value="">Mới nhất</option>
+												<option value="enable">Đã đọc</option>
+												<option value="disable">Chưa đọc</option>
+											</select> </td>
+									<td>
+									<select name="subject"
+											 class="form-control">
+												<option value="">Tất cả</option>
+												<option value="enable">Đã đọc</option>
+												<option value="disable">Chưa đọc</option>
+											</select>
+										</form>
+										</td>
 								</tr>
 							</tbody>
 						</table>
@@ -83,46 +103,41 @@
 								<tr>
 								  <th class="text-center">Chọn</th>
 									<th>STT</th>
-									<th>ID Phản Hồi</th>
-									<th>Tên Phản Hồi</th>
-									<th>Số lượng Truyện</th>
-									<th>Trạng Thái</th>
-									<th></th>
+									<th>Thời gian</th>
+									<th>Chủ đề</th>
+									<th>Tên người gửi</th>
+									<th>Email</th>
+									<th>Tình trạng</th>
+									<th></th>	
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTacGia.list}" var="us"
+								<c:forEach items="${listPhanHoi.list}" var="us"
 									varStatus="status">
 									<tr class="odd gradeX">
-									 <td class="text-center"><input type="checkbox" name="" id="${us.ID}"></td>
+									 <td class="text-center"><input type="checkbox" name="" id="${us.maPhanHoi}"></td>
 										<td scope="row">${status.index + 1}</td>
-										<td>${us.ID}</td>
-										<td>${us.tenTacGia}</td>
-										<td class="center"><c:forEach items="${listSL}" var="sl">
-												<c:if test="${ sl.key == us.ID }">
-											 		${sl.value }
-											 	</c:if>
-											</c:forEach></td>
-										<td class="center">
-										<c:if test="${us.trangThai == '1'}">
-											Enable
+										<td>${us.ngayTao}</td>
+										<td>${us.chuDe}</td>
+										<td class="center">${us.tenNguoiGui}</td>
+										<td class="center">${us.email }
+										</td>
+										<td><label id="daXem${us.maPhanHoi }">	<c:if test="${us.daXem == true}">
+										<span class="badge badge-success" style="background-color: #5cb85c;">Đã xem</span>
 										</c:if>
-										<c:if test="${us.trangThai == '0'}">
-											Disable
-										</c:if>
+										<c:if test="${us.daXem == false }">
+											<span class="badge badge-secondary">Chưa xem</span>
+										</c:if></label>
 										</td>
 										<td class="center">
-										<form id="form${us.ID}" action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/xoa/${us.ID}" method="post">
-										<a class="btn btn-primary btn-circle"
-											title="Tất cả Truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
-												<i class="fa fa-list-ul"></i>
-										</a> <a data-toggle="modal" id="${us.ID}" data-target="#sua"
-											class="btn btn-success btn-circle btn-sua"
-											title="Chỉnh sửa danh mục"> <i class="fa  fa-edit"></i>
+										<form id="form${us.maPhanHoi}" action="${pageContext.request.contextPath}/quan-tri/phan-hoi/xoa/${us.maPhanHoi}" method="post">
+										<a class="btn btn-success btn-circle btn-xem"
+											title="Xem"
+											href="" data-toggle="modal" id="${us.maPhanHoi}" data-target="#xem">
+												<i class="fa fa-eye"></i>
 										</a>
 										
-										<a id="${us.ID }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
+										<a id="${us.maPhanHoi }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
 										><i
 												class="fa fa-close"></i></a>
 										</form> 
@@ -134,11 +149,11 @@
 						</table>
 					</div>
 					<div class="grid_3 grid_5 agileits ">
-						<c:if test="${listTacGia.totalPages >1}">
+						<c:if test="${listPhanHoi.totalPages >1}">
 							<div class="col-md-6">
 								<nav>
 									<ul class="pagination pagination-lg">
-										<c:forEach items="${listTacGia.navigationPages}" var="page">
+										<c:forEach items="${listPhanHoi.navigationPages}" var="page">
 											<c:if test="${page != -1 }">
 												<li><a href="?page=${page}" class="nav-item">${page}</a></li>
 											</c:if>
@@ -155,83 +170,38 @@
 			</div>
 		</div>
 	</div>
-	<div class="modal fade" id="themmoi" tabindex="-1" role="dialog">
+
+	<div class="modal fade" id="xem" tabindex="-1" role="dialog">
 		<div class="modal-dialog">
 			<!-- Modal content-->
 			<div class="col-lg-12">
-				<div class="panel panel-green">
+				<div class="panel panel-primary">
 
 					<div class="panel-heading">
-						<h4>Thêm Thể Loại Truyện Mới</h4>
+						<h4>Nội dung phản hồi</h4>
 					</div>
 					<div class="panel-body">
 						<h4>Nhập thông tin về Phản Hồi Truyện</h4>
 						<div class="row">
 							<div class="col-lg-12">
 								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/insert"
+									action="${pageContext.request.contextPath}/quan-tri/phan-hoi/edit"
 									method="post">
 									<div class="form-group">
-										<label>Tên Phản Hồi Truyện</label> <input class="form-control"
-											name="tenTacGia" placeholder="Nhập tên Phản Hồi Truyện">
+										<label>Mã Phản Hồi:</label> <input class="form-control"
+											name="maPhanHoi" id="id" readonly>
 									</div>
 									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" placeholder="Nhập giới thiệu về Phản Hồi">
-									</div>
-									<button type="submit" class="btn btn-primary">Thêm tác
-										giả</button>
-								</form>
-							</div>
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<!-- //Modal content-->
-		</div>
-	</div>
-	<div class="modal fade" id="sua" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="col-lg-12">
-				<div class="panel panel-success">
-
-					<div class="panel-heading">
-						<h4>Sửa Phản Hồi Truyện</h4>
-					</div>
-					<div class="panel-body">
-						<h4>Nhập thông tin về Phản Hồi Truyện</h4>
-						<div class="row">
-							<div class="col-lg-12">
-								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/edit"
-									method="post">
-									<div class="form-group">
-										<label>ID Phản Hồi:</label> <input class="form-control"
-											name="id" id="id" readonly>
+										<label>Chủ đề:</label> <input class="form-control"
+											name="chuDe" id="chuDe"
+											placeholder="Chủ đề" readonly>
 									</div>
 									<div class="form-group">
-										<label>Tên Phản Hồi Truyện</label> <input class="form-control"
-											name="tenTacGia" id="tenTacGia"
-											placeholder="Nhập tên danh mục Truyện">
+										<label>Nội dung</label>
+										 <textarea style="pointer-events:none;" class="form-control" name="noiDung" id="noiDung" rows="10" placeholde="Nội dung phản hồi">
+										 </textarea>
 									</div>
-									<div class="form-group">
-										<label>Giới thiệu</label> <input class="form-control"
-											name="gioiThieu" id="gioiThieu"
-											placeholder="Nhập giới thiệu về danh mục">
-									</div>
-									<div class="form-group">
-
-										<label class="radio-inline"> <input type="radio"
-											name="trangThai" id="trangThai1" value="1"> Enable
-										</label> <label class="radio-inline"> <input type="radio"
-											name="trangThai" id="trangThai0" value="0"> Disable
-										</label>
-
-									</div>
-									<button type="submit" class="btn btn-success">Sửa thể
-										loại</button>
+									<a class="btn btn-danger pull-right btn-xoa">Xóa</a>
 								</form>
 							</div>
 						</div>
@@ -243,7 +213,7 @@
 		</div>
 	</div>
 	<c:url var="home"
-		value="${pageContext.request.contextPath}/quan-tri/ql-tacgia/"
+		value="${pageContext.request.contextPath}/quan-tri/phan-hoi/"
 		scope="request" />
 	<script>
 		$(document)
@@ -252,12 +222,12 @@
 							$(document)
 									.on(
 											'click',
-											'.btn-sua',
+											'.btn-xem',
 											function() {
 												let id = $(this).attr("id");
 												$
 														.ajax({
-															url : "${pageContext.request.contextPath}/quan-tri/ql-tacgia/ajax",
+															url : "${pageContext.request.contextPath}/quan-tri/phan-hoi/ajax",
 															type : "POST",
 															dataType : "json",
 															data : {
@@ -265,38 +235,24 @@
 															},
 															success : function(
 																	data) {
-																$("#sua #id")
+																$("#xem #id")
 																		.val(id);
 																$(
-																		"#sua #tenTacGia")
+																		"#xem #chuDe")
 																		.val(
-																				data.tenTacGia);
+																				data.chuDe);
 																$(
-																		"#sua #gioiThieu")
+																		"#xem #noiDung")
 																		.val(
-																				data.gioiThieu);
-																if (data.trangThai == "1") {
-																	$(
-																			"#sua #trangThai1")
-																			.prop(
-																					"checked",
-																					"true");
-																} else
-																	$(
-																			"#sua #trangThai0")
-																			.prop(
-																					"checked",
-																					"true");
-															},
-															error : function(
-																	error) {
-																alert(error);
+																				data.noiDung	);
+																$("#daXem"+id+" span").css("background-color","#5cb85c"); 
+																$("#daXem"+id+" span").text("Đã xem");
 															}
 														});
 											});
 							 // Sự kiện xóa dữ liệu
 					        $(document).on('click','a.btn-xoa',function(){
-					            let id = $(this).attr('id');
+					            let id = $(this).attr('id') != null ? $(this).attr('id') : $("#xem #id").val();
 					            $.confirm({
 					            title: 'Cảnh báo!',
 					            content: 'Xác nhận xóa Phản Hồi này?',

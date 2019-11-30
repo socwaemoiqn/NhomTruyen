@@ -22,6 +22,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.InfoTaiKhoanDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.PhanHoiDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
@@ -30,6 +31,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.ChuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.DanhMucTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.InfoTaiKhoanImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.PhanHoiImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.RoleImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TacGiaImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TheLoaiTruyenImpl;
@@ -139,5 +141,9 @@ public class ApplicationContextConfig {
 	@Bean(name = "roleDAO")
 	public RoleDAO getRoleDAO() {
 		return new RoleImpl();
+	}
+	@Bean(name = "phanHoiInfo")
+	public PhanHoiDAO getphanHoiDAO() {
+		return new PhanHoiImpl();
 	}
 }

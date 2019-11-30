@@ -112,7 +112,7 @@ public class QL_TacGiaController {
 			TacGiaInfo tacgiainfo = new TacGiaInfo();
 			tacgiainfo.setGioiThieu(gioiThieu);
 			tacgiainfo.setTenTacGia(tenTacGia);
-			TacGiaEntity tacgia = tacGiaDAO.insert(tacgiainfo);
+			tacGiaDAO.insert(tacgiainfo);
 		
 			mess.put("status", "Thêm tác giả thành công!");
 			mess.put("name","Tác giả vừa được thêm: "+tenTacGia);

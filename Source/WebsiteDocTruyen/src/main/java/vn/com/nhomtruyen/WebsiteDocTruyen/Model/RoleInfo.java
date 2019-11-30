@@ -1,7 +1,5 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Model;
 
-import java.util.Date;
-
 public class RoleInfo {
 	private int maRole;
 	private String tenRole;

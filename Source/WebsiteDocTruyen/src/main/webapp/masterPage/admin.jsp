@@ -44,11 +44,6 @@
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="${pageContext.request.contextPath}/template/admin/js/metisMenu.min.js"></script>
 
-	<!-- Morris Charts JavaScript -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/raphael.min.js"></script>
-	<script src="${pageContext.request.contextPath}/template/admin/js/morris.min.js"></script>
-	<script src="${pageContext.request.contextPath}/template/admin/js/morris-data.js"></script>
-
 	<!-- Custom Theme JavaScript -->
 	<script src="${pageContext.request.contextPath}/template/admin/js/startmin.js"></script>
 </body>
