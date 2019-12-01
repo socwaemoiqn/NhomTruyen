@@ -54,7 +54,6 @@
                                                     <span class="input-group-btn">
                                                          <input class="btn btn-success" type="submit"
 											value="Tìm kiếm">
-                                                     	<input type="hidden" name="type" value="new"/> 
                                                     </span>
                                                 </div></form></td>
 										<td><span
@@ -77,20 +76,22 @@
 								<tr style="background-color:#f9f9f9;">
 									<td><label
                                     class="btn btn-primary pull-right">Hiển thị theo: </label></td>
-									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/show-by"
-											method="get">
+									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
+											method="get">	
 											<select name="type"
 												 class="form-control">
-												<option value="">Mới nhất</option>
-												<option value="enable">Đã đọc</option>
-												<option value="disable">Chưa đọc</option>
+												<option value="new">Mới nhất</option>
+												<option value="readed">Đã đọc</option>
+												<option value="unread">Chưa đọc</option>
 											</select> </td>
 									<td>
 									<select name="subject"
 											 class="form-control">
-												<option value="">Tất cả</option>
-												<option value="enable">Đã đọc</option>
-												<option value="disable">Chưa đọc</option>
+												<option value="all">Tất cả</option>
+												<option value="ads">Quảng cáo</option>
+												<option value="error">Báo lỗi</option>
+												<option value="feedback">Góp ý</option>
+												<option value="other">Khác</option>
 											</select>
 										</form>
 										</td>

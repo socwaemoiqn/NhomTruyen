@@ -1,6 +1,7 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -50,9 +51,23 @@ public class PhanHoiImpl implements PhanHoiDAO{
 	}
 
 	@Override
-	public PaginationResult<PhanHoiInfo> getTacGiaByKey(int page, int Max_Result, int Max_Navigation, String ten) {
-		// TODO Auto-generated method stub
-		return null;
+	public PaginationResult<PhanHoiInfo> getPhanHoiBySearch(int page, int Max_Result, int Max_Navigation,Map<String,String> list) {
+	
+		Session se = this.sessionFactory.getCurrentSession();
+		Boolean type = list.get("type").equals("readed") ? true : false;
+		String sqlDaXem = type == null ? "ORDER BY a.ngayTao DESC" : "and a.daXem = "+type;
+		String sql = "Select new "+PhanHoiInfo.class.getName()
+				+"(a.maPhanHoi,a.chuDe,a.tenNguoiGui,a.email,a.noiDung,a.daXem,a.ngayTao) "
+				+ "from "+PhanHoiEntity.class.getName()+" a "
+						+ "where a.chuDe like: key "
+						+ " or a.tenNguoiGui like: key "
+						+ " or a.email like: key "
+						+ " or a.noiDung like: key "
+						+ " or a.ngayTao like: key "
+						+ " "+sqlDaXem;
+		Query query = se.createQuery(sql);
+		query.setParameter("key", "%"+list.get("key")+"%");
+		return new PaginationResult<PhanHoiInfo>(query, page, Max_Result, Max_Navigation);
 	}
 
 	@Override

@@ -21,7 +21,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.PhanHoiDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PhanHoiInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PhanHoiInfo;
 
 @Controller
 @RequestMapping("quan-tri/phan-hoi")
@@ -84,10 +83,13 @@ public class QL_PhanHoiController {
 		return json;
 	}
 	@RequestMapping(value = "/search",method = RequestMethod.GET)
-	public String search(HttpServletRequest request,HttpSession session, @RequestParam(value="page",defaultValue = "1")String pageStr)
+	public String search(HttpServletRequest request,HttpSession session, 
+			@RequestParam(value="page",defaultValue = "1")String pageStr,
+			@RequestParam(value="key",defaultValue = "all")String key,
+			@RequestParam(value="type",defaultValue = "new")String type,
+			@RequestParam(value="subject",defaultValue = "all")String subject)
 	{
-		String key = request.getParameter("key");
-		if(!key.isEmpty())
+		if(!key.equals("all"))
 		{
 			int page = 1;
 			try {
@@ -97,12 +99,13 @@ public class QL_PhanHoiController {
 			}
 			final int Max_Result = 100;
 			final int Max_Navigation = 10;
-			PaginationResult<PhanHoiInfo> listPhanHoi = phanHoiDAO.getTacGiaByKey(page, Max_Result, Max_Navigation,key);
+			Map<String,String> list = new HashMap<String, String>();
+			list.put("key",key);
+			list.put("type",type);
+			list.put("subject",subject);
+			PaginationResult<PhanHoiInfo> listPhanHoi = phanHoiDAO.getPhanHoiBySearch(page, Max_Result, Max_Navigation,list);
 			request.setAttribute("listPhanHoi",listPhanHoi);
-			Map<String,String> mess = new HashMap<String, String>();
-			mess.put("status", "Tìm kiếm thành công!");
-			mess.put("name","Tìm được: "+listPhanHoi.getList().size()+" kết quả!");
-			session.setAttribute("mess", mess);
+			session.setAttribute("mess","Tìm được: "+listPhanHoi.getList().size()+" kết quả!");
 			return "admin/ql_phanhoi";
 		}
 		return "redirect:/quan-tri/phan-hoi";
