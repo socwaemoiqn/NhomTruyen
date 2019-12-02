@@ -109,16 +109,16 @@
 										</c:if>
 										</td>
 										<td class="center">
-										<form id="form${us.ID}" action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/xoa/${us.ID}" method="post">
+											<form id="form${us.ID}" action="${pageContext.request.contextPath}/quan-tri/ql-tacgia/xoa/${us.ID}" method="post">
 										<a class="btn btn-primary btn-circle"
-											title="Tất cả Truyện"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.ID}">
+											title="Tất cả Truyện" target="_blank"
+											href="${pageContext.request.contextPath}/quan-tri/ql-truyen/tac-gia/${us.ID}">
 												<i class="fa fa-list-ul"></i>
 										</a> <a data-toggle="modal" id="${us.ID}" data-target="#sua"
 											class="btn btn-success btn-circle btn-sua"
 											title="Chỉnh sửa danh mục"> <i class="fa  fa-edit"></i>
 										</a>
-										
+									
 										<a id="${us.ID }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
 										><i
 												class="fa fa-close"></i></a>

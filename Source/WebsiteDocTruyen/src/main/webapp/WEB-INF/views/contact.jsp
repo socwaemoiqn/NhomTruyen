@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=Utf8"
 	pageEncoding="Utf8"%>
+	<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,10 @@
 	href="${pageContext.request.contextPath}/template/client/assets/css/contact.css">
 </head>
 <body>
+	<c:if test="${not empty mess}">
+	 	<script>alert('${mess}')</script>
+	</c:if>
+	<% request.getSession().removeAttribute("mess"); %>
 	<div class="main">
 		<div id="path">
 			<i class="fa fa-home"></i> Truyện <span class="path">/</span> <span
@@ -20,23 +25,23 @@
 					<i class="fas fa-envelope"></i> CONTACT - LIÊN HỆ
 				</div>
 				<div class="content">
-					<form method="" action="">
+					<form method="post" action="${pageContext.request.contextPath}/quan-tri/phan-hoi/insert">
 						<div>
-							Tên / Name: <br> <input type="text" name=""
-								placeholder="Nhập tên của bạn"> <br>
-							<br> Email: <br> <input type="text" name=""
-								placeholder="Địa chỉ email của bạn"> <br>
-							<br> Chủ đề / Subject: <br> <select>
+							Tên / Name: <br> <input type="text" name="tenNguoiGui"
+								placeholder="Nhập tên của bạn" required="required"> <br>
+							<br> Email: <br> <input type="text" name="email"
+								placeholder="Địa chỉ email của bạn" required="required"> <br>
+							<br> Chủ đề / Subject: <br> <select name="chuDe">
 								<option value="">Chọn một / Choose one</option>
-								<option value="">Báo lỗi / Report an error</option>
-								<option value="">Góp ý / Suggest</option>
-								<option value="">Quảng cáo / Advertisement</option>
-								<option value="">Khác / Other</option>
+								<option value="error">Báo lỗi / Report an error</option>
+								<option value="feedback">Góp ý / Suggest</option>
+								<option value="ads">Quảng cáo / Advertisement</option>
+								<option value="other">Khác / Other</option>
 							</select>
 						</div>
 						<div>
 							Nội dung / Message: <br>
-							<textarea name="" placeholder="Nội dung"></textarea>
+							<textarea name="noiDung" placeholder="Nội dung" required="required"></textarea>
 							<br>
 							<button>Gửi / Send</button>
 						</div>

@@ -1,7 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Common/Helper.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Config/ApplicationContextConfig.java=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_DanhMucTruyenController.java=UTF-8
+=======
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_PhanHoiController.java=UTF-8
+>>>>>>> c75b985744da6c5481111863be34c8d1fcfbcf0b
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TacGiaController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoanController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoan_VaiTroController.java=UTF-8

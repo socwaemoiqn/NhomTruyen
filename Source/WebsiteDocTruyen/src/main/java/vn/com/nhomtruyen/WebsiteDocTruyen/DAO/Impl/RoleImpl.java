@@ -1,6 +1,5 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -10,16 +9,11 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import net.sourceforge.jtds.jdbc.DateTime;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.RoleEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TheLoaiTruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 
 
 public class RoleImpl implements RoleDAO {

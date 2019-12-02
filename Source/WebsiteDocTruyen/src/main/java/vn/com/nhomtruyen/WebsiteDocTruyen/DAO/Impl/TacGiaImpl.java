@@ -88,7 +88,7 @@ public class TacGiaImpl implements TacGiaDAO {
 	}
 
 	@Override
-	public TacGiaEntity insert(TacGiaInfo tacGiaInfo) {
+	public void insert(TacGiaInfo tacGiaInfo) {
 		Session se = this.sessionFactory.getCurrentSession();
 		TacGiaEntity tacgia = new TacGiaEntity();
 		tacgia.setTenTacGia(tacGiaInfo.getTenTacGia());
@@ -96,7 +96,6 @@ public class TacGiaImpl implements TacGiaDAO {
 		tacgia.setTrangThai("1");
 		tacgia.setNgayTao(Helper.getCurrentDateAndTime());
 		se.persist(tacgia);
-		return tacgia;
 	}
 
 	@Override
