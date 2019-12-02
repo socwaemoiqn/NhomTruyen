@@ -101,29 +101,21 @@
 
 
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-<<<<<<< HEAD
+
 		<!-- <dependency>
-=======
-<!-- 		<dependency>
->>>>>>> c75b985744da6c5481111863be34c8d1fcfbcf0b
+	<dependency>
+
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.15</version>
 		</dependency> -->
-<<<<<<< HEAD
+
 		<!-- http://mvnrepository.com/artifact/mysql/mysql-connector-java -->
        <dependency>
            <groupId>mysql</groupId>
            <artifactId>mysql-connector-java</artifactId>
            <version>5.1.34</version>
        </dependency>
-=======
-	<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.34</version>
-		</dependency>
->>>>>>> c75b985744da6c5481111863be34c8d1fcfbcf0b
 
 		<!-- Apache Commons FileUpload -->
 		<!-- http://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->

@@ -57,18 +57,6 @@
 	<!-- Metis Menu Plugin JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/template/admin/js/metisMenu.min.js"></script>
-
-<<<<<<< HEAD
-	<!-- Morris Charts JavaScript -->
-	<script
-		src="${pageContext.request.contextPath}/template/admin/js/raphael.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/template/admin/js/morris.min.js"></script>
-	<script
-		src="${pageContext.request.contextPath}/template/admin/js/morris-data.js"></script>
-
-=======
->>>>>>> c75b985744da6c5481111863be34c8d1fcfbcf0b
 	<!-- Custom Theme JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/template/admin/js/startmin.js"></script>
