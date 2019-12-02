@@ -52,21 +52,36 @@ public class PhanHoiImpl implements PhanHoiDAO{
 
 	@Override
 	public PaginationResult<PhanHoiInfo> getPhanHoiBySearch(int page, int Max_Result, int Max_Navigation,Map<String,String> list) {
-	
 		Session se = this.sessionFactory.getCurrentSession();
-		Boolean type = list.get("type").equals("readed") ? true : false;
-		String sqlDaXem = type == null ? "ORDER BY a.ngayTao DESC" : "and a.daXem = "+type;
+		String sqlKey = !list.get("key").equals("") ?  "( a.chuDe like: key or a.tenNguoiGui like: key  or a.email like: key or a.noiDung like: key or a.ngayTao like: key )" : "";
+		String sqlChuDe = list.get("subject").equals("all") ? "" :  "a.chuDe = '"+list.get("subject")+"'";
+		sqlChuDe = sqlKey != "" && sqlChuDe != "" ? sqlChuDe + " and " : sqlChuDe;
+		String sqlDaXem = "";
+		switch(list.get("type"))
+		{
+			case "readed":
+				sqlDaXem = "a.daXem = 1";
+				if(!sqlChuDe.equals("") || !sqlKey.equals(""))
+					sqlDaXem += " and ";
+				break;
+			case "unread":
+				sqlDaXem = "a.daXem = 0";
+				if(!sqlChuDe.equals("") || !sqlKey.equals(""))
+					sqlDaXem += " and ";
+				break;
+		}
+		String where = sqlKey == "" && sqlChuDe == "" && sqlDaXem == ""? "" : "where";
 		String sql = "Select new "+PhanHoiInfo.class.getName()
 				+"(a.maPhanHoi,a.chuDe,a.tenNguoiGui,a.email,a.noiDung,a.daXem,a.ngayTao) "
 				+ "from "+PhanHoiEntity.class.getName()+" a "
-						+ "where a.chuDe like: key "
-						+ " or a.tenNguoiGui like: key "
-						+ " or a.email like: key "
-						+ " or a.noiDung like: key "
-						+ " or a.ngayTao like: key "
-						+ " "+sqlDaXem;
+						+ " "+where
+						+ " "+sqlDaXem
+						+ " "+sqlChuDe
+						+ " "+sqlKey
+						+ " ORDER BY a.ngayTao DESC";
+						
 		Query query = se.createQuery(sql);
-		query.setParameter("key", "%"+list.get("key")+"%");
+		if (sqlKey != "")query.setParameter("key", "%"+list.get("key")+"%");
 		return new PaginationResult<PhanHoiInfo>(query, page, Max_Result, Max_Navigation);
 	}
 
@@ -91,7 +106,6 @@ public class PhanHoiImpl implements PhanHoiDAO{
 
 	@Override
 	public void xoa(int maPhanHoi) {
-		Session se = this.sessionFactory.getCurrentSession();
 		PhanHoiEntity phanhoi = this.findPhanHoiEntity(maPhanHoi);
 		this.sessionFactory.getCurrentSession().delete(phanhoi);		
 	}
@@ -106,7 +120,6 @@ public class PhanHoiImpl implements PhanHoiDAO{
 
 	@Override
 	public void updateTrangThai(PhanHoiInfo PhanHoiInfo) {
-		Session se = this.sessionFactory.getCurrentSession();
 		PhanHoiEntity phanhoi = this.findPhanHoiEntity(PhanHoiInfo.getMaPhanHoi());
 		phanhoi.setDaXem(PhanHoiInfo.getDaXem());
 		this.sessionFactory.getCurrentSession().update(phanhoi);

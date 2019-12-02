@@ -46,7 +46,7 @@
 								
 									
 								
-									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
+									<td><form id="form-search" action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
 										method="get">	<div class="form-group input-group ">
 									
                                              <input class="form-control" type="text" name="key"
@@ -55,8 +55,29 @@
                                                          <input class="btn btn-success" type="submit"
 											value="Tìm kiếm">
                                                     </span>
-                                                </div></form></td>
-										<td><span
+                                                </div>	</td>
+										<td><label
+                                    class="btn btn-primary pull-right">Hiển thị theo: </label></td>
+									<td>		<select id="select-type" name="type"
+												 class="form-control">
+												<option value="new">Mới nhất</option>
+												<option value="readed">Đã đọc</option>
+												<option value="unread">Chưa đọc</option>
+											</select> </td>
+									<td>
+									<select id="select-subject" name="subject"
+											 class="form-control">
+												<option value="all">Tất cả</option>
+												<option value="ads">Quảng cáo</option>
+												<option value="error">Báo lỗi</option>
+												<option value="feedback">Góp ý</option>
+												<option value="other">Khác</option>
+											</select>
+										</td></form>
+								</tr>
+								<tr style="background-color:#f9f9f9;">
+										<td></td>
+									<td><span
                                     class="btn btn-primary pull-right" id="btn-all">Chọn tất cả </span>        
                                 </td>
 									<td>
@@ -70,31 +91,9 @@
 										</form>
 
 									</td>
-									<td rowspan="2" class="text-center" style="vertical-align: middle;"><label class="btn btn-danger" disabled>Hiện
+								
+										<td class="text-center" style="vertical-align: middle;"><label class="btn btn-danger" disabled>Hiện
 											có: ${listPhanHoi.totalRecords} Phản Hồi </label></td>
-								</tr>
-								<tr style="background-color:#f9f9f9;">
-									<td><label
-                                    class="btn btn-primary pull-right">Hiển thị theo: </label></td>
-									<td><form action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
-											method="get">	
-											<select name="type"
-												 class="form-control">
-												<option value="new">Mới nhất</option>
-												<option value="readed">Đã đọc</option>
-												<option value="unread">Chưa đọc</option>
-											</select> </td>
-									<td>
-									<select name="subject"
-											 class="form-control">
-												<option value="all">Tất cả</option>
-												<option value="ads">Quảng cáo</option>
-												<option value="error">Báo lỗi</option>
-												<option value="feedback">Góp ý</option>
-												<option value="other">Khác</option>
-											</select>
-										</form>
-										</td>
 								</tr>
 							</tbody>
 						</table>
@@ -217,6 +216,12 @@
 		value="${pageContext.request.contextPath}/quan-tri/phan-hoi/"
 		scope="request" />
 	<script>
+	window.onload = () => {
+		let select_type = localStorage.getItem("select-type") != null ? localStorage.getItem("select-type") : "new";
+		let select_subject = localStorage.getItem("select-subject") != null ? localStorage.getItem("select-subject") : "all";
+		SetValueToSelect("select-type",select_type);
+		SetValueToSelect("select-subject",select_subject);
+	}
 		$(document)
 				.ready(
 						function() {
@@ -370,7 +375,14 @@
 					            
 					            
 					        });
-
+					        $("#select-type").change(()=>{
+					        	localStorage.setItem("select-type",$("#select-type").val());
+					        	 ShowBy("type",$("#select-type").val());
+					        });
+					        $("#select-subject").change(()=>{
+					        	localStorage.setItem("select-subject",$("#select-subject").val());
+					        	 ShowBy("subject",$("#select-subject").val());
+					        });
 						});
 		  ClickCheckbox = (e,array_checkbox,array_value_checkbox,array_button) =>{
 		        if(e.checked) // Nếu checkbox được checked
@@ -434,6 +446,48 @@
 		        for (let index = 0; index < array.length; index++) {
 		            console.log(array[index]);    
 		        }
+		    }
+		    ShowBy = (key,value) => {
+		    	let url = location.href; 
+		    	if(!url.includes("/search"))
+		    	{
+		    		if(url.charAt(url.length-1) == "/")
+		    			url += "search";
+		    		else
+		    			url += "/search";
+		    	}
+		    	if(!url.includes(key))
+		    	{
+		    		if(url.includes("key"))
+		    			location.href = url+"&"+key+"="+value;
+		    		else
+		    			location.href = url+"?key=&"+key+"="+value;
+		    	}
+		    	else
+		    		{
+		    			let array = url.split("&");
+		    			for(let i = 0; i < array.length ; i++)
+		    			{
+		    				if(array[i].includes(key))
+		    					{
+		    						array.splice(i,1);
+		    						url = "";
+		    						for(let j = 0; j < array.length ; j++)
+		    		    			{
+		    							url += array[j]+"&";
+		    		    			}
+		    						url += key+"="+value;
+		    						break;
+		    					}	
+		    			}
+		    			location.href = url; 
+		    			
+		    		}
+		    		
+		    			
+		    }
+		    SetValueToSelect = (idSelect,value) => {
+		    	$("#"+idSelect).val(value);
 		    }
 	</script>
 </body>

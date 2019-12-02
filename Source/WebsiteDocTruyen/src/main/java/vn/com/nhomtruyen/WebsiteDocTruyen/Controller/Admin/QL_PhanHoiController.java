@@ -85,12 +85,10 @@ public class QL_PhanHoiController {
 	@RequestMapping(value = "/search",method = RequestMethod.GET)
 	public String search(HttpServletRequest request,HttpSession session, 
 			@RequestParam(value="page",defaultValue = "1")String pageStr,
-			@RequestParam(value="key",defaultValue = "all")String key,
+			@RequestParam(value="key",defaultValue = "")String key,
 			@RequestParam(value="type",defaultValue = "new")String type,
 			@RequestParam(value="subject",defaultValue = "all")String subject)
-	{
-		if(!key.equals("all"))
-		{
+	{	
 			int page = 1;
 			try {
 				page = Integer.parseInt(pageStr);
@@ -107,7 +105,6 @@ public class QL_PhanHoiController {
 			request.setAttribute("listPhanHoi",listPhanHoi);
 			session.setAttribute("mess","Tìm được: "+listPhanHoi.getList().size()+" kết quả!");
 			return "admin/ql_phanhoi";
-		}
-		return "redirect:/quan-tri/phan-hoi";
+	
 	}
 }

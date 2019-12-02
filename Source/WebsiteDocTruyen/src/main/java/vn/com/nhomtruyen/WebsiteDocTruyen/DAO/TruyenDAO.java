@@ -15,6 +15,7 @@ public interface TruyenDAO   {
 	//public PaginationResult<truyenSelectInfo> litTruyen(int page, int maxResult, int maxNavigationPage);
 	public PaginationResult<SelectTruyenInfo> litsTruyen(int page, int maxResult, int maxNavigationPage);
 	public PaginationResult<SelectTruyenInfo> getTruyenByTen(String tenTruyen,int page, int maxResult, int maxNavigationPage);
+	public PaginationResult<SelectTruyenInfo> getTruyenByTacGia(int maTacGia,int page, int maxResult, int maxNavigationPage);
 	public List<SelectTruyenInfo> searchTruyen(String tenTruyen);
 	public List<SelectTruyenInfo> listTruyen();
 	public Map<String, String> listPathVariableString();

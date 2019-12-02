@@ -522,7 +522,34 @@ public class QL_TruyenController {
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 	}
+	@RequestMapping(value = "/tac-gia/{id}",method = RequestMethod.GET)
+	public String getTruyenTheoTacGia(Model model,
+			@PathVariable(value = "id")String id,
+			@RequestParam(value = "page", defaultValue = "1")String pageStr)
+	{
+		int page = 1;
+		try {
+			page = Integer.parseInt(pageStr);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		final int Max_Result = 10;
+		final int Max_Navigation = 3;
+		int maTacGia = Integer.parseInt(id);
+		PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.getTruyenByTacGia(maTacGia, page, Max_Result, Max_Navigation);
+		List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
 
+		Map<String, String> listUrl = truyenDao.listPathVariableString();
+		
+		TruyenAddForm truyen = new TruyenAddForm();
+
+		model.addAttribute("tenTheLoai", theLoaiTruyen);
+		model.addAttribute("listTruyen", listTruyen);
+		model.addAttribute("url", listUrl);
+		model.addAttribute("truyenAddForm", truyen);
+		model.addAttribute("slt", listTruyen.getTotalRecords());
+		return "admin/ql_truyen";
+	}
 	@ModelAttribute("danhMuc")
 	public List<DanhMucTruyenInfo> getDanhMuc() {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();

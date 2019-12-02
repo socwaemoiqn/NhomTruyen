@@ -256,4 +256,18 @@ public class TruyenImpl implements TruyenDAO {
 		return query.list();
 	}
 
+	@Override
+	public PaginationResult<SelectTruyenInfo> getTruyenByTacGia(int maTacGia, int page, int maxResult,
+			int maxNavigationPage) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.maTacGia =: maTacGia ";
+		Query query = session.createQuery(sql);
+		query.setParameter("maTacGia", maTacGia);
+		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
+	}
+
 }
