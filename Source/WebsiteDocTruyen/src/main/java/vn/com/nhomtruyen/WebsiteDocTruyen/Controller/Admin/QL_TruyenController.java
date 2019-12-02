@@ -50,7 +50,6 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
-
 @Controller(value = "QL_TruyenControllerOfAdmin")
 @RequestMapping(value = "/quan-tri/ql-truyen")
 public class QL_TruyenController {
@@ -97,7 +96,7 @@ public class QL_TruyenController {
 		List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
 
 		Map<String, String> listUrl = truyenDao.listPathVariableString();
-		
+
 		TruyenAddForm truyen = new TruyenAddForm();
 
 		model.addAttribute("tenTheLoai", theLoaiTruyen);
@@ -160,12 +159,10 @@ public class QL_TruyenController {
 		int luotXem = 0;
 		String nguon = truyenAddForm.getNguon();
 		String hinhAnh = "";
-		CommonsMultipartFile[] fileDatas = truyenAddForm.getHinhAnh();
-		for (CommonsMultipartFile fileData : fileDatas) {
-
-			// Tên file gốc tại Client.
-			hinhAnh = fileData.getOriginalFilename();
-		}
+		CommonsMultipartFile fileDatas = truyenAddForm.getHinhAnh();
+		// Tên file gốc tại Client.
+		hinhAnh = fileDatas.getOriginalFilename();
+		
 		boolean full = false;
 		boolean hot = false;
 		boolean news = true;
@@ -225,32 +222,27 @@ public class QL_TruyenController {
 		if (!uploadRootDir.exists()) {
 			uploadRootDir.mkdirs();
 		}
-		CommonsMultipartFile[] fileDatas = truyenAddForm.getHinhAnh();
-		//
-		List<File> uploadedFiles = new ArrayList<File>();
-		for (CommonsMultipartFile fileData : fileDatas) {
+		CommonsMultipartFile fileDatas = truyenAddForm.getHinhAnh();
+		// Tên file gốc tại Client.
+		String name = fileDatas.getOriginalFilename();
+		System.out.println("Client File Name = " + name);
 
-			// Tên file gốc tại Client.
-			String name = fileData.getOriginalFilename();
-			System.out.println("Client File Name = " + name);
+		if (name != null && name.length() > 0) {
+			try {
+				// Tạo file tại Server.
+				File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
 
-			if (name != null && name.length() > 0) {
-				try {
-					// Tạo file tại Server.
-					File serverFile = new File(uploadRootDir.getAbsolutePath() + File.separator + name);
-
-					// Luồng ghi dữ liệu vào file trên Server.
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-					stream.write(fileData.getBytes());
-					stream.close();
-					//
-					uploadedFiles.add(serverFile);
-					System.out.println("Write file: " + serverFile);
-				} catch (Exception e) {
-					System.out.println("Error Write file: " + name);
-				}
+				// Luồng ghi dữ liệu vào file trên Server.
+				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+				stream.write(fileDatas.getBytes());
+				stream.close();
+				//
+				System.out.println("Write file: " + serverFile);
+			} catch (Exception e) {
+				System.out.println("Error Write file: " + name);
 			}
 		}
+		
 
 	}
 
@@ -376,9 +368,9 @@ public class QL_TruyenController {
 
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
 	private String xemTruyenPage(Model model, @PathVariable("tenTruyen") String tenTruyen) {
-		
+
 		TruyenAddForm truyen = new TruyenAddForm();
-		
+
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
 
@@ -388,16 +380,15 @@ public class QL_TruyenController {
 
 		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
 		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-		
-		List<ChuongInfo> listChuong= chuongDao.listChuongOfTruyenSortASC(maTruyen);
-		Map<String, String> soChuong=new HashMap<String, String>();
-		int i=1;
+
+		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+		Map<String, String> soChuong = new HashMap<String, String>();
+		int i = 1;
 		for (ChuongInfo ch : listChuong) {
-			
-			soChuong.put(ch.getId(), "Chương "+i);
+
+			soChuong.put(ch.getId(), "Chương " + i);
 			i++;
 		}
-
 
 		int slChuong = listChuongByTruyen.size();
 
@@ -409,7 +400,7 @@ public class QL_TruyenController {
 		model.addAttribute("tenTruyen", tenTruyen);
 		model.addAttribute("urlChuong", urlChuong);
 		model.addAttribute("soChuong", soChuong);
-		
+
 		model.addAttribute("truyenEditForm", truyen);
 
 		return "admin/ql_truyen_xemtruyen";
@@ -420,25 +411,53 @@ public class QL_TruyenController {
 			@ModelAttribute("truyenEditForm") TruyenAddForm truyenAddForm) {
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
+		SelectTruyenInfo truyenCu = truyenDao.selectTruyenByMa(maTruyen);
+		
 
-		String tenTruyenMoi = truyenAddForm.getTenTruyen();
+		String tenTruyenMoi = (truyenAddForm.getTenTruyen().isEmpty()) ? truyenCu.getTenTruyen() : truyenAddForm.getTenTruyen();
+
+		System.out.println(tenTruyenMoi + "");
 		String hinhAnhMoi = "";
-		CommonsMultipartFile[] fileDatas = truyenAddForm.getHinhAnh();
-		for (CommonsMultipartFile fileData : fileDatas) {
-
-			// Tên file gốc tại Client.
-			hinhAnhMoi = fileData.getOriginalFilename();
+		CommonsMultipartFile fileDatas = truyenAddForm.getHinhAnh();
+		// Tên file gốc tại Client.
+		hinhAnhMoi = (!fileDatas.getOriginalFilename().isEmpty()) ? fileDatas.getOriginalFilename()
+				: truyenCu.getHinhAnh();
+		
+		List<TacGiaInfo> list = tacGiaDao.listTacGia();
+		int maTacGiaCu=-1;
+		System.out.println(truyenCu.getTenTacGia());
+		for(TacGiaInfo k : list) {
+			if(k.getTenTacGia().equals(truyenCu.getTenTacGia()))
+			{
+				maTacGiaCu=k.getID();
+				break;
+			}
+			
 		}
-		int maTacGia = truyenAddForm.getMaTacGia();
-		// xem lai phan cap nhat ma the loai
-		int[] matheLoai = truyenAddForm.getMaTheLoai();
-		String nguonMoi = truyenAddForm.getNguon();
-		String gioiThieuMoi = truyenAddForm.getGioiThieu();
-		TruyenInfo truyenInfo = new TruyenInfo(maTruyen, tenTruyenMoi, maTacGia, nguonMoi, gioiThieuMoi, hinhAnhMoi);
+		int maTacGiaMoi = (!(truyenAddForm.getMaTacGia() == -1)) ? truyenAddForm.getMaTacGia() : maTacGiaCu;
+
+		int[] matheLoaiMoi = truyenAddForm.getMaTheLoai();
+		if (matheLoaiMoi.length >= 1) {
+			// xoa all tl trong bang chi tiet the loai
+			theLoaiTruyenDao.xoaChiTietTheLoaiTheoTruyen(maTruyen);
+			// cap nhat lai the loai trong bang chi tiet the loai
+			themChitietTheLoai(maTruyen, matheLoaiMoi);
+		}
+
+		String nguonMoi = (!truyenAddForm.getNguon().isEmpty()) ? truyenAddForm.getNguon() : truyenCu.getNguon();
+		String gioiThieuMoi = (!truyenAddForm.getGioiThieu().isEmpty()) ? truyenAddForm.getGioiThieu()
+				: truyenCu.getGioiThieu();
+		TruyenInfo truyenInfo = new TruyenInfo();
+		truyenInfo.setID(maTruyen);
+		truyenInfo.setTenTruyen(tenTruyenMoi);
+		truyenInfo.setHinhAnh(hinhAnhMoi);
+		truyenInfo.setMaTacGia(maTacGiaMoi);
+		truyenInfo.setNguon(nguonMoi);
+		truyenInfo.setGioiThieu(gioiThieuMoi);
 		truyenDao.capNhatTruyen(truyenInfo);
 		return "redirect:/quan-tri/ql-truyen/" + Helper.pathVariableString(tenTruyenMoi);
 	}
-
+	
 	@RequestMapping(value = "/{tenTruyen}/{tenChuong}", method = RequestMethod.GET)
 	public String xemChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
 			@PathVariable("tenChuong") String tenChuong) {
@@ -455,74 +474,7 @@ public class QL_TruyenController {
 		model.addAttribute("tenChuong", tenChuong);
 		return "admin/ql_truyen_xemchuong";
 	}
-
-	@RequestMapping(value = "/{tenTruyen}/addChuong", method = RequestMethod.POST)
-	public String addChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen, HttpServletRequest request,
-			HttpSession session) {
-		String idChuong = Helper.CreateId("CH");
-		String tieuDe = request.getParameter("ten");
-		String noiDung = request.getParameter("noiDung");
-		int trangThai = 1;
-		String ngayTao = Helper.getCurrentDateAndTime();
-		Map<String, String> url = truyenDao.listPathVariableString();
-		String maTruyen = url.get(tenTruyen);
-		
-		// cap nhat so luong chuong vao bang truyện
-		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() + 1);
-		
-		// tạo 1 đối tượng
-		ChuongInfo newChuong = new ChuongInfo(idChuong, maTruyen, tieuDe, noiDung, trangThai, ngayTao);
-		
-		// insert vào csdl
-		chuongDao.insertChuong(newChuong);
-		session.setAttribute("themChuong", tieuDe);
-
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
-	}
-
-	@RequestMapping(value = "/{tenTruyen}/editChuong/{tenChuong}", method = RequestMethod.POST)
-	public String editChuongForm(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@PathVariable("tenChuong") String tenChuong, @RequestParam("ten") String ten,
-			@RequestParam("noidung") String nd) {
-
-		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-		String maTruyen = urlTruyen.get(tenTruyen);
-
-		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-		String idChuong = urlChuong.get(tenChuong);
-		boolean kt = chuongDao.upDataChuong(ten, nd, idChuong);
-		if (kt)
-			return "redirect:/admin/ql-truyen";
-		else
-			return "redirect:/quan-tri/ql-truyen/" + tenTruyen + "/" + Helper.pathVariableString(ten);
-	}
-
-	@RequestMapping(value = "get-chuong-ajax", method = RequestMethod.POST)
-	public @ResponseBody String getChuong(Model model, HttpServletRequest request) throws JsonProcessingException {
-		String idChuong = request.getParameter("id");
-		ChuongInfo chuong = chuongDao.chuongInfo(idChuong);
-		ObjectMapper mapper = new ObjectMapper();
-		String json = mapper.writeValueAsString(chuong);
-		return json;
-
-	}
-
-	@RequestMapping(value = "/{tenTruyen}/xoachuong", method = RequestMethod.POST)
-	public String deleteChuongForm(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@RequestParam("idChuong") String idChuong, HttpServletRequest request) {
-
-		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-		String maTruyen = urlTruyen.get(tenTruyen);
-		// cập nhật số lượng truyện khi xóa chương
-		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() - 1);
-		// xóa chương trong csdl
-		chuongDao.deleteChuong(idChuong);
-
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
-	}
-
+	
 	@ModelAttribute("danhMuc")
 	public List<DanhMucTruyenInfo> getDanhMuc() {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();

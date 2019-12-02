@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Quản trị - Quản lý truyện</title>
 </head>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản Lý - Truyện</h1>
+			<h1 class="page-header">Quản Lý Truyện</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -103,15 +103,19 @@
 									</td>
 									
                                      <td>
-                                         <button type="submit" class="btn btn-success" id="btn_update" disabled="disabled">Cập nhật</button>
+                                     
+                                         <button type="submit" class="btn btn-success" id="btn_update" disabled="disabled" >Cập nhật</button>
                                             
 									 	<button type="submit" class="btn btn-danger" id="btn-delete" disabled="disabled"  data-toggle="modal"
 										data-target="#formXoaALlTruyen" >Delete</button>
 									</td>
 									
 									
-									<td><a href="" class="btn btn-danger disabled">Hiện có
-											: ${slt } truyện</a></td>
+									<td>
+										<button class="btn btn-danger disabled">Hiện có
+											: ${slt } truyện
+										</button>
+									</td>
 
 								</tr>
 							</tbody>
@@ -121,47 +125,61 @@
 							id="dataTables-truyen">
 							<thead>
 								<tr>
-									<th>
-										<!-- <input type="checkbox" id="select_all"> /> all -->
-									</th>
+									<th>Chọn</th>
 									<th>STT</th>
-									<th>Hình Ảnh</th>
-									<th>Tên Truyện</th>
-									<th>Tên Tác Giả</th>
+									<th>Ảnh</th>
+									<th>Truyện</th>
+									<th>Tác Giả</th>
 									<th>Thể loại</th>
 									<th>Số Chương</th>
 									<th>Lượt Xem</th>
-									<th>Truyện Full</th>
-									<th>Truyện Hot</th>
-									<th>Truyện New</th>
-									<th>Hiển thị</th>
+									<th>Full</th>
+									<th>Hot</th>
+									<th>New</th>
+									<th>Show</th>
 									<th></th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTruyen.list}" var="us"
-									varStatus="status">
+								<c:forEach items="${listTruyen.list}" var="us" varStatus="status">
 									<tr class="odd gradeA">
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
-												<label> <input class="checkbox all" type="checkbox" name="check[]" id="${us.ID }">
+												<label>
+													 <input class="checkbox all" type="checkbox" name="check[]" id="${us.ID }">
 												</label>
 											</div> 
 										</td>
-										<td scope="row">${status.index + 1}</td>
-										<td style="width: 13%; text-align: center;"><img heigth="100px" width="100px"
-											src="${pageContext.request.contextPath}/truyen/img/${us.hinhAnh}" />
+										<td style="text-align: center; padding-top:2%;">${status.index + 1}</td>
+										<td style="width: 13%; text-align: center;">
+											<img height="150px" width="100px"
+												src="${pageContext.request.contextPath}/truyen/img/${us.hinhAnh}" />
 										</td>
-										<td>${us.tenTruyen}</td>
-										<td class="center">${us.tenTacGia }</td>
-										<td><c:forEach items="${tenTheLoai}" var="tl" varStatus="status">
+										<td style="padding-top:2%;">
+											
+											
+											<c:forEach items="${url}" var="url">
+											<c:if test="${url.value==us.ID }">
+												<a
+													title="Xem trước"
+													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
+														${us.tenTruyen}
+												</a> 
+											</c:if>
+										
+										</c:forEach>
+										</td>
+										<td style="padding-top:2%;">${us.tenTacGia }</td>
+										<td style="padding-top:2%;">
+											<c:forEach items="${tenTheLoai}" var="tl" varStatus="status">
 
 												<c:if test="${us.ID == tl.maTruyen}">
 													${tl.tenTheLoai},
 												</c:if>
-											</c:forEach></td>
-										<td style="text-align: center">${us.soChuong }</td>
-										<td style="text-align: center">${us.luotXem }</td>
+											</c:forEach>
+										</td>
+										<td style="text-align: center;  padding-top:2%;">${us.soChuong }</td>
+										<td style="text-align: center; padding-top:2%;">${us.luotXem }</td>
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label>						
@@ -170,11 +188,9 @@
 													</c:if>
 													<c:if test="${us.full == false }">
 														<input class="checkbox full" type="checkbox" name="check_full[]" id="${us.ID }">
-													</c:if>	
-													
+													</c:if>		
 												</label>
 											</div>
-											
 										</td>
 											
 										<td style="width: 5%; text-align: center;">
@@ -220,8 +236,9 @@
 													class="btn btn-warning btn-circle" title="Xem trước"
 													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
 														<i class="fa fa-eye"></i>
-												</a> <a class="btn btn-danger btn-circle delete-truyen" title="Xóa truyện" data-toggle="modal"
-												data-target="#formXoaTruyen" id="${us.ID }">
+												</a> 
+												<a class="btn btn-danger btn-circle delete-truyen" title="Xóa truyện" 
+												data-toggle="modal" data-target="#formXoaTruyen" id="${us.ID }">
 														<i class="fa fa-close"></i>
 												</a></td>
 											</c:if>
@@ -519,7 +536,7 @@
 				checkboxes[i].checked = true;
 				let id = $(checkboxes[i]).attr("id");
 				array_id.push(id);
-				console.log(array_id[i]);
+				//console.log(array_id[i]);
 			}
 			
 			document.getElementById("select_all").style.display = 'none';

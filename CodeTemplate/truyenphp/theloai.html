@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="assets/icon/css/all.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/login.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/tool.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <!-- Path.css dùng cho trang thông tin truyện và đọc truyện -->
+    <link rel="stylesheet" href="assets/css/path.css">
+    <!-- Path.css dùng cho trang thông tin truyện và đọc truyện -->
+    <link rel="stylesheet" href="assets/css/info-truyen.css"> <!--  Sử dụng Css truyện đang hot -->
+    <link rel="stylesheet" href="assets/css/search.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tổng hợp truyện tu tiên cực hot, cực hay</title>
+</head>
+<body>
+        <div class="topnav" id="myTopnav">
+                <a href="index.html" id="home">
+                        <span class="fa-stack">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
+                        </span>
+                TRUYỆN PHP</a>
+                <div class="dropdown" id="danhMuc">
+                    <button class="dropbtn"><i class="fas fa-list"></i> Danh mục
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content" id="dropdown-content">
+                        <a href="danhmuc.html?id=full"><strong style="color: #86ad86;">Truyện full
+                                <span data-placeholder="Truyện full"></strong></span>
+                        </b></a>
+                        <a href="danhmuc.html?id=hot"><strong style="color: #fd8383;">Truyện hot
+                                <span data-placeholder="Truyện hot"></span>
+                        </strong></a>
+                        <a href="#"><strong style="color: #8eb3fd;">Truyện New
+                                <span data-placeholder="Truyện new"></span>
+                        </strong></a>
+                        <a href="#"><strong>Truyện mới cập nhật
+                                <span data-placeholder="Truyện mới cập nhập"></span>
+                        </strong></a>
+                    </div>
+                </div>
+                <div class="dropdown" id="theLoai">
+                    <button class="dropbtn"><i class="fa fa-sort"></i> Thể loại
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <table width="100%" >
+                            <tr>
+                                <td  >
+                                    <a href="theloai.html?id=tien-hiep"><strong>Tiên hiệp
+                                            <span data-placeholder="Tiên hiệp" ></span></strong></a>
+                                </td>
+                                <td>
+                                    <a href="theloai.html?id=tien-hiep"><strong>Kiếm hiệp
+                                            <span data-placeholder="Kiếm hiệp" ></span></strong></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="theloai.html?id=tien-hiep"><strong>Huyền huyễn
+                                            <span data-placeholder="Huyền huyễn" ></span></strong></a>
+                                  
+                                </td>
+                                <td>
+                                        <a href="theloai.html?id=tien-hiep"><strong>Tu chân
+                                                <span data-placeholder="Tu chân" ></span></strong></a>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <a id="search" style=" position: absolute;right: 25%;top:0;width: 300px;padding: 10px;">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </a>
+                <!-- Nút đăng nhập-->
+                <div class="dropdown"  id="user">
+                        <button class="dropbtn" style="cursor:pointer;font-weight: bold"><i class="fa fa-user"></i> Đăng nhập
+                           
+                        </button>
+                </div>
+                <a style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+            </div>
+    <div class="main">
+        <div id="path">
+            <i class="fa fa-home"></i> Truyện 
+            <span class="path">/</span> 
+            <span class="path-search">Tiên hiệp </span> 
+        </div>
+        <div class="row">
+                <div class="col-7" id="tim-kiem-truyen">
+                        <div class="title"><i class="fas fa-list"></i> TRUYỆN TIÊN HIỆP </div>
+                        <div class="content">
+                            <div class="search-item">
+                                <div class="search-item-picture">
+                                    <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg">
+                                </div>
+                                <div class="search-item-infor">
+                                       <span class="search-item-infor-name">
+                                           <b>
+                                               <a href="#"><i class="fas fa-book"></i> Ma thiên ký</a>
+                                                         <span class="index-item-status" id="index-item-status-full">Full</span>
+                                        <span class="index-item-status" id="index-item-status-hot">Hot</span>
+                                         <span class="index-item-status" id="index-item-status-new">New</span>
+                                            </b> 
+                                            <br><i class="fas fa-pencil-alt"></i> Vong ngữ</span>
+                                       <span class="search-item-infor-chuong"><a href="#">Chương 1</a></span>
+                                </div>
+                            </div>
+                            <div class="search-item">
+                                    <div class="search-item-picture">
+                                        <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg">
+                                    </div>
+                                    <div class="search-item-infor">
+                                           <span class="search-item-infor-name">
+                                               <b>
+                                                   <a href="#"><i class="fas fa-book"></i> Ma thiên ký</a>
+                                             
+                                                </b> 
+                                                <br><i class="fas fa-pencil-alt"></i> Vong ngữ</span>
+                                           <span class="search-item-infor-chuong"><a href="#">Chương 1</a></span>
+                                    </div>
+                                </div>
+                                <div class="search-item">
+                                        <div class="search-item-picture">
+                                            <img src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg">
+                                        </div>
+                                        <div class="search-item-infor">
+                                               <span class="search-item-infor-name">
+                                                   <b>
+                                                       <a href="#"><i class="fas fa-book"></i> Ma thiên ký</a>
+                                                     
+                                                    </b> 
+                                                    <br><i class="fas fa-pencil-alt"></i> Vong ngữ</span>
+                                               <span class="search-item-infor-chuong"><a href="#">Chương 1</a></span>
+                                        </div>
+                                    </div>
+                        </div>
+                </div>
+                <div class="col-3" id="description-search">
+                    <div class="content">
+                        <table>
+                            <tr>
+                                <td>Truyện tiên hiệp thường kể về quá trình tu luyện và khám phá thế giới tu sĩ thần tiên đầy bí ẩn của nhân vật chính.
+                                        <br>
+                                        <br>
+                                        Trong truyện tiên hiệp thường chia ra những cấp bậc tu luyện trước khi thành tiên như sau:
+                                        <ul>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+                                            <li> Luyện Khí</li>
+
+                                        </ul>
+                                        Sau khi thành tiên thì có những cấp bậc: 
+                                        <ul>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                                <li> Luyện Khí</li>
+                                        </ul>
+                                        Ngoài ra còn có những cấp độ ngoài tiên như Bán Thánh, Vô Cực Thánh Nhân,.. dựa theo trí tưởng tượng của tác giả.</span></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-3" id="the-loai-truyen">
+                    <div class="title">THỂ LOẠI TRUYỆN <i class="fas fa-arrow-circle-down"></i></div>
+                        <div class="content">
+                            <table>
+                                <tr>
+                                    <td><a href="#"><strong><i class="far fa-star"></i> Tiên hiệp<span data-placeholder="Truyện full"></span></strong></a></td>
+                                    <td><a href="#"><strong><i class="far fa-star"></i> Kiếm hiệp<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                </tr>
+                                <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                </tr>
+                                <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>
+                                    <tr>
+                                            <td><a href="#"><strong><i class="fas fa-tags"></i> Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                            <td><a href="#"><strong><i class="fas fa-tags"></i> Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>  
+                                    <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                </tr>
+                                <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Tu chuân<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                        <td><a href="#"><strong><i class="fas fa-tags"></i> Đô thị<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>
+                                    <tr>
+                                            <td><a href="#"><strong><i class="fas fa-tags"></i> Huyền huyễn<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                            <td><a href="#"><strong><i class="fas fa-tags"></i> Xuyên không<span data-placeholder="Truyện full"></span></strong></a></a></td>
+                                    </tr>            
+                                        
+                            </table>
+                    </div>
+        
+            </div>
+                <div class="col-3" id="truyen-dang-hot">
+                        <div class="title">TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i></div>
+                            <div class="content">
+                                <table cellspacing="5">
+                                    <tr>
+                                        <td style="padding-left: 5%;padding-right: 5%;">
+                                            <span class="type-time type-time-unactive">Ngày</span>
+                                            <span class="type-time type-time-unactive">Tháng</span>
+                                            <span class="type-time type-time-active">Năm</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="one">1</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="two">2</span><span class="name"><a>Chọc tức vợ yêu - Mua tặng ...</a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="three">3</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">4</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">5</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">6</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">7</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">8</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">9</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="index" id="all">10</span><span class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
+                                    </tr>
+                                </table>
+                        </div>
+        </div>
+    </div>
+<div class="tool">
+        <span class="tool-item" id="tool-item-top"><span class="tool-mota">Về đầu trang</span><i class="far fa-arrow-alt-circle-up"></i></span>
+        <span class="tool-item"><span class="tool-mota">Liên hệ Facebook</span><a target="_blank" href="https://facebook.com"><i class="fab fa-facebook-f"></i></a></span>
+        <span class="tool-item"><span class="tool-mota">Phản hồi</span><a target="_blank" href="contact.html"><i class="far fa-envelope"></i></a></span>
+</div>
+<div class="footer">
+    <div class="footer-left">
+            <a href="#home" id="home">
+                    <span class="fa-stack">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-book-open fa-spin fa-stack-1x fa-inverse" style="color: black;"></i>
+                    </span>
+            TRUYỆN PHP</a>
+    </div>
+    <div class="footer-mid">
+        <table>
+            <thead>
+                <tr>
+                    <td>Truyện full</td>
+                    <td>Truyện mới cập nhật</td>
+                    <td>Truyện hot</td>
+                </tr>
+            </thead>
+           <tbody>
+                <tr>
+                    <td><a href="#">Thiên hạ vô song</a></td>
+                    <td><a href="#">Duy ngã độc tôn</a></td>
+                    <td><a href="#">Vô địch thiên hạ</a></td>
+                </tr> 
+                <tr>
+                        <td><a href="#">Thiên hạ vô song</a></td>
+                        <td><a href="#">Duy ngã độc tôn</a></td>
+                        <td><a href="#">Vô địch thiên hạ</a></td>
+                    </tr> 
+                    <tr>
+                            <td><a href="#">Thiên hạ vô song</a></td>
+                            <td><a href="#">Duy ngã độc tôn</a></td>
+                            <td><a href="#">Vô địch thiên hạ</a></td>
+                        </tr> 
+                        <tr>
+                                <td><a href="#">Thiên hạ vô song</a></td>
+                                <td><a href="#">Duy ngã độc tôn</a></td>
+                                <td><a href="#">Vô địch thiên hạ</a></td>
+                            </tr> 
+           </tbody>
+        </table>
+    </div>
+    <div class="footer-right">
+        <span>Đề tài:</span> Xây dựng ứng dụng web đọc truyện online <br>
+        <span>Môn:</span> Phát triển phần mềm chuyên nghiệp <br>
+        Thành viên: <br>
+         - Võ Văn Việt <br>
+         - Nguyễn Công Toàn <br>
+         - Phạm Ngọc Văn
+         <span id="footer-right-term"><i class="fab fa-steam-symbol"></i> <a href="term.html">Terms of Service</a></span> 
+    </div>
+</div>
+    <div id="container-login">
+        <i class="fas fa-times-circle fa-lg"></i>
+        <form action="#" method="post">
+            <h1 id="abac">Đăng nhập</h1>
+            <div class="txtb">
+                <input type="text">
+                <span data-placeholder="Tài khoản"></span>
+            </div>
+            <div class="txtb">
+                <input type="password">
+                <span data-placeholder="Mật khẩu"></span>
+            </div>
+            <input type="button" value="Đăng nhập">
+            <div class="bottom-text">
+               Chưa có tài khoản? <a HREF="#" id="btn-logup">Đăng ký</a>
+            </div>
+     </form>
+    </div>
+    <div id="container-logup">
+        <i class="fas fa-times-circle fa-lg"></i>
+        <form action="#" method="post">
+            <h1 id="abac">Đăng ký</h1>
+            <div class="txtb">
+                <input type="text">
+                <span data-placeholder="Tài khoản"></span>
+            </div>
+            <div class="txtb">
+                <input type="password">
+                <span data-placeholder="Mật khẩu"></span>
+            </div>
+            <div class="txtb">
+                <input type="password">
+                <span data-placeholder="Xác nhận mật khẩu"></span>
+            </div>
+            <div class="txtb">
+                <input type="text">
+                <span data-placeholder="Email"></span>
+            </div>
+            <input type="button" value="Đăng ký">
+            <div class="bottom-text">
+               Đã có tài khoản? <a HREF="#" id="btn-login">Quay lại</a>
+            </div>
+     </form>
+    </div>
+    <div class="cover-login"></div>
+    <!-- JS phần login -->
+<script src="assets/js/login.js">
+</script>
+<!-- JS phần login -->
+<!-- JS phần menu và responsive -->
+<script src="assets/js/menu-responsive.js">
+</script>
+<script src="assets/js/info-truyen.js"></script>
+<script src="assets/js/tool.js"></script>
+<!-- JS phần menu và responsive -->
+</body>
+</html>

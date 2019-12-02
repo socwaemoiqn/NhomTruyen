@@ -19,7 +19,7 @@
 		a:hover {
 		  color: lightgreen;
 		}
-		.col-6{
+	.phan-trang{
 			text-align:center;
 			position: relative;
 			min-height: 1px;
@@ -36,8 +36,6 @@
 		.pagination>li {
 			display: inline
 		}
-		
-		
 	</style>
 		
 </head>
@@ -244,8 +242,9 @@
 							</c:forEach>
 						</table>
 					</div>
-					<c:if test="${listChuong.totalPages >1}">
-							<div class="col-6">
+				</div>
+				<c:if test="${listChuong.totalPages >1}">
+							<div class="phan-trang">
 								<nav>
 									<ul class="pagination pagination-lg">
 										<c:forEach items="${listChuong.navigationPages}" var="page">
@@ -260,7 +259,6 @@
 								</nav>
 							</div>
 						</c:if>
-				</div>
 			</div>
 			<div class="col-7" id="binh-luan"
 				style="background: #fff; text-align: center;">

@@ -47,7 +47,7 @@ public class HomeController {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();
 		List<TheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTheLoai();
 
-		Map<String, String> urlTheLoai = new HashMap<String, String>();
+		Map<String, Integer> urlTheLoai = new HashMap<String, Integer>();
 		for (TheLoaiTruyenInfo tl : theLoaiTruyen) {
 			urlTheLoai.put(Helper.pathVariableString(tl.getTenTheLoai()), tl.getId());
 		}

@@ -6,7 +6,7 @@ public class TruyenAddForm {
 
 	private String tenTruyen;
 	// Upload files.
-    private CommonsMultipartFile[] hinhAnh;
+    private CommonsMultipartFile hinhAnh;
     
     private int maTacGia;
     private int soChuong;
@@ -27,10 +27,10 @@ public class TruyenAddForm {
 	public void setTenTruyen(String tenTruyen) {
 		this.tenTruyen = tenTruyen;
 	}
-	public CommonsMultipartFile[] getHinhAnh() {
+	public CommonsMultipartFile getHinhAnh() {
 		return hinhAnh;
 	}
-	public void setHinhAnh(CommonsMultipartFile[] hinhAnh) {
+	public void setHinhAnh(CommonsMultipartFile hinhAnh) {
 		this.hinhAnh = hinhAnh;
 	}
 	public int getMaTacGia() {

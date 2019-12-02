@@ -1,0 +1,11 @@
+#path{
+    color: #4e4e4e;
+    background: #ececec;
+    font-size: 14px;
+    line-height: 30px;
+    box-shadow: 0 5px 10px gray;
+    padding: 0 10%;
+}
+.path{
+    color: #b4b9b4;
+}

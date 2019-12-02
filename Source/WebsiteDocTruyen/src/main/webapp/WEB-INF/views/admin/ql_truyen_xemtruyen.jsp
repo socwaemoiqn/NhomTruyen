@@ -5,14 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Quản lý truyện - ${truyenById.tenTruyen }</title>
 
+  <!-- DataTables CSS -->
+  <link href="${pageContext.request.contextPath}/template/admin/css/dataTables/dataTables.bootstrap.css" rel="stylesheet">
 
+  <!-- DataTables Responsive CSS -->
+  <link href="${pageContext.request.contextPath}/template/admin/css/dataTables/dataTables.responsive.css" rel="stylesheet">
+	
 </head>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h2 class="page-header">Thông tin truyện : ${truyenById.tenTruyen }</h2>
+			<h2 class="page-header">Thông tin chi tiết về truyện</h2>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -25,10 +30,9 @@
 				<c:if test="${not empty sessionScope.themChuong}">
                     	<div class="alert alert-info alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                                
-                                	 Đã thêm chương:
-                                	  <a href="" class="alert-link">${sessionScope.themChuong}</a>.<i> Nhấn tab <a href="#chuong" data-toggle="tab">Chương</a> để xem chi tiết.</i> 
-                               
+                               	 Đã thêm chương:
+                               	 <a href="" class="alert-link">${sessionScope.themChuong}</a>.
+                               	 <i> Nhấn tab <a href="#chuong" data-toggle="tab">Chương</a> để xem chi tiết.</i> 
                            </div>
 					</c:if>
 					
@@ -65,17 +69,11 @@
 
 							</div>
 
-							<h3>${truyenById.tenTruyen }</h3>
+							<h3>Tên: ${truyenById.tenTruyen }</h3>
 							<div style="float: right;">
 								<a href="" class="btn btn-success" data-toggle="modal"
 									data-target="#editThongTinTruyen">Chỉnh Sửa Thông Tin</a>
 							</div>
-							<p>
-								Danh Mục:
-								<c:forEach items="${dmById}" var="d" varStatus="status">
-									<a>${d.tenDanhMuc }</a>,
-								</c:forEach>
-							</p>
 							<p>
 								Thể loại:
 								 <c:forEach items="${temtl}" var="d" varStatus="status">
@@ -109,8 +107,8 @@
 						<div class="tab-pane fade" id="chuong">
 							<h4> <i>${truyenById.tenTruyen } hiện có </i> : ${truyenById.soChuong } chương. </h4>
 							<p style="float: right;">
-								<a href="#" data-toggle="modal" data-target="#addChuong"
-									class="btn btn-primary">Thêm Chương Mới</a>
+								<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/ql-chuong/${tenTruyen}"
+									class="btn btn-primary">Quản lý chương</a>
 							</p>
 							<div class="clearfix"></div>
 
@@ -125,19 +123,19 @@
 												<c:set value="collapse" var="in" />
 											</c:otherwise>
 										</c:choose>
-										<div id="collapse${i}" class="panel-collapse ${in } ">
+										
 
 											<div class="panel-body">
 												<table
 													class="table table-striped table-bordered table-hover"
-													id="dataTables-example">
+													id="table-chuong">
 													<thead>
 														<tr>
 															<th>STT</th>
 															<th>Chương</th>
-															<th>Tên Chương</th>
+															<th>Tiêu đề</th>
 															<th>Trạng Thái</th>
-															<th></th>
+															
 														</tr>
 													</thead>
 													<tbody>
@@ -152,43 +150,40 @@
 																		</c:if>
 																	</c:forEach>
 																</td>
-																<td>${us.tieuDe}</td>
-																<td class="center">dùng check</td>
-																<c:forEach items="${urlChuong}" var="ch">
+																<td>
+																	<a title="Xem trước"
+																		href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
+																		${us.tieuDe}
+																	</a>
+																</td>
+																<td >
+																	<c:if test="${us.trangThai == '1'}">
+																		Enable
+																	</c:if>
+																	<c:if test="${us.trangThai == '0'}">
+																		Disable
+																	</c:if>
+																</td>
+																<%-- <c:forEach items="${urlChuong}" var="ch">
 																	
 																	<c:if test="${ch.value==us.id }">
 																	
-																		<td class="center"><a
-																			class="btn btn-primary btn-circle" title="Xem trước"
-																			href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
+																		<td style="width: 5%;">
+																			<a	class="btn btn-primary btn-circle" title="Xem trước"
+																				href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
 																				<i class="fa fa-eye"></i>
-																		</a> <a class="btn btn-danger btn-circle btn-xoa"
-																			title="Xóa chương" id="${us.id}" data-toggle="modal"
-																			data-target="#xoaChuong" href=""><i
-																			class="fa fa-close"></i></a></td>
+																			</a>
+																		</td>
 																	</c:if>
-																</c:forEach>
+																</c:forEach> --%>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
 											</div>
-										</div>
+										
 									</div>
 								</c:forEach>
-								<div class="grid_3 grid_5 agileits">
-									<div class="col-md-6">
-										<nav>
-											<ul class="pagination pagination-lg">
-												<c:forEach var="i" begin="1" end="${(slChuong/25)+1}">
-													<li><a data-toggle="collapse" data-parent="#accordion"
-														href="#collapse${i}">${i}</a></li>
-												</c:forEach>
-											</ul>
-										</nav>
-									</div>
-
-								</div>
 
 							</div>
 						</div>
@@ -231,6 +226,7 @@
 										<label>Tác giả cũ: <i>${truyenById.tenTacGia }</i></label><br>
 										<label>Chọn lại tác giả: </label>
 										<form:select path="maTacGia" class="form-control">
+											<form:option value="-1" label="-----" />
 											<form:options items="${tacGia}" itemLabel="tenTacGia"
 												itemValue="ID" />
 										</form:select>
@@ -261,12 +257,13 @@
 									<div class="form-group">
 										<label>Giới thiệu chung
 										</label>
-										<form:textarea path="gioiThieu" class="form-control"
+										<form:textarea path="gioiThieu"  id ="gt" class="form-control"
 											placeholder="${truyenById.gioiThieu }"/>
+											 
 
 									</div>
-									<button type="submit" class="btn btn-primary">Thêm
-										Truyện Mới</button>
+									<button type="submit" class="btn btn-success">Chỉnh sửa thông tin truyện</button>
+									<button type="button" class="btn btn-warning" data-dismiss="modal">Hủy</button>
 								</form:form>
 							</div>
 
@@ -278,111 +275,16 @@
 			<!-- //Modal content-->
 		</div>
 	</div>
-
-	<div class="modal fade" id="addChuong" tabindex="-1" role="dialog">
-		<div class="modal-dialog-editchuong">
-			<!-- Modal content-->
-			<div class="col-lg-12">
-				<div class="panel panel-primary">
-
-					<div class="panel-heading">
-						<h3>Thêm chương mới</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/addChuong"
-									method="post">
-									<div class="form-group">
-										<label>Nhập lại tên chương</label> <input class="form-control"
-											type="text" name="ten" placeholder="Nhập tên chương">
-									</div>
-									<div class="form-group">
-										<label>Nhập nội dung của chương</label>
-										<textarea name="noiDung" id="noidung"></textarea>
-										<script>
-											CKEDITOR.replace('noidung');
-											CKEDITOR.addCss('form-control')
-										</script>
-									</div>
-									<button type="submit" class="btn panel-primary">Đồng ý</button>
-								</form>
-							</div>
-
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<!-- //Modal content-->
-
-		</div>
-	</div>
-	<div class="modal fade" id="xoaChuong" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
-			<div class="col-lg-12">
-				<div class="panel panel-red">
-
-					<div class="panel-heading">
-						<h3>Xóa chương</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/xoachuong"
-									method="post">
-									<div class="form-group">
-										<label>Bạn muốn xóa bỏ chương: </label>
-										<h4 id="tenChuong"></h4>
-									</div>
-									<input type="text" name="idChuong" id="idChuong" value=""
-										style="width: 0px; height: 0px; border: none; background: transparent;" />
-									<div class="form-group">
-										<label>Nhấn "Đồng ý" để xác nhận xóa chương!</label>
-
-									</div>
-									<button type="submit" class="btn btn-danger">Đồng ý</button>
-									<button type="button" class="btn btn-warning"
-										data-dismiss="modal">Hủy</button>
-								</form>
-							</div>
-
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<!-- //Modal content-->
-
-		</div>
-	</div>
-	<script>	
-		$(document).ready(function() 
-		{
-			$(document).on('click','.btn-xoa',function() {
-			let id = $(this).attr("id");
-			$.ajax(
-				{
-					url : "${pageContext.request.contextPath}/quan-tri/ql-truyen/get-chuong-ajax",
-					type : "POST",
-					dataType : "json",
-					data : {id : id},
-					success : function(data)
-					{
-						var tieuDe = " "+ data.tieuDe;
-						$("#xoaChuong #tenChuong").html(tieuDe);
-						$("#xoaChuong #idChuong").val(data.id);
-					},
-					error : function(error)
-					{
-						alert(error);
-					}
-				});
-		});
-	});
-	</script>
-</body>
+	<!-- DataTables JavaScript -->
+       <script src="${pageContext.request.contextPath}/template/admin/js/dataTables/jquery.dataTables.min.js"></script>
+       <script src="${pageContext.request.contextPath}/template/admin/js/dataTables/dataTables.bootstrap.min.js"></script>
+       <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+       <script>
+           $(document).ready(function() {
+               $('#table-chuong').DataTable({
+                       responsive: true
+               });
+           });
+       </script>
+	</body>
 </html>

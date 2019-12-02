@@ -15,14 +15,21 @@ public interface DanhMucTruyenDAO {
 	
 	public List<DanhMucTruyenInfo> dsDanhMucTruyen();
 	public PaginationResult<DanhMucTruyenInfo> listDanhMucTruyen(int page, int maxResult, int maxNavigationPage);
-	public DanhMucTruyenEntity findDanhMucTruyenEntity(int id); 
-	public DanhMucTruyenInfo findDanhMucTruyenInfo(int id);
-	public void insertDanhMucTruyen(DanhMucTruyenInfo danhMucTruyenInfo); 
-	public void deleteDanhMucTruyen(int id);
-	public void deleteChiTietDanhMuc(ChiTietDanhMucEntity chiTietDanhMucEntity);
+	public PaginationResult<DanhMucTruyenInfo> searchDanhMuc(String tuKhoa,int page, int maxResult, int maxNavigationPage);
 	public List<ChiTietDanhMucTruyenInfo> listTenDMByMaTruyen(String maTruyen);
 	public List<ChiTietDanhMucTruyenInfo> listTenDM();
 	
+	public DanhMucTruyenEntity findDanhMucTruyenEntity(int id); 
+	public DanhMucTruyenInfo findDanhMucTruyenInfo(int id);
+	
+	public void insertDanhMucTruyen(DanhMucTruyenInfo danhMucTruyenInfo); 
+	public void insertChiTietDanhMuc(ChiTietDanhMucTruyenInfo chiTietDanhMucTruyenInfo);
+	
+	public void capNhatDanhMuc(DanhMucTruyenInfo danhMucTruyenInfo);
+	public void capNhatTrangThaiDanhMuc(DanhMucTruyenInfo danhMucTruyenInfo);
+	
+	public void deleteDanhMucTruyen(int id);
+	public void deleteChiTietDanhMuc(ChiTietDanhMucEntity chiTietDanhMucEntity);
 
-	public void InsertChiTietDanhMuc(ChiTietDanhMucTruyenInfo chiTietDanhMucTruyenInfo);
+	
 }

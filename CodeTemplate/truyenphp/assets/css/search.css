@@ -1,0 +1,65 @@
+#tim-kiem-truyen{
+    min-height: 1500px;
+}
+#tim-kiem-truyen .search-item{
+    width: 100%;
+    border-bottom: 1px solid gray;
+    padding: 20px;
+    min-height: 120px;
+    clear: both;
+}
+.search-item .search-item-picture{
+   float: left;
+    width: 25%;   
+    max-height: 90px;
+    overflow: hidden;
+}
+.search-item .search-item-infor{
+    float:left;
+    padding: 15px;
+    border-left: 1px solid gray;
+    margin-left: 1%;
+    width: 74%;
+    height: 90px;
+    
+}
+.search-item-infor .search-item-infor-name{
+    text-align: left;
+    line-height: 25px;
+}
+.search-item-infor .search-item-infor-name i{
+    color:#FF9933;
+}
+.search-item-infor .search-item-infor-name b{
+    font-size: 20px;
+}
+
+.search-item-infor .search-item-infor-name b i{
+    color: #FF9933;
+}
+
+.search-item-infor .search-item-infor-chuong{
+    position: absolute;
+    right: 40px;
+    
+}
+.search-item-infor .search-item-infor-chuong a{
+    font-size: 17px;
+}
+.search-item-infor a{
+    text-decoration: none;
+}
+.search-item-infor a:hover{
+    color: gray;
+}
+#description-search{
+    min-height: auto;
+    padding: 1px;
+}
+
+#description-search table td{
+    padding: 5px;
+}
+#description-search table td span{
+    color: yellow;
+}

@@ -5,23 +5,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản Trị</title>
-	<script src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/js/jquery-confirm.js"></script>
+<title><dec:title/></title>
+<script
+	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
+<script
+	src="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/js/jquery-confirm.js"></script>
 
 <!-- Bootstrap Core CSS -->
-<link href="${pageContext.request.contextPath}/template/admin/css/bootstrap.min.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/template/admin/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/template/admin/jquery-confirm-v3.3.4/dist/jquery-confirm.min.css"
+	rel="stylesheet">
 <!-- MetisMenu CSS -->
-<link href="${pageContext.request.contextPath}/template/admin/css/metisMenu.min.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/template/admin/css/metisMenu.min.css"
+	rel="stylesheet">
 
 <!-- Custom CSS -->
-<link href="${pageContext.request.contextPath}/template/admin/css/startmin.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath}/template/admin/css/startmin.css"
+	rel="stylesheet">
 
 <!-- Custom Fonts -->
-<link href="${pageContext.request.contextPath}/template/admin/css/font-awesome.min.css" rel="stylesheet"
-	type="text/css">
-	<script src="${pageContext.request.contextPath}/template/admin/ckeditor/ckeditor.js"></script>
+<link
+	href="${pageContext.request.contextPath}/template/admin/css/font-awesome.min.css"
+	rel="stylesheet" type="text/css">
+
+	<dec:head/>
 </head>
 <body>
 	<div id="wrapper">
@@ -36,20 +48,26 @@
 		</div>
 	</div>
 	<!-- jQuery -->
-	
+
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/bootstrap.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/metisMenu.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/metisMenu.min.js"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/raphael.min.js"></script>
-	<script src="${pageContext.request.contextPath}/template/admin/js/morris.min.js"></script>
-	<script src="${pageContext.request.contextPath}/template/admin/js/morris-data.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/raphael.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/morris.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/morris-data.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="${pageContext.request.contextPath}/template/admin/js/startmin.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/template/admin/js/startmin.js"></script>
 </body>
 </html>

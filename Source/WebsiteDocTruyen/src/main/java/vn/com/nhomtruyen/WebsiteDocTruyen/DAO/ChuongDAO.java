@@ -19,7 +19,8 @@ public interface ChuongDAO {
 	
 	public ChuongInfo chuongInfo(String idChuong);
 	public void insertChuong(ChuongInfo chuongInfo);
-	public boolean upDataChuong(String tieuDe,String nd, String idChuong);
+	public void upDateChuong(ChuongInfo chuongInfo);
+	public void upDateTrangThaiChuong(ChuongInfo chuongInfo);
 	public void deleteChuong(String idChuong);
 	
 }

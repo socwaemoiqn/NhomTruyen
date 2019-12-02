@@ -176,12 +176,11 @@ public class TruyenImpl implements TruyenDAO {
 		TruyenEntity truyen = findTruyenEntity(truyenInfo.getID());
 		truyen.setTenTruyen(truyenInfo.getTenTruyen());
 		truyen.setHinhAnh(truyenInfo.getHinhAnh());
+		truyen.setMaTacGia(truyenInfo.getMaTacGia());
 		truyen.setNguon(truyenInfo.getNguon());
 		truyen.setGioiThieu(truyenInfo.getGioiThieu());
 
-		if (truyen != null) {
-			this.sessionFactory.getCurrentSession().update(truyen);
-		}
+		this.sessionFactory.getCurrentSession().update(truyen);
 
 	}
 

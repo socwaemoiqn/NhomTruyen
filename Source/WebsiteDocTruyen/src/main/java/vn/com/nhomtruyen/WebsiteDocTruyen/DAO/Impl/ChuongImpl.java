@@ -28,7 +28,7 @@ public class ChuongImpl implements ChuongDAO{
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao ASC";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao DESC";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", idTruyen);
@@ -87,19 +87,12 @@ public class ChuongImpl implements ChuongDAO{
 	}
 
 	@Override
-	public boolean upDataChuong(String tieuDe, String nd, String idChuong) {
-		Session session = this.sessionFactory.getCurrentSession();
-		String sql = " update " + ChuongEntity.class.getName() + " ch set ch.tieuDe =:td , ch.noiDung =: nd where ch.id =: id";
-
-		Query query = session.createQuery(sql);
-		query.setParameter("id", idChuong);
-		query.setParameter("nd", nd);
-		query.setParameter("td",tieuDe);
-
-		if (query.executeUpdate() > 1)
-			return true;
-		else
-			return false;
+	public void upDateChuong(ChuongInfo chuongInfo) {
+		ChuongEntity chuongEntity= findChuongEntity(chuongInfo.getId());
+		chuongEntity.setNoiDung(chuongInfo.getNoiDung());
+		chuongEntity.setTieuDe(chuongInfo.getTieuDe());
+		chuongEntity.setTrangThai(chuongInfo.getTrangThai());
+		this.sessionFactory.getCurrentSession().update(chuongEntity);
 	}
 
 	
@@ -130,6 +123,13 @@ public class ChuongImpl implements ChuongDAO{
 		if(chuongEntity != null) {
 			this.sessionFactory.getCurrentSession().delete(chuongEntity);
 		}
+	}
+
+	@Override
+	public void upDateTrangThaiChuong(ChuongInfo chuongInfo) {
+		ChuongEntity chuongEntity= findChuongEntity(chuongInfo.getId());
+		chuongEntity.setTrangThai(chuongInfo.getTrangThai());
+		this.sessionFactory.getCurrentSession().update(chuongEntity);
 	}
 
 	

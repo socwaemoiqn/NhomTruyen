@@ -29,45 +29,8 @@ public class HomeController {
 		return "admin/home";
 	}
 
-	@RequestMapping(value = "/ql-danhmuc-truyen", method = RequestMethod.GET)
-	public String QlDanhMucTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
+	
 
-		// List<danhMucTruyenInfo> listDanhMuc= danhMucTruyenDAO.dsDanhMucTruyen();
-
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 2;
-		final int Max_Navigation = 2;
-		PaginationResult<DanhMucTruyenInfo> listDanhMuc = danhMucTruyenDAO.listDanhMucTruyen(page, Max_Result,
-				Max_Navigation);
-
-		model.addAttribute("danhMucTruyen", listDanhMuc);
-
-		return "admin/ql_danhmuctruyen";
-	}
-
-	@RequestMapping(value = "/ql-theloai-truyen", method = RequestMethod.GET)
-	public String QlTheLoaiTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 3;
-		final int Max_Navigation = 4;
-
-		PaginationResult<TheLoaiTruyenInfo> listTheLoaiTruyen = theLoaiTruyenDAO.listTheLoaiTruyen(page, Max_Result,
-				Max_Navigation);
-
-		model.addAttribute("listTheLoaiTruyen", listTheLoaiTruyen);
-
-		return "admin/ql_theloaitruyen";
-	}
 
 	
 

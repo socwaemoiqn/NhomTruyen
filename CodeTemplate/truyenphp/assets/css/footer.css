@@ -1,0 +1,82 @@
+.footer{
+    clear: both;
+    padding: 0 10%;
+    border-top: 2px solid yellow;
+    min-height: 0px;
+    background: #ffffff;
+}
+.footer-left,.footer-mid,.footer-right{
+    float:left;
+    height: 200px;
+
+    padding: 10px;
+}
+.footer-left{
+    width: 25%;
+
+}
+.footer-left a{
+    font-size: 25px;
+    text-decoration: none;
+}
+.footer-mid{
+    width: 45%;
+}
+.footer-mid table{
+    width: 100%;
+}
+.footer-mid table thead td{
+    padding: 8px 0;
+    color: #44e2ff;
+    font-size: 18px;
+}
+.footer-mid table tbody td
+{
+    padding: 5px 0px;
+    color: blanchedalmond;
+    font-size: 13px;
+}
+.footer-mid table tbody td a{
+    text-decoration: none;
+}
+.footer-mid table tbody td a:hover{
+    color: #dacb46;
+}
+.footer-right{
+      position: relative;
+    font-size: 15px;
+    width: 30%;
+    padding: 10px;
+    color: #ffffff;
+    line-height: 22.5px;
+}
+.footer-right span{
+    color: #44e2ff;
+}
+.footer-right i.fa-facebook{
+    color :#4267b2;
+    font-size:25px;
+}
+.footer-right i.fa-envelope-square{
+    color :#FFFFFF;
+    font-size:25px;
+    margin-left: 5px;
+}
+.footer-right span#footer-right-term{
+    position: absolute;
+    font-size: 12.5px;
+    right: 0px;
+    bottom: 35px;
+    color: #CCCCCC;
+}
+.footer-right span#footer-right-term a{
+    text-decoration: none;
+}
+.footer-right span#footer-right-term a:hover{
+    text-decoration-line: underline;
+}
+.footer-right span#footer-right-term i{
+    font-size: 18px;
+    vertical-align: middle;
+    padding-bottom: 3px;
+}
