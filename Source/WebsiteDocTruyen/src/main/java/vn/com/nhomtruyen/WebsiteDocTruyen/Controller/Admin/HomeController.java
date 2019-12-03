@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TaiKhoanEntity;
@@ -29,15 +30,8 @@ public class HomeController {
 
 	@RequestMapping(value = { "/*", "home", "" }, method = RequestMethod.GET)
 	public String indexAdminPage(HttpServletRequest request) {
-		if (request.getSession().getAttribute("acc_login") == null)
-			return "redirect:/index";
-		else
-		{
-			TaiKhoanEntity taiKhoanEntity = (TaiKhoanEntity) request.getSession().getAttribute("acc_login");
-			if(taiKhoanEntity.getMaRole() != 1)
-				return "redirect:/index";
-		}
-		return "admin/home";
+		String urlRedirect =  !Authencation.Auth(request,1) ? "redirect:/" : "admin/home";
+		return urlRedirect;
 	}
 
 	

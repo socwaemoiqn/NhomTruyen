@@ -38,13 +38,13 @@
 							border="0">
 							<tbody>
 								<tr>
-									<form action="${pageContext.request.contextPath}/quan-tri/tai-khoan/search"
+									<form action="${pageContext.request.contextPath}/quan-tri/tai-khoan"
 										method="get">
 										<td><a
 											href="${pageContext.request.contextPath}/quan-tri/tai-khoan"
 											class="btn btn-warning" title="Trở lại"> <i
 												class="fa  fa-arrow-left fa-1x"></i></a></td>
-										<td><input class="form-control" type="text" name="key"
+										<td><input class="form-control" type="text" name="search"
 											placeholder="Nhập nội dung tìm kiếm"></td>
 										<td><input class="btn btn-success" type="submit"
 											value="Tìm kiếm">

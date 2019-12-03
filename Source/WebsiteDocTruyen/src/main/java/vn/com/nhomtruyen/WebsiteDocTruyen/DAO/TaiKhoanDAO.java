@@ -15,7 +15,7 @@ public interface TaiKhoanDAO {
 	public PaginationResult<TaiKhoanInfo> paginationListTaiKhoan(int page,int Max_Result, int Max_Navigation);
 	public TaiKhoanInfo getTaiKhoanById(int maTaiKhoan);
 	public PaginationResult<TaiKhoanInfo> getTaiKhoanByTen(int page,int Max_Result, int Max_Navigation,String ten);
-	public TaiKhoanEntity insert(TaiKhoanInfo TaiKhoanInfo);
+	public void insert(TaiKhoanInfo TaiKhoanInfo);
 	public void edit(TaiKhoanInfo TaiKhoanInfo);
 	public void xoa(int maTaiKhoan);
 	public TaiKhoanEntity findTaiKhoanEntity(int tenTaiKhoan);

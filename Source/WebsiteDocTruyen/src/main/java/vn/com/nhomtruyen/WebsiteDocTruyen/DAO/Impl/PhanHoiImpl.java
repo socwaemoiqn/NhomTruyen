@@ -53,7 +53,7 @@ public class PhanHoiImpl implements PhanHoiDAO{
 	@Override
 	public PaginationResult<PhanHoiInfo> getPhanHoiBySearch(int page, int Max_Result, int Max_Navigation,Map<String,String> list) {
 		Session se = this.sessionFactory.getCurrentSession();
-		String sqlKey = !list.get("key").equals("") ?  "( a.chuDe like: key or a.tenNguoiGui like: key  or a.email like: key or a.noiDung like: key or a.ngayTao like: key )" : "";
+		String sqlKey = !list.get("search").equals("") ?  "( a.chuDe like: key or a.tenNguoiGui like: key  or a.email like: key or a.noiDung like: key or a.ngayTao like: key )" : "";
 		String sqlChuDe = list.get("subject").equals("all") ? "" :  "a.chuDe = '"+list.get("subject")+"'";
 		sqlChuDe = sqlKey != "" && sqlChuDe != "" ? sqlChuDe + " and " : sqlChuDe;
 		String sqlDaXem = "";
@@ -81,7 +81,7 @@ public class PhanHoiImpl implements PhanHoiDAO{
 						+ " ORDER BY a.ngayTao DESC";
 						
 		Query query = se.createQuery(sql);
-		if (sqlKey != "")query.setParameter("key", "%"+list.get("key")+"%");
+		if (sqlKey != "")query.setParameter("key", "%"+list.get("search")+"%");
 		return new PaginationResult<PhanHoiInfo>(query, page, Max_Result, Max_Navigation);
 	}
 

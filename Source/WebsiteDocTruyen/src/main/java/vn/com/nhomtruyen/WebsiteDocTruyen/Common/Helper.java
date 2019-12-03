@@ -1,14 +1,12 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Common;
 
-import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
-import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;

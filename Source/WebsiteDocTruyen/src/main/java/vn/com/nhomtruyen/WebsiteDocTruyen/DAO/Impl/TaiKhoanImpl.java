@@ -71,7 +71,7 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 	}
 
 	@Override
-	public TaiKhoanEntity insert(TaiKhoanInfo taiKhoanInfo) {
+	public void insert(TaiKhoanInfo taiKhoanInfo) {
 		Session se = this.sessionFactory.getCurrentSession();
 		TaiKhoanEntity taikhoan = new TaiKhoanEntity();
 		taikhoan.setTenTaiKhoan(taiKhoanInfo.getTenTaiKhoan());
@@ -81,7 +81,6 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 		taikhoan.setMaRole(2);
 		taikhoan.setTrangThai(true);
 		se.save(taikhoan);
-		return taikhoan;
 	}
 	
 	@Override
