@@ -261,6 +261,8 @@
 											'.btn-sua',
 											function() {
 												let id = $(this).attr("id");
+												$("#sua #id")
+												.val(id);
 												$
 														.ajax({
 															url : "${pageContext.request.contextPath}/quan-tri/tai-khoan/ajax",
@@ -271,8 +273,7 @@
 															},
 															success : function(
 																	data) {
-																$("#sua #id")
-																		.val(id);
+																
 																$	(
 																		"#sua #tenTaiKhoan")
 																		.val(

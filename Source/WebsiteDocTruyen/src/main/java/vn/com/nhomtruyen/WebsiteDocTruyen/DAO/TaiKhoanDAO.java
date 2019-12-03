@@ -19,5 +19,6 @@ public interface TaiKhoanDAO {
 	public void edit(TaiKhoanInfo TaiKhoanInfo);
 	public void xoa(int maTaiKhoan);
 	public TaiKhoanEntity findTaiKhoanEntity(int tenTaiKhoan);
+	public TaiKhoanEntity findTaiKhoanEntityByTen(String tenTaiKhoan);
 	public void updateTrangThai(TaiKhoanInfo TaiKhoanInfo);
 }

@@ -8,7 +8,8 @@
 <head>
 <meta charset="UTF-8">
 <title><dec:title/></title>
-
+<script
+	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
 <link rel="stylesheet"
@@ -29,6 +30,10 @@
 <dec:head />
 </head>
 <body>
+	<c:if test="${not empty mess }">
+	<script> alert("${mess}");</script>
+	</c:if>
+	<% request.getSession().removeAttribute("mess"); %>
 	<div class="topnav" id="myTopnav">
 		<a href="${pageContext.request.contextPath}/index" id="home"> <span class="fa-stack"> <i
 				class="fa fa-circle fa-stack-2x"></i> <i
@@ -106,11 +111,30 @@
 			
 		</div>
 		<!-- Nút đăng nhập-->
-		<div class="dropdown" id="user">
-			<button class="dropbtn" style="cursor: pointer; font-weight: bold">
+		<div class="dropdown">
+			<c:if test="${empty acc_login }">
+				<button class="dropbtn" style="cursor: pointer; font-weight: bold" id="user">
 				<i class="fa fa-user"></i> Đăng nhập
-
-			</button>
+				</button>
+			</c:if>
+			<c:if test="${not empty acc_login }">
+				<c:if test="${acc_login.maRole == 2 }">
+					<form action="${pageContext.request.contextPath}/logout" method="get">
+					<button class="dropbtn" style="cursor: pointer; font-weight: bold" id="logout">
+					<i class="fa fa-power-off"></i> Đăng xuất
+					</button></a>
+					</form>
+				</c:if>
+				<c:if test="${acc_login.maRole == 3 }">
+					<form action="${pageContext.request.contextPath}/nhom-dich" method="get">
+					<button class="dropbtn" style="cursor: pointer; font-weight: bold" id="translator">
+					<i class="fa fa-user"></i> Tài khoản
+					</button></a>
+					</form>
+				</c:if>	
+			</c:if>
+			
+		
 		</div>
 		<a style="font-size: 15px;" class="icon" onclick="myFunction()">&#9776;</a>
 	</div>
@@ -204,14 +228,14 @@
 	</div>
 	<div id="container-login">
 		<i class="fas fa-times-circle fa-lg"></i>
-		<form action="login" method="post">
+		<form action="${pageContext.request.contextPath}/login" method="post">
 			<h1 id="abac">Đăng nhập</h1>
 			<div class="txtb">
-				<input type="text" name="userName" required=""> <span
+				<input type="text" name="username" required="required"> <span
 					data-placeholder="Tài khoản"></span>
 			</div>
 			<div class="txtb" required="">
-				<input type="password" name="passWord"> <span
+				<input type="password" name="password" required="required"> <span
 					data-placeholder="Mật khẩu"></span>
 			</div>
 			<button class="btn" type="submit">Đăng Nhâp</button>
@@ -222,20 +246,20 @@
 	</div>
 	<div id="container-logup">
 		<i class="fas fa-times-circle fa-lg"></i>
-		<form action="#" method="post">
+		<form method="post">
 			<h1 id="abac">Đăng ký</h1>
 			<div class="txtb">
-				<input type="text"> <span data-placeholder="Tài khoản"></span>
+				<input type="text" name="username" required="required"> <span data-placeholder="Tài khoản" ></span>
 			</div>
 			<div class="txtb">
-				<input type="password"> <span data-placeholder="Mật khẩu"></span>
+				<input type="password" name="password" required="required"> <span data-placeholder="Mật khẩu" ></span>
 			</div>
 			<div class="txtb">
-				<input type="password"> <span
-					data-placeholder="Xác nhận mật khẩu"></span>
+				<input type="password" name="repassword" required="required"> <span
+					data-placeholder="Xác nhận mật khẩu" required="required"></span>
 			</div>
 			<div class="txtb">
-				<input type="text"> <span data-placeholder="Email"></span>
+				<input type="email" name="email" required="required"> <span data-placeholder="Email" required="required"></span>
 			</div>
 			<button class="btn" type="submit">Đăng Ký</button>
 			<div class="bottom-text">
