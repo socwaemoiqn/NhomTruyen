@@ -28,7 +28,7 @@ public class ChuongImpl implements ChuongDAO{
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao DESC";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao ASC";
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", idTruyen);

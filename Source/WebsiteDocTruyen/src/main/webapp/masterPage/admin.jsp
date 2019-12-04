@@ -32,7 +32,8 @@
 <link
 	href="${pageContext.request.contextPath}/template/admin/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
-
+ <!-- Timeline CSS -->
+        <link href="${pageContext.request.contextPath}/template/admin/css/timeline.css" rel="stylesheet">
 	<dec:head/>
 </head>
 <body>

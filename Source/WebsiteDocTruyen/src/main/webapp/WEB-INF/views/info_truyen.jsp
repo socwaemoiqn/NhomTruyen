@@ -83,7 +83,7 @@
 							<i id="icon-7" class="fas fa-star"></i> <i id="icon-8"
 								class="fas fa-star"></i> <i id="icon-9" class="fas fa-star"></i>
 							<i id="icon-10" class="fas fa-star"></i> <br> <span>Đánh
-								giá: <b>6.4</b>/10 từ <b>2122 lượt</b>
+								giá: <b>6.4</b>/10 từ <b>${truyenById.luotXem} lượt</b>
 							</span>
 
 						</div>
@@ -100,23 +100,15 @@
 				</div>
 				<div class="content">
 					<table>
-						<tr>
-							<td><a href="info-truyen.html"><i
-									class="fas fa-book-reader"></i> Phần này chưa phát triên <br>
-									(Chương 1998)</a></td>
-						</tr>
-						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Đế
-									tôn <br> (Chương 203)</a></a></td>
-						</tr>
-						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Thiên
-									mệnh chân tử <br> (Chương 2032)</a></a></td>
-						</tr>
+						
+							
+							
+						
 						<tr>
 							<td><a href="#"><i class="fas fa-book-reader"></i> Đế
 									tôn <br> (Chương 203)</a></a></td>
 						</tr>
+						
 					</table>
 				</div>
 			</div>
@@ -199,6 +191,32 @@
 					</table>
 				</div>
 			</div>
+			
+			<div class="col-7" id="danh-sach-chuong">
+				<div class="title">
+					Chương mới cập nhật....
+				</div>
+				<div class="content">
+					<div class="list-chuong" style="width: 100%">
+						<table>
+							<c:forEach items="${chuongMoi}" var="ch" varStatus="status" begin="0" end="4">
+								<tr>
+									<td><i class="fas fa-certificate"></i> 
+										<c:forEach items="${urlChuong}" var="url">
+											<c:if test="${url.key==ch.id}">
+												<a href="${pageContext.request.contextPath}/${tenTruyen }/chuong-${url.value}">
+													Chương ${url.value }:
+													 ${ch.tieuDe }</a>
+											</c:if>
+										</c:forEach>
+									</td>
+								</tr>
+							</c:forEach>			
+						</table>
+					</div>
+				</div>
+			</div>
+			
 			<div class="col-7" id="danh-sach-chuong">
 				<div class="title">
 					DANH SÁCH CHƯƠNG <i class="fas fa-arrow-circle-down"></i>
@@ -208,7 +226,7 @@
 						<table>
 
 
-							<c:forEach items="${listChuong.list}" var="ch" varStatus="status">
+							<c:forEach items="${listChuong.list}" var="ch" varStatus="status" begin="0" end="4">
 								<tr>
 								<td><i class="fas fa-certificate"></i> 
 									<c:forEach items="${urlChuong}" var="url">
@@ -227,7 +245,7 @@
 					</div>
 					<div class="list-chuong">
 						<table>
-							<c:forEach items="${listChuong.list}" var="ch" varStatus="status">
+							<c:forEach items="${listChuong.list}" var="ch" varStatus="status" begin="5" end="9">
 								<tr>
 								<td><i class="fas fa-certificate"></i> 
 									<c:forEach items="${urlChuong}" var="url">

@@ -23,11 +23,15 @@ public interface TruyenDAO   {
 	public boolean selectTruyenByTen(String tenTruyen);
 	public int sumSoLuongTruyenOfTacGia(int maTacGia);
 	public TruyenEntity findTruyenEntity(String maTruyen);
+	
 	public void insertTruyen(TruyenInfo truyenInfo);
 	public void capNhatTruyen(TruyenInfo truyenInfo);
 	public void capNhatTrangThaiTruyen(String maTruyen, String trangThai, boolean value);
 	public void capNhatSoLuongChuong(String maTruyen, int soChuong);
+	public void capNhatLuotXem(SelectTruyenInfo truyenInfo);
 	public void xoaTruyen(String maTruyen);
+	
+	public List<SelectTruyenInfo> selectAllTruyenNoFull();
 	
 	//các select dành cho trang index
 	public List<SelectTruyenInfo> selectAllTruyenByDanhMuc(String danhMuc);

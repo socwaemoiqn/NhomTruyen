@@ -28,6 +28,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
 @Controller
 public class HomeController {
@@ -105,7 +106,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
-	public String truyenPage(Model model, @PathVariable("tenTruyen") String tenTruyen,@RequestParam(value = "page", defaultValue = "1") String pageStr) {
+	public String truyenPage(Model model,HttpSession session ,@PathVariable("tenTruyen") String tenTruyen,@RequestParam(value = "page", defaultValue = "1") String pageStr) {
 
 		int page = 1;
 		try {
@@ -113,17 +114,19 @@ public class HomeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		final int Max_Result = 1;
+		final int Max_Result = 10;
 		final int Max_Navigation = 10;
 		
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
+		
 
 		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		 PaginationResult<ChuongInfo> listPaginationChuong= chuongDao.listChuongOfTruyen(maTruyen, page, Max_Result, Max_Navigation);
+		PaginationResult<ChuongInfo> listPaginationChuong= chuongDao.listChuongOfTruyen(maTruyen, page, Max_Result, Max_Navigation);
 		List<SelectTruyenInfo> truyenCungTacGia = truyenDao.selectAllTruyenByTacGia(tr.getTenTacGia());
 		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+		List<ChuongInfo> listChuongMoi= chuongDao.listChuongOfTruyenSortDESC(maTruyen);
 		Map<String, String> urlChuong = new HashMap<String, String>();
 		int i = 1;
 		for (ChuongInfo ch : listChuong) {
@@ -131,6 +134,11 @@ public class HomeController {
 			i++;
 		}
 
+		
+		//Cap nhat luot xem
+		
+		truyenDao.capNhatLuotXem(tr);
+		
 		// Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
 
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
@@ -143,6 +151,13 @@ public class HomeController {
 		model.addAttribute("tenTruyen", tenTruyen);
 		model.addAttribute("tenTheLoai", tenTheLoai);
 		model.addAttribute("urlTacGia", Helper.pathVariableString(tr.getTenTacGia()));
+		model.addAttribute("chuongMoi", listChuongMoi);
+
+			session.setAttribute("truyenVuaDoc", tr);
+			
+		
+		
+		
 
 		loadTheLoaiAndDanhMucTruyen(model);
 
@@ -260,26 +275,7 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String loginPage(Model model, @RequestParam("userName") String userName,
 			@RequestParam("passWord") String passWord, HttpSession session) {
-//		String request = "";
-//		// userAccountsInfo user = userAccountsDAO.login(userName, passWord);
-//		TaiKhoanInfo tk = userAccountsDAO.ck_login(userName, passWord);
-//		if (tk != null) {
-//			String role = tk.getTenRole();
-//			if (role.equals("Admin")) {
-//				session.setAttribute("admin", tk);
-//				request = "redirect:/quan-tri";
-//			} else if (role.equals("tlt")) {
-//				session.setAttribute("tlt", tk);
-//				request = "redirect:/nhom-dich";
-//			} else {
-//				session.setAttribute("client", tk);
-//				request = "redirect:/user_Info";
-//			}
-//
-//		} else {
-//			model.addAttribute("loi", "loi");
-//			request = "redirect:/index";
-//		}
+
 		return "";
 
 	}

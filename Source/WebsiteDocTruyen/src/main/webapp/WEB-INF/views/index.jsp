@@ -111,13 +111,13 @@
 										<c:if test="${url.value==tr.ID }">
 											<a href="${pageContext.request.contextPath}/${url.key}">
 												${tr.tenTruyen }</a>
-											<c:if test="${tr.full= true }">
+											<c:if test="${tr.full == true }">
 												<span class="index-item-status" id="index-item-status-full">Full</span>
 											</c:if>
-											<c:if test="${tr.hot==true }">
+											<c:if test="${tr.hot ==true }">
 												 <span class="index-item-status" id="index-item-status-hot">Hot</span>
 											</c:if>
-											<c:if test="${tr.news==true }">
+											<c:if test="${tr.news ==true }">
 												  <span class="index-item-status" id="index-item-status-new">New</span>
 											</c:if>											
 										</c:if>

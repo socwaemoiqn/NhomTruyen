@@ -206,6 +206,12 @@ public class TruyenImpl implements TruyenDAO {
 		query.setParameter("sl", soChuong);
 		query.executeUpdate();
 	}
+	@Override
+	public void capNhatLuotXem(SelectTruyenInfo truyenInfo) {
+		TruyenEntity truyen= findTruyenEntity(truyenInfo.getID());
+		truyen.setLuotXem(truyen.getLuotXem()+1);
+		this.sessionFactory.getCurrentSession().update(truyen);
+	}
 
 	@Override
 	public void xoaTruyen(String maTruyen) {
@@ -214,6 +220,19 @@ public class TruyenImpl implements TruyenDAO {
 			this.sessionFactory.getCurrentSession().delete(truyenEntity);
 		}
 	}
+	
+	@Override
+	public List<SelectTruyenInfo> selectAllTruyenNoFull() {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and NOT tr.full = 1 ";
+		Query query = session.createQuery(sql);
+		return query.list();
+	}
+	
 
 	// select danh cho trang index
 	@Override
@@ -268,5 +287,9 @@ public class TruyenImpl implements TruyenDAO {
 		query.setParameter("maTacGia", maTacGia);
 		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
 	}
+
+	
+
+	
 
 }

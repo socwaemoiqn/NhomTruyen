@@ -1,14 +1,12 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Common;
 
-import java.text.DateFormat;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
-import java.text.Normalizer;
 import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +63,11 @@ public class Helper {
 		} else
 			return day + " ngày trước";
 	}
+	public static String ngayThang(String date) {
+		String[] d=date.split(" ");
+		String[] m=d[0].split("-");
+		return m[2]+"/"+m[1];
+	}
 
 	@Autowired
 	private static TruyenDAO truyenDao;
@@ -86,13 +89,13 @@ public class Helper {
 	}
 
 	public static void main(String[] args) throws ParseException {
-//		String dateStart = "2017-10-28 21:29:58";
+		String dateStart = "2017-10-28 21:29:58";
 //		cal = Calendar.getInstance();
 //		String dateStop = getCurrentDateAndTime();
 
 		//System.out.println("" + compareTime(dateStart, dateStop));
 		
 		System.out.println(pathVariableString("Sinh Viên Công Nghệ Thông Tin trƯờnG Đh qUy Nhơn"));
-		
+		System.out.println(ngayThang(dateStart));
 	}
 }
