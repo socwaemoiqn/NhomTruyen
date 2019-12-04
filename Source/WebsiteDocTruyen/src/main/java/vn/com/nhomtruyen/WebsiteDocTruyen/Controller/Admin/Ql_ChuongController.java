@@ -14,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -22,12 +21,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TruyenEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
@@ -46,41 +47,56 @@ public class Ql_ChuongController {
 	@Autowired
 	private TacGiaDAO tacGiaDao;
 
-	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
-	public String qlChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 10;
+	public PaginationResult<ChuongInfo> getData(HttpServletRequest request, String idTruyen) {
+
+		int Max_Result = 10;
 		final int Max_Navigation = 10;
-		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-		String maTruyen = urlTruyen.get(tenTruyen);
+		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
+		String tuKhoa = request.getParameter("tu-khoa") == null ? "" : request.getParameter("tu-khoa");
+		PaginationResult<ChuongInfo> list;
+		if (tuKhoa.isEmpty()) {
+			list = chuongDao.listChuongOfTruyen(idTruyen, "DESC", page, Max_Result, Max_Navigation);
+		} else {
+			Max_Result = 100;
+			list = chuongDao.searchChuogn(idTruyen, tuKhoa, page, Max_Result, Max_Navigation);
+			request.getSession().setAttribute("tuKhoa", tuKhoa);
+		}
+		return list;
+	}
 
-		SelectTruyenInfo truyen = truyenDao.selectTruyenByMa(maTruyen);
+	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
+	public String qlChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen, HttpServletRequest request) {
 
-		PaginationResult<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyen(maTruyen, page, Max_Result,
-				Max_Navigation);
-		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
+		String urlRedirect = "";
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
+			Map<String, String> urlTruyen = truyenDao.listPathVariableString();
+			String maTruyen = urlTruyen.get(tenTruyen);
 
-		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
-		Map<String, Integer> soChuong = new HashMap<String, Integer>();
-		int i = 1;
-		for (ChuongInfo ch : listChuong) {
+			SelectTruyenInfo truyen = truyenDao.selectTruyenByMa(maTruyen);
+			String sort = "DESC";
+			PaginationResult<ChuongInfo> listChuongByTruyen = getData(request, maTruyen);
+			Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
 
-			soChuong.put(ch.getId(), i);
-			i++;
+			List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+			Map<String, Integer> soChuong = new HashMap<String, Integer>();
+			int i = 1;
+			for (ChuongInfo ch : listChuong) {
+
+				soChuong.put(ch.getId(), i);
+				i++;
+			}
+
+			model.addAttribute("tenTruyen", truyen.getTenTruyen());
+			model.addAttribute("pathTenTruyen", tenTruyen);
+			model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
+			model.addAttribute("urlChuong", urlChuong);
+			model.addAttribute("soChuong", soChuong);
+			urlRedirect = "admin/ql_truyen_ql_chuong";
 		}
 
-		model.addAttribute("tenTruyen", truyen.getTenTruyen());
-		model.addAttribute("pathTenTruyen", tenTruyen);
-		model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
-		model.addAttribute("urlChuong", urlChuong);
-		model.addAttribute("soChuong", soChuong);
-		return "admin/ql_truyen_ql_chuong";
+		return urlRedirect;
 	}
 
 	@RequestMapping(value = "/{tenTruyen}/them-chuong", method = RequestMethod.POST)
@@ -117,14 +133,15 @@ public class Ql_ChuongController {
 		return json;
 
 	}
+
 	@RequestMapping(value = "{tenTruyen}/tac-vu/{action}", method = RequestMethod.POST)
 	public String tacVu(Model model, @PathVariable("action") String action, HttpServletRequest request,
 			HttpSession session) throws JsonParseException, JsonMappingException, IOException {
-		
+
 		String json = request.getParameter("array_id");
-		ObjectMapper mapper = new ObjectMapper();	
+		ObjectMapper mapper = new ObjectMapper();
 		String[] array_id = mapper.readValue(json, String[].class);
-		Map<String,String> mess = new HashMap<String, String>();
+		Map<String, String> mess = new HashMap<String, String>();
 		ChuongInfo chuongInfo = new ChuongInfo();
 		switch (action) {
 		case "enable":
@@ -154,7 +171,7 @@ public class Ql_ChuongController {
 			break;
 		default:
 			break;
-		
+
 		}
 		session.setAttribute("tacVu", mess);
 		String back = request.getHeader("Referer");
@@ -178,48 +195,55 @@ public class Ql_ChuongController {
 		chuong.setTieuDe(tieuDe);
 		chuong.setTrangThai(Integer.parseInt(trangThai));
 		session.setAttribute("capNhatChuong", tieuDe);
-		
+
 		chuongDao.upDateChuong(chuong);
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 	}
 
-
 	@RequestMapping(value = "/{tenTruyen}/xoa-chuong", method = RequestMethod.POST)
-	public String deleteChuongForm(Model model, @PathVariable("tenTruyen") String tenTruyen,
-		 HttpServletRequest request, HttpSession session) {
+	public String deleteChuongForm(Model model, @PathVariable("tenTruyen") String tenTruyen, HttpServletRequest request,
+			HttpSession session) {
 
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
 		String idChuong = request.getParameter("idChuong");
-		String tieuDe=request.getParameter("tieuDe");
-		
+		String tieuDe = request.getParameter("tieuDe");
+
 		// cập nhật số lượng truyện khi xóa chương
 		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() - 1);
 		// xóa chương trong csdl
 		chuongDao.deleteChuong(idChuong);
 		session.setAttribute("xoaChuong", tieuDe);
-		
+
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 	}
-	
-	
-//	@RequestMapping(value = "/{tenTruyen}/{tenChuong}", method = RequestMethod.GET)
-//	public String xemChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-//			@PathVariable("tenChuong") String tenChuong) {
-//		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-//		String maTruyen = urlTruyen.get(tenTruyen);
-//
-//		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-//		String idChuong = urlChuong.get(tenChuong);
-//
-//		System.out.println(idChuong);
-//		ChuongInfo chuongInfo = chuongDao.chuongInfo(idChuong);
-//		model.addAttribute("chuongInfo", chuongInfo);
-//		model.addAttribute("tenTruyen", tenTruyen);
-//		model.addAttribute("tenChuong", tenChuong);
-//		return "admin/ql_truyen_xemchuong";
-//	}
+
+	@RequestMapping(value = "/{tenTruyen}/{chuongSo}", method = RequestMethod.GET)
+	public String xemChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
+			@PathVariable("chuongSo") String chuongSo) {
+		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
+		String maTruyen = urlTruyen.get(tenTruyen);
+		System.out.println(maTruyen);
+		TruyenEntity tr=truyenDao.findTruyenEntity(maTruyen);
+		
+		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+		Map<String, String> urlChuong = new HashMap<String, String>();
+		int i = 1;
+		for (ChuongInfo ch : listChuong) {
+			urlChuong.put(Helper.pathVariableString("chuong-" + i), ch.getId());
+			i++;
+		}
+
+		String idChuong = urlChuong.get(chuongSo);
+		ChuongInfo chuongOfId = chuongDao.chuongInfo(idChuong);
+
+		System.out.println(idChuong);
+		model.addAttribute("chuong", chuongOfId);
+		model.addAttribute("tenTruyen", tr.getTenTruyen());
+		model.addAttribute("pathTenTruyen", Helper.pathVariableString(tr.getTenTruyen()));
+		return "admin/ql_truyen_xemchuong";
+	}
 
 }

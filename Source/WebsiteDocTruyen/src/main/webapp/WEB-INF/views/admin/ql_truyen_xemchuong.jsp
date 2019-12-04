@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Chương ${chuong.tieuDe} của truyện ${tenTruyen }</title>
 </head>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý</h1>
+			<h1 class="page-header">Chương ${chuong.tieuDe}</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>
@@ -17,24 +18,29 @@
 
 		<div class="col-lg-12">
 			<div class="panel panel-default">
-				<div class="panel-heading"><h3>Chương: ${chuongInfo.tieuDe }</h3> </div>
+				<div class="panel-heading">
+					
+						<a style="float: left; margin-right: 10px"
+							href="${pageContext.request.contextPath}/quan-tri/ql-truyen/ql-chuong/${pathTenTruyen}"
+							class="btn btn-warning" title="Trở lại"> <i
+							class="fa  fa-arrow-left fa-1x"></i>
+						</a>
+					
+					<h4>
+						Chương: ${chuong.tieuDe }
+						</h3>
+				</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 					<!-- Nav tabs -->
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#home"> Nội
-								dung</a></li>
-
-						<p style="float: right;">
-							<a href="" class="btn btn-success" data-toggle="modal"
-								data-target="#editChuong">Chỉnh Sửa Nội Dung Chương</a>
-						</p>
+						<li class="active"><a href="#home"> Nội dung</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane fade in active" id="home">
 
 
-							<h3>${chuongInfo.noiDung}</h3>
+							<h3>${chuong.noiDung}</h3>
 
 						</div>
 					</div>
@@ -44,47 +50,6 @@
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-
-	<div class="modal fade" id="editChuong" tabindex="-1" role="dialog">
-		<div class="modal-dialog-editchuong">
-			<!-- Modal content-->
-			<div class="col-lg-12">
-				<div class="panel panel-success">
-
-					<div class="panel-heading">
-						<h3>Chỉnh sửa thông tin chương: ${chuongInfo.tieuDe }</h3>
-					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
-								<form
-									action="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen }/editChuong/${tenChuong}"
-									method="post">
-									<div class="form-group">
-										<label>Nhập lại tên chương</label>
-										<input class="form-control" type="text" name="ten"
-											placeholder="Nhập tên chương">
-									</div>
-									<div class="form-group">
-										<label>Nhập lại nội dung của chương</label> <textarea name="noidung" id="noidung" >${chuongInfo.noiDung}</textarea>
-										 <script>
-											CKEDITOR.replace('noidung');
-											CKEDITOR.addCss('form-control')
-										</script>
-									</div>
-									<button type="submit" class="btn btn-success">Đồng ý</button>
-								</form>
-							</div>
-
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-			</div>
-			<!-- //Modal content-->
-
 		</div>
 	</div>
 </body>

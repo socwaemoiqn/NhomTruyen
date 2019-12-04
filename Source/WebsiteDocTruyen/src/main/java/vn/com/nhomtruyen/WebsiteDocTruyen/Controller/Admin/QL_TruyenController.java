@@ -33,6 +33,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
@@ -81,48 +82,31 @@ public class QL_TruyenController {
 		}
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String QlTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
+	public PaginationResult<SelectTruyenInfo> getData(HttpServletRequest request) {
+
+		int Max_Result = 10;
+		final int Max_Navigation = 10;
+		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
+		String tuKhoa = request.getParameter("tu-khoa") == null ? "" : request.getParameter("tu-khoa");
+		PaginationResult<SelectTruyenInfo> list;
+		if (tuKhoa.isEmpty()) {
+			list = truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
+		} else {
+			Max_Result = 100;
+			list = truyenDao.getTruyenByTen(tuKhoa, page, Max_Result, Max_Navigation);
+			request.getSession().setAttribute("tuKhoa", tuKhoa);
 		}
-		final int Max_Result = 10;
-		final int Max_Navigation = 3;
-
-		PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.litsTruyen(page, Max_Result, Max_Navigation);
-		List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
-
-		Map<String, String> listUrl = truyenDao.listPathVariableString();
-
-		TruyenAddForm truyen = new TruyenAddForm();
-
-		model.addAttribute("tenTheLoai", theLoaiTruyen);
-		model.addAttribute("listTruyen", listTruyen);
-		model.addAttribute("url", listUrl);
-		model.addAttribute("truyenAddForm", truyen);
-		model.addAttribute("slt", listTruyen.getTotalRecords());
-
-		return "admin/ql_truyen";
+		return list;
 	}
 
-	@RequestMapping(value = "tim-kiem/", method = RequestMethod.GET)
-	public String timKiemTruyen(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr,
-			@RequestParam("tu-khoa") String tuKhoa, HttpSession session) {
-		if (!tuKhoa.isEmpty()) {
-			int page = 1;
-			try {
-				page = Integer.parseInt(pageStr);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			final int Max_Result = 10;
-			final int Max_Navigation = 3;
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String QlTruyenPage(Model model, HttpServletRequest request) {
 
-			PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.getTruyenByTen(tuKhoa, page, Max_Result,
-					Max_Navigation);
+		String urlRedirect = "";
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
+			PaginationResult<SelectTruyenInfo> listTruyen = getData(request);
 			List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
 
 			Map<String, String> listUrl = truyenDao.listPathVariableString();
@@ -134,20 +118,15 @@ public class QL_TruyenController {
 			model.addAttribute("url", listUrl);
 			model.addAttribute("truyenAddForm", truyen);
 			model.addAttribute("slt", listTruyen.getTotalRecords());
-			session.setAttribute("tuKhoa", tuKhoa);
-
-			return "admin/ql_truyen";
+			urlRedirect = "admin/ql_truyen";
 		}
-		return "redirect:/quan-tri/ql-truyen";
+
+		return urlRedirect;
 	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	private String themTruyenForm(HttpServletRequest request, Model model,
-			@ModelAttribute("truyenAddForm") @Validated TruyenAddForm truyenAddForm, BindingResult result,
-			HttpSession session) {
-		if (result.hasErrors()) {
-			return "redirect:/quan-tri/ql-truyen";
-		}
+			@ModelAttribute("truyenAddForm") @Validated TruyenAddForm truyenAddForm, HttpSession session) {
 		String maTruyen = Helper.CreateId("TR");
 
 		String tenTruyen = truyenAddForm.getTenTruyen();
@@ -162,7 +141,7 @@ public class QL_TruyenController {
 		CommonsMultipartFile fileDatas = truyenAddForm.getHinhAnh();
 		// Tên file gốc tại Client.
 		hinhAnh = fileDatas.getOriginalFilename();
-		
+
 		boolean full = false;
 		boolean hot = false;
 		boolean news = true;
@@ -242,7 +221,6 @@ public class QL_TruyenController {
 				System.out.println("Error Write file: " + name);
 			}
 		}
-		
 
 	}
 
@@ -367,43 +345,48 @@ public class QL_TruyenController {
 	}
 
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
-	private String xemTruyenPage(Model model, @PathVariable("tenTruyen") String tenTruyen) {
+	private String xemTruyenPage(Model model, @PathVariable("tenTruyen") String tenTruyen, HttpServletRequest request) {
+		String urlRedirect = "";
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
+			TruyenAddForm truyen = new TruyenAddForm();
 
-		TruyenAddForm truyen = new TruyenAddForm();
+			Map<String, String> urlTruyen = truyenDao.listPathVariableString();
+			String maTruyen = urlTruyen.get(tenTruyen);
 
-		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-		String maTruyen = urlTruyen.get(tenTruyen);
+			SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
+			List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+			List<ChiTietTheLoaiTruyenInfo> cttl = theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
 
-		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
-		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		List<ChiTietTheLoaiTruyenInfo> cttl = theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
+			List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
+			Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
 
-		List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
-		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
+			List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+			Map<String, String> soChuong = new HashMap<String, String>();
+			int i = 1;
+			for (ChuongInfo ch : listChuong) {
 
-		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
-		Map<String, String> soChuong = new HashMap<String, String>();
-		int i = 1;
-		for (ChuongInfo ch : listChuong) {
+				soChuong.put(ch.getId(), "Chương " + i);
+				i++;
+			}
 
-			soChuong.put(ch.getId(), "Chương " + i);
-			i++;
+			int slChuong = listChuongByTruyen.size();
+
+			model.addAttribute("truyenById", tr);
+			model.addAttribute("dmById", ctdm);
+			model.addAttribute("temtl", cttl);
+			model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
+			model.addAttribute("slChuong", slChuong);
+			model.addAttribute("tenTruyen", tenTruyen);
+			model.addAttribute("urlChuong", urlChuong);
+			model.addAttribute("soChuong", soChuong);
+
+			model.addAttribute("truyenEditForm", truyen);
+			urlRedirect = "admin/ql_truyen_xemtruyen";
 		}
 
-		int slChuong = listChuongByTruyen.size();
-
-		model.addAttribute("truyenById", tr);
-		model.addAttribute("dmById", ctdm);
-		model.addAttribute("temtl", cttl);
-		model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
-		model.addAttribute("slChuong", slChuong);
-		model.addAttribute("tenTruyen", tenTruyen);
-		model.addAttribute("urlChuong", urlChuong);
-		model.addAttribute("soChuong", soChuong);
-
-		model.addAttribute("truyenEditForm", truyen);
-
-		return "admin/ql_truyen_xemtruyen";
+		return urlRedirect;
 	}
 
 	@RequestMapping(value = "/{tenTruyen}/edit-truyen", method = RequestMethod.POST)
@@ -412,9 +395,9 @@ public class QL_TruyenController {
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
 		SelectTruyenInfo truyenCu = truyenDao.selectTruyenByMa(maTruyen);
-		
 
-		String tenTruyenMoi = (truyenAddForm.getTenTruyen().isEmpty()) ? truyenCu.getTenTruyen() : truyenAddForm.getTenTruyen();
+		String tenTruyenMoi = (truyenAddForm.getTenTruyen().isEmpty()) ? truyenCu.getTenTruyen()
+				: truyenAddForm.getTenTruyen();
 
 		System.out.println(tenTruyenMoi + "");
 		String hinhAnhMoi = "";
@@ -422,17 +405,16 @@ public class QL_TruyenController {
 		// Tên file gốc tại Client.
 		hinhAnhMoi = (!fileDatas.getOriginalFilename().isEmpty()) ? fileDatas.getOriginalFilename()
 				: truyenCu.getHinhAnh();
-		
+
 		List<TacGiaInfo> list = tacGiaDao.listTacGia();
-		int maTacGiaCu=-1;
+		int maTacGiaCu = -1;
 		System.out.println(truyenCu.getTenTacGia());
-		for(TacGiaInfo k : list) {
-			if(k.getTenTacGia().equals(truyenCu.getTenTacGia()))
-			{
-				maTacGiaCu=k.getID();
+		for (TacGiaInfo k : list) {
+			if (k.getTenTacGia().equals(truyenCu.getTenTacGia())) {
+				maTacGiaCu = k.getID();
 				break;
 			}
-			
+
 		}
 		int maTacGiaMoi = (!(truyenAddForm.getMaTacGia() == -1)) ? truyenAddForm.getMaTacGia() : maTacGiaCu;
 
@@ -457,50 +439,64 @@ public class QL_TruyenController {
 		truyenDao.capNhatTruyen(truyenInfo);
 		return "redirect:/quan-tri/ql-truyen/" + Helper.pathVariableString(tenTruyenMoi);
 	}
-	
+
 	@RequestMapping(value = "/{tenTruyen}/{tenChuong}", method = RequestMethod.GET)
 	public String xemChuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@PathVariable("tenChuong") String tenChuong) {
-		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
-		String maTruyen = urlTruyen.get(tenTruyen);
+			@PathVariable("tenChuong") String tenChuong, HttpServletRequest request) {
+		String urlRedirect = "";
 
-		Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-		String idChuong = urlChuong.get(tenChuong);
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
 
-		System.out.println(idChuong);
-		ChuongInfo chuongInfo = chuongDao.chuongInfo(idChuong);
-		model.addAttribute("chuongInfo", chuongInfo);
-		model.addAttribute("tenTruyen", tenTruyen);
-		model.addAttribute("tenChuong", tenChuong);
-		return "admin/ql_truyen_xemchuong";
-	}
-	@RequestMapping(value = "/tac-gia/{id}",method = RequestMethod.GET)
-	public String getTruyenTheoTacGia(Model model,
-			@PathVariable(value = "id")String id,
-			@RequestParam(value = "page", defaultValue = "1")String pageStr)
-	{
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
+			Map<String, String> urlTruyen = truyenDao.listPathVariableString();
+			String maTruyen = urlTruyen.get(tenTruyen);
+
+			Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
+			String idChuong = urlChuong.get(tenChuong);
+
+			System.out.println(idChuong);
+			ChuongInfo chuongInfo = chuongDao.chuongInfo(idChuong);
+			model.addAttribute("chuongInfo", chuongInfo);
+			model.addAttribute("tenTruyen", tenTruyen);
+			model.addAttribute("tenChuong", tenChuong);
+			urlRedirect = "admin/ql_truyen_xemchuong";
 		}
-		final int Max_Result = 10;
-		final int Max_Navigation = 3;
-		int maTacGia = Integer.parseInt(id);
-		PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.getTruyenByTacGia(maTacGia, page, Max_Result, Max_Navigation);
-		List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
+		return urlRedirect;
+	}
 
-		Map<String, String> listUrl = truyenDao.listPathVariableString();
-		
-		TruyenAddForm truyen = new TruyenAddForm();
+	@RequestMapping(value = "/tac-gia/{id}", method = RequestMethod.GET)
+	public String getTruyenTheoTacGia(Model model, @PathVariable(value = "id") String id,
+			@RequestParam(value = "page", defaultValue = "1") String pageStr, HttpServletRequest request) {
+		String urlRedirect = "";
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
+			int page = 1;
+			try {
+				page = Integer.parseInt(pageStr);
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			final int Max_Result = 10;
+			final int Max_Navigation = 3;
+			int maTacGia = Integer.parseInt(id);
+			PaginationResult<SelectTruyenInfo> listTruyen = truyenDao.getTruyenByTacGia(maTacGia, page, Max_Result,
+					Max_Navigation);
+			List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
 
-		model.addAttribute("tenTheLoai", theLoaiTruyen);
-		model.addAttribute("listTruyen", listTruyen);
-		model.addAttribute("url", listUrl);
-		model.addAttribute("truyenAddForm", truyen);
-		model.addAttribute("slt", listTruyen.getTotalRecords());
-		return "admin/ql_truyen";
+			Map<String, String> listUrl = truyenDao.listPathVariableString();
+
+			TruyenAddForm truyen = new TruyenAddForm();
+
+			model.addAttribute("tenTheLoai", theLoaiTruyen);
+			model.addAttribute("listTruyen", listTruyen);
+			model.addAttribute("url", listUrl);
+			model.addAttribute("truyenAddForm", truyen);
+			model.addAttribute("slt", listTruyen.getTotalRecords());
+			urlRedirect = "admin/ql_truyen";
+		}
+		return urlRedirect;
 	}
 
 	@ModelAttribute("danhMuc")

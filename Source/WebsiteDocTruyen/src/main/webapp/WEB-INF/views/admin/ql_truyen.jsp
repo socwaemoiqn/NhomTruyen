@@ -81,7 +81,7 @@
 										</a>
 									</td>
 									<td>
-										<form action="${pageContext.request.contextPath}/quan-tri/ql-truyen/tim-kiem/">
+										<form action="${pageContext.request.contextPath}/quan-tri/ql-truyen">
 										<div style="float:left">	
 											<input class="form-control" type="text" name="tu-khoa" placeholder="Nhập nội dung tìm kiếm">
 										</div>

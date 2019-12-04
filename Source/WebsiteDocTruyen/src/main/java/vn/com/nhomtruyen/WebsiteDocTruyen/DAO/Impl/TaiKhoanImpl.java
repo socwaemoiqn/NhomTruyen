@@ -71,7 +71,7 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 	}
 
 	@Override
-	public TaiKhoanEntity insert(TaiKhoanInfo taiKhoanInfo) {
+	public void insert(TaiKhoanInfo taiKhoanInfo) {
 		Session se = this.sessionFactory.getCurrentSession();
 		TaiKhoanEntity taikhoan = new TaiKhoanEntity();
 		taikhoan.setTenTaiKhoan(taiKhoanInfo.getTenTaiKhoan());
@@ -81,7 +81,6 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 		taikhoan.setMaRole(2);
 		taikhoan.setTrangThai(true);
 		se.save(taikhoan);
-		return taikhoan;
 	}
 	
 	@Override
@@ -106,7 +105,13 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 		crit.add(Restrictions.eq("id", maTaiKhoan));
 		return (TaiKhoanEntity) crit.uniqueResult();
 	}
-
+	@Override
+	public TaiKhoanEntity findTaiKhoanEntityByTen(String tenTaiKhoan) {
+		Session se = this.sessionFactory.getCurrentSession();
+		Criteria crit = se.createCriteria(TaiKhoanEntity.class);
+		crit.add(Restrictions.eq("tenTaiKhoan", tenTaiKhoan));
+		return (TaiKhoanEntity) crit.uniqueResult();
+	}
 	@Override
 	public void updateTrangThai(TaiKhoanInfo TaiKhoanInfo) {
 		TaiKhoanEntity taikhoan = this.findTaiKhoanEntity(TaiKhoanInfo.getMaRole());

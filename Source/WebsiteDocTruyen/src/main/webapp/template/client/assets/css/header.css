@@ -71,7 +71,7 @@ button.btn:hover{
 	 background-position: right;
 }
 
-#user{
+#user,#logout,#translator{
     right: 10%;
     cursor: pointer;
     position: absolute;

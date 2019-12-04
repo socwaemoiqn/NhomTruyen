@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
@@ -21,12 +22,14 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TaiKhoanEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietDanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChiTietTheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
@@ -34,7 +37,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 public class HomeController {
 
 	@Autowired
-	private TaiKhoanDAO userAccountsDAO;
+	private TaiKhoanDAO taiKhoanDAO;
 	@Autowired
 	private TruyenDAO truyenDao;
 	@Autowired
@@ -43,7 +46,7 @@ public class HomeController {
 	private ChuongDAO chuongDao;
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDao;
-
+	
 	public void loadTheLoaiAndDanhMucTruyen(Model model) {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();
 		List<TheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTheLoai();
@@ -123,7 +126,8 @@ public class HomeController {
 
 		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		PaginationResult<ChuongInfo> listPaginationChuong= chuongDao.listChuongOfTruyen(maTruyen, page, Max_Result, Max_Navigation);
+		String sort ="ASC";
+		PaginationResult<ChuongInfo> listPaginationChuong= chuongDao.listChuongOfTruyen(maTruyen,sort, page, Max_Result, Max_Navigation);
 		List<SelectTruyenInfo> truyenCungTacGia = truyenDao.selectAllTruyenByTacGia(tr.getTenTacGia());
 		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
 		List<ChuongInfo> listChuongMoi= chuongDao.listChuongOfTruyenSortDESC(maTruyen);
@@ -273,15 +277,70 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String loginPage(Model model, @RequestParam("userName") String userName,
-			@RequestParam("passWord") String passWord, HttpSession session) {
 
-		return "";
-
+	public String login( @RequestParam("username") String userName,
+			@RequestParam("password") String passWord,HttpServletRequest request,HttpSession session) {
+		
+		String back = request.getHeader("Referer");
+		String requestStr = "";
+		if(userName.isEmpty() || passWord.isEmpty())
+		{
+			session.setAttribute("mess","Chưa nhập đủ thông tin");
+			requestStr = "redirect:"+back;
+		}
+		TaiKhoanEntity taikhoan = taiKhoanDAO.findTaiKhoanEntityByTen(userName);
+		if(taikhoan == null || !taikhoan.getMatKhau().equals(passWord))
+		{
+			session.setAttribute("mess","Tài khoản hoặc mật khẩu không chính xác");
+			requestStr = "redirect:"+back;
+		}
+		else
+		{
+			if(taikhoan.getMaRole() == 2 || taikhoan.getMaRole() == 3)
+			{
+				session.setAttribute("mess","Đăng nhập thành công!");
+				session.setAttribute("acc_login", taikhoan);
+				requestStr = "redirect:"+back;
+			}
+			else if (taikhoan.getMaRole() == 1)
+			{
+				session.setAttribute("acc_login", taikhoan);
+				requestStr = "redirect:/quan-tri";
+			}
+				
+		}
+		
+		return requestStr;
 	}
-
+	@RequestMapping(value = "/logup",method = RequestMethod.POST)
+	public @ResponseBody String logup(HttpServletRequest request)
+	{
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String repassword = request.getParameter("repassword");
+		String email = request.getParameter("email");
+		if(email.isEmpty() || password.isEmpty() || repassword.isEmpty() || username.isEmpty())
+		{
+			return "empty";
+		}
+		if(!password.equals(repassword))
+		{
+			return "password";
+		}
+		if(taiKhoanDAO.findTaiKhoanEntityByTen(username)!= null)
+		{
+			return "exist";
+		}
+		TaiKhoanInfo taikhoan = new TaiKhoanInfo();
+		taikhoan.setTenTaiKhoan(username);
+		taikhoan.setMatKhau(password);
+		taikhoan.setEmail(email);
+		taiKhoanDAO.insert(taikhoan);
+		return "success"; 
+	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logoutPage(Model model) {
+	public String logout(HttpServletRequest request) {
+		request.getSession().removeAttribute("acc_login");
 		return "redirect:/index";
 	}
 

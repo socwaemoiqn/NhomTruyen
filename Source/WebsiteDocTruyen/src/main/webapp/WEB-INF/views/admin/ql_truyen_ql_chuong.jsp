@@ -57,12 +57,29 @@
                                 	Tìm thấy: ${sl} thể loại truyện .                              
                            </div>
 					</c:if>
+					<c:if test="${not empty sessionScope.themChuong}">
+                    	<div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  
+  
+                                	 Thêm chương ${sessionScope.themChuong }thành công !                   
+                                	                             
+                           </div>
+					</c:if>
 					
+					<c:if test="${not empty sessionScope.tuKhoa}">
+                    	<div class="alert alert-info alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>  
+   									Kết quả tìm kiếm cho từ khóa
+                                	  <a href="" class="alert-link">${sessionScope.tuKhoa}</a>.
+                           </div>
+					</c:if>
 					<%
 					        request.getSession().removeAttribute("capNhatChuong");
 						 	request.getSession().removeAttribute("xoaChuong");
 							request.getSession().removeAttribute("tenTheLoaiMoi");
 							request.getSession().removeAttribute("tacVu");
+							request.getSession().removeAttribute("themChuong");
+							request.getSession().removeAttribute("tuKhoa");
 					%>
 				</div>
 				<div class="panel-body">
@@ -72,13 +89,13 @@
 							<tbody>
 								<tr>
 									<td><a
-										href="${pageContext.request.contextPath}/quan-tri/ql-the-loai-truyen"
+										href="${pageContext.request.contextPath}/quan-tri/ql-truyen/ql-chuong/${pathTenTruyen}"
 										class="btn btn-warning" title="Trở lại"> <i
 											class="fa  fa-arrow-left fa-1x"></i>
 									</a></td>
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/quan-tri/ql-the-loai-truyen/tim-kiem/">
+											action="${pageContext.request.contextPath}/quan-tri/ql-truyen/ql-chuong/${pathTenTruyen}">
 											<div style="float: left">
 												<input class="form-control" type="text" name="tu-khoa"
 													placeholder="Nhập nội dung tìm kiếm">
@@ -174,7 +191,7 @@
 												<c:if test="${sc.key==us.id }">
 													
 													<a	class="btn btn-primary btn-circle" title="Xem trước"
-													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${pathTenTruyen}/chuong-${sc.value}">
+													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/ql-chuong/${pathTenTruyen}/chuong-${sc.value}">
 														<i class="fa fa-eye"></i>
 													</a>
 													<a data-toggle="modal" data-target="#formSuaChuong"

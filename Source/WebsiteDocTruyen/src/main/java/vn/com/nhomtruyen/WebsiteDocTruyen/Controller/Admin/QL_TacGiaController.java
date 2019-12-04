@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -21,8 +20,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 
@@ -32,16 +31,24 @@ public class QL_TacGiaController {
 	@Autowired
 	private TacGiaDAO tacGiaDAO;
 
-	public PaginationResult<TacGiaInfo> getData(String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 10;
+	public PaginationResult<TacGiaInfo> getData(HttpServletRequest request) {
+		int Max_Result = 10;
 		final int Max_Navigation = 10;
-		PaginationResult<TacGiaInfo> list = tacGiaDAO.paginationListTacGia(page, Max_Result, Max_Navigation);
+		int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+		String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+		PaginationResult<TacGiaInfo> list;
+		if(search.isEmpty() |search.equals(""))
+			 list = tacGiaDAO.paginationListTacGia(page, Max_Result, Max_Navigation);
+		else
+		{
+			Max_Result = 100;
+			list = tacGiaDAO.getTacGiaByTen(page, Max_Result, Max_Navigation, search);
+			Map<String,String> mess =new HashMap<String, String>();
+			mess.put("status","Tìm kiếm thành công!");
+			mess.put("name","Tìm được "+list.getTotalRecords()+" kết quả!");
+			request.getSession().setAttribute("mess", mess);
+		}
+			
 		return list;
 	}
 
@@ -55,13 +62,14 @@ public class QL_TacGiaController {
 		return listSL;
 	}
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String QlTacGiaPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		PaginationResult<TacGiaInfo> list = getData(pageStr);
+	@RequestMapping(value = {"/*",""}, method = RequestMethod.GET)
+	public String QlTacGiaPage(Model model, HttpServletRequest request) {
+		String urlRedirect =  !Authencation.Auth(request,1) ? "redirect:/" : "admin/ql_tacgia";
+		PaginationResult<TacGiaInfo> list = getData(request);
 		model.addAttribute("listTacGia", list);
 		Map<Integer, Integer> listSL = getDataSL(list);
 		model.addAttribute("listSL", listSL);
-		return "admin/ql_tacgia";
+		return urlRedirect;
 	}
 
 	@RequestMapping(value = "/ajax", method = RequestMethod.POST)
@@ -73,36 +81,6 @@ public class QL_TacGiaController {
 		return json;
 	}
 
-	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public String search(HttpServletRequest request, HttpSession session,
-			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		String key = request.getParameter("key");
-		if (!key.isEmpty()) {
-			int page = 1;
-			try {
-				page = Integer.parseInt(pageStr);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			final int Max_Result = 100;
-			final int Max_Navigation = 10;
-			PaginationResult<TacGiaInfo> listTacGia = tacGiaDAO.getTacGiaByTen(page, Max_Result, Max_Navigation, key);
-			request.setAttribute("listTacGia", listTacGia);
-			Map<Integer, Integer> listSL = new HashMap<Integer, Integer>();
-			for (TacGiaInfo tg : listTacGia.getList()) {
-				int maTacGia = tg.getID();
-				int soluong = tacGiaDAO.getSoLuongTruyenById(maTacGia);
-				listSL.put(maTacGia, soluong);
-			}
-			request.setAttribute("listSL", listSL);
-			Map<String, String> mess = new HashMap<String, String>();
-			mess.put("status", "Tìm kiếm thành công!");
-			mess.put("name", "Tìm được: " + listTacGia.getList().size() + " kết quả!");
-			session.setAttribute("mess", mess);
-			return "admin/ql_tacgia";
-		}
-		return "redirect:/quan-tri/ql-tacgia";
-	}
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request, HttpSession session) {

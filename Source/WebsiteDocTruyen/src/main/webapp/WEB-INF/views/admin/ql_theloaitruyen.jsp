@@ -48,10 +48,10 @@
                            	${sessionScope.tacVu.trangThai}.                       
                    		</div>
 					</c:if>
-					<c:if test="${not empty sl}">
+					<c:if test="${not empty sessionScope.tuKhoa}">
                     	<div class="alert alert-info alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>                            
-                                	Tìm thấy: ${sl} thể loại truyện .                              
+                                	Kết quả tìm kiếm cho từ khóa ${sessionScope.tuKhoa}:                              
                            </div>
 					</c:if>
 					
@@ -60,6 +60,7 @@
 						 	request.getSession().removeAttribute("mess");
 							request.getSession().removeAttribute("tenTheLoaiMoi");
 							request.getSession().removeAttribute("tacVu");
+							request.getSession().removeAttribute("tuKhoa");
 					%>
 				</div>
 				<div class="panel-body">
@@ -75,7 +76,7 @@
 									</a></td>
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/quan-tri/ql-the-loai-truyen/tim-kiem/">
+											action="${pageContext.request.contextPath}/quan-tri/ql-the-loai-truyen">
 											<div style="float: left">
 												<input class="form-control" type="text" name="tu-khoa"
 													placeholder="Nhập nội dung tìm kiếm">

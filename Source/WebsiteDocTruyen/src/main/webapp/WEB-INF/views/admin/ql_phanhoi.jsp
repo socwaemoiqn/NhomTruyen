@@ -22,7 +22,7 @@
 					<c:if test="${not empty mess}">
 						<div class="alert alert-success">
 							<ul>
-								<%-- <li>${mess.status }</li> --%>
+						<%-- 		 <li>${mess.status }</li> --%>
 								<li>${mess }</li>
 							</ul>
 						</div>
@@ -46,10 +46,10 @@
 								
 									
 								
-									<td><form id="form-search" action="${pageContext.request.contextPath}/quan-tri/phan-hoi/search"
+									<td><form id="form-search" action="${pageContext.request.contextPath}/quan-tri/phan-hoi"
 										method="get">	<div class="form-group input-group ">
 									
-                                             <input class="form-control" type="text" name="key"
+                                             <input class="form-control" type="text" name="search"
 											placeholder="Nhập nội dung tìm kiếm">   
                                                     <span class="input-group-btn">
                                                          <input class="btn btn-success" type="submit"

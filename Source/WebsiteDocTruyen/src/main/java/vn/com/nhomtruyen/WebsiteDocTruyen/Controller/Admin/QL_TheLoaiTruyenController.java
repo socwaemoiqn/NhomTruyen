@@ -20,8 +20,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 
@@ -32,28 +34,42 @@ public class QL_TheLoaiTruyenController {
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDAO;
 
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String QlTheLoaiTruyenPage(Model model, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
+	public PaginationResult<TheLoaiTruyenInfo> getData(HttpServletRequest request) {
+
+		int Max_Result = 10;
+		final int Max_Navigation = 10;
+		int page = request.getParameter("page") == null ? 1 : Integer.parseInt(request.getParameter("page"));
+		String tuKhoa = request.getParameter("tu-khoa") == null ? "" : request.getParameter("tu-khoa");
+		PaginationResult<TheLoaiTruyenInfo> list;
+		if (tuKhoa.isEmpty()) {
+			list = theLoaiTruyenDAO.listTheLoaiTruyen(page, Max_Result, Max_Navigation);
+		} else {
+			Max_Result = 100;
+			list = theLoaiTruyenDAO.searchTheLoai(tuKhoa, page, Max_Result, Max_Navigation);
+			request.getSession().setAttribute("tuKhoa", tuKhoa);
 		}
-		final int Max_Result = 10;
-		final int Max_Navigation = 4;
+		return list;
+	}
 
-		PaginationResult<TheLoaiTruyenInfo> listTheLoaiTruyen = theLoaiTruyenDAO.listTheLoaiTruyen(page, Max_Result,
-				Max_Navigation);
-		Map<Integer, Integer> slTruyen = new HashMap<Integer, Integer>();
-		for (TheLoaiTruyenInfo theLoai : listTheLoaiTruyen.getList()) {
-			slTruyen.put(theLoai.getId(), theLoaiTruyenDAO.soLuongTruyenOfOneTheLoai(theLoai.getId()));
+	@RequestMapping(value = { "/*", "" }, method = RequestMethod.GET)
+	public String QlTheLoaiTruyenPage(Model model, HttpServletRequest request) {
+
+		String urlRedirect = "";
+		if (!Authencation.Auth(request, 1)) {
+			urlRedirect = "redirect:/";
+		} else {
+			PaginationResult<TheLoaiTruyenInfo> listTheLoaiTruyen = getData(request);
+			Map<Integer, Integer> slTruyen = new HashMap<Integer, Integer>();
+			for (TheLoaiTruyenInfo theLoai : listTheLoaiTruyen.getList()) {
+				slTruyen.put(theLoai.getId(), theLoaiTruyenDAO.soLuongTruyenOfOneTheLoai(theLoai.getId()));
+			}
+
+			model.addAttribute("listTheLoaiTruyen", listTheLoaiTruyen);
+			model.addAttribute("slTruyen", slTruyen);
+			urlRedirect="admin/ql_theloaitruyen";
 		}
 
-		model.addAttribute("listTheLoaiTruyen", listTheLoaiTruyen);
-		model.addAttribute("slTruyen", slTruyen);
-
-		return "admin/ql_theloaitruyen";
+		return urlRedirect;
 	}
 
 	@RequestMapping(value = "/them-the-loai")
@@ -71,7 +87,7 @@ public class QL_TheLoaiTruyenController {
 		return "redirect:" + back;
 	}
 
-	@RequestMapping(value = "/ajax")
+	@RequestMapping(value = "/ajax", method = RequestMethod.POST)
 	public @ResponseBody String loadAjax(Model model, HttpServletRequest request) throws JsonProcessingException {
 
 		int id = Integer.parseInt(request.getParameter("id"));
@@ -107,11 +123,11 @@ public class QL_TheLoaiTruyenController {
 	@RequestMapping(value = "/tac-vu/{action}", method = RequestMethod.POST)
 	public String tacVu(Model model, @PathVariable("action") String action, HttpServletRequest request,
 			HttpSession session) throws JsonParseException, JsonMappingException, IOException {
-		
+
 		String json = request.getParameter("array_id");
-		ObjectMapper mapper = new ObjectMapper();	
+		ObjectMapper mapper = new ObjectMapper();
 		String[] array_id = mapper.readValue(json, String[].class);
-		Map<String,String> mess = new HashMap<String, String>();
+		Map<String, String> mess = new HashMap<String, String>();
 		TheLoaiTruyenInfo theLoaiTruyenInfo = new TheLoaiTruyenInfo();
 		switch (action) {
 		case "enable":
@@ -141,36 +157,13 @@ public class QL_TheLoaiTruyenController {
 			break;
 		default:
 			break;
-		
+
 		}
 		session.setAttribute("tacVu", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:" + back;
 	}
-	
-	@RequestMapping(value = "/tim-kiem/", method = RequestMethod.GET)
-	public String searchTheLoai(Model model, @RequestParam("tu-khoa") String tuKhoa, @RequestParam(value = "page", defaultValue = "1") String pageStr) {
-		int page=1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 10;
-		final int Max_Navigation = 4;
 
-		PaginationResult<TheLoaiTruyenInfo> listTheLoaiTruyen = theLoaiTruyenDAO.searchTheLoai(tuKhoa, page, Max_Result, Max_Navigation);
-		Map<Integer, Integer> slTruyen = new HashMap<Integer, Integer>();
-		for (TheLoaiTruyenInfo theLoai : listTheLoaiTruyen.getList()) {
-			slTruyen.put(theLoai.getId(), theLoaiTruyenDAO.soLuongTruyenOfOneTheLoai(theLoai.getId()));
-		}
-
-		model.addAttribute("listTheLoaiTruyen", listTheLoaiTruyen);
-		model.addAttribute("slTruyen", slTruyen);
-		model.addAttribute("sl", listTheLoaiTruyen.getTotalRecords());
-		return "admin/ql_theloaitruyen";
-	}
-	
 	@RequestMapping(value = "/xoa-the-loai", method = RequestMethod.POST)
 	public String deleteTheLoai(Model model, HttpServletRequest request, HttpSession session) {
 		int id = Integer.parseInt(request.getParameter("idTheLoai"));

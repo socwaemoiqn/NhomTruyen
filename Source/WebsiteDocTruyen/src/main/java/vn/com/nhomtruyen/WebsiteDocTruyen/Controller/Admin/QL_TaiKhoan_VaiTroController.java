@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -21,6 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
@@ -30,24 +30,34 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.RoleInfo;
 public class QL_TaiKhoan_VaiTroController {
 	@Autowired
 	private RoleDAO roleDAO;
-	public PaginationResult<RoleInfo> getData(String pageStr)
+	public PaginationResult<RoleInfo> getData(HttpServletRequest request)
 	{
-		int page = 1;
-		try {
-			page = Integer.parseInt(pageStr);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-		final int Max_Result = 10;
+		int Max_Result = 10;
 		final int Max_Navigation = 10;
-		PaginationResult<RoleInfo> list = roleDAO.paginationListRole(page, Max_Result, Max_Navigation);
+		int page = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+		String search = request.getParameter("search") != null ? request.getParameter("search") : "";
+		PaginationResult<RoleInfo> list;
+		if(search.isEmpty() |search.equals(""))
+			list = roleDAO.paginationListRole(page, Max_Result, Max_Navigation);
+		else
+		{
+			Max_Result = 100;
+			list = roleDAO.getRoleByTen(page, Max_Result, Max_Navigation, search);
+			Map<String,String> mess =new HashMap<String, String>();
+			mess.put("status","Tìm kiếm thành công!");
+			mess.put("name","Tìm được "+list.getTotalRecords()+" kết quả!");
+			request.getSession().setAttribute("mess", mess);
+		
+		}
+			
 		return list;
 	}
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String quyenNguoDungPage(Model model, @RequestParam(value="page",defaultValue = "1")String pageStr) {
-		PaginationResult<RoleInfo> list = getData(pageStr);
+	@RequestMapping(value = {"/*",""}, method = RequestMethod.GET)
+	public String quyenNguoDungPage(Model model,HttpServletRequest request) {
+		String urlRedirect =  !Authencation.Auth(request,1) ? "redirect:/" : "admin/ql_taikhoan_vaitro";
+		PaginationResult<RoleInfo> list = getData(request);
 		model.addAttribute("listRole",list);
-		return "admin/ql_taikhoan_vaitro";
+		return urlRedirect;
 	}
 	@RequestMapping(value = "/ajax",method = RequestMethod.POST)
 	public @ResponseBody String getTacGiaById(HttpServletRequest request) throws JsonProcessingException
@@ -57,30 +67,6 @@ public class QL_TaiKhoan_VaiTroController {
 		 ObjectMapper mapper = new ObjectMapper();
 		 String json = mapper.writeValueAsString(role);
 		return json;
-	}
-	@RequestMapping(value = "/search",method = RequestMethod.GET)
-	public String search(HttpServletRequest request,HttpSession session, @RequestParam(value="page",defaultValue = "1")String pageStr) 
-	{
-		String key = request.getParameter("key");
-		if(!key.isEmpty())
-		{
-			int page = 1;
-			try {
-				page = Integer.parseInt(pageStr);
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
-			final int Max_Result = 100;
-			final int Max_Navigation = 10;
-			PaginationResult<RoleInfo> listRole = roleDAO.getRoleByTen(page, Max_Result, Max_Navigation,key);
-			request.setAttribute("listRole",listRole);
-			Map<String,String> mess = new HashMap<String, String>();
-			mess.put("status", "Tìm kiếm thành công!");
-			mess.put("name","Tìm được: "+listRole.getList().size()+" kết quả!");
-			session.setAttribute("mess", mess);
-			return "admin/ql_taikhoan_vaitro";
-		}
-		return "redirect:/quan-tri/tai-khoan/vai-tro";
 	}
 	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public String insert(HttpServletRequest request,HttpSession session)

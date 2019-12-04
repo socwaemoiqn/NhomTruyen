@@ -55,6 +55,13 @@
                            	${sessionScope.tacVu.trangThai}.                       
                    		</div>
 					</c:if>
+					<c:if test="${not empty sessionScope.tuKhoa}">
+							
+						<div class="alert alert-info  alert-dismissible">
+                         	  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>                            
+                           	 Kết quả tìm kiếm cho từ khóa ${sessionScope.tuKhoa}:                  
+                   		</div>
+					</c:if>
 					
 					<%
 					        request.getSession().removeAttribute("themDanhMuc");
@@ -78,7 +85,7 @@
 									</a></td>
 									<td>
 										<form
-											action="${pageContext.request.contextPath}/quan-tri/ql-danh-muc-truyen/tim-kiem/">
+											action="${pageContext.request.contextPath}/quan-tri/ql-danh-muc-truyen">
 											<div style="float: left">
 												<input class="form-control" type="text" name="tu-khoa"
 													placeholder="Nhập nội dung tìm kiếm">

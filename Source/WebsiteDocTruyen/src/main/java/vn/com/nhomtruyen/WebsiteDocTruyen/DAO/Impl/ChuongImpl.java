@@ -17,21 +17,35 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChuongEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 
-public class ChuongImpl implements ChuongDAO{
+public class ChuongImpl implements ChuongDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
 
 	@Override
-	public PaginationResult<ChuongInfo> listChuongOfTruyen(String idTruyen, int page, int maxResult,
+	public PaginationResult<ChuongInfo> listChuongOfTruyen(String idTruyen, String sort, int page, int maxResult,
 			int maxNavigationPage) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String sql = " Select new " + ChuongInfo.class.getName()
 				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
-				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao ASC";
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id ORDER BY ch.ngayTao " + sort;// ASC
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", idTruyen);
+		return new PaginationResult<ChuongInfo>(query, page, maxResult, maxNavigationPage);
+	}
+
+	@Override
+	public PaginationResult<ChuongInfo> searchChuogn(String idTruyen, String tuKhoa, int page, int maxResult,
+			int maxNavigationPage) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = " Select new " + ChuongInfo.class.getName()
+				+ "(ch.id, ch.IDTruyen, ch.tieuDe, ch.noiDung, ch.trangThai, ch.ngayTao)" + " from "
+				+ ChuongEntity.class.getName() + " ch where ch.IDTruyen  = :id  and ch.tieuDe like : tuKhoa ";
+
+		Query query = session.createQuery(sql);
+		query.setParameter("id", idTruyen);
+		query.setParameter("tuKhoa", "%" + tuKhoa + "%");
 		return new PaginationResult<ChuongInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
@@ -46,7 +60,7 @@ public class ChuongImpl implements ChuongDAO{
 		query.setParameter("id", maTruyen);
 		return query.list();
 	}
-	
+
 	@Override
 	public List<ChuongInfo> listChuongOfTruyenSortASC(String matruyen) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -58,6 +72,7 @@ public class ChuongImpl implements ChuongDAO{
 		query.setParameter("id", matruyen);
 		return query.list();
 	}
+
 	@Override
 	public Map<String, String> listPathVariableString(String maTruyen) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -67,13 +82,14 @@ public class ChuongImpl implements ChuongDAO{
 
 		Query query = session.createQuery(sql);
 		query.setParameter("id", maTruyen);
-		List<ChuongInfo> list= query.list();
-		Map<String, String> maps= new HashMap<String, String>();
-		for(ChuongInfo ch: list) {
+		List<ChuongInfo> list = query.list();
+		Map<String, String> maps = new HashMap<String, String>();
+		for (ChuongInfo ch : list) {
 			maps.put(Helper.pathVariableString(ch.getTieuDe()), ch.getId());
 		}
 		return maps;
 	}
+
 	@Override
 	public ChuongInfo chuongInfo(String idChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -88,18 +104,16 @@ public class ChuongImpl implements ChuongDAO{
 
 	@Override
 	public void upDateChuong(ChuongInfo chuongInfo) {
-		ChuongEntity chuongEntity= findChuongEntity(chuongInfo.getId());
+		ChuongEntity chuongEntity = findChuongEntity(chuongInfo.getId());
 		chuongEntity.setNoiDung(chuongInfo.getNoiDung());
 		chuongEntity.setTieuDe(chuongInfo.getTieuDe());
 		chuongEntity.setTrangThai(chuongInfo.getTrangThai());
 		this.sessionFactory.getCurrentSession().update(chuongEntity);
 	}
 
-	
-
 	@Override
 	public void insertChuong(ChuongInfo chuongInfo) {
-		ChuongEntity chuong= new ChuongEntity();
+		ChuongEntity chuong = new ChuongEntity();
 		chuong.setId(chuongInfo.getId());
 		chuong.setIDTruyen(chuongInfo.getIDTruyen());
 		chuong.setTieuDe(chuongInfo.getTieuDe());
@@ -108,8 +122,9 @@ public class ChuongImpl implements ChuongDAO{
 		chuong.setNgayTao(chuongInfo.getNgayTao());
 		Session session = sessionFactory.getCurrentSession();
 		session.persist(chuong);
-		
+
 	}
+
 	@Override
 	public ChuongEntity findChuongEntity(String idChuong) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -117,23 +132,20 @@ public class ChuongImpl implements ChuongDAO{
 		crit.add(Restrictions.eq("id", idChuong));
 		return (ChuongEntity) crit.uniqueResult();
 	}
+
 	@Override
 	public void deleteChuong(String idChuong) {
-		ChuongEntity chuongEntity= this.findChuongEntity(idChuong);
-		if(chuongEntity != null) {
+		ChuongEntity chuongEntity = this.findChuongEntity(idChuong);
+		if (chuongEntity != null) {
 			this.sessionFactory.getCurrentSession().delete(chuongEntity);
 		}
 	}
 
 	@Override
 	public void upDateTrangThaiChuong(ChuongInfo chuongInfo) {
-		ChuongEntity chuongEntity= findChuongEntity(chuongInfo.getId());
+		ChuongEntity chuongEntity = findChuongEntity(chuongInfo.getId());
 		chuongEntity.setTrangThai(chuongInfo.getTrangThai());
 		this.sessionFactory.getCurrentSession().update(chuongEntity);
 	}
-
-	
-
-	
 
 }
