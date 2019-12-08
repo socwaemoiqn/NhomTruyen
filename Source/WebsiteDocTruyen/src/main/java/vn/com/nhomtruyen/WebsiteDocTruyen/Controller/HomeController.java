@@ -179,6 +179,7 @@ public class HomeController {
 		model.addAttribute("chuongTruoc", chuongTruoc);
 
 		ChuongInfo chuongOfId = chuongDao.chuongInfo(idChuong);
+		model.addAttribute("maTruyen",chuongOfId.getIDTruyen());
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("listChuong", urlChuong);

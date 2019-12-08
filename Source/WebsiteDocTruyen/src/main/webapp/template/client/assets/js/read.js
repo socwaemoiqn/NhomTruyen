@@ -1,5 +1,3 @@
-var btnPhanHoi = document.querySelector(".chuong-phanhoi");
-var content_PhanHoi = "";
 var btnBinhLuan = document.querySelector(".chuong-binhluan");
 var divBinhLuan = document.getElementById("binh-luan");
 var btnHideMenuPath = document.getElementById("btnHideMenuPath");
@@ -8,9 +6,6 @@ btnBinhLuan.onclick = function(){
         divBinhLuan.style.display = "block";
    else
         divBinhLuan.style.display = "none";
-};
-btnPhanHoi.onclick = function(){
-    content_PhanHoi = prompt("Vui lòng mô tả nội dung cần phản hồi:");
 };
 btnHideMenuPath.onclick = function(){
      let icon_hideMenuPath = document.querySelector("#btnHideMenuPath i");
@@ -30,6 +25,6 @@ btnHideMenuPath.onclick = function(){
           topMenu.style.display = "block";
           path.style.display = "block";
      }
-  
 };
+
 

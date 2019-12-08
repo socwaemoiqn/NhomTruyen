@@ -23,6 +23,33 @@
 
 </head>
 <body>
+	<c:if test="${not empty maTruyen}">
+		<script type="text/javascript">
+		var truyen_readed = {
+				maTruyen : "${maTruyen}",
+				tenTruyen : "${tenTruyen}",
+				chuongHienTai: "${chuongHienTai}"
+		}
+		var cookie_readed = localStorage.getItem("cookie_readed")!= null ? JSON.parse(localStorage.getItem("cookie_readed")) : new Array();
+		if (cookie_readed.length != 0)
+		{
+			for(let i = 0 ; i < cookie_readed.length ; i++)
+			{
+				if(cookie_readed[i].maTruyen == truyen_readed.maTruyen)
+					break;
+				cookie_readed.push(truyen_readed);
+					break;
+			}
+		}
+		else
+		{
+			cookie_readed.push(truyen_readed);
+		}
+		var json = JSON.stringify(cookie_readed);
+		localStorage.setItem("cookie_readed",json);
+		</script>
+		
+	</c:if>
 	<div class="main">
 		<div id="path">
 			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
@@ -121,6 +148,13 @@
 							</a>
 						</c:otherwise>
 					</c:choose>
+					<br>
+					<a  href="${pageContext.request.contextPath}/contact" target="_blank"><span class="chuong-phanhoi">Phản hồi</span></a>
+					<span class="chuong-binhluan">Bình luận</span>
+					<br>
+					<i class="fas fa-bezier-curve"></i>
+					<br>
+					<span class="chuong-tips">Bạn có thể dùng phím mũi tên hoặc WASD để lùi/sang chương.</span>
 				</div>
 			</div>
 			<div class="col-10" id="binh-luan"
@@ -192,13 +226,10 @@
 				class="fab fa-facebook-f"></i></a></span> <span class="tool-item"><span
 			class="tool-mota">Phản hồi</span><i class="far fa-envelope"></i></span>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/template/client/assets/js/read.js">
-		
+	<script >
+
 	</script>
-	<!-- JS phần menu và responsive -->
 	<script type="text/javascript">
-	
 		document.getElementById('chuongLists').onchange = function() {
 		    var value =  this.value;
 		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
@@ -209,8 +240,14 @@
 		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
 		    //alert(value)
 		};
+		function SetHistoryReaded(maTruyen) {
+			alert(maTruyen);
+		}
 	</script>
-	
+		<script
+		src="${pageContext.request.contextPath}/template/client/assets/js/read.js">
+		
+	</script>
 	<script src="${pageContext.request.contextPath}/template/client/assets/js/tool-read.js"></script>
 </body>
 </html>

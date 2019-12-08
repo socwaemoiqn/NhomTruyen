@@ -10,6 +10,7 @@ var btnConfigBackgroundAndColor = document.getElementById("config-background-col
 var AllSpanOfContentChuong = document.querySelectorAll("#content-chuong p span");
 /// Chạy cấu hình giao diện khi lần đầu load trang
 config_Tool_default();
+showBtnTop();
 /// Chạy cấu hình giao diện khi lần đầu load trang
 btnGoTop.onclick = function(){
     window.scrollTo({
@@ -20,11 +21,8 @@ btnGoTop.onclick = function(){
 btnPhanHoi.onclick = function(){
      content_PhanHoi = prompt("Vui lòng mô tả nội dung cần phản hồi:");
 };
-window.onload = function(){
-    showBtnPhanHoi();
-};
 window.onscroll = function(){
-    showBtnPhanHoi();
+	showBtnTop();
 };
 btnKhung_Full.onclick = function(){
     let row_khung = document.querySelector(".main .row");
@@ -56,7 +54,7 @@ btnConfigBackgroundAndColor.onchange = function(){
         AllSpanOfContentChuong[i].style.color = obj.color;
      }
 };
-function showBtnPhanHoi()
+function showBtnTop()
 {
     if(document.body.scrollTop > 0 || document.documentElement.scrollTop > 0)
     {
