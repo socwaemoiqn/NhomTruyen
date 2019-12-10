@@ -118,6 +118,13 @@
 				</button>
 			</c:if>
 			<c:if test="${not empty acc_login }">
+				<c:if test="${acc_login.maRole == 1 }">
+					<form action="${pageContext.request.contextPath}/quan-tri" method="get">
+					<button class="dropbtn" style="cursor: pointer; font-weight: bold" id="logout">
+					<i class="fa fa-user"></i> Quản trị
+					</button></a>
+					</form>
+				</c:if>
 				<c:if test="${acc_login.maRole == 2 }">
 					<form action="${pageContext.request.contextPath}/logout" method="get">
 					<button class="dropbtn" style="cursor: pointer; font-weight: bold" id="logout">

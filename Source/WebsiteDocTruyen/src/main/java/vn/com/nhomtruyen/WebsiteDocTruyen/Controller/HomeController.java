@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,6 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
 @Controller
 public class HomeController {
@@ -46,7 +46,7 @@ public class HomeController {
 	private ChuongDAO chuongDao;
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDao;
-	
+
 	public void loadTheLoaiAndDanhMucTruyen(Model model) {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();
 		List<TheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTheLoai();
@@ -109,7 +109,8 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
-	public String truyenPage(Model model,HttpSession session ,@PathVariable("tenTruyen") String tenTruyen,@RequestParam(value = "page", defaultValue = "1") String pageStr) {
+	public String truyenPage(Model model, HttpSession session, @PathVariable("tenTruyen") String tenTruyen,
+			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
 
 		int page = 1;
 		try {
@@ -119,28 +120,27 @@ public class HomeController {
 		}
 		final int Max_Result = 10;
 		final int Max_Navigation = 10;
-		
+
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
-		
 
 		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
-		String sort ="ASC";
-		PaginationResult<ChuongInfo> listPaginationChuong= chuongDao.listChuongOfTruyen(maTruyen,sort, page, Max_Result, Max_Navigation);
+		String sort = "ASC";
+		PaginationResult<ChuongInfo> listPaginationChuong = chuongDao.listChuongOfTruyen(maTruyen, sort, page,
+				Max_Result, Max_Navigation);
 		List<SelectTruyenInfo> truyenCungTacGia = truyenDao.selectAllTruyenByTacGia(tr.getTenTacGia());
 		List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
-		List<ChuongInfo> listChuongMoi= chuongDao.listChuongOfTruyenSortDESC(maTruyen);
+		List<ChuongInfo> listChuongMoi = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
 		Map<String, String> urlChuong = new HashMap<String, String>();
 		int i = 1;
 		for (ChuongInfo ch : listChuong) {
-			urlChuong.put(ch.getId(), Helper.pathVariableString(i+""));
+			urlChuong.put(ch.getId(), Helper.pathVariableString(i + ""));
 			i++;
 		}
 
-		
-		//Cap nhat luot xem
-		
+		// Cap nhat luot xem
+
 		truyenDao.capNhatLuotXem(tr);
 		//
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
@@ -155,11 +155,7 @@ public class HomeController {
 		model.addAttribute("urlTacGia", Helper.pathVariableString(tr.getTenTacGia()));
 		model.addAttribute("chuongMoi", listChuongMoi);
 
-			session.setAttribute("truyenVuaDoc", tr);
-			
-		
-		
-		
+		session.setAttribute("truyenVuaDoc", tr);
 
 		loadTheLoaiAndDanhMucTruyen(model);
 
@@ -189,24 +185,76 @@ public class HomeController {
 		int chuongTruoc = chuongHienTai - 1;
 		int chuongSau = chuongHienTai + 1;
 
-		
 		// get truyện vừa đọc.
-		
-		
-		
-		
+
 		model.addAttribute("chuongSau", chuongSau);
 		model.addAttribute("chuongTruoc", chuongTruoc);
 
 		ChuongInfo chuongOfId = chuongDao.chuongInfo(idChuong);
+		model.addAttribute("maTruyen", chuongOfId.getIDTruyen());
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("listChuong", urlChuong);
-		model.addAttribute("tenTR", truyen.getTenTruyen());
+		model.addAttribute("tenTR", truyen.getTenTruyen()); // Việt thêm
 		model.addAttribute("tenUrlTruyen", tenTruyen);
 		model.addAttribute("chuongHienTai", chuongHienTai);
 		loadTheLoaiAndDanhMucTruyen(model);
+		Map<String, String> object_readed = new HashMap<String, String>();
+		object_readed.put("maTruyen", chuongOfId.getIDTruyen());
+		object_readed.put("tenTruyen", truyen.getTenTruyen());
+		object_readed.put("chuongHienTai", chuongHienTai + "");
+		object_readed.put("urlTruyen", tenTruyen + "/chuong-" + chuongHienTai);
+		/// Việt thêm chức năng truyện vừa đọc
+		ArrayList<Map<String, String>> array_readed = session.getAttribute("array_readed") != null
+				? (ArrayList<Map<String, String>>) session.getAttribute("array_readed")
+				: new ArrayList<Map<String, String>>();
+		if (array_readed.size() != 0) // Nếu đã có truyện
+		{
+			array_readed = reserveArray(array_readed); // Đảo ngược lại mảng
+			boolean checkExsit = false; // Biến kiểm tra xem truyện có tồn tại trong mảng trước đó chưa
+			int limit = 5; // Giới hạn chỉ lưu 5 truyện gần nhất
+			for (int j = 0; j < array_readed.size(); j++) // Duyệt mảng
+			{
+				if (array_readed.get(j).get("maTruyen").equals(chuongOfId.getIDTruyen())) // Nếu đã tồn tại truyện vừa
+																							// chọn đọc trong mảng
+				{
+					Map<String, String> itemLast = array_readed.get(array_readed.size() - 1); // Lưu tạm item cuối cùng
+																								// ra
+					array_readed.set(array_readed.size() - 1, object_readed); // Gán item cuối cùng bằng item vừa đọc
+					array_readed.set(j, itemLast); // Đảo vị trí giữa 2 truyện
+					checkExsit = true; // Đưa biến kiểm tra về true
+					break;
+				}
+			}
+			if (!checkExsit) // Nếu không tồn tại truyện vừa chọn đọc trong mảng
+			{
+				if (array_readed.size() >= limit) // Nếu mảng đã có số lượng >= 5
+				{
+					for (int j = 0; j < array_readed.size() - 1; j++) { // Duyệt mảng xóa lùi các truyện
+						array_readed.set(j, array_readed.get(j + 1));
+					}
+					array_readed.set(array_readed.size() - 1, object_readed); // Gán truyện mới nhất vào vị trí cuối
+																				// cùng
+				} else // Nếu số lượng truyện < 5
+				{
+					array_readed.add(object_readed); // Thêm truyện vào mảng
+				}
+
+			}
+		} else // Mảng rỗng (Chưa có truyện nào)
+		{
+			array_readed.add(object_readed); // Thêm truyện vào
+		}
+		session.setAttribute("array_readed", reserveArray(array_readed)); // Lưu vào session
 		return "xem_chuong";
+	}
+
+	public ArrayList<Map<String, String>> reserveArray(ArrayList<Map<String, String>> array) {
+		ArrayList<Map<String, String>> newArray = new ArrayList<Map<String, String>>();
+		for (int i = 0; i < array.size(); i++) {
+			newArray.add(i, array.get(array.size() - 1 - i));
+		}
+		return newArray;
 	}
 
 	@RequestMapping(value = "/danh-muc/{danh-muc}", method = RequestMethod.GET)
@@ -215,25 +263,25 @@ public class HomeController {
 
 		List<SelectTruyenInfo> listTruyenByDanhMuc = null;
 		String gioiThieu = "";
-		String tenDanhMuc="";
+		String tenDanhMuc = "";
 		if (tenDanhMucPath.equals("truyen-full")) {
 			listTruyenByDanhMuc = truyenDao.selectAllTruyenByDanhMuc("full");
 			gioiThieu = "Danh sách những truyện đã full, có nhiều người đọc và quan tâm nhất.";
-			tenDanhMuc="Truyện Full";
+			tenDanhMuc = "Truyện Full";
 		}
 		if (tenDanhMucPath.equals("truyen-hot")) {
 			listTruyenByDanhMuc = truyenDao.selectAllTruyenByDanhMuc("hot");
 			gioiThieu = "Danh sách những truyện đang hot, có nhiều người đọc và quan tâm nhất trong tháng này.";
-			tenDanhMuc="Truyện Hot";
+			tenDanhMuc = "Truyện Hot";
 		}
 		if (tenDanhMucPath.equals("truyen-news")) {
 			listTruyenByDanhMuc = truyenDao.selectAllTruyenByDanhMuc("news");
 			gioiThieu = "Danh sách những truyện mới cập nhật.";
-			tenDanhMuc="Truyện News";
+			tenDanhMuc = "Truyện News";
 		}
 		model.addAttribute("danhMucTruyen", listTruyenByDanhMuc);
 		model.addAttribute("gioiThieu", gioiThieu);
-		model.addAttribute("tenDanhMuc",tenDanhMuc);
+		model.addAttribute("tenDanhMuc", tenDanhMuc);
 		return "danh_muc";
 	}
 
@@ -259,16 +307,13 @@ public class HomeController {
 
 		return "the-loai";
 	}
-	
+
 	@RequestMapping(value = "/tac-gia/{tacGia}", method = RequestMethod.GET)
 	public String tacGiaPage(Model model, @PathVariable("tacGia") String tenTacGia) {
 		loadTheLoaiAndDanhMucTruyen(model);
 
-	
 		return "the-loai";
 	}
-	
-	
 
 	@RequestMapping("/tim-kiem")
 	public String searchPage(Model model, @RequestParam("tu-khoa") String tuKhoa) {
@@ -282,57 +327,47 @@ public class HomeController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 
-	public String login( @RequestParam("username") String userName,
-			@RequestParam("password") String passWord,HttpServletRequest request,HttpSession session) {
-		
+	public String login(@RequestParam("username") String userName, @RequestParam("password") String passWord,
+			HttpServletRequest request, HttpSession session) {
+
 		String back = request.getHeader("Referer");
 		String requestStr = "";
-		if(userName.isEmpty() || passWord.isEmpty())
-		{
-			session.setAttribute("mess","Chưa nhập đủ thông tin");
-			requestStr = "redirect:"+back;
+		if (userName.isEmpty() || passWord.isEmpty()) {
+			session.setAttribute("mess", "Chưa nhập đủ thông tin");
+			requestStr = "redirect:" + back;
 		}
 		TaiKhoanEntity taikhoan = taiKhoanDAO.findTaiKhoanEntityByTen(userName);
-		if(taikhoan == null || !taikhoan.getMatKhau().equals(passWord))
-		{
-			session.setAttribute("mess","Tài khoản hoặc mật khẩu không chính xác");
-			requestStr = "redirect:"+back;
-		}
-		else
-		{
-			if(taikhoan.getMaRole() == 2 || taikhoan.getMaRole() == 3)
-			{
-				session.setAttribute("mess","Đăng nhập thành công!");
+		if (taikhoan == null || !taikhoan.getMatKhau().equals(passWord)) {
+			session.setAttribute("mess", "Tài khoản hoặc mật khẩu không chính xác");
+			requestStr = "redirect:" + back;
+		} else {
+			if (taikhoan.getMaRole() == 2 || taikhoan.getMaRole() == 3) {
+				session.setAttribute("mess", "Đăng nhập thành công!");
 				session.setAttribute("acc_login", taikhoan);
-				requestStr = "redirect:"+back;
-			}
-			else if (taikhoan.getMaRole() == 1)
-			{
+				requestStr = "redirect:" + back;
+			} else if (taikhoan.getMaRole() == 1) {
 				session.setAttribute("acc_login", taikhoan);
 				requestStr = "redirect:/quan-tri";
 			}
-				
+
 		}
-		
+
 		return requestStr;
 	}
-	@RequestMapping(value = "/logup",method = RequestMethod.POST)
-	public @ResponseBody String logup(HttpServletRequest request)
-	{
+
+	@RequestMapping(value = "/logup", method = RequestMethod.POST)
+	public @ResponseBody String logup(HttpServletRequest request) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String repassword = request.getParameter("repassword");
 		String email = request.getParameter("email");
-		if(email.isEmpty() || password.isEmpty() || repassword.isEmpty() || username.isEmpty())
-		{
+		if (email.isEmpty() || password.isEmpty() || repassword.isEmpty() || username.isEmpty()) {
 			return "empty";
 		}
-		if(!password.equals(repassword))
-		{
+		if (!password.equals(repassword)) {
 			return "password";
 		}
-		if(taiKhoanDAO.findTaiKhoanEntityByTen(username)!= null)
-		{
+		if (taiKhoanDAO.findTaiKhoanEntityByTen(username) != null) {
 			return "exist";
 		}
 		TaiKhoanInfo taikhoan = new TaiKhoanInfo();
@@ -340,8 +375,9 @@ public class HomeController {
 		taikhoan.setMatKhau(password);
 		taikhoan.setEmail(email);
 		taiKhoanDAO.insert(taikhoan);
-		return "success"; 
+		return "success";
 	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpServletRequest request) {
 		request.getSession().removeAttribute("acc_login");

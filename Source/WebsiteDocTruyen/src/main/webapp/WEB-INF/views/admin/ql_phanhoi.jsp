@@ -449,13 +449,13 @@
 		    }
 		    ShowBy = (key,value) => {
 		    	let url = location.href; 
-		    	if(!url.includes("/search"))
+	/* 	    	if(!url.includes("/search"))
 		    	{
 		    		if(url.charAt(url.length-1) == "/")
 		    			url += "search";
 		    		else
 		    			url += "/search";
-		    	}
+		    	} */
 		    	if(!url.includes(key))
 		    	{
 		    		if(url.includes("key"))

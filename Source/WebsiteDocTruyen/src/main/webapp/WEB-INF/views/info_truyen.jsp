@@ -100,15 +100,21 @@
 				</div>
 				<div class="content">
 					<table>
-						
-							
-							
-						
-						<tr>
-							<td><a href="#"><i class="fas fa-book-reader"></i> Đế
-									tôn <br> (Chương 203)</a></a></td>
-						</tr>
-						
+						<c:if test="${not empty array_readed }">
+						<c:forEach items="${array_readed }" var="item">
+							<tr>
+							<td><a href="${pageContext.request.contextPath}/${item.urlTruyen}"><i
+									class="fas fa-book-reader"></i><span>${item["tenTruyen"] }</span> <br>
+									(Chương ${item["chuongHienTai"]})
+								</a></td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty array_readed }">
+					<tr>
+							<td style="padding: 14px 16px;text-align:center;height: 351px;"> Bạn chưa đọc truyện nào cả</td>
+							</tr>
+					</c:if>
 					</table>
 				</div>
 			</div>

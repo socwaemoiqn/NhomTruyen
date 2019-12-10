@@ -121,6 +121,13 @@
 							</a>
 						</c:otherwise>
 					</c:choose>
+					<br>
+					<a  href="${pageContext.request.contextPath}/contact" target="_blank"><span class="chuong-phanhoi">Phản hồi</span></a>
+					<span class="chuong-binhluan">Bình luận</span>
+					<br>
+					<i class="fas fa-bezier-curve"></i>
+					<br>
+					<span class="chuong-tips">Bạn có thể dùng phím mũi tên hoặc WASD để lùi/sang chương.</span>
 				</div>
 			</div>
 			<div class="col-10" id="binh-luan"
@@ -192,13 +199,10 @@
 				class="fab fa-facebook-f"></i></a></span> <span class="tool-item"><span
 			class="tool-mota">Phản hồi</span><i class="far fa-envelope"></i></span>
 	</div>
-	<script
-		src="${pageContext.request.contextPath}/template/client/assets/js/read.js">
-		
+	<script >
+
 	</script>
-	<!-- JS phần menu và responsive -->
 	<script type="text/javascript">
-	
 		document.getElementById('chuongLists').onchange = function() {
 		    var value =  this.value;
 		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
@@ -209,8 +213,14 @@
 		    location.href="${pageContext.request.contextPath}/${tenUrlTruyen}/chuong-"+value;
 		    //alert(value)
 		};
+		function SetHistoryReaded(maTruyen) {
+			alert(maTruyen);
+		}
 	</script>
-	
+		<script
+		src="${pageContext.request.contextPath}/template/client/assets/js/read.js">
+		
+	</script>
 	<script src="${pageContext.request.contextPath}/template/client/assets/js/tool-read.js"></script>
 </body>
 </html>
