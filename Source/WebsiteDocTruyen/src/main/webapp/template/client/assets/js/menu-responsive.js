@@ -1,11 +1,5 @@
 var y = document.getElementById("user");
 var z = document.getElementById("search"); 
-var btnSearch = document.querySelector("#search button");
-btnSearch.onclick = () => { 
-    let value = document.querySelector("#search input[type=text]");
-    
-    location.href="search.html?id="+value.value;
-}
 
 window.onload = function(){
     resize();

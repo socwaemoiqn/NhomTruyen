@@ -11,7 +11,6 @@ function clickIconRate(e)
     var id_element= e.getAttribute("id");  
     var index = id_element.split("-")[1];
     localStorage.setItem("click-icon-rate",index);
-    console.log(localStorage.getItem("click-icon-rate"));
     for(var i = 0; i<index;i++)
     {
          icon_rate[i].style.color = "yellow";
@@ -36,9 +35,6 @@ function removeHoverIconRate(e)
    
     var click_cookie_index = localStorage.getItem("click-icon-rate");
     var hover_cookie_index = localStorage.getItem("hover-icon-rate");
-    console.log(index);
-    console.log(click_cookie_index);
-    console.log(hover_cookie_index);
     for(var i = click_cookie_index ; i < index ; i++)
     {
         icon_rate[i].style.color = "white";
@@ -49,13 +45,19 @@ function icon_rate_default()
     if(localStorage.getItem("click-icon-rate") == null)
         localStorage.setItem("click-icon-rate",0);
     let index = localStorage.getItem("click-icon-rate");
-        for(var i = 0 ; i < index ; i++)
-        {
-            icon_rate[i].style.color = "yellow";
-        }   
+    if(index != 0)
+    	{
+    	   for(var i = 0 ; i < index ; i++)
+           {
+               icon_rate[i].style.color = "yellow";
+           }   
+    	}
+     
 }
 /// Xử li kích chọn time truyện đang hot
+
 var ele = document.querySelectorAll("#truyen-dang-hot table td span.type-time");
+type_time_active(ele[0]);
 for(var i = 0; i < ele.length ;i++)
 {
     ele[i].setAttribute("onclick","type_time_active(this)");

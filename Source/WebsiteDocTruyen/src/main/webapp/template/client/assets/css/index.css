@@ -12,7 +12,7 @@
     min-height: 300px;
 }
 .col-3{
-   min-height: 170px;
+   min-height: 100px;
 }
 .col-10{
     width: 100%;
@@ -275,8 +275,12 @@
 }
 #truyen-vua-doc table td{
     text-align: left;
-    padding: 0 5px;
+  	 padding: 3px 10px;
     font-weight: normal;
+}
+#truyen-vua-doc table td span{
+	
+	color:#8eb3fd;
 }
 #truyen-vua-doc table td i{
     color: black;
