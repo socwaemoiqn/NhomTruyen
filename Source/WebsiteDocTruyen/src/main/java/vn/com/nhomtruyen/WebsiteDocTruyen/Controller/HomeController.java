@@ -142,9 +142,7 @@ public class HomeController {
 		//Cap nhat luot xem
 		
 		truyenDao.capNhatLuotXem(tr);
-		
-		// Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-
+		//
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
 
 		model.addAttribute("truyenById", tr);
@@ -170,7 +168,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/{tenTruyen}/{chuongSo}", method = RequestMethod.GET)
 	public String chuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@PathVariable("chuongSo") String chuongSo) {
+			@PathVariable("chuongSo") String chuongSo, HttpSession session) {
 
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
@@ -191,6 +189,12 @@ public class HomeController {
 		int chuongTruoc = chuongHienTai - 1;
 		int chuongSau = chuongHienTai + 1;
 
+		
+		// get truyện vừa đọc.
+		
+		
+		
+		
 		model.addAttribute("chuongSau", chuongSau);
 		model.addAttribute("chuongTruoc", chuongTruoc);
 

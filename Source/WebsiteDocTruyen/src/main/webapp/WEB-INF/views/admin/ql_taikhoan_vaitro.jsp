@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Quản trị - Quản lý quyền người dùng</title>
 </head>
 <body>
 	<div class="row">

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Chương ${chuong.tieuDe} của truyện ${tenTruyen }</title>
 </head>
 <body>

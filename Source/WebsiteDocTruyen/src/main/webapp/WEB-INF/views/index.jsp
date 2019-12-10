@@ -26,7 +26,7 @@
 										<div class="item-status">
 											<i class="fab fa-hotjar"></i> 
 											<c:choose>
-												<c:when test="${tr.full==true }">Full</c:when>
+												<c:when test="${tr.full== true }">Full</c:when>
 												<c:otherwise>Chương :${tr.soChuong }</c:otherwise>
 											</c:choose>
 											
@@ -79,6 +79,9 @@
 				</div>
 				<div class="content">
 					<table>
+						<c:if test="${not empty sessionScope.truyenVuaDoc }">
+							${sessionScope.truyenVuaDoc.tenTruyen }
+						</c:if>
 						<tr>
 							<td><a href="info-truyen.html"><i
 									class="fas fa-book-reader"></i> Phần này chưa phát triển. <br>
@@ -130,7 +133,15 @@
 												</c:if>
 										</c:forEach></a>
 								</td>
-								<td><a href="#" class="chuong">Chương ${tr.soChuong } </a></td>
+								<td>
+								<c:forEach items="${urlTruyen}" var="url">
+									<c:if test="${url.value==tr.ID }">
+										<a href="${pageContext.request.contextPath}/${url.key}/chuong-${tr.soChuong}">
+											Chương ${tr.soChuong }</a>
+									</c:if>
+								</c:forEach>
+								
+								</td>
 
 								<td><c:set var="maTruyen" value="${tr.ID}" /> <c:forEach
 										var="t" items="${truoc}">
@@ -140,19 +151,6 @@
 									</c:forEach></td>
 							</tr>
 						</c:forEach>
-
-						<tr>
-							<td><i class="fas fa-chevron-right"></i> <a href="#">///phần
-									tĩnh </a>
-									 <span class="index-item-status" id="index-item-status-full">Full</span>
-                                       
-                                         <span class="index-item-status" id="index-item-status-new">New</span>
-									
-							</td>
-							<td><a href="#">Tiên hiệp, huyền huyễn</a></td>
-							<td><a href="#" class="chuong">Chương 201</a></td>
-							<td>3 phút trước</td>
-						</tr>
 					</table>
 				</div>
 			</div>
@@ -210,16 +208,7 @@
 							<img src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" />
 						</div>
 					</c:forEach>
-					<div class="item">
-						<div class="item-status">
-							<i class="fab fa-hotjar"></i> Full
-						</div>
-						<div class="item-title">
-							<a href="#">Phần Tĩnh</a>
-						</div>
-						<img
-							src="https://cdnaz.truyenfull.vn/cover/o/eJzLyTDT17WITwqMNNQtNKp01A_zNXY1ifQuc8301HeEghwTR_1IV8PsTO-w4HKTUP1yIzNT3QxjSzMANU0RrA==/pham-nhan-tu-tien.jpg" />
-					</div>
+					
 				</div>
 			</div>
 		</div>

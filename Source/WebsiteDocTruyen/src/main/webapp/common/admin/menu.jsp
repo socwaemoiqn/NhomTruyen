@@ -40,9 +40,9 @@
 					<span class="fa arrow"></span>
 				</a>
 				<ul class="nav nav-second-level">
-					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke-truyen">Các thông tin về truyện</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke-nhom-dich">Các thông tin về nhóm dịch</a></li>
-					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke-nguoidung">Các thông tin về người dùng</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke/truyen">Các thông tin về truyện</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke/nhom-dich">Các thông tin về nhóm dịch</a></li>
+					<li><a href="${pageContext.request.contextPath}/quan-tri/thong-ke/nguoi-dung">Các thông tin về người dùng</a></li>
 				</ul>
 			</li>
 			<li>

@@ -6,12 +6,12 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Quản trị - Quản lý tài khoản</title>
 </head>
 <body>
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="page-header">Quản lý tài khoản</h1>
+			<h1 class="page-header">Quản Lý Tài Khoản</h1>
 		</div>
 		<!-- /.col-lg-12 -->
 	</div>

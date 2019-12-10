@@ -285,7 +285,7 @@
 				</div>
 				<div class="content" style="padding: 5px;">
 					<div class="fb-comments"
-						data-href="http://localhost:5500/info-truyen.html"
+						data-href="${pageContext.request.contextPath}/${tenTruyen }"
 						style="border: none; visibility: visible; width: 100%;"
 						data-colorscheme="" data-width="" data-numposts="5"></div>
 				</div>
