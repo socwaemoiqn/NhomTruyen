@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -154,7 +155,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/{tenTruyen}/{chuongSo}", method = RequestMethod.GET)
 	public String chuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@PathVariable("chuongSo") String chuongSo) {
+			@PathVariable("chuongSo") String chuongSo,HttpSession session) {
 
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
@@ -183,13 +184,65 @@ public class HomeController {
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("listChuong", urlChuong);
-		model.addAttribute("tenTR", truyen.getTenTruyen());
+		model.addAttribute("tenTR", truyen.getTenTruyen()); // Việt thêm
 		model.addAttribute("tenUrlTruyen", tenTruyen);
 		model.addAttribute("chuongHienTai", chuongHienTai);
 		loadTheLoaiAndDanhMucTruyen(model);
+		Map<String, String> object_readed = new HashMap<String, String>();
+		object_readed.put("maTruyen", chuongOfId.getIDTruyen());
+		object_readed.put("tenTruyen", truyen.getTenTruyen());
+		object_readed.put("chuongHienTai",chuongHienTai+"");
+		object_readed.put("urlTruyen",tenTruyen+"/chuong-"+chuongHienTai);
+		/// Việt thêm chức năng truyện vừa đọc
+		ArrayList<Map<String, String>> array_readed = session.getAttribute("array_readed")!= null ? (ArrayList<Map<String,String>>)session.getAttribute("array_readed") : new ArrayList<Map<String,String>>();
+		if (array_readed.size() != 0) // Nếu đã có truyện
+		{
+			array_readed = reserveArray(array_readed); // Đảo ngược lại mảng
+			boolean checkExsit = false; // Biến kiểm tra xem truyện có tồn tại trong mảng trước đó chưa
+			int limit = 5; // Giới hạn chỉ lưu 5 truyện gần nhất
+			for (int j = 0; j < array_readed.size(); j++) // Duyệt mảng
+			{
+				if(array_readed.get(j).get("maTruyen").equals(chuongOfId.getIDTruyen())) // Nếu đã tồn tại truyện vừa chọn đọc trong mảng
+				{
+					Map<String, String> itemLast = array_readed.get(array_readed.size()-1); // Lưu tạm item cuối cùng ra 
+					array_readed.set(array_readed.size()-1, object_readed); // Gán item cuối cùng bằng item vừa đọc
+					array_readed.set(j, itemLast); // Đảo vị trí giữa 2 truyện
+					checkExsit = true; // Đưa biến kiểm tra về true
+					break;
+				}			
+			}
+			if(!checkExsit) // Nếu không tồn tại truyện vừa chọn đọc trong mảng
+			{
+				if(array_readed.size() >= limit) // Nếu mảng đã có số lượng >= 5
+				{
+					for (int j = 0; j < array_readed.size()-1; j++) { // Duyệt mảng xóa lùi các truyện
+						array_readed.set(j,array_readed.get(j+1));
+					}
+					array_readed.set(array_readed.size()-1, object_readed); // Gán truyện mới nhất vào vị trí cuối cùng
+				}
+				else // Nếu số lượng truyện < 5
+				{
+					array_readed.add( object_readed); // Thêm truyện vào mảng
+				}
+				
+			}
+		}
+		else // Mảng rỗng (Chưa có truyện nào)
+		{
+			array_readed.add( object_readed); //Thêm truyện vào
+		}
+		session.setAttribute("array_readed", reserveArray(array_readed)); // Lưu vào session
 		return "xem_chuong";
 	}
-
+	public ArrayList<Map<String,String>> reserveArray(ArrayList<Map<String,String>> array)
+	{
+		ArrayList<Map<String,String>> newArray = new ArrayList<Map<String,String>>();
+		for (int i = 0; i < array.size(); i++) {
+			newArray.add(i, array.get(array.size()-1-i));
+		}
+		return newArray;
+	}
+	
 	@RequestMapping(value = "/danh-muc/{danh-muc}", method = RequestMethod.GET)
 	public String danhMucPage(Model model, @PathVariable("danh-muc") String tenDanhMucPath) {
 		loadTheLoaiAndDanhMucTruyen(model);

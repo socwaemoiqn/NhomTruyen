@@ -23,33 +23,6 @@
 
 </head>
 <body>
-	<c:if test="${not empty maTruyen}">
-		<script type="text/javascript">
-		var truyen_readed = {
-				maTruyen : "${maTruyen}",
-				tenTruyen : "${tenTruyen}",
-				chuongHienTai: "${chuongHienTai}"
-		}
-		var cookie_readed = localStorage.getItem("cookie_readed")!= null ? JSON.parse(localStorage.getItem("cookie_readed")) : new Array();
-		if (cookie_readed.length != 0)
-		{
-			for(let i = 0 ; i < cookie_readed.length ; i++)
-			{
-				if(cookie_readed[i].maTruyen == truyen_readed.maTruyen)
-					break;
-				cookie_readed.push(truyen_readed);
-					break;
-			}
-		}
-		else
-		{
-			cookie_readed.push(truyen_readed);
-		}
-		var json = JSON.stringify(cookie_readed);
-		localStorage.setItem("cookie_readed",json);
-		</script>
-		
-	</c:if>
 	<div class="main">
 		<div id="path">
 			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span

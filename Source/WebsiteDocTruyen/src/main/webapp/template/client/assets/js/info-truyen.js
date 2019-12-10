@@ -55,7 +55,9 @@ function icon_rate_default()
      
 }
 /// Xử li kích chọn time truyện đang hot
+
 var ele = document.querySelectorAll("#truyen-dang-hot table td span.type-time");
+type_time_active(ele[0]);
 for(var i = 0; i < ele.length ;i++)
 {
     ele[i].setAttribute("onclick","type_time_active(this)");
