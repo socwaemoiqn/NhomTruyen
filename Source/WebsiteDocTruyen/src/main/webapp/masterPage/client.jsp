@@ -8,8 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <title><dec:title/></title>
-<script
-	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
+
+<link rel="shortcut icon" type="image/x-icon" href="" />
+<%-- <script
+	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script> --%>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
 <link rel="stylesheet"
@@ -39,7 +41,7 @@
 				class="fa fa-circle fa-stack-2x"></i> <i
 				class="fa fa-book-open fa-spin fa-stack-1x fa-inverse"
 				style="color: black;"></i>
-		</span> TRUYỆN PHP
+		</span> NHÓM TRUYỆN
 		</a>
 		<div class="dropdown" id="danhMuc">
 			<button class="dropbtn">

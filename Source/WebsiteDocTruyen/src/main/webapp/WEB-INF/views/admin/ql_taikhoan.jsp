@@ -105,24 +105,27 @@
 										</c:if>
 										</td>
 										<td class="center">
-										<form id="form${us.maTaiKhoan}" action="${pageContext.request.contextPath}/quan-tri/tai-khoan/xoa/${us.maTaiKhoan}" method="post">
-										<a class="btn btn-primary btn-circle"
-											title="Tất cả tài khoản"
-											href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.maTaiKhoan}">
-												<i class="fa fa-list-ul"></i>
-										</a> <a data-toggle="modal" id="${us.maTaiKhoan}" data-target="#sua"
-											class="btn btn-success btn-circle btn-sua"
-											title="Chỉnh sửa danh mục"> <i class="fa  fa-edit"></i>
-										</a>
-										
-										<a id="${us.maTaiKhoan }"class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục"
-										><i
-												class="fa fa-close"></i></a>
-										</form> 
+											<form id="form${us.maTaiKhoan}" 
+											action="${pageContext.request.contextPath}/quan-tri/tai-khoan/xoa/${us.maTaiKhoan}" 
+											method="post">
+												<a class="btn btn-primary btn-circle"
+													title="Tất cả tài khoản"
+													href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.maTaiKhoan}">
+														<i class="fa fa-list-ul"></i>
+												</a> 
+												<a data-toggle="modal" id="${us.maTaiKhoan}" data-target="#sua"
+													class="btn btn-success btn-circle btn-sua"
+													title="Chỉnh sửa danh mục"> 
+													<i class="fa  fa-edit"></i>
+												</a>
+												
+												<a id="${us.maTaiKhoan }" class="btn btn-danger btn-circle btn-xoa" title="Xóa danh mục" >
+													<i	class="fa fa-close"></i>
+												</a>
+											</form> 
 										</td>
 									</tr>
 								</c:forEach>
-
 							</tbody>
 						</table>
 					</div>

@@ -99,23 +99,28 @@ public class QL_TheLoaiTruyenController {
 
 	@RequestMapping(value = "/sua-the-loai", method = RequestMethod.POST)
 	public String editTheLoai(Model model, HttpServletRequest request, HttpSession session) {
+		//lay thong tin request tu trang web
 		int id = Integer.parseInt(request.getParameter("idTheLoai"));
 		String tenTheloai = request.getParameter("tenTheLoai");
 		String gioiThieu = request.getParameter("gioiThieu");
 		String trangThai = request.getParameter("trangThai");
-
+		// kiem tra do dai cua ten the loai moi
 		if (tenTheloai.length() > 10 || !tenTheloai.isEmpty()) {
+			// tao moi mot the loai
 			TheLoaiTruyenInfo theLoai = new TheLoaiTruyenInfo();
 			theLoai.setId(id);
 			theLoai.setTenTheLoai(tenTheloai);
 			theLoai.setTrangThai(trangThai);
 			theLoai.setGioiThieu(gioiThieu);
+			//cap nhat lai thong tin the loai
 			theLoaiTruyenDAO.capNhatTheLoaiTruyen(theLoai);
+			//thong bao
 			session.setAttribute("mess", true);
 			session.setAttribute("tenTheLoaiMoi", tenTheloai);
 		} else {
 			session.setAttribute("mess", false);
 		}
+		// redirect lai trang
 		String back = request.getHeader("Referer");
 		return "redirect:" + back;
 	}
@@ -123,7 +128,6 @@ public class QL_TheLoaiTruyenController {
 	@RequestMapping(value = "/tac-vu/{action}", method = RequestMethod.POST)
 	public String tacVu(Model model, @PathVariable("action") String action, HttpServletRequest request,
 			HttpSession session) throws JsonParseException, JsonMappingException, IOException {
-
 		String json = request.getParameter("array_id");
 		ObjectMapper mapper = new ObjectMapper();
 		String[] array_id = mapper.readValue(json, String[].class);

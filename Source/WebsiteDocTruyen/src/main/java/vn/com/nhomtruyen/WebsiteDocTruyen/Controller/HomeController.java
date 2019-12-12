@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
@@ -30,6 +31,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.ChuongInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.DanhMucTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
 
@@ -46,6 +48,8 @@ public class HomeController {
 	private ChuongDAO chuongDao;
 	@Autowired
 	private TheLoaiTruyenDAO theLoaiTruyenDao;
+	@Autowired
+	private TacGiaDAO tacGiaDao;
 
 	public void loadTheLoaiAndDanhMucTruyen(Model model) {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();
@@ -145,6 +149,7 @@ public class HomeController {
 		//
 		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
 
+		
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
 		model.addAttribute("listChuong", listPaginationChuong);
@@ -195,7 +200,7 @@ public class HomeController {
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
 		model.addAttribute("tieuDe", chuongOfId.getTieuDe());
 		model.addAttribute("listChuong", urlChuong);
-		model.addAttribute("tenTR", truyen.getTenTruyen()); // Việt thêm
+		model.addAttribute("tenTR", truyen.getTenTruyen()); 
 		model.addAttribute("tenUrlTruyen", tenTruyen);
 		model.addAttribute("chuongHienTai", chuongHienTai);
 		loadTheLoaiAndDanhMucTruyen(model);
@@ -204,7 +209,7 @@ public class HomeController {
 		object_readed.put("tenTruyen", truyen.getTenTruyen());
 		object_readed.put("chuongHienTai", chuongHienTai + "");
 		object_readed.put("urlTruyen", tenTruyen + "/chuong-" + chuongHienTai);
-		/// Việt thêm chức năng truyện vừa đọc
+		//thêm chức năng truyện vừa đọc
 		ArrayList<Map<String, String>> array_readed = session.getAttribute("array_readed") != null
 				? (ArrayList<Map<String, String>>) session.getAttribute("array_readed")
 				: new ArrayList<Map<String, String>>();
@@ -309,18 +314,34 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/tac-gia/{tacGia}", method = RequestMethod.GET)
-	public String tacGiaPage(Model model, @PathVariable("tacGia") String tenTacGia) {
+	public String tacGiaPage(Model model, @PathVariable("tacGia") String pathTacGia) {
 		loadTheLoaiAndDanhMucTruyen(model);
-
-		return "the-loai";
+		List<TacGiaInfo> listTacGia=tacGiaDao.listTacGia();
+		Map<String, Object> mapTacGia = new HashMap<String, Object>();
+		for (TacGiaInfo tacGiaInfo : listTacGia) {
+			mapTacGia.put(Helper.pathVariableString(tacGiaInfo.getTenTacGia()), tacGiaInfo);
+		}
+		TacGiaInfo tacGia=(TacGiaInfo) mapTacGia.get(pathTacGia);
+		String tenTacgia= tacGia.getTenTacGia();
+		List<SelectTruyenInfo> listTruyenByTacGia= truyenDao.selectAllTruyenByTacGia(tenTacgia);
+		model.addAttribute("listTacGia", listTruyenByTacGia);
+		model.addAttribute("tenTacGia", tenTacgia);
+		model.addAttribute("gioiThieu", tacGia.getGioiThieu());
+		return "tac_gia";
 	}
 
 	@RequestMapping("/tim-kiem")
 	public String searchPage(Model model, @RequestParam("tu-khoa") String tuKhoa) {
 		loadTheLoaiAndDanhMucTruyen(model);
 		List<SelectTruyenInfo> listTruyenTimKiem = truyenDao.searchTruyen(tuKhoa);
-
+		Map<String, String > map = new HashMap<String, String>();
+		
+		for (SelectTruyenInfo selectTruyenInfo : listTruyenTimKiem) {
+			map.put(selectTruyenInfo.getID(), Helper.pathVariableString(selectTruyenInfo.getTenTruyen()));
+		}
+		
 		model.addAttribute("listTruyenSearch", listTruyenTimKiem);
+		model.addAttribute("path", map);
 		model.addAttribute("tuKhoa", tuKhoa);
 		return "search";
 	}

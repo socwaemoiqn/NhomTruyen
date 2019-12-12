@@ -204,9 +204,10 @@ public class Ql_ChuongController {
 	@RequestMapping(value = "/{tenTruyen}/xoa-chuong", method = RequestMethod.POST)
 	public String deleteChuongForm(Model model, @PathVariable("tenTruyen") String tenTruyen, HttpServletRequest request,
 			HttpSession session) {
-
+		//  get maTruyen khi nhan request.
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
+		
 		String idChuong = request.getParameter("idChuong");
 		String tieuDe = request.getParameter("tieuDe");
 
@@ -214,8 +215,9 @@ public class Ql_ChuongController {
 		truyenDao.capNhatSoLuongChuong(maTruyen, chuongDao.listChuongOfTruyenSortDESC(maTruyen).size() - 1);
 		// xóa chương trong csdl
 		chuongDao.deleteChuong(idChuong);
+		//thong bao
 		session.setAttribute("xoaChuong", tieuDe);
-
+		//redirect lai trang
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 	}

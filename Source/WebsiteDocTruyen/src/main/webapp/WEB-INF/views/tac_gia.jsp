@@ -1,32 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+	
 <%@ include file="/common/taglib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Nhóm truyên -Tác giả ${tenTacGia}</title>
+
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/template/client/assets/css/info-truyen.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/template/client/assets/css/search.css">
+<style>
+		a:link {
+		  text-decoration: none;
+		}
+		
+		a:hover {
+		  color: lightgreen;
+		}
+		</style>
+		
+
 </head>
 <body>
 <div class="main">
 		<div id="path">
 			<i class="fa fa-home"></i> Truyện <span class="path">/</span> <span
-				class="path-search">Truyện Hot</span>
+				class="path-search">${tenTacGia }</span>
 		</div>
 		<div class="row">
 			<div class="col-7" id="tim-kiem-truyen">
 				<div class="title">
-					<i class="fas fa-list"></i> TRUYỆN HOT
+					<i class="fas fa-list"></i> ${tenTacGia }
 				</div>
 				<div class="content">
-					<c:if test="${empty listTheLoai}">
+					<c:if test="${empty listTacGia}">
 						<div class="search-item">
 								<div class="search-item-infor">
 									<span class="search-item-infor-name"> 
 										<b> 
 											<a>
-												<i class="fas fa-book"></i> Không có truyện nào trong thể loại: ${tenTheLoai }
+												<i class="fas fa-book"></i> Tác giả ${tenTacGia } không có truyện nào!
 											</a> 
 										</b>
 									</span>
@@ -34,7 +49,7 @@
 						</div>
 					</c:if>
 				
-					<c:forEach items="${listTheLoai}" var="tr">		
+					<c:forEach items="${listTacGia}" var="tr">		
 						<div class="search-item">
 							<div class="search-item-picture">
 								<img src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" />
@@ -66,7 +81,7 @@
 				<div class="content">
 					<table>
 						<tr>
-							<td>${gioiThieuTheLoai }</td>
+							<td>${gioiThieu }</td>
 						</tr>
 					</table>
 				</div>

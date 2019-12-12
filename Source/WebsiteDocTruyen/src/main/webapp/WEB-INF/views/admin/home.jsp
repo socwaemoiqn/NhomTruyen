@@ -236,7 +236,7 @@
 												<small class="text-muted"><i class="fa fa-clock-o"></i>
 													<c:forEach items="${ngayTruoc }" var="nt">
 														<c:if test="${nt.key == tr.ID }">
-															${nt.value }
+															${nt.value } by ${tr.tenTacGia }
 														</c:if>
 													</c:forEach>
 												 </small>

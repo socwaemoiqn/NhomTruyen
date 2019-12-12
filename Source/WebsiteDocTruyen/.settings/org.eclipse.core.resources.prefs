@@ -10,6 +10,7 @@ encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_T
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoanController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TaiKhoan_VaiTroController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TheLoaiTruyenController.java=UTF-8
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_ThongKeController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_TruyenController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/Ql_ChuongController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/HomeController.java=UTF-8

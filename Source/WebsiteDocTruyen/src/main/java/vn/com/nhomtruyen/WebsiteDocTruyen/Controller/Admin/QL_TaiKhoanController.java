@@ -35,6 +35,7 @@ public class QL_TaiKhoanController {
 	private TaiKhoanDAO taiKhoanDao;
 	@Autowired
 	private RoleDAO roleDao;
+	
 	public PaginationResult<TaiKhoanInfo> getData(HttpServletRequest request)
 	{
 		int Max_Result = 10;
@@ -125,15 +126,20 @@ public class QL_TaiKhoanController {
 	@RequestMapping(value = "/xoa/{id}",method = RequestMethod.POST)
 	public String xoa(HttpServletRequest request, HttpSession session,@PathVariable(value="id")String id)
 	{
+		//tao taiKhoanInfo
 		TaiKhoanInfo taikhoan = taiKhoanDao.getTaiKhoanById(Integer.parseInt(id));
+		//thong bao xoa
 		Map<String,String> mess = new HashMap<String,String>();
 		mess.put("status", "Xóa thành công!");
 		mess.put("name","Tài khoản vừa được xóa: "+taikhoan.getTenTaiKhoan());
 		session.setAttribute("mess", mess);
+		//thuc hien xoa 
 		taiKhoanDao.xoa(Integer.parseInt(id));
+		//rederect lai trang
 		String back = request.getHeader("Referer");
 		return "redirect:"+back;
 	}
+	
 	public List<RoleInfo> getListRole()
 	{
 		List<RoleInfo> listRole = roleDao.getListRole();

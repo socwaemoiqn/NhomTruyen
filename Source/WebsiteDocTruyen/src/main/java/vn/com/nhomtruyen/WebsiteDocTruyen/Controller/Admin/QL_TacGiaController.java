@@ -87,15 +87,15 @@ public class QL_TacGiaController {
 		String tenTacGia = request.getParameter("tenTacGia");
 		String gioiThieu = request.getParameter("gioiThieu");
 		Map<String, String> mess = new HashMap<String, String>();
+		// kiem tra ten tac gia nhap vao
 		if (tenTacGia.length() > 0 && tenTacGia.length() <= 50) {
+			//tao moi mot tac gia
 			TacGiaInfo tacgiainfo = new TacGiaInfo();
 			tacgiainfo.setGioiThieu(gioiThieu);
 			tacgiainfo.setTenTacGia(tenTacGia);
-
-			
+			//them tac gia
 			tacGiaDAO.insert(tacgiainfo);
-		
-
+			//thong bao
 			mess.put("status", "Thêm tác giả thành công!");
 			mess.put("name", "Tác giả vừa được thêm: " + tenTacGia);
 
@@ -104,6 +104,7 @@ public class QL_TacGiaController {
 			mess.put("name", "Độ dài tên tác giả 50 ký tự và không để trống");
 
 		}
+		//gui thong bao len form va redirect lai trang.
 		session.setAttribute("mess", mess);
 		String back = request.getHeader("Referer");
 		return "redirect:" + back;

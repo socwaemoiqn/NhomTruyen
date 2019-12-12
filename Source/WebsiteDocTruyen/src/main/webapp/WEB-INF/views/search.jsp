@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="Utf8">
-<title>Insert title here</title>
+<title>Tìm kiếm từ khóa: ${tuKhoa }</title>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/css/info-truyen.css">
 <link rel="stylesheet"
@@ -19,6 +19,7 @@
 		a:hover {
 		  color: lightgreen;
 		}</style>
+		
 </head>
 <body>
 	<div class="main">
@@ -52,8 +53,15 @@
 									src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" />
 							</div>
 							<div class="search-item-infor">
-								<span class="search-item-infor-name"> <b> <a href="#"><i
+								<span class="search-item-infor-name"> <b> 
+									<c:forEach var="url" items="${path }">
+										<c:if test="${url.key == tr.ID }">
+											<a href="${pageContext.request.contextPath}/${url.value}"><i
 											class="fas fa-book"></i> ${tr.tenTruyen }</a> 
+										</c:if>
+										
+									</c:forEach>
+									
 											<c:if test="${tr.full= true }">
 												<span class="index-item-status" id="index-item-status-full">Full</span>
 											</c:if>

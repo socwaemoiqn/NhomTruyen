@@ -68,7 +68,6 @@ public class Helper {
 		String[] m=d[0].split("-");
 		return m[2]+"/"+m[1];
 	}
-
 	@Autowired
 	private static TruyenDAO truyenDao;
 
@@ -97,5 +96,6 @@ public class Helper {
 		
 		System.out.println(pathVariableString("Sinh Viên Công Nghệ Thông Tin trƯờnG Đh qUy Nhơn"));
 		System.out.println(ngayThang(dateStart));
+		
 	}
 }

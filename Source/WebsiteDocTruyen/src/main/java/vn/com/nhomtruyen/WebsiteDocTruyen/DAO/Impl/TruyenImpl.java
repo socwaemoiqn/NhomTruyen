@@ -1,4 +1,4 @@
-package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
+	package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -206,10 +206,11 @@ public class TruyenImpl implements TruyenDAO {
 		query.setParameter("sl", soChuong);
 		query.executeUpdate();
 	}
+
 	@Override
 	public void capNhatLuotXem(SelectTruyenInfo truyenInfo) {
-		TruyenEntity truyen= findTruyenEntity(truyenInfo.getID());
-		truyen.setLuotXem(truyen.getLuotXem()+1);
+		TruyenEntity truyen = findTruyenEntity(truyenInfo.getID());
+		truyen.setLuotXem(truyen.getLuotXem() + 1);
 		this.sessionFactory.getCurrentSession().update(truyen);
 	}
 
@@ -220,7 +221,7 @@ public class TruyenImpl implements TruyenDAO {
 			this.sessionFactory.getCurrentSession().delete(truyenEntity);
 		}
 	}
-	
+
 	@Override
 	public List<SelectTruyenInfo> selectAllTruyenNoFull() {
 		Session session = sessionFactory.getCurrentSession();
@@ -232,7 +233,6 @@ public class TruyenImpl implements TruyenDAO {
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
-	
 
 	// select danh cho trang index
 	@Override
@@ -256,7 +256,7 @@ public class TruyenImpl implements TruyenDAO {
 				+ NhomDichEntity.class.getName() + " nd, " + ChiTietTheLoaiTruyenEntity.class.getName() + " cttl, "
 				+ TheLoaiTruyenEntity.class.getName() + " tl "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and cttl.maTruyen=tr.ID and cttl.maTheLoai= tl.id and tl.tenTheLoai = '"
-				+ tenTheLoai+"' ";
+				+ tenTheLoai + "' ";
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
@@ -288,8 +288,17 @@ public class TruyenImpl implements TruyenDAO {
 		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
-	
-
-	
+	@Override
+	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
+				+ NhomDichEntity.class.getName() + " nd "
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr."
+				+ thongKe + " = 1 and tr.ngayTao BETWEEN '"+ batDau +"' and '" +ketThuc+"' ";
+		Query query = session.createQuery(sql);
+		return query.list();
+	}
 
 }
