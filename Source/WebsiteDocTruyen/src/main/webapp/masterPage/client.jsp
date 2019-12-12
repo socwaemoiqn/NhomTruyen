@@ -62,16 +62,6 @@
 						<span data-placeholder="Truyện mới cập nhập"></span>
 					</strong>
 				</a> 
-				<a href="${pageContext.request.contextPath}/abcd">
-					<strong>Truyện abcd
-						<span data-placeholder="Truyện mới cập nhập"></span>
-					</strong>
-				</a> 
-				<a href="${pageContext.request.contextPath}/abcd">
-					<strong>Truyện abcd
-						<span data-placeholder="Truyện abcd"></span>
-					</strong>
-				</a> 
 			</div>
 		</div>
 		<div class="dropdown" id="theLoai">

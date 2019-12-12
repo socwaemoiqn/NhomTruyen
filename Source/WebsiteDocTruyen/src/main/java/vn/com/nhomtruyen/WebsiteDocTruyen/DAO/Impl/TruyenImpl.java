@@ -289,6 +289,7 @@ public class TruyenImpl implements TruyenDAO {
 	}
 
 	@Override
+
 	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
@@ -300,5 +301,16 @@ public class TruyenImpl implements TruyenDAO {
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
+
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen,tr.luotXem) "
+				+ " from " + TruyenEntity.class.getName() + " tr "
+				+ " ORDER BY tr.luotXem DESC ";
+		Query query = session.createQuery(sql).setMaxResults(10);
+		return query.list();
+	}
+
 
 }

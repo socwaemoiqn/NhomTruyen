@@ -83,7 +83,10 @@ public class TruyenInfo {
 		this.nguon = nguon;
 		this.hinhAnh = hinhAnh;
 	}
+	
 
+
+	
 	public String getID() {
 		return ID;
 	}

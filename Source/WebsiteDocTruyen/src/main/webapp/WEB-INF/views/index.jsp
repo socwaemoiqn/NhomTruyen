@@ -35,13 +35,13 @@
 										<div class="item-title">
 											<c:forEach items="${urlTruyen }" var="url">
 												<c:if test="${url.value==tr.ID }">
-													<a href="${pageContext.request.contextPath}/${url.key}">${tr.tenTruyen }</a>
+													<a href="${pageContext.request.contextPath}/${url.key}">${tr.tenTruyen }
 												</c:if>
 											</c:forEach>
 											
 										</div>
 										<img
-											src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" />
+											src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" /></a>
 									</div>
 								</c:forEach>
 							</div>

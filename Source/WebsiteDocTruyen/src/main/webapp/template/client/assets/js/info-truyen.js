@@ -1,4 +1,25 @@
+
+/// Xử li kích chọn time truyện đang hot
+
+var ele = document.querySelectorAll("#truyen-dang-hot table td span.type-time");
+type_time_active(ele[2]);
+for(var i = 0; i < ele.length ;i++)
+{
+    ele[i].setAttribute("onclick","type_time_active(this)");
+  
+}
+function type_time_active(e){
+    ele.forEach(function(item){
+        item.classList.remove("type-time-active");
+        if(!item.classList.contains("type-time-unactive"))
+             item.classList.add("type-time-unactive");
+    });
+     e.classList.add("type-time-active");
+     e.classList.remove("type-time-unactive");
+}
 var icon_rate = document.querySelectorAll(".info-content .info-content-rate i");
+
+
 icon_rate_default();
 for(var i = 0; i < icon_rate.length;i++)
 {
@@ -6,6 +27,8 @@ for(var i = 0; i < icon_rate.length;i++)
     icon_rate[i].setAttribute("onmouseover","hoverIconRate(this)");
     icon_rate[i].setAttribute("onmouseout","removeHoverIconRate(this)");
 }
+
+
 function clickIconRate(e)
 {
     var id_element= e.getAttribute("id");  
@@ -54,23 +77,3 @@ function icon_rate_default()
     	}
      
 }
-/// Xử li kích chọn time truyện đang hot
-
-var ele = document.querySelectorAll("#truyen-dang-hot table td span.type-time");
-type_time_active(ele[0]);
-for(var i = 0; i < ele.length ;i++)
-{
-    ele[i].setAttribute("onclick","type_time_active(this)");
-  
-}
-function type_time_active(e){
-    ele.forEach(function(item){
-        item.classList.remove("type-time-active");
-        if(!item.classList.contains("type-time-unactive"))
-             item.classList.add("type-time-unactive");
-    });
-     e.classList.add("type-time-active");
-     e.classList.remove("type-time-unactive");
-}
-
-

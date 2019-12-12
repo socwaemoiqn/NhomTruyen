@@ -37,6 +37,10 @@ public interface TruyenDAO   {
 	public List<SelectTruyenInfo> selectAllTruyenByDanhMuc(String danhMuc);
 	public List<SelectTruyenInfo> selectAllTheLoaiTruyen(String tenTheLoai);
 	public List<SelectTruyenInfo> selectAllTruyenByTacGia(String tenTacGia);
+
 	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc);
+
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem();
+
 	
 }
