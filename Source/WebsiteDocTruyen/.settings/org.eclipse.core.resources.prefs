@@ -15,6 +15,8 @@ encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/Ql_C
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/HomeController.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/DAO/Impl/DanhMucTruyenImpl.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/PaginationResult.java=UTF-8
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/SelectTruyenInfo.java=UTF-8
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Model/TruyenInfo.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_tacgia.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_thongke.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/ql_truyen_ql_chuong.jsp=UTF-8

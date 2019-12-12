@@ -2,11 +2,14 @@
 { 
     height: 100vh;
 }
-
+#thong-tin-truyen{
+	min-height:500px; 
+}
 .info-picture,.info-content{
     min-height: 350px;
     float:left;
 }
+
 .info-picture{
     margin: 8px 1%;
     width: 33%;
@@ -24,10 +27,18 @@
     text-align: start;
     line-height: 25px;
 }
+.info-picture-content span{
+	color: #8eb3fd;
+	letter-spacing: 1px;
+}
 .info-content{
     width: 65%;
    padding: 5px;
 }
+.info-content .info-content-title{
+	color: #8eb3fd;
+}
+
 .info-content-title{
     clear: both;
     font-size: 24px; line-height: 26px;
@@ -35,6 +46,9 @@
 }
 .info-content hr{
     border: 0.5px solid gray;
+}
+.info-content #danh-sach-chuong{
+	min-height: 200px;
 }
 .info-content-rate{
     font-size: 13px;
@@ -52,23 +66,46 @@
     color:yellow;
 }
 .info-content-content{
+	padding: 10px 14px;
     font-size:14px;
     line-height: 23px;
+    overflow: auto; 
+    height: 200px;
+    margin-bottom: 35px;
+}
+
+.info-content-content span:first-child{
+	color: #8eb3fd;
 }
 #truyen-cung-tac-gia table td{
     padding: 10px 5px;
+}
+#truyen-cung-tac-gia table td span{
+	color: #8eb3fd;
+	
+}
+#truyen-cung-tac-gia table td span.so-chuong{
+	color: #fff;
 }
 #truyen-cung-tac-gia table td i{
     color: black;
 }
 #truyen-dang-hot table td{
    padding: 5px;
+
 }
 #truyen-dang-hot table td span.index,#truyen-dang-hot table td span.name{
     float:left;
     display: block;
-    height: 35px;
-    line-height: 35px;
+}
+#truyen-dang-hot table td span.index{
+	line-height: 35px;
+	height: 35px;	
+}
+
+#truyen-dang-hot table td span.name a{
+	padding: 0 2px;
+		color: #8eb3fd;
 }
 #truyen-dang-hot table td span.index{
     width: 35px;
@@ -88,6 +125,9 @@
     text-align: center;
     transition: 0.5s;
     cursor: pointer;
+}
+#truyen-dang-hot table td span.the-loai{
+	font-size: 12.5px;
 }
 #truyen-dang-hot table td span.type-time:hover{
     background: #ffffff;
@@ -130,6 +170,10 @@
 #danh-sach-chuong .list-chuong{
     float:left;
     width: 50%;
+
+}
+#danh-sach-chuong{
+	min-height: 280px;
 }
 #danh-sach-chuong table{
     width: 100%;

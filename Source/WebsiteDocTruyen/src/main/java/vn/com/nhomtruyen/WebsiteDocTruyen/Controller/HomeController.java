@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
@@ -32,6 +35,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.PaginationResult;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
 @Controller
 public class HomeController {
@@ -107,7 +111,33 @@ public class HomeController {
 		model.addAttribute("truyenFull", listTruyenFull);
 		return "index";
 	}
-
+	@RequestMapping(value = "/select-top-10", method = RequestMethod.POST)
+	public @ResponseBody String selectTop10(HttpServletRequest request) throws JsonProcessingException
+	{ 
+		String typeTime = request.getParameter("typeTime");
+	
+		  List<SelectTruyenInfo> listTop10Truyen = new ArrayList<SelectTruyenInfo>();
+		  switch
+		  (typeTime) { case "all": 
+			  listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem();
+		  break;
+		  
+		 default: break; }
+		  ObjectMapper mapper = new ObjectMapper(); 
+		  for (SelectTruyenInfo selectTruyenInfo : listTop10Truyen) {
+			String urlTruyen = Helper.pathVariableString(selectTruyenInfo.getTenTruyen());
+			List<ChiTietTheLoaiTruyenInfo> listTheLoai = theLoaiTruyenDao.listTenTlOfTruyen(selectTruyenInfo.getID());
+			String strTheLoaiTruyen = "";
+			for (ChiTietTheLoaiTruyenInfo chiTietTL : listTheLoai) {
+				strTheLoaiTruyen += chiTietTL.getTenTheLoai()+", ";
+			}
+			strTheLoaiTruyen = strTheLoaiTruyen.substring(0, strTheLoaiTruyen.length()-2);
+			selectTruyenInfo.setUrlTruyen(urlTruyen);
+			selectTruyenInfo.setTheLoaiTruyen(strTheLoaiTruyen);
+		}
+		 String json = mapper.writeValueAsString(listTop10Truyen);
+		return json;
+	}
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
 	public String truyenPage(Model model, HttpSession session, @PathVariable("tenTruyen") String tenTruyen,
 			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
@@ -119,7 +149,7 @@ public class HomeController {
 			// TODO: handle exception
 		}
 		final int Max_Result = 10;
-		final int Max_Navigation = 10;
+		final int Max_Navigation = 5;
 
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);

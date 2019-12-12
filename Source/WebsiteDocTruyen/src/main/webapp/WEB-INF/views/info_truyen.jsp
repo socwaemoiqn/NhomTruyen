@@ -21,29 +21,35 @@
 		}
 	.phan-trang{
 			text-align:center;
-			position: relative;
 			min-height: 1px;
 			padding-right: 15px;
-			padding-left: 15px
+			padding-left: 15px;
+
 		}
 		.pagination {
 			display: inline-block;
 			padding-left: 0;
-			margin: 20px 0;
+			margin: 0;
 			border-radius: 4px
 		}
 		
-		.pagination>li {
-			display: inline
+.pagination li{
+display: inline;}
+		.pagination li a{
+			border: 1px solid;
+			display: inline-block;
+			padding: 5px 10px;
 		}
 	</style>
 		
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=969730360057516&autoLogAppEvents=1"></script>
 	<div class="main">
-		<div id="path">
-			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
-				class="path-truyen">${truyenById.tenTruyen }</span>
+			<div id="path">
+			<i class="fa fa-home"></i><a href="${pageContext.request.contextPath}/">Truyện </a> <span class="path"> /</span> <span
+				class="path-truyen"><a>${truyenById.tenTruyen }</a></span>
 		</div>
 		<div class="row">
 			<div class="col-7" id="thong-tin-truyen">
@@ -54,8 +60,8 @@
 					<div class="info-picture">
 						<img src="${pageContext.request.contextPath}/truyen/img/${truyenById.hinhAnh}" />
 						<div class="info-picture-content">
-							Tác giả: <a href="${pageContext.request.contextPath}/tac-gia/${urlTacGia}"> ${truyenById.tenTacGia }</a> <br> 
-							Thể loại: 
+							<span>Tác giả</span>: <a href="${pageContext.request.contextPath}/tac-gia/${urlTacGia}"> ${truyenById.tenTacGia }</a> <br> 
+							<span>Thể loại</span>: 
 								<c:forEach items="${tenTheLoai}"
 									var="tl">
 									<c:if test="${truyenById.ID == tl.maTruyen}">
@@ -63,8 +69,8 @@
 										</c:if>
 								</c:forEach>
 								<br> 
-							Nguồn: ${truyenById.nguon } 
-							<br> Trạng thái:
+							<span>Nguồn</span>: ${truyenById.nguon } <br> 
+							<span>Trạng thái</span>:
 							<c:choose>
 								<c:when test="${truyenById.full == true }"> Đã Full</c:when>
 								<c:otherwise>Đang cập nhật</c:otherwise>
@@ -88,9 +94,33 @@
 
 						</div>
 						<div class="info-content-content">
-							Nhóm dịch: <span id="nhomdich">${truyenById.tenNhomDich }</span>
+							<span>Nhóm dịch</span>: <span id="nhomdich">${truyenById.tenNhomDich }</span>
 							<br> ${truyenById.gioiThieu }
 						</div>
+							<div class="col-10" id="danh-sach-chuong">
+				<div class="title">
+					Chương mới cập nhật
+				</div>
+				<div class="content">
+					<div class="list-chuong" style="width: 100%">
+						<table>
+							<c:forEach items="${chuongMoi}" var="ch" varStatus="status" begin="0" end="4">
+								<tr>
+									<td><i class="fas fa-certificate"></i> 
+										<c:forEach items="${urlChuong}" var="url">
+											<c:if test="${url.key==ch.id}">
+												<a href="${pageContext.request.contextPath}/${tenTruyen }/chuong-${url.value}">
+													Chương ${url.value }:
+													 ${ch.tieuDe }</a>
+											</c:if>
+										</c:forEach>
+									</td>
+								</tr>
+							</c:forEach>			
+						</table>
+					</div>
+				</div>
+			</div>
 					</div>
 				</div>
 			</div>
@@ -131,9 +161,10 @@
 								<c:forEach items="${urlTruyen }" var="url">
 									<c:if test="${url.value==tr.ID }">
 										<a href="${pageContext.request.contextPath}/${url.key}">
-											<i class="fas fa-book-reader"></i> ${tr.tenTruyen} <br>
-											(Chương 1998)
-										</a>
+											<i class="fas fa-book-reader"></i> <span>${tr.tenTruyen} <br></span>
+										
+											</a>
+											<span class="so-chuong">(Chương ${tr.soChuong })</span>
 									</c:if>
 								</c:forEach>
 								
@@ -143,95 +174,14 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-3" id="truyen-dang-hot">
-				<div class="title">
-					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
-				</div>
-				<div class="content">
-					<table cellspacing="5">
-						<tr>
-							<td style="padding-left: 5%; padding-right: 5%;"><span
-								class="type-time">Ngày</span><span class="type-time">Tháng</span><span
-								class="type-time">Năm</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="one">1</span><span class="name"><a>Chọc
-										tức vợ yêu - Mua tặng ...</a></span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="two">2</span><span class="name"><a>Chọc
-										tức vợ yêu - Mua tặng ...</a></span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="three">3</span><span
-								class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">4</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">5</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">6</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">7</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">8</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">9</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">10</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-			
+
 			<div class="col-7" id="danh-sach-chuong">
 				<div class="title">
-					Chương mới cập nhật....
-				</div>
-				<div class="content">
-					<div class="list-chuong" style="width: 100%">
-						<table>
-							<c:forEach items="${chuongMoi}" var="ch" varStatus="status" begin="0" end="4">
-								<tr>
-									<td><i class="fas fa-certificate"></i> 
-										<c:forEach items="${urlChuong}" var="url">
-											<c:if test="${url.key==ch.id}">
-												<a href="${pageContext.request.contextPath}/${tenTruyen }/chuong-${url.value}">
-													Chương ${url.value }:
-													 ${ch.tieuDe }</a>
-											</c:if>
-										</c:forEach>
-									</td>
-								</tr>
-							</c:forEach>			
-						</table>
-					</div>
-				</div>
-			</div>
-			
-			<div class="col-7" id="danh-sach-chuong">
-				<div class="title">
-					DANH SÁCH CHƯƠNG <i class="fas fa-arrow-circle-down"></i>
+					DANH SÁCH CHƯƠNG <i class="fas fa-arrow-circle-down"></i><span>Số chương: ${listChuong.totalRecords	 }</span>
 				</div>
 				<div class="content">
 					<div class="list-chuong">
 						<table>
-
-
 							<c:forEach items="${listChuong.list}" var="ch" varStatus="status" begin="0" end="4">
 								<tr>
 								<td><i class="fas fa-certificate"></i> 
@@ -271,18 +221,48 @@
 							<div class="phan-trang">
 								<nav>
 									<ul class="pagination pagination-lg">
+										<c:if test="${listChuong.currentPage > 1}">
+											<li><a href="${tenTruyen }?page=${listChuong.currentPage-1}">Trước</a></li>
+										</c:if>	
 										<c:forEach items="${listChuong.navigationPages}" var="page">
-											<c:if test="${page != -1 }">
+											<c:if test="${page == listChuong.currentPage }">
+												<li><a>${page}</a></li>
+											</c:if>
+											<c:if test="${page != -1 && page != listChuong.currentPage}">
 												<li><a href="${tenTruyen }?page=${page}" class="nav-item">${page}</a></li>
 											</c:if>
 											<c:if test="${page == -1 }">
 												<li><a><span> ... </span></a></li>
 											</c:if>
 										</c:forEach>
+										<c:if test="${listChuong.currentPage < listChuong.totalPages}">
+											<li><a href="${tenTruyen }?page=${listChuong.currentPage+1}">Sau</a></li>
+										</c:if>
+										
 									</ul>
 								</nav>
 							</div>
 						</c:if>
+			</div>
+			
+				<div class="col-3" id="truyen-dang-hot">
+				<div class="title">
+					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
+				</div>
+				<div class="content">
+					<table cellspacing="5">
+					<thead>
+						<tr>
+							<td style="padding-left: 5%; padding-right: 5%;"><span
+								class="type-time" id="day">Ngày</span>
+								<span class="type-time" id="month">Tháng</span><span
+								class="type-time" id="all">All</span></td>
+						</tr>
+						</thead>
+						<tbody>
+						</tbody>
+					</table>
+				</div>
 			</div>
 			<div class="col-7" id="binh-luan"
 				style="background: #fff; text-align: center;">
@@ -291,7 +271,7 @@
 				</div>
 				<div class="content" style="padding: 5px;">
 					<div class="fb-comments"
-						data-href="${pageContext.request.contextPath}/${tenTruyen }"
+						data-href="http://localhost:8080/WebsiteDocTruyen/${tenTruyen }"
 						style="border: none; visibility: visible; width: 100%;"
 						data-colorscheme="" data-width="" data-numposts="5"></div>
 				</div>
@@ -305,5 +285,66 @@
 	<script
 		src="${pageContext.request.contextPath}/template/client/assets/js/info-truyen.js"></script>
 	<!-- JS phần menu và responsive -->
+	
+	<script type="text/javascript">
+	selectTop10Truyen("all");
+	$(document).ready(function(){
+		$(document).on("click","span.type-time",function(){
+			let typeTime = $(this).attr("id");
+			selectTop10Truyen(typeTime);
+	});
+	});
+	function selectTop10Truyen(typeTime) 
+	{
+		$.ajax({
+			url: "${pageContext.request.contextPath}/select-top-10",
+			type: "post",
+			dataType: "json",
+			data:{
+				typeTime: typeTime
+			},
+			success: function (result) 
+			{
+				let html = "";
+				$.each(result,function(key,item) 
+				{
+				
+					if(item.tenTruyen.length >= 32)
+					{
+						item.tenTruyen = item.tenTruyen.slice(0,28);
+						item.tenTruyen =  item.tenTruyen + "...";
+					}
+					if(item.theLoaiTruyen.length >= 32)
+					{
+						item.theLoaiTruyen = item.theLoaiTruyen.slice(0,28);
+						item.theLoaiTruyen =  item.theLoaiTruyen + "...";
+					}
+					switch(key)
+					{
+						case 0:
+							html += '<tr><td><span class="index" id="one">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						case 1:
+							html += '<tr><td><span class="index" id="two">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						case 2:
+							html += '<tr><td><span class="index" id="three">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						default:
+							html += '<tr><td><span class="index" id="all">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+				
+							break;
+					}
+					
+				});
+				$("#truyen-dang-hot table tbody").html(html);
+			}
+		});
+	}
+</script>
 </body>
 </html>

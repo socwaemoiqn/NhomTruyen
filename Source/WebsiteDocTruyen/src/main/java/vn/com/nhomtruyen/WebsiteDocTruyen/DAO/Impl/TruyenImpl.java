@@ -288,6 +288,17 @@ public class TruyenImpl implements TruyenDAO {
 		return new PaginationResult<SelectTruyenInfo>(query, page, maxResult, maxNavigationPage);
 	}
 
+	@Override
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen,tr.luotXem) "
+				+ " from " + TruyenEntity.class.getName() + " tr "
+				+ " ORDER BY tr.luotXem DESC ";
+		Query query = session.createQuery(sql).setMaxResults(10);
+		return query.list();
+	}
+
 	
 
 	

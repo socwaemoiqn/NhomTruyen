@@ -23,11 +23,13 @@
 
 </head>
 <body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v5.0&appId=969730360057516&autoLogAppEvents=1"></script>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> Truyện <span class="path"> /</span> <span
-				class="path-truyen">${tenTR}</span> / <span
-				class="path-chuong">${tieuDe}</span>
+			<i class="fa fa-home"></i><a href="${pageContext.request.contextPath}/">Truyện </a> <span class="path"> /</span> <span
+				class="path-truyen"><a href="${pageContext.request.contextPath}/${tenUrlTruyen}">${tenTR}<a></a></span> / <span
+				class="path-chuong">Chương ${chuongHienTai}: ${tieuDe}</span>
 		</div>
 		<div class="row">
 			<div class="col-10" id="chuong" style="position: relative;">
@@ -137,7 +139,7 @@
 				</div>
 				<div class="content" style="padding: 5px; text-align: center;">
 					<div class="fb-comments"
-						data-href="http://localhost:5500/info-truyen.html"
+						data-href="http://localhost:8080/WebsiteDocTruyen/${tenUrlTruyen }"
 						style="border: none; visibility: visible; width: 100%;"
 						data-colorscheme="" data-width="" data-numposts="5"></div>
 				</div>

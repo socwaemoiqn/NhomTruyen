@@ -23,7 +23,7 @@
 <body>
 	<div class="main">
 		<div id="path">
-			<i class="fa fa-home"></i> Truyện <span class="path">/</span> <span
+			<i class="fa fa-home"></i> <a href="${pageContext.request.contextPath}/">Truyện </a> <span class="path">/</span> <span
 				class="path-search">Tìm kiếm </span> <span class="path"> </span> 
 		</div>
 		<div class="row">
@@ -112,58 +112,22 @@
 				</div>
 
 			</div>
-			<div class="col-3" id="truyen-dang-hot">
+		<div class="col-3" id="truyen-dang-hot">
 				<div class="title">
 					TRUYỆN ĐANG HOT <i class="fas fa-arrow-circle-down"></i>
 				</div>
 				<div class="content">
 					<table cellspacing="5">
+					<thead>
 						<tr>
 							<td style="padding-left: 5%; padding-right: 5%;"><span
-								class="type-time type-time-unactive">Ngày</span> <span
-								class="type-time type-time-unactive">Tháng</span> <span
-								class="type-time type-time-active">Năm</span></td>
+								class="type-time" id="day">Ngày</span>
+								<span class="type-time" id="month">Tháng</span><span
+								class="type-time" id="all">All</span></td>
 						</tr>
-						<tr>
-							<td><span class="index" id="one">1</span><span class="name"><a>Chọc
-										tức vợ yêu - Mua tặng ...</a></span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="two">2</span><span class="name"><a>Chọc
-										tức vợ yêu - Mua tặng ...</a></span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="three">3</span><span
-								class="name">Chọc tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">4</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">5</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">6</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">7</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">8</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">9</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
-						<tr>
-							<td><span class="index" id="all">10</span><span class="name">Chọc
-									tức vợ yêu - Mua tặng ...</span></td>
-						</tr>
+						</thead>
+						<tbody>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -171,5 +135,64 @@
 	</div>
 	<script
 		src="${pageContext.request.contextPath}/template/client/assets/js/info-truyen.js"></script>
+		<script type="text/javascript">
+	selectTop10Truyen("all");
+	$(document).ready(function(){
+		$(document).on("click","span.type-time",function(){
+			let typeTime = $(this).attr("id");
+			selectTop10Truyen(typeTime);
+	});
+	});
+	function selectTop10Truyen(typeTime) 
+	{
+		$.ajax({
+			url: "${pageContext.request.contextPath}/select-top-10",
+			type: "post",
+			dataType: "json",
+			data:{
+				typeTime: typeTime
+			},
+			success: function (result) 
+			{
+				let html = "";
+				$.each(result,function(key,item) 
+				{
+					if(item.tenTruyen.length >= 32)
+					{
+						item.tenTruyen = item.tenTruyen.slice(0,28);
+						item.tenTruyen =  item.tenTruyen + "...";
+					}
+					if(item.theLoaiTruyen.length >= 32)
+					{
+						item.theLoaiTruyen = item.theLoaiTruyen.slice(0,28);
+						item.theLoaiTruyen =  item.theLoaiTruyen + "...";
+					}
+					switch(key)
+					{
+						case 0:
+							html += '<tr><td><span class="index" id="one">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						case 1:
+							html += '<tr><td><span class="index" id="two">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						case 2:
+							html += '<tr><td><span class="index" id="three">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+							break;
+						default:
+							html += '<tr><td><span class="index" id="all">'+(key+1)+'</span><span class="name"><a href="${pageContext.request.contextPath}/'+item.urlTruyen+'">';
+							html += item.tenTruyen+'<br></a><span class="the-loai">'+item.theLoaiTruyen+'</span></span></td></tr>';
+				
+							break;
+					}
+					
+				});
+				$("#truyen-dang-hot table tbody").html(html);
+			}
+		});
+	}
+</script>
 </body>
 </html>

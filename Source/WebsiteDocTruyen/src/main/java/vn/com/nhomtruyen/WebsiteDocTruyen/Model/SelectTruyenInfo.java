@@ -15,6 +15,20 @@ public class SelectTruyenInfo {
 	private boolean news;
 	private boolean hienThi;
 	private String ngayTao;
+	private String urlTruyen;
+	private String theLoaiTruyen;
+	public String getTheLoaiTruyen() {
+		return theLoaiTruyen;
+	}
+	public void setTheLoaiTruyen(String theLoaiTruyen) {
+		this.theLoaiTruyen = theLoaiTruyen;
+	}
+	public String getUrlTruyen() {
+		return urlTruyen;
+	}
+	public void setUrlTruyen(String urlTruyen) {
+		this.urlTruyen = urlTruyen;
+	}
 	public SelectTruyenInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,6 +51,14 @@ public class SelectTruyenInfo {
 		this.news = news;
 		this.hienThi = hienThi;
 		this.ngayTao = ngayTao;
+	}
+	/// Dùng để láy top 10 tên truyện theo lượt xem
+	public SelectTruyenInfo(String ID,String tenTruyen,int luotXem)
+	{
+		super();
+		this.ID = ID;
+		this.tenTruyen = tenTruyen;
+		this.luotXem = luotXem;
 	}
 	public String getID() {
 		return ID;
