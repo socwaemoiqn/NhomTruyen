@@ -70,19 +70,28 @@ public class QL_TaiKhoanController {
 	public String insert(HttpServletRequest request,HttpSession session)
 	{
 		Map<String,String> mess = new HashMap<String, String>();
-		String tenTaiKhoan = request.getParameter("tentaikhoan");
+		String tenTaiKhoan = request.getParameter("tentaikhoan").trim();
 		String matKhau = request.getParameter("matkhau") != "" ? request.getParameter("matkhau") : "123456";
 		String email = request.getParameter("email")!= "" ? request.getParameter("email"): "Chưa có" ;
 		if(tenTaiKhoan.length() > 0 && tenTaiKhoan.length() <= 50)
 		{
-			TaiKhoanInfo taikhoaninfo = new TaiKhoanInfo();
-			taikhoaninfo.setTenTaiKhoan(tenTaiKhoan);
-			taikhoaninfo.setMatKhau(matKhau);
-			taikhoaninfo.setEmail(email);
-			taiKhoanDao.insert(taikhoaninfo);
+			if(taiKhoanDao.findTaiKhoanEntityByTen(tenTaiKhoan) == null)
+			{
+				TaiKhoanInfo taikhoaninfo = new TaiKhoanInfo();
+				taikhoaninfo.setTenTaiKhoan(tenTaiKhoan);
+				taikhoaninfo.setMatKhau(matKhau);
+				taikhoaninfo.setEmail(email);
+				taiKhoanDao.insert(taikhoaninfo);
+				
+				mess.put("status", "Thêm tài khoản thành công!");
+				mess.put("name","Tài khoản vừa được thêm: "+tenTaiKhoan);
+			}
+			else
+			{
+				mess.put("status", "Thêm tài khoản không thành công!");
+				mess.put("name","Tài khoản vừa được thêm đã tồn tại!");
+			}
 			
-			mess.put("status", "Thêm tác giả thành công!");
-			mess.put("name","Tác giả vừa được thêm: "+tenTaiKhoan);
 			
 		}
 		else

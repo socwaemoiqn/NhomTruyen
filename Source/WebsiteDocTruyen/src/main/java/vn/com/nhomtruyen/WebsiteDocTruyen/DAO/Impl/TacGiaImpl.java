@@ -122,6 +122,13 @@ public class TacGiaImpl implements TacGiaDAO {
 		crit.add(Restrictions.eq("id", maTacGia));
 		return (TacGiaEntity) crit.uniqueResult();
 	}
+	@Override
+	public TacGiaEntity findTacGiaEntityByTen(String tenTacGia) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Criteria crit= session.createCriteria(TacGiaEntity.class);
+		crit.add(Restrictions.eq("tenTacGia", tenTacGia));
+		return (TacGiaEntity) crit.uniqueResult();
+	}
 
 	@Override
 	public void updateTrangThai(TacGiaInfo tacGiaInfo) {

@@ -71,17 +71,25 @@ public class QL_TaiKhoan_VaiTroController {
 	@RequestMapping(value = "/insert",method = RequestMethod.POST)
 	public String insert(HttpServletRequest request,HttpSession session)
 	{
-		String tenRole = request.getParameter("tenRole");
+		String tenRole = request.getParameter("tenRole").trim();
 		Map<String,String> mess = new HashMap<String, String>();
 		if(tenRole.length() > 0 && tenRole.length() <= 50)
 		{
-			RoleInfo role = new RoleInfo();
-			role.setTenRole(tenRole);
-			role.setGioiThieu(request.getParameter("gioiThieu"));
-			roleDAO.insert(role);
-		
-			mess.put("status", "Thêm vai trò thành công!");
-			mess.put("name","Tác giả vừa được thêm: "+tenRole);
+			if(roleDAO.findRoleEntityByTen(tenRole) == null)
+			{
+				RoleInfo role = new RoleInfo();
+				role.setTenRole(tenRole);
+				role.setGioiThieu(request.getParameter("gioiThieu"));
+				roleDAO.insert(role);
+			
+				mess.put("status", "Thêm vai trò thành công!");
+				mess.put("name","Vai trò vừa được thêm: "+tenRole);
+			}
+			else
+			{
+				mess.put("status", "Thêm vai trò không thành công!");
+				mess.put("name","Vai trò vừa được thêm đã tồn tại!");
+			}
 			
 		}
 		else

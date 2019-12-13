@@ -257,7 +257,7 @@ public class HomeController {
 																								// ra
 					array_readed.set(array_readed.size() - 1, object_readed); // Gán item cuối cùng bằng item vừa đọc
 					array_readed.set(j, itemLast); // Đảo vị trí giữa 2 truyện
-					checkExsit = true; // Đưa biến kiểm tra về true
+					checkExsit = true; // Đưa biến kiểm tra về true	
 					break;
 				}
 			}

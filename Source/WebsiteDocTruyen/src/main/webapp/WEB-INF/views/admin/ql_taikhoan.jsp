@@ -281,18 +281,22 @@
 																		"#sua #tenTaiKhoan")
 																		.val(
 																				data.tenTaiKhoan);
-																let matKhau = data.matKhau != "123456" ? $(
-																"#sua #matKhau")
-																.val(
-																		data.matKhau): $(
-																		"#sua #matKhau")
-																		.attr('placeholder','Mật khẩu mặc định là: '+data.matKhau) ;
-																let email = data.email != "Chưa có" ? $(
-																		"#sua #email")
-																		.val(
-																				data.email): $(
-																				"#sua #email")
-																				.attr('placeholder','Chưa có email') ;
+																$("#sua #matKhau").val("");
+																if(data.matKhau == "123456")
+																{
+																	$("#sua #matKhau").attr("placeholder","Mật khẩu mặc định là: 123456");
+																}
+																else
+																	$("#sua #matKhau").val(data.matKhau);
+																$("#sua #email").val("");
+																if(data.email == "Chưa có")
+																	{
+																		$("#sua #email").attr("placeholder","Chưa có");
+																	}
+																else
+																	$("#sua #email").val(data.email);
+					
+																$("#sua #role").val(data.maRole);
 																if (data.trangThai == "1") {
 																	$(
 																			"#sua #trangThai1")

@@ -106,7 +106,13 @@ public class RoleImpl implements RoleDAO {
 		crit.add(Restrictions.eq("maRole", maRole));
 		return (RoleEntity) crit.uniqueResult();
 	}
-
+	@Override
+	public RoleEntity findRoleEntityByTen(String tenRole) {
+		Session se = this.sessionFactory.getCurrentSession();
+		Criteria crit = se.createCriteria(RoleEntity.class);
+		crit.add(Restrictions.eq("tenRole", tenRole));
+		return (RoleEntity) crit.uniqueResult();
+	}
 	@Override
 	public void updateTrangThai(RoleInfo RoleInfo) {
 		Session se = this.sessionFactory.getCurrentSession();
