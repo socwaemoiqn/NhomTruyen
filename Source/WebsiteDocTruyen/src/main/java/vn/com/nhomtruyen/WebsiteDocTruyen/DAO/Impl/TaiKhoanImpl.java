@@ -50,7 +50,7 @@ public class TaiKhoanImpl implements TaiKhoanDAO {
 		Session se = this.sessionFactory.getCurrentSession();
 
 		String sql = " Select new " + TaiKhoanInfo.class.getName()
-				+ "(a.maTaiKhoan, a.tenTaiKhoan,a.matKhau,a.email, a.trangThai,b.tenRole,a.ngayTao)" + " from "
+				+ "(a.maTaiKhoan, a.tenTaiKhoan,a.matKhau,a.email, a.trangThai,b.maRole,b.tenRole,a.ngayTao)" + " from "
 				+ TaiKhoanEntity.class.getName() + " a, "+RoleEntity.class.getName()+" b where a.maRole = b.maRole and a.maTaiKhoan =: mtk";
 		Query query = se.createQuery(sql);
 		query.setParameter("mtk", maTaiKhoan);

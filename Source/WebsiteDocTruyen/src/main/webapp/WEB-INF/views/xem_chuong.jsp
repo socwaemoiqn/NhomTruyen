@@ -155,6 +155,7 @@
 					<tr>
 						<td>Màu nền</td>
 						<td><select name="" id="config-background-color">
+								<option value="#ffffff-#000000">Màu trắng</option>
 								<option value="#f4f4f4-#4e4e4e">Xám nhạt</option>
 								<option value="#f4f4e4-#4e4e4e">Vàng nhạt</option>
 								<option value="#eae4d3-#4e4e4e">Màu sepia</option>

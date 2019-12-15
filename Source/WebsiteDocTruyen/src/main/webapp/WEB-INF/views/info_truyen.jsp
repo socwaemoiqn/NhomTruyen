@@ -161,10 +161,10 @@ display: inline;}
 								<c:forEach items="${urlTruyen }" var="url">
 									<c:if test="${url.value==tr.ID }">
 										<a href="${pageContext.request.contextPath}/${url.key}">
-											<i class="fas fa-book-reader"></i> <span>${tr.tenTruyen} <br></span>
+											<i class="fas fa-book-reader"></i> <span>${tr.tenTruyen}</span><br>
 										
-											</a>
-											<span class="so-chuong">(Chương ${tr.soChuong })</span>
+											
+											(Chương ${tr.soChuong })</a>
 									</c:if>
 								</c:forEach>
 								

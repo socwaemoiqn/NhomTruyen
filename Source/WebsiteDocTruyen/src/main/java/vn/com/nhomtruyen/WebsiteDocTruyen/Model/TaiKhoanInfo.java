@@ -39,6 +39,18 @@ public class TaiKhoanInfo {
 		this.tenRole = tenRole;
 		this.ngayTao = ngayTao;
 	}
+	public TaiKhoanInfo(int maTaiKhoan, String tenTaiKhoan, String matKhau, String email, boolean trangThai,int maRole,
+			String tenRole, String ngayTao) {
+		super();
+		this.maTaiKhoan = maTaiKhoan;
+		this.tenTaiKhoan = tenTaiKhoan;
+		this.matKhau = matKhau;
+		this.email = email;
+		this.trangThai = trangThai;
+		this.maRole = maRole;
+		this.tenRole = tenRole;
+		this.ngayTao = ngayTao;
+	}
 	public int getMaTaiKhoan() {
 		return maTaiKhoan;
 	}

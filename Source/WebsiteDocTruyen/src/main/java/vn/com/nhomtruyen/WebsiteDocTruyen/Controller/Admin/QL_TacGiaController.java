@@ -84,20 +84,28 @@ public class QL_TacGiaController {
 
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	public String insert(HttpServletRequest request, HttpSession session) {
-		String tenTacGia = request.getParameter("tenTacGia");
+		String tenTacGia = request.getParameter("tenTacGia").trim();
 		String gioiThieu = request.getParameter("gioiThieu");
 		Map<String, String> mess = new HashMap<String, String>();
 		// kiem tra ten tac gia nhap vao
 		if (tenTacGia.length() > 0 && tenTacGia.length() <= 50) {
 			//tao moi mot tac gia
-			TacGiaInfo tacgiainfo = new TacGiaInfo();
-			tacgiainfo.setGioiThieu(gioiThieu);
-			tacgiainfo.setTenTacGia(tenTacGia);
-			//them tac gia
-			tacGiaDAO.insert(tacgiainfo);
-			//thong bao
-			mess.put("status", "Thêm tác giả thành công!");
-			mess.put("name", "Tác giả vừa được thêm: " + tenTacGia);
+			if(tacGiaDAO.findTacGiaEntityByTen(tenTacGia) == null)
+			{
+				TacGiaInfo tacgiainfo = new TacGiaInfo();
+				tacgiainfo.setGioiThieu(gioiThieu);
+				tacgiainfo.setTenTacGia(tenTacGia);
+				//them tac gia
+				tacGiaDAO.insert(tacgiainfo);
+				//thong bao
+				mess.put("status", "Thêm tác giả thành công!");
+				mess.put("name", "Tác giả vừa được thêm: " + tenTacGia);
+			}
+			else
+			{
+				mess.put("status", "Thêm tác giả không thành công!");
+				mess.put("name", "Tác giả vừa được thêm đã tồn tại!");
+			}
 
 		} else {
 			mess.put("status", "Thêm tác giả không thành công!");

@@ -20,6 +20,7 @@ public interface TacGiaDAO {
 	public void edit(TacGiaInfo tacGiaInfo);
 	public void xoa(int maTacGia);
 	public TacGiaEntity findTacGiaEntity(int maTacGia);
+	public TacGiaEntity findTacGiaEntityByTen(String tenTacGia);
 	public void updateTrangThai(TacGiaInfo tacGiaInfo);
 }
 

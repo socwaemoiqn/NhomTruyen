@@ -77,7 +77,7 @@ public class QL_ThongKeController {
 					String ngayDauThang = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
 							+ cal.getActualMinimum(Calendar.DATE) + " 00:00:00";
 					String ngayCuoiThang = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "/"
-							+ cal.getActualMaximum(Calendar.DATE) + " 00:00:00";
+							+ cal.getActualMaximum(Calendar.DATE) + " 23:59:00";
 					truyen = truyenDao.thongKetruyen(thongKe, ngayDauThang, ngayCuoiThang);
 					map1.put("months", "Tháng");
 					mess="Thống Kê Truyện "+ thongKe.substring(0, 1).toUpperCase() + thongKe.substring(1).toLowerCase()+" Tháng "+ + (cal.get(Calendar.MONTH) + 1);

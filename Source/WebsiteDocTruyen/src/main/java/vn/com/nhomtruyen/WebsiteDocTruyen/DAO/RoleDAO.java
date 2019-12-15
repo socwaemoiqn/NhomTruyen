@@ -17,5 +17,6 @@ public interface RoleDAO {
 	public void edit(RoleInfo RoleInfo);
 	public void xoa(int maRole);
 	public RoleEntity findRoleEntity(int maRole);
+	public RoleEntity findRoleEntityByTen(String tenRole);
 	public void updateTrangThai(RoleInfo RoleInfo);
 }

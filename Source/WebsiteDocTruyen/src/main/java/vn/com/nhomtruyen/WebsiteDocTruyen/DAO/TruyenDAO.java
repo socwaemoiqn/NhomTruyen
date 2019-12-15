@@ -41,6 +41,7 @@ public interface TruyenDAO   {
 	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc);
 
 	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem();
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart,String timeEnd);
 
 	
 }

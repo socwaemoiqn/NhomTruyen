@@ -312,5 +312,14 @@ public class TruyenImpl implements TruyenDAO {
 		return query.list();
 	}
 
-
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd) {
+		Session session = sessionFactory.getCurrentSession();
+		String sql = " Select new " + SelectTruyenInfo.class.getName()
+				+ " (tr.ID, tr.tenTruyen,tr.luotXem) "
+				+ " from " + TruyenEntity.class.getName() + " tr "
+				+ " where tr.ngayTao BETWEEN '"+timeStart+"' and '"+timeEnd+"'"
+				+ " ORDER BY tr.luotXem DESC ";
+		Query query = session.createQuery(sql).setMaxResults(10);
+		return query.list();
+	}
 }

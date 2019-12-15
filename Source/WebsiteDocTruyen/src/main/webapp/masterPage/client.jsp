@@ -10,8 +10,9 @@
 <title><dec:title/></title>
 
 <link rel="shortcut icon" type="image/x-icon" href="" />
-<script
-	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script> 
+ <script
+	src="${pageContext.request.contextPath}/template/admin/js/jquery.min.js"></script>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/template/client/assets/icon/css/all.css">
 <link rel="stylesheet"
