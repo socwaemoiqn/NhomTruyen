@@ -24,7 +24,7 @@ public class LuotXemImpl implements LuotXemDAO{
 		se.save(luotXemEntity);
 	}
 	@Override
-	public LuotXemModel findLuotXem(LuotXemModel luotXemModel) {
+	public LuotXemModel findLuotXem(String maTruyen) {
 		Session se = this.sessionFactory.getCurrentSession();
 		String startTime = Helper.getToday()+" 00:00:00";
 		String endTime = Helper.getToday() + " 23:59:00";
@@ -33,7 +33,7 @@ public class LuotXemImpl implements LuotXemDAO{
 				+ " from "+LuotXemEntity.class.getName()+" lx "
 						+ " where lx.maTruyen =: maTruyen and lx.ngayXem BETWEEN '"+startTime+"' and '"+endTime+"'";
 		Query query = se.createQuery(sql);
-		query.setParameter("maTruyen", luotXemModel.getMaTruyen());
+		query.setParameter("maTruyen", maTruyen);
 		return (LuotXemModel)query.uniqueResult();
 	}
 	@Override

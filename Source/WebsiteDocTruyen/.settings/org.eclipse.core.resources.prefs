@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=c75b985744da6c5481111863be34c8d1fcfbcf0b
 eclipse.preferences.version=1
+encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Common/ConnectionJDBC.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Common/Helper.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Config/ApplicationContextConfig.java=UTF-8
 encoding//src/main/java/vn/com/nhomtruyen/WebsiteDocTruyen/Controller/Admin/QL_DanhMucTruyenController.java=UTF-8

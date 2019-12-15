@@ -6,7 +6,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.LuotXemModel;
 
 @Transactional
 public interface LuotXemDAO {
-	public LuotXemModel findLuotXem(LuotXemModel luotXemModel);
+	public LuotXemModel findLuotXem(String maTruyen);
 	public void insert(LuotXemModel luotXemModel);
 	public void updateLuotXem(LuotXemModel luotXemModel);
 }

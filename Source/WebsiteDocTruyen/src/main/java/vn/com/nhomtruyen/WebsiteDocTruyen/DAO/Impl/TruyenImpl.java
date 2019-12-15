@@ -1,9 +1,15 @@
 	package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.SQLWarning;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.sql.Statement;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,9 +18,17 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mysql.jdbc.ExceptionInterceptor;
+import com.mysql.jdbc.PingTarget;
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.ResultSetInternalMethods;
+
+
+import vn.com.nhomtruyen.WebsiteDocTruyen.Common.ConnectionJDBC;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.ChiTietTheLoaiTruyenEntity;
+import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.LuotXemEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.NhomDichEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TacGiaEntity;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Entity.TheLoaiTruyenEntity;
@@ -302,24 +316,43 @@ public class TruyenImpl implements TruyenDAO {
 		return query.list();
 	}
 
-	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() {
-		Session session = sessionFactory.getCurrentSession();
-		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen,tr.luotXem) "
-				+ " from " + TruyenEntity.class.getName() + " tr "
-				+ " ORDER BY tr.luotXem DESC ";
-		Query query = session.createQuery(sql).setMaxResults(10);
-		return query.list();
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() throws ClassNotFoundException, SQLException {
+		Connection conn = ConnectionJDBC.getMySQLConnection();
+	Statement statement = conn.createStatement();
+	String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
+			+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen GROUP BY lx.maTruyen "
+			+ " ORDER BY SUM(lx.luotXem) DESC";
+	ResultSet rs = statement.executeQuery(sql);
+	List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
+	while(rs.next())
+	{
+		SelectTruyenInfo selectTruyenInfo = new SelectTruyenInfo();
+		selectTruyenInfo.setID(rs.getString(1));
+		selectTruyenInfo.setTenTruyen(rs.getString(2));
+		selectTruyenInfo.setLuotXem(rs.getInt(3));
+		listLuotXem.add(selectTruyenInfo);
+	}
+	return listLuotXem;
 	}
 
-	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd) {
-		Session session = sessionFactory.getCurrentSession();
-		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen,tr.luotXem) "
-				+ " from " + TruyenEntity.class.getName() + " tr "
-				+ " where tr.ngayTao BETWEEN '"+timeStart+"' and '"+timeEnd+"'"
-				+ " ORDER BY tr.luotXem DESC ";
-		Query query = session.createQuery(sql).setMaxResults(10);
-		return query.list();
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd) throws SQLException, ClassNotFoundException {
+		Connection conn = ConnectionJDBC.getMySQLConnection();
+		Statement statement = conn.createStatement();
+		String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
+				+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen "
+				+ " and lx.ngayXem BETWEEN '"+timeStart+"' and '"+timeEnd+"' "
+				+ " GROUP BY lx.maTruyen "
+				+ " ORDER BY SUM(lx.luotXem) DESC";
+		ResultSet rs = statement.executeQuery(sql);
+		List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
+		while(rs.next())
+		{
+			SelectTruyenInfo selectTruyenInfo = new SelectTruyenInfo();
+			selectTruyenInfo.setID(rs.getString(1));
+			selectTruyenInfo.setTenTruyen(rs.getString(2));
+			selectTruyenInfo.setLuotXem(rs.getInt(3));
+			listLuotXem.add(selectTruyenInfo);
+		}
+		return listLuotXem;
 	}
 }

@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -40,8 +41,8 @@ public interface TruyenDAO   {
 
 	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc);
 
-	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem();
-	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart,String timeEnd);
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() throws ClassNotFoundException, SQLException;
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart,String timeEnd) throws SQLException, ClassNotFoundException;
 
 	
 }

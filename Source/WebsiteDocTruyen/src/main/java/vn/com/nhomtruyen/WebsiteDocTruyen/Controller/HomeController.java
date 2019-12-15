@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -120,7 +121,7 @@ public class HomeController {
 		return "index";
 	}
 	@RequestMapping(value = "/select-top-10", method = RequestMethod.POST)
-	public @ResponseBody String selectTop10(HttpServletRequest request) throws JsonProcessingException
+	public @ResponseBody String selectTop10(HttpServletRequest request) throws JsonProcessingException, ClassNotFoundException, SQLException
 	{ 
 		String typeTime = request.getParameter("typeTime");
 	
@@ -142,6 +143,8 @@ public class HomeController {
 			  		+ "/"+cal.getActualMinimum(Calendar.DATE)+" 00:00:00";
 			   timeEnd = cal.get(Calendar.YEAR)+"/"+(cal.get(Calendar.MONTH)+1)+""
 				  		+ "/"+cal.getActualMaximum(Calendar.DATE)+" 23:59:00";
+			   listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem(timeStart, timeEnd);
+			   break;
 		 default: break; }
 		  ObjectMapper mapper = new ObjectMapper(); 
 		  for (SelectTruyenInfo selectTruyenInfo : listTop10Truyen) {
@@ -257,15 +260,16 @@ public class HomeController {
 		session.setAttribute("array_readed", reserveArray(array_readed)); // Lưu vào session
 		///////////////////////////////
 		LuotXemModel luotXemModel = new LuotXemModel();
-		luotXemModel.setMaTruyen(chuongOfId.getIDTruyen());
-		luotXemModel.setLuotXem(1);
-		luotXemModel.setNgayXem(Helper.getCurrentDateAndTime());
-		if(luotXemDAO.findLuotXem(luotXemModel)== null)
+		if(luotXemDAO.findLuotXem(chuongOfId.getIDTruyen())== null)
 		{
+			luotXemModel.setMaTruyen(chuongOfId.getIDTruyen());
+			luotXemModel.setLuotXem(1);
+			luotXemModel.setNgayXem(Helper.getCurrentDateAndTime());
 			luotXemDAO.insert(luotXemModel);
 		}
 		else
 		{
+			luotXemModel = luotXemDAO.findLuotXem(chuongOfId.getIDTruyen());
 			luotXemDAO.updateLuotXem(luotXemModel);
 		}
 		return "xem_chuong";
