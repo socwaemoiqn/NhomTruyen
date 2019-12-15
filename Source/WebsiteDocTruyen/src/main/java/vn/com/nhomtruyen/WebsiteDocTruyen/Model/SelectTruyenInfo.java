@@ -60,6 +60,26 @@ public class SelectTruyenInfo {
 		this.tenTruyen = tenTruyen;
 		this.luotXem = luotXem;
 	}
+	
+	
+	public SelectTruyenInfo(String iD, String tenTruyen, String tenTacGia, int soChuong, String gioiThieu,
+			String tenNhomDich, String nguon, String hinhAnh, boolean full, boolean hot, boolean news, boolean hienThi,
+			String ngayTao) {
+		super();
+		ID = iD;
+		this.tenTruyen = tenTruyen;
+		this.tenTacGia = tenTacGia;
+		this.soChuong = soChuong;
+		this.gioiThieu = gioiThieu;
+		this.tenNhomDich = tenNhomDich;
+		this.nguon = nguon;
+		this.hinhAnh = hinhAnh;
+		this.full = full;
+		this.hot = hot;
+		this.news = news;
+		this.hienThi = hienThi;
+		this.ngayTao = ngayTao;
+	}
 	public String getID() {
 		return ID;
 	}

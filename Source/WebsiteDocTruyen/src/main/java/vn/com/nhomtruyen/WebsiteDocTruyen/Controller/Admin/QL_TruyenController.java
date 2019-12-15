@@ -37,6 +37,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Authencation;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.LuotXemDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TheLoaiTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
@@ -65,6 +66,8 @@ public class QL_TruyenController {
 	private TheLoaiTruyenDAO theLoaiTruyenDao;
 	@Autowired
 	private TacGiaDAO tacGiaDao;
+	@Autowired
+	private LuotXemDAO luotXemDao;
 
 	// Phương thức này được gọi mỗi lần có Submit.
 	@InitBinder
@@ -107,17 +110,25 @@ public class QL_TruyenController {
 			urlRedirect = "redirect:/";
 		} else {
 			PaginationResult<SelectTruyenInfo> listTruyen = getData(request);
-			List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTenTheLoai();
+			
+			for (SelectTruyenInfo truyen : listTruyen.getList()) {
+				truyen.setUrlTruyen(Helper.pathVariableString(truyen.getTenTruyen()));
+				List<ChiTietTheLoaiTruyenInfo> theLoaiTruyen= theLoaiTruyenDao.listTenTlOfTruyen(truyen.getID());
+				String tenTheLoaiTruyen="";
+				for (ChiTietTheLoaiTruyenInfo chiTietTheLoaiTruyenInfo : theLoaiTruyen) {
+					tenTheLoaiTruyen+=chiTietTheLoaiTruyenInfo.getTenTheLoai()+", ";
+				}
+				tenTheLoaiTruyen=Helper.subString(tenTheLoaiTruyen);
+				truyen.setTheLoaiTruyen(tenTheLoaiTruyen);
+				truyen.setLuotXem(luotXemDao.sumLuotXemOfTruyen(truyen.getID()));
+			}
 
-			Map<String, String> listUrl = truyenDao.listPathVariableString();
-
+			
+			
 			TruyenAddForm truyen = new TruyenAddForm();
 
-			model.addAttribute("tenTheLoai", theLoaiTruyen);
 			model.addAttribute("listTruyen", listTruyen);
-			model.addAttribute("url", listUrl);
 			model.addAttribute("truyenAddForm", truyen);
-			model.addAttribute("slt", listTruyen.getTotalRecords());
 			urlRedirect = "admin/ql_truyen";
 		}
 
@@ -356,31 +367,28 @@ public class QL_TruyenController {
 			String maTruyen = urlTruyen.get(tenTruyen);
 
 			SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
-			List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+			//List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
+			String tenTheLoai="";
 			List<ChiTietTheLoaiTruyenInfo> cttl = theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
-
-			List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortDESC(maTruyen);
-			Map<String, String> urlChuong = chuongDao.listPathVariableString(maTruyen);
-
-			List<ChuongInfo> listChuong = chuongDao.listChuongOfTruyenSortASC(maTruyen);
-			Map<String, String> soChuong = new HashMap<String, String>();
+			for (ChiTietTheLoaiTruyenInfo chiTietTheLoaiTruyenInfo : cttl) {
+				tenTheLoai+=chiTietTheLoaiTruyenInfo.getTenTheLoai()+", ";
+			}
+			tr.setTheLoaiTruyen(Helper.subString(tenTheLoai));
+			
+			List<ChuongInfo> listChuongByTruyen = chuongDao.listChuongOfTruyenSortASC(maTruyen);
+			
 			int i = 1;
-			for (ChuongInfo ch : listChuong) {
+			for (ChuongInfo ch : listChuongByTruyen) {
 
-				soChuong.put(ch.getId(), "Chương " + i);
+				//soChuong.put(ch.getId(), "Chương " + i);
+				ch.setUrlChuong("chuong-" + i);
 				i++;
 			}
 
-			int slChuong = listChuongByTruyen.size();
-
 			model.addAttribute("truyenById", tr);
-			model.addAttribute("dmById", ctdm);
-			model.addAttribute("temtl", cttl);
 			model.addAttribute("listChuongOfTruyen", listChuongByTruyen);
-			model.addAttribute("slChuong", slChuong);
 			model.addAttribute("tenTruyen", tenTruyen);
-			model.addAttribute("urlChuong", urlChuong);
-			model.addAttribute("soChuong", soChuong);
+		
 
 			model.addAttribute("truyenEditForm", truyen);
 			urlRedirect = "admin/ql_truyen_xemtruyen";

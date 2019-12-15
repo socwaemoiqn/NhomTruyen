@@ -122,30 +122,21 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="tr" items="${topTruyen }" begin="0" end="9" varStatus="index">
+								<c:forEach var="tr" items="${listTopTruyen }" begin="0" end="9" varStatus="index">
 									<tr>
 										<td>${index.index+1 }</td>
 										<td>
-											<c:forEach items="${listUrl}" var="url">
-												<c:if test="${url.value==tr.ID }">
-													<a
-														title="Xem trước"
-														href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
-															${tr.tenTruyen}
-													</a> 
-												</c:if>
-											</c:forEach>
+												<a
+													title="Xem trước"
+													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen}">
+														${tr.tenTruyen}
+												</a> 
 										</td>
 										<td>
 											${tr.tenTacGia }
 										</td>
 										<td>
-											<c:forEach items="${tenTheLoai}" var="tl" varStatus="status">
-
-												<c:if test="${tr.ID == tl.maTruyen}">
-													${tl.tenTheLoai},
-												</c:if>
-											</c:forEach>
+											${tr.theLoaiTruyen}
 										</td>
 										<td>${tr.luotXem }</td>
 									</tr>
@@ -157,7 +148,7 @@
 				</div>
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-heading">Top truyện mới trong ngày</div>
+				<div class="panel-heading">Top truyện mới</div>
 				<!-- /.panel-heading -->
 				<div class="panel-body">
 				<table class="table">
@@ -175,26 +166,18 @@
 									<tr>
 										<td>${index.index+1 }</td>
 										<td>
-											<c:forEach items="${listUrl}" var="url">
-												<c:if test="${url.value==tr.ID }">
-													<a
-														title="Xem trước"
-														href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
-															${tr.tenTruyen}
-													</a> 
-												</c:if>
-											</c:forEach>
+											<a
+												title="Xem trước"
+												href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen}">
+													${tr.tenTruyen}
+											</a> 
 										</td>
 										<td>
 											${tr.tenTacGia }
 										</td>
 										<td>
-											<c:forEach items="${tenTheLoai}" var="tl" varStatus="status">
-
-												<c:if test="${tr.ID == tl.maTruyen}">
-													${tl.tenTheLoai},
-												</c:if>
-											</c:forEach>
+											${tr.theLoaiTruyen}
+												
 										</td>
 										<td>
 											${tr.luotXem }
@@ -224,12 +207,7 @@
 									<div class="timeline-panel">
 										<div class="timeline-heading">
 											<h4 class="timeline-title">
-												<c:forEach items="${listUrl }" var="url">
-													<c:if test="${url.value== tr.ID }">
-														<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key }">${tr.tenTruyen }</a>
-													</c:if>
-												</c:forEach>
-												
+												<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen }">${tr.tenTruyen }</a>	
 											</h4>
 		
 											<p>
@@ -250,11 +228,7 @@
 												${tr.gioiThieu }
 											</p>
 											<h4>
-												<c:forEach items="${listUrl }" var="url">
-													<c:if test="${url.value== tr.ID }">
-														<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key }">Xem chi tiết...</a>
-													</c:if>
-												</c:forEach>
+												<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen }">Xem chi tiết...</a>	
 											</h4>
 										</div>
 									</div>
@@ -268,11 +242,7 @@
 									<div class="timeline-panel">
 										<div class="timeline-heading">
 											<h4 class="timeline-title">
-												<c:forEach items="${listUrl }" var="url">
-													<c:if test="${url.value== tr.ID }">
-														<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key }">${tr.tenTruyen }</a>
-													</c:if>
-												</c:forEach>
+														<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen }">${tr.tenTruyen }</a>
 											</h4>
 		
 											<p>
@@ -293,11 +263,8 @@
 												${tr.gioiThieu }
 											</p>
 											<h4>
-												<c:forEach items="${listUrl }" var="url">
-													<c:if test="${url.value== tr.ID }">
-														<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key }">Xem chi tiết...</a>
-													</c:if>
-												</c:forEach>
+												<a href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen }">Xem chi tiết...</a>
+													
 											</h4>
 										</div>
 									</div>

@@ -73,6 +73,25 @@ public class TruyenInfo {
 		this.ngayTao = ngayTao;
 	}
 	
+	
+
+	public TruyenInfo(String iD, String tenTruyen, int maTacGia, int maNhomDich, int soChuong, String gioiThieu,
+			String nguon, String hinhAnh, boolean full, boolean hot, boolean news, boolean hienThi, String ngayTao) {
+		super();
+		ID = iD;
+		this.tenTruyen = tenTruyen;
+		this.maTacGia = maTacGia;
+		this.maNhomDich = maNhomDich;
+		this.soChuong = soChuong;
+		this.gioiThieu = gioiThieu;
+		this.nguon = nguon;
+		this.hinhAnh = hinhAnh;
+		this.full = full;
+		this.hot = hot;
+		this.news = news;
+		this.hienThi = hienThi;
+		this.ngayTao = ngayTao;
+	}
 
 	public TruyenInfo(String iD, String tenTruyen, int maTacGia, String gioiThieu, String nguon, String hinhAnh) {
 		super();

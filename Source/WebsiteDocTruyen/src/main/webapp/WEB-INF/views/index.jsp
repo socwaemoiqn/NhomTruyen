@@ -128,12 +128,7 @@
 										</c:if>
 									</c:forEach></td>
 								<td>
-									<a><c:forEach items="${tenTheLoai}"
-											var="tl">
-											<c:if test="${tr.ID == tl.maTruyen}">
-													${tl.tenTheLoai},
-												</c:if>
-										</c:forEach></a>
+									<a>${tr.theLoaiTruyen }</a>
 								</td>
 								<td>
 								<c:forEach items="${urlTruyen}" var="url">

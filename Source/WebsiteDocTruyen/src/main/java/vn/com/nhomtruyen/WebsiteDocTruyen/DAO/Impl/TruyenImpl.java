@@ -1,4 +1,4 @@
-	package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
+package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -23,7 +23,6 @@ import com.mysql.jdbc.PingTarget;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.ResultSetInternalMethods;
 
-
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.ConnectionJDBC;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Common.Helper;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TruyenDAO;
@@ -47,7 +46,7 @@ public class TruyenImpl implements TruyenDAO {
 	public PaginationResult<SelectTruyenInfo> litsTruyen(int page, int maxResult, int maxNavigationPage) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
@@ -60,7 +59,7 @@ public class TruyenImpl implements TruyenDAO {
 			int maxNavigationPage) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen like: ten ";
@@ -86,7 +85,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> listTruyen() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
@@ -98,7 +97,7 @@ public class TruyenImpl implements TruyenDAO {
 	public Map<String, String> listPathVariableString() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich ORDER BY tr.ngayTao DESC ";
@@ -116,7 +115,7 @@ public class TruyenImpl implements TruyenDAO {
 	public SelectTruyenInfo selectTruyenByMa(String maTruyen) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.ID=: id ";
@@ -129,7 +128,7 @@ public class TruyenImpl implements TruyenDAO {
 	public boolean selectTruyenByTen(String tenTruyen) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen =: ten ";
@@ -146,7 +145,7 @@ public class TruyenImpl implements TruyenDAO {
 	public int sumSoLuongTruyenOfTacGia(int maTacGia) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " ( tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu,tr.tenNhomDich, tr.luotXem,tr.nguon, tr.hinhAnh,tr.full, tr.hot, tr.news, tr.hienThi,tr.ngayTao) "
+				+ " ( tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu,tr.tenNhomDich, tr.nguon, tr.hinhAnh,tr.full, tr.hot, tr.news, tr.hienThi,tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr ," + TacGiaEntity.class.getName() + " tg"
 				+ " where tr.maTacGia = tg.ID GROUP BY tr.id where tg.ID =: id";
 		Query query = session.createQuery(sql);
@@ -171,7 +170,6 @@ public class TruyenImpl implements TruyenDAO {
 		truyen.setMaNhomDich(truyenInfo.getMaNhomDich());
 		truyen.setSoChuong(truyenInfo.getSoChuong());
 		truyen.setGioiThieu(truyenInfo.getGioiThieu());
-		truyen.setLuotXem(truyenInfo.getLuotXem());
 		truyen.setNguon(truyenInfo.getNguon());
 		truyen.setHinhAnh(truyenInfo.getHinhAnh());
 		truyen.setFull(truyenInfo.isFull());
@@ -221,12 +219,7 @@ public class TruyenImpl implements TruyenDAO {
 		query.executeUpdate();
 	}
 
-	@Override
-	public void capNhatLuotXem(SelectTruyenInfo truyenInfo) {
-		TruyenEntity truyen = findTruyenEntity(truyenInfo.getID());
-		truyen.setLuotXem(truyen.getLuotXem() + 1);
-		this.sessionFactory.getCurrentSession().update(truyen);
-	}
+
 
 	@Override
 	public void xoaTruyen(String maTruyen) {
@@ -240,7 +233,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> selectAllTruyenNoFull() {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and NOT tr.full = 1 ";
@@ -253,7 +246,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> selectAllTruyenByDanhMuc(String danhMuc) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr." + danhMuc + " = 1 ";
@@ -265,7 +258,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> selectAllTheLoaiTruyen(String tenTheLoai) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd, " + ChiTietTheLoaiTruyenEntity.class.getName() + " cttl, "
 				+ TheLoaiTruyenEntity.class.getName() + " tl "
@@ -279,7 +272,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> selectAllTruyenByTacGia(String tenTacGia) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tg.tenTacGia =: tenTacGia ";
@@ -293,7 +286,7 @@ public class TruyenImpl implements TruyenDAO {
 			int maxNavigationPage) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.maTacGia =: maTacGia ";
@@ -307,42 +300,42 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> thongKetruyen(String thongKe, String batDau, String ketThuc) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
-				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr."
-				+ thongKe + " = 1 and tr.ngayTao BETWEEN '"+ batDau +"' and '" +ketThuc+"' ";
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr." + thongKe
+				+ " = 1 and tr.ngayTao BETWEEN '" + batDau + "' and '" + ketThuc + "' ";
 		Query query = session.createQuery(sql);
 		return query.list();
 	}
 
 	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem() throws ClassNotFoundException, SQLException {
 		Connection conn = ConnectionJDBC.getMySQLConnection();
-	Statement statement = conn.createStatement();
-	String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
-			+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen GROUP BY lx.maTruyen "
-			+ " ORDER BY SUM(lx.luotXem) DESC";
-	ResultSet rs = statement.executeQuery(sql);
-	List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
-	while(rs.next())
-	{
-		SelectTruyenInfo selectTruyenInfo = new SelectTruyenInfo();
-		selectTruyenInfo.setID(rs.getString(1));
-		selectTruyenInfo.setTenTruyen(rs.getString(2));
-		selectTruyenInfo.setLuotXem(rs.getInt(3));
-		listLuotXem.add(selectTruyenInfo);
-	}
-	return listLuotXem;
+		Statement statement = conn.createStatement();
+		String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
+				+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen GROUP BY lx.maTruyen "
+				+ " ORDER BY SUM(lx.luotXem) DESC limit 11";
+		ResultSet rs = statement.executeQuery(sql);
+		List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
+		while (rs.next()) {
+			SelectTruyenInfo selectTruyenInfo = new SelectTruyenInfo();
+			selectTruyenInfo.setID(rs.getString(1));
+			selectTruyenInfo.setTenTruyen(rs.getString(2));
+			selectTruyenInfo.setLuotXem(rs.getInt(3));
+			listLuotXem.add(selectTruyenInfo);
+		}
+		return null;
 	}
 
-	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd) throws SQLException, ClassNotFoundException {
-		Connection conn = ConnectionJDBC.getMySQLConnection();
-		Statement statement = conn.createStatement();
+	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd)
+			throws SQLException, ClassNotFoundException {
+		 Connection conn = ConnectionJDBC.getMySQLConnection();
+		 Statement statement = conn.createStatement();
 		String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
 				+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen "
 				+ " and lx.ngayXem BETWEEN '"+timeStart+"' and '"+timeEnd+"' "
 				+ " GROUP BY lx.maTruyen "
-				+ " ORDER BY SUM(lx.luotXem) DESC";
+				+ " ORDER BY SUM(lx.luotXem) DESC limit 11";
 		ResultSet rs = statement.executeQuery(sql);
 		List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
 		while(rs.next())

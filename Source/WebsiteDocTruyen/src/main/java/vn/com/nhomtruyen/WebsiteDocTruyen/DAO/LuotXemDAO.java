@@ -9,4 +9,5 @@ public interface LuotXemDAO {
 	public LuotXemModel findLuotXem(String maTruyen);
 	public void insert(LuotXemModel luotXemModel);
 	public void updateLuotXem(LuotXemModel luotXemModel);
+	public int sumLuotXemOfTruyen(String maTruyen);
 }

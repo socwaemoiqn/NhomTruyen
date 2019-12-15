@@ -15,7 +15,6 @@ public class TruyenEntity {
 	private int maNhomDich;
 	private int soChuong;
 	private String gioiThieu;
-	private int luotXem;
 	private String nguon;
 	private String hinhAnh;
 	private boolean full;
@@ -66,13 +65,6 @@ public class TruyenEntity {
 	}
 	public void setGioiThieu(String gioiThieu) {
 		this.gioiThieu = gioiThieu;
-	}
-	@Column(name="LuotXem")	
-	public int getLuotXem() {
-		return luotXem;
-	}
-	public void setLuotXem(int luotXem) {
-		this.luotXem = luotXem;
 	}
 	@Column(name="Nguon")	
 	public String getNguon() {

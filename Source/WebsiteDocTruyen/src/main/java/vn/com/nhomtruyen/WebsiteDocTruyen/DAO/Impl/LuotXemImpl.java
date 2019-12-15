@@ -1,5 +1,7 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -49,4 +51,19 @@ public class LuotXemImpl implements LuotXemDAO{
 		query.setParameter("maTruyen", luotXemModel.getMaTruyen());	
 		query.executeUpdate();
 		}
+	@Override
+	public int sumLuotXemOfTruyen(String maTruyen) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String sql = "Select new "+LuotXemModel.class.getName()+" "
+				+ " (lx.id,lx.luotXem,lx.maTruyen,lx.ngayXem) "
+				+ " from "+LuotXemEntity.class.getName()+" lx where lx.maTruyen =: maTruyen";
+		Query query = session.createQuery(sql);
+		query.setParameter("maTruyen", maTruyen);
+		List<LuotXemModel> listLuotXem= query.list();
+		int sumLuotXem =0;
+		for (LuotXemModel luotXemModel : listLuotXem) {
+			sumLuotXem+= luotXemModel.getLuotXem();
+		}
+		return sumLuotXem;
+	}
 }

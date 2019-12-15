@@ -86,6 +86,9 @@ public class Helper {
 	      }
 	      return null;
 	}
+	public static String subString(String string) {
+		return string.substring(0, string.length()-2);
+	}
 
 	public static void main(String[] args) throws ParseException {
 		String dateStart = "2017-10-28 21:29:58";

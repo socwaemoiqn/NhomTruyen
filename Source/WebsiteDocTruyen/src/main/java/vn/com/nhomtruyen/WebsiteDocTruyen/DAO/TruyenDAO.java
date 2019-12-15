@@ -29,7 +29,6 @@ public interface TruyenDAO   {
 	public void capNhatTruyen(TruyenInfo truyenInfo);
 	public void capNhatTrangThaiTruyen(String maTruyen, String trangThai, boolean value);
 	public void capNhatSoLuongChuong(String maTruyen, int soChuong);
-	public void capNhatLuotXem(SelectTruyenInfo truyenInfo);
 	public void xoaTruyen(String maTruyen);
 	
 	public List<SelectTruyenInfo> selectAllTruyenNoFull();

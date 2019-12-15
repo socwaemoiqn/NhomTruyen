@@ -76,9 +76,9 @@
 							</div>
 							<p>
 								Thể loại:
-								 <c:forEach items="${temtl}" var="d" varStatus="status">
-									<a>${d.tenTheLoai }</a>,
-								</c:forEach> 
+								
+									<a>${truyenById.theLoaiTruyen }</a>
+								
 							</p>
 							<p>
 								Tác giả: <a> ${truyenById.tenTacGia }</a>
@@ -131,7 +131,6 @@
 													id="table-chuong">
 													<thead>
 														<tr>
-															<th>STT</th>
 															<th>Chương</th>
 															<th>Tiêu đề</th>
 															<th>Trạng Thái</th>
@@ -140,19 +139,15 @@
 													</thead>
 													<tbody>
 														<c:forEach items="${listChuongOfTruyen}" var="us"
-															begin="${25*(i-1)}" end="${(25*i)-1}" varStatus="status">
+															varStatus="status">
 															<tr class="odd gradeX">
-																<td scope="row">${status.index + 1}</td>
+																
 																<td>
-																	<c:forEach items="${soChuong}" var="sc">
-																		<c:if test="${sc.key==us.id }">
-																			${sc.value }
-																		</c:if>
-																	</c:forEach>
+																	Chương ${status.index + 1}
 																</td>
 																<td>
 																	<a title="Xem trước"
-																		href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
+																		href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${us.urlChuong}">
 																		${us.tieuDe}
 																	</a>
 																</td>
@@ -164,18 +159,6 @@
 																		Disable
 																	</c:if>
 																</td>
-																<%-- <c:forEach items="${urlChuong}" var="ch">
-																	
-																	<c:if test="${ch.value==us.id }">
-																	
-																		<td style="width: 5%;">
-																			<a	class="btn btn-primary btn-circle" title="Xem trước"
-																				href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tenTruyen}/${ch.key}">
-																				<i class="fa fa-eye"></i>
-																			</a>
-																		</td>
-																	</c:if>
-																</c:forEach> --%>
 															</tr>
 														</c:forEach>
 													</tbody>
@@ -282,9 +265,10 @@
        <script>
            $(document).ready(function() {
                $('#table-chuong').DataTable({
-                       responsive: true
+                      
                });
            });
        </script>
+       
 	</body>
 </html>

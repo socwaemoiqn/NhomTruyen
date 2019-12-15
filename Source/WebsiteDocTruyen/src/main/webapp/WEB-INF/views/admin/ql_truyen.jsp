@@ -113,7 +113,7 @@
 									
 									<td>
 										<button class="btn btn-danger disabled">Hiện có
-											: ${slt } truyện
+											: ${listTruyen.totalRecords} truyện
 										</button>
 									</td>
 
@@ -141,53 +141,40 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${listTruyen.list}" var="us" varStatus="status">
+								<c:forEach items="${listTruyen.list}" var="tr" varStatus="status">
 									<tr class="odd gradeA">
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label>
-													 <input class="checkbox all" type="checkbox" name="check[]" id="${us.ID }">
+													 <input class="checkbox all" type="checkbox" name="check[]" id="${tr.ID }">
 												</label>
 											</div> 
 										</td>
 										<td style="text-align: center; padding-top:2%;">${status.index + 1}</td>
 										<td style="width: 13%; text-align: center;">
 											<img height="150px" width="100px"
-												src="${pageContext.request.contextPath}/truyen/img/${us.hinhAnh}" />
+												src="${pageContext.request.contextPath}/truyen/img/${tr.hinhAnh}" />
 										</td>
 										<td style="padding-top:2%;">
-											
-											
-											<c:forEach items="${url}" var="url">
-											<c:if test="${url.value==us.ID }">
-												<a
-													title="Xem trước"
-													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
-														${us.tenTruyen}
+												<a title="Xem trước"
+													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen}">
+														${tr.tenTruyen}
 												</a> 
-											</c:if>
-										
-										</c:forEach>
 										</td>
-										<td style="padding-top:2%;">${us.tenTacGia }</td>
+										<td style="padding-top:2%;">${tr.tenTacGia }</td>
 										<td style="padding-top:2%;">
-											<c:forEach items="${tenTheLoai}" var="tl" varStatus="status">
-
-												<c:if test="${us.ID == tl.maTruyen}">
-													${tl.tenTheLoai},
-												</c:if>
-											</c:forEach>
+											${tr.theLoaiTruyen }
 										</td>
-										<td style="text-align: center;  padding-top:2%;">${us.soChuong }</td>
-										<td style="text-align: center; padding-top:2%;">${us.luotXem }</td>
+										<td style="text-align: center;  padding-top:2%;">${tr.soChuong }</td>
+										<td style="text-align: center; padding-top:2%;">${tr.luotXem }</td>
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label>						
-													<c:if test="${us.full == true }">
-														<input class="checkbox full" type="checkbox" name="check_full[]" id="${us.ID }" checked> 					
+													<c:if test="${tr.full == true }">
+														<input class="checkbox full" type="checkbox" name="check_full[]" id="${tr.ID }" checked> 					
 													</c:if>
-													<c:if test="${us.full == false }">
-														<input class="checkbox full" type="checkbox" name="check_full[]" id="${us.ID }">
+													<c:if test="${tr.full == false }">
+														<input class="checkbox full" type="checkbox" name="check_full[]" id="${tr.ID }">
 													</c:if>		
 												</label>
 											</div>
@@ -196,11 +183,11 @@
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label> 
-													<c:if test="${us.hot == true }">
-														<input class="checkbox hot" type="checkbox" name="check_full[]" id="${us.ID }" checked>					
+													<c:if test="${tr.hot == true }">
+														<input class="checkbox hot" type="checkbox" name="check_full[]" id="${tr.ID }" checked>					
 													</c:if>	
-													<c:if test="${us.hot == false }">
-														<input class="checkbox hot" type="checkbox" name="check_full[]" id="${us.ID }">					
+													<c:if test="${tr.hot == false }">
+														<input class="checkbox hot" type="checkbox" name="check_full[]" id="${tr.ID }">					
 													</c:if>	
 												</label>
 											</div>
@@ -208,11 +195,11 @@
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label> 
-													<c:if test="${us.news == true }">
-														<input class="checkbox new" type="checkbox" name="check_full[]" id="${us.ID }" checked>			
+													<c:if test="${tr.news == true }">
+														<input class="checkbox new" type="checkbox" name="check_full[]" id="${tr.ID }" checked>			
 													</c:if>	
-													<c:if test="${us.news == false }">
-														<input class="checkbox new" type="checkbox" name="check_full[]" id="${us.ID }" >			
+													<c:if test="${tr.news == false }">
+														<input class="checkbox new" type="checkbox" name="check_full[]" id="${tr.ID }" >			
 													</c:if>	
 												</label>
 											</div>
@@ -220,30 +207,27 @@
 										<td style="width: 5%; text-align: center;">
 											<div class="checkbox">
 												<label>	
-													<c:if test="${us.hienThi == true }">
-														<input class="checkbox show" type="checkbox" name="check_full[]" id="${us.ID }" checked>						
+													<c:if test="${tr.hienThi == true }">
+														<input class="checkbox show" type="checkbox" name="check_full[]" id="${tr.ID }" checked>						
 													</c:if>	
-													<c:if test="${us.hienThi == false }">
-														<input class="checkbox show" type="checkbox" name="check_full[]" id="${us.ID }" >						
+													<c:if test="${tr.hienThi == false }">
+														<input class="checkbox show" type="checkbox" name="check_full[]" id="${tr.ID }" >						
 													</c:if>															
 												</label>
 											</div>
 											
 										</td>
-										<c:forEach items="${url}" var="url">
-											<c:if test="${url.value==us.ID }">
-												<td style="width: 9%; text-align: center;"><a
-													class="btn btn-warning btn-circle" title="Xem trước"
-													href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${url.key}">
-														<i class="fa fa-eye"></i>
-												</a> 
-												<a class="btn btn-danger btn-circle delete-truyen" title="Xóa truyện" 
-												data-toggle="modal" data-target="#formXoaTruyen" id="${us.ID }">
-														<i class="fa fa-close"></i>
-												</a></td>
-											</c:if>
+										<td style="width: 9%; text-align: center;">
+										<a class="btn btn-warning btn-circle" title="Xem trước"
+											href="${pageContext.request.contextPath}/quan-tri/ql-truyen/${tr.urlTruyen}">
+												<i class="fa fa-eye"></i>
+										</a> 
+										<a class="btn btn-danger btn-circle delete-truyen" title="Xóa truyện" 
+										data-toggle="modal" data-target="#formXoaTruyen" id="${tr.ID }">
+												<i class="fa fa-close"></i>
+										</a>
+										</td>
 										
-										</c:forEach>
 										
 									</tr>
 								</c:forEach>

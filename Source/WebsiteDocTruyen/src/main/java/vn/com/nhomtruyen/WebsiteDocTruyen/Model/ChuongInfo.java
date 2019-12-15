@@ -8,6 +8,7 @@ public class ChuongInfo {
 	private String noiDung;
 	private int trangThai;
 	private String ngayTao;
+	private String urlChuong;
 	public ChuongInfo() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -22,6 +23,24 @@ public class ChuongInfo {
 		this.ngayTao = ngayTao;
 	}
 	
+	
+	public ChuongInfo(String id, String iDTruyen, String tieuDe, String noiDung, int trangThai, String ngayTao,
+			String urlChuong) {
+		super();
+		this.id = id;
+		IDTruyen = iDTruyen;
+		this.tieuDe = tieuDe;
+		this.noiDung = noiDung;
+		this.trangThai = trangThai;
+		this.ngayTao = ngayTao;
+		this.urlChuong = urlChuong;
+	}
+	public String getUrlChuong() {
+		return urlChuong;
+	}
+	public void setUrlChuong(String urlChuong) {
+		this.urlChuong = urlChuong;
+	}
 	public String getId() {
 		return id;
 	}

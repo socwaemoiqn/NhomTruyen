@@ -94,9 +94,15 @@ public class HomeController {
 		// get list truyện
 		List<SelectTruyenInfo> truyen = truyenDao.listTruyen();
 		// Map<String, String> listUrl = truyenDao.listPathVariableString();
-
-		// get ten the loai de add vao thong tin truyen
-		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
+		for (SelectTruyenInfo selectTruyenInfo : truyen) {
+			selectTruyenInfo.setUrlTruyen(Helper.pathVariableString(selectTruyenInfo.getTenTruyen()));
+			String tenTheLoai="";
+			List<ChiTietTheLoaiTruyenInfo> listTheLoaiByTruyen=theLoaiTruyenDao.listTenTlOfTruyen(selectTruyenInfo.getID());
+			for (ChiTietTheLoaiTruyenInfo tl : listTheLoaiByTruyen) {
+				tenTheLoai+= tl.getTenTheLoai()+", ";
+			}
+			selectTruyenInfo.setTheLoaiTruyen(Helper.subString(tenTheLoai));
+		}
 
 		// tinh ngay truoc cua truyen
 		String ngayhethong = Helper.getCurrentDateAndTime();
@@ -113,10 +119,7 @@ public class HomeController {
 		List<SelectTruyenInfo> listTruyenFull = truyenDao.selectAllTruyenByDanhMuc("full");
 
 		model.addAttribute("truyen", truyen);
-		// model.addAttribute("url", listUrl);
-
 		model.addAttribute("truoc", mapNgayTruoc);
-		model.addAttribute("tenTheLoai", tenTheLoai);
 		model.addAttribute("truyenFull", listTruyenFull);
 		return "index";
 	}
