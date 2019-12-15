@@ -292,8 +292,9 @@ public class HomeController {
 				{
 					Map<String, String> itemLast = array_readed.get(array_readed.size() - 1); // Lưu tạm item cuối cùng
 																								// ra
-					array_readed.set(array_readed.size() - 1, object_readed); // Gán item cuối cùng bằng item vừa đọc
+					
 					array_readed.set(j, itemLast); // Đảo vị trí giữa 2 truyện
+					array_readed.set(array_readed.size() - 1, object_readed); // Gán item cuối cùng bằng item vừa đọc
 					checkExsit = true; // Đưa biến kiểm tra về true	
 					break;
 				}

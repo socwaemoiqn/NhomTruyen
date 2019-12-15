@@ -72,7 +72,7 @@ public class TruyenImpl implements TruyenDAO {
 	public List<SelectTruyenInfo> searchTruyen(String tenTruyen) {
 		Session session = sessionFactory.getCurrentSession();
 		String sql = " Select new " + SelectTruyenInfo.class.getName()
-				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.luotXem, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
+				+ " (tr.ID, tr.tenTruyen, tg.tenTacGia, tr.soChuong, tr.gioiThieu, nd.tenNhomDich, tr.nguon, tr.hinhAnh, tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao) "
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd "
 				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and tr.tenTruyen like: ten ";
@@ -314,7 +314,7 @@ public class TruyenImpl implements TruyenDAO {
 		Statement statement = conn.createStatement();
 		String sql = "SELECT lx.maTruyen,tr.TenTruyen,SUM(lx.luotXem) "
 				+ " from tbluotxem lx,tbtruyen tr WHERE lx.maTruyen = tr.MaTruyen GROUP BY lx.maTruyen "
-				+ " ORDER BY SUM(lx.luotXem) DESC limit 11";
+				+ " ORDER BY SUM(lx.luotXem) DESC";
 		ResultSet rs = statement.executeQuery(sql);
 		List<SelectTruyenInfo> listLuotXem = new ArrayList<>();
 		while (rs.next()) {
@@ -324,7 +324,7 @@ public class TruyenImpl implements TruyenDAO {
 			selectTruyenInfo.setLuotXem(rs.getInt(3));
 			listLuotXem.add(selectTruyenInfo);
 		}
-		return null;
+		return listLuotXem;
 	}
 
 	public List<SelectTruyenInfo> selectTop10TruyenByLuotXem(String timeStart, String timeEnd)
