@@ -155,7 +155,7 @@
 					class="fa fa-circle fa-stack-2x"></i> <i
 					class="fa fa-book-open fa-spin fa-stack-1x fa-inverse"
 					style="color: black;"></i>
-			</span> TRUYỆN PHP
+			</span> NHÓM TRUYỆN
 			</a>
 		</div>
 		<div class="footer-mid">

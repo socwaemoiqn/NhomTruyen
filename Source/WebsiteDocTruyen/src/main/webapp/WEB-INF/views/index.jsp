@@ -12,6 +12,9 @@
 
 	${loi}
 	<div class="main">
+	<div id="path">
+			<i class="fa fa-home"></i> <span>Đọc truyện online, đọc truyện chữ, truyện full, truyện hay. Tổng hợp đầy đủ và cập nhật liên tục.
+		</span></div>
 		<div class="row">
 			<div class="col-7" id="truyen-de-cu" style="overflow: hidden;">
 				<div class="title">

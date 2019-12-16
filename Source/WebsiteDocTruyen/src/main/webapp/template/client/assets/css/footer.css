@@ -8,11 +8,10 @@
 .footer-left,.footer-mid,.footer-right{
     float:left;
     height: 200px;
-
     padding: 10px;
 }
 .footer-left{
-    width: 25%;
+    width: 27%;
 
 }
 .footer-left a{
@@ -20,7 +19,7 @@
     text-decoration: none;
 }
 .footer-mid{
-    width: 45%;
+    width: 43%;
 }
 .footer-mid table{
     width: 100%;
