@@ -52,7 +52,7 @@ public class TacGiaImpl implements TacGiaDAO {
 		Session se = this.sessionFactory.getCurrentSession();
 
 		String sql = " Select new " + TruyenInfo.class.getName()
-				+ "(tr.ID,tr.tenTruyen, tr.maTacGia, tr.maNhomDich, tr.soChuong,tr.gioiThieu, tr.luotXem, tr.nguon, tr.hinhAnh,tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao)" + " from "
+				+ "(tr.ID,tr.tenTruyen, tr.maTacGia, tr.maNhomDich, tr.soChuong,tr.gioiThieu, tr.nguon, tr.hinhAnh,tr.full, tr.hot, tr.news, tr.hienThi, tr.ngayTao)" + " from "
 				+ TruyenEntity.class.getName() + " tr" +" where tr.maTacGia =: maTacGia";
 
 		Query query = se.createQuery(sql);
