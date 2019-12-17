@@ -181,6 +181,13 @@ public class HomeController {
 		String maTruyen = urlTruyen.get(tenTruyen);
 
 		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
+		List<ChiTietTheLoaiTruyenInfo> listTheLoai=theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
+		String tenTheLoai= "";
+		for (ChiTietTheLoaiTruyenInfo chiTiet : listTheLoai) {
+			tenTheLoai+=chiTiet.getTenTheLoai()+", ";
+		}
+		tr.setTheLoaiTruyen(Helper.subString(tenTheLoai));
+		
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
 		String sort = "ASC";
 		PaginationResult<ChuongInfo> listPaginationChuong = chuongDao.listChuongOfTruyen(maTruyen, sort, page,
@@ -194,14 +201,12 @@ public class HomeController {
 			urlChuong.put(ch.getId(), Helper.pathVariableString(i + ""));
 			i++;
 		}
-		List<ChiTietTheLoaiTruyenInfo> tenTheLoai = theLoaiTruyenDao.dsTenTheLoai();
 		model.addAttribute("truyenById", tr);
 		model.addAttribute("dmById", ctdm);
 		model.addAttribute("listChuong", listPaginationChuong);
 		model.addAttribute("truyenCungTacGia", truyenCungTacGia);
 		model.addAttribute("urlChuong", urlChuong);
 		model.addAttribute("tenTruyen", tenTruyen);
-		model.addAttribute("tenTheLoai", tenTheLoai);
 		model.addAttribute("urlTacGia", Helper.pathVariableString(tr.getTenTacGia()));
 		model.addAttribute("chuongMoi", listChuongMoi);
 

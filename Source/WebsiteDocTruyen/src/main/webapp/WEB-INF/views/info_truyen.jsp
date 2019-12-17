@@ -62,12 +62,7 @@ display: inline;}
 						<div class="info-picture-content">
 							<span>Tác giả</span>: <a href="${pageContext.request.contextPath}/tac-gia/${urlTacGia}"> ${truyenById.tenTacGia }</a> <br> 
 							<span>Thể loại</span>: 
-								<c:forEach items="${tenTheLoai}"
-									var="tl">
-									<c:if test="${truyenById.ID == tl.maTruyen}">
-											${tl.tenTheLoai},
-										</c:if>
-								</c:forEach>
+								${truyenById.theLoaiTruyen}
 								<br> 
 							<span>Nguồn</span>: ${truyenById.nguon } <br> 
 							<span>Trạng thái</span>:

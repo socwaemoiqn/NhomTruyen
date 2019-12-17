@@ -262,9 +262,9 @@ public class TruyenImpl implements TruyenDAO {
 				+ " from " + TruyenEntity.class.getName() + " tr, " + TacGiaEntity.class.getName() + " tg, "
 				+ NhomDichEntity.class.getName() + " nd, " + ChiTietTheLoaiTruyenEntity.class.getName() + " cttl, "
 				+ TheLoaiTruyenEntity.class.getName() + " tl "
-				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and cttl.maTruyen=tr.ID and cttl.maTheLoai= tl.id and tl.tenTheLoai = '"
-				+ tenTheLoai + "' ";
+				+ " where tr.maTacGia = tg.ID and nd.maNhomDich=tr.maNhomDich and cttl.maTruyen=tr.ID and cttl.maTheLoai= tl.id and tl.tenTheLoai =: tenTheLoai ";
 		Query query = session.createQuery(sql);
+		query.setParameter("tenTheLoai", tenTheLoai);
 		return query.list();
 	}
 
