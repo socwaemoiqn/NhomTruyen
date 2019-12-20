@@ -108,11 +108,7 @@
 											<form id="form${us.maTaiKhoan}" 
 											action="${pageContext.request.contextPath}/quan-tri/tai-khoan/xoa/${us.maTaiKhoan}" 
 											method="post">
-												<a class="btn btn-primary btn-circle"
-													title="Tất cả tài khoản"
-													href="${pageContext.request.contextPath}/quan-tri/abcd?id=${us.maTaiKhoan}">
-														<i class="fa fa-list-ul"></i>
-												</a> 
+										
 												<a data-toggle="modal" id="${us.maTaiKhoan}" data-target="#sua"
 													class="btn btn-success btn-circle btn-sua"
 													title="Chỉnh sửa danh mục"> 

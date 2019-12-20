@@ -1,5 +1,6 @@
 package vn.com.nhomtruyen.WebsiteDocTruyen.Controller;
 
+import java.net.HttpCookie;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,7 +43,6 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.Model.SelectTruyenInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TacGiaInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TaiKhoanInfo;
 import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TheLoaiTruyenInfo;
-import vn.com.nhomtruyen.WebsiteDocTruyen.Model.TruyenInfo;
 
 @Controller
 public class HomeController {
@@ -60,6 +61,7 @@ public class HomeController {
 	private TacGiaDAO tacGiaDao;
 	@Autowired
 	private LuotXemDAO luotXemDAO;
+
 	public void loadTheLoaiAndDanhMucTruyen(Model model) {
 		List<DanhMucTruyenInfo> danhMuc = dmtruyenDao.dsDanhMucTruyen();
 		List<TheLoaiTruyenInfo> theLoaiTruyen = theLoaiTruyenDao.dsTheLoai();
@@ -96,10 +98,11 @@ public class HomeController {
 		// Map<String, String> listUrl = truyenDao.listPathVariableString();
 		for (SelectTruyenInfo selectTruyenInfo : truyen) {
 			selectTruyenInfo.setUrlTruyen(Helper.pathVariableString(selectTruyenInfo.getTenTruyen()));
-			String tenTheLoai="";
-			List<ChiTietTheLoaiTruyenInfo> listTheLoaiByTruyen=theLoaiTruyenDao.listTenTlOfTruyen(selectTruyenInfo.getID());
+			String tenTheLoai = "";
+			List<ChiTietTheLoaiTruyenInfo> listTheLoaiByTruyen = theLoaiTruyenDao
+					.listTenTlOfTruyen(selectTruyenInfo.getID());
 			for (ChiTietTheLoaiTruyenInfo tl : listTheLoaiByTruyen) {
-				tenTheLoai+= tl.getTenTheLoai()+", ";
+				tenTheLoai += tl.getTenTheLoai() + ", ";
 			}
 			selectTruyenInfo.setTheLoaiTruyen(Helper.subString(tenTheLoai));
 		}
@@ -123,47 +126,51 @@ public class HomeController {
 		model.addAttribute("truyenFull", listTruyenFull);
 		return "index";
 	}
+
 	@RequestMapping(value = "/select-top-10", method = RequestMethod.POST)
-	public @ResponseBody String selectTop10(HttpServletRequest request) throws JsonProcessingException, ClassNotFoundException, SQLException
-	{ 
+	public @ResponseBody String selectTop10(HttpServletRequest request)
+			throws JsonProcessingException, ClassNotFoundException, SQLException {
 		String typeTime = request.getParameter("typeTime");
-	
-		  List<SelectTruyenInfo> listTop10Truyen = new ArrayList<SelectTruyenInfo>();
-		  Calendar cal = Calendar.getInstance();
-		  String timeStart,timeEnd;
-		  switch
-		  (typeTime) { case "all": 
-			  listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem();
-			 
-		  break;
-		  case "day":
-			   timeStart = Helper.getToday()+" 00:00:00";
-			   timeEnd = Helper.getToday()+" 23:59:00";
-			  listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem(timeStart,timeEnd);
-			  break;
-		  case "month":
-			   timeStart = cal.get(Calendar.YEAR)+"/"+(cal.get(Calendar.MONTH)+1)+""
-			  		+ "/"+cal.getActualMinimum(Calendar.DATE)+" 00:00:00";
-			   timeEnd = cal.get(Calendar.YEAR)+"/"+(cal.get(Calendar.MONTH)+1)+""
-				  		+ "/"+cal.getActualMaximum(Calendar.DATE)+" 23:59:00";
-			   listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem(timeStart, timeEnd);
-			   break;
-		 default: break; }
-		  ObjectMapper mapper = new ObjectMapper(); 
-		  for (SelectTruyenInfo selectTruyenInfo : listTop10Truyen) {
+
+		List<SelectTruyenInfo> listTop10Truyen = new ArrayList<SelectTruyenInfo>();
+		Calendar cal = Calendar.getInstance();
+		String timeStart, timeEnd;
+		switch (typeTime) {
+		case "all":
+			listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem();
+
+			break;
+		case "day":
+			timeStart = Helper.getToday() + " 00:00:00";
+			timeEnd = Helper.getToday() + " 23:59:00";
+			listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem(timeStart, timeEnd);
+			break;
+		case "month":
+			timeStart = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "" + "/"
+					+ cal.getActualMinimum(Calendar.DATE) + " 00:00:00";
+			timeEnd = cal.get(Calendar.YEAR) + "/" + (cal.get(Calendar.MONTH) + 1) + "" + "/"
+					+ cal.getActualMaximum(Calendar.DATE) + " 23:59:00";
+			listTop10Truyen = truyenDao.selectTop10TruyenByLuotXem(timeStart, timeEnd);
+			break;
+		default:
+			break;
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		for (SelectTruyenInfo selectTruyenInfo : listTop10Truyen) {
 			String urlTruyen = Helper.pathVariableString(selectTruyenInfo.getTenTruyen());
 			List<ChiTietTheLoaiTruyenInfo> listTheLoai = theLoaiTruyenDao.listTenTlOfTruyen(selectTruyenInfo.getID());
 			String strTheLoaiTruyen = "";
 			for (ChiTietTheLoaiTruyenInfo chiTietTL : listTheLoai) {
-				strTheLoaiTruyen += chiTietTL.getTenTheLoai()+", ";
+				strTheLoaiTruyen += chiTietTL.getTenTheLoai() + ", ";
 			}
-			strTheLoaiTruyen = strTheLoaiTruyen.substring(0, strTheLoaiTruyen.length()-2);
+			strTheLoaiTruyen = strTheLoaiTruyen.substring(0, strTheLoaiTruyen.length() - 2);
 			selectTruyenInfo.setUrlTruyen(urlTruyen);
 			selectTruyenInfo.setTheLoaiTruyen(strTheLoaiTruyen);
 		}
-		 String json = mapper.writeValueAsString(listTop10Truyen);
+		String json = mapper.writeValueAsString(listTop10Truyen);
 		return json;
 	}
+
 	@RequestMapping(value = "/{tenTruyen}", method = RequestMethod.GET)
 	public String truyenPage(Model model, HttpSession session, @PathVariable("tenTruyen") String tenTruyen,
 			@RequestParam(value = "page", defaultValue = "1") String pageStr) {
@@ -181,13 +188,13 @@ public class HomeController {
 		String maTruyen = urlTruyen.get(tenTruyen);
 
 		SelectTruyenInfo tr = truyenDao.selectTruyenByMa(maTruyen);
-		List<ChiTietTheLoaiTruyenInfo> listTheLoai=theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
-		String tenTheLoai= "";
+		List<ChiTietTheLoaiTruyenInfo> listTheLoai = theLoaiTruyenDao.listTenTlOfTruyen(maTruyen);
+		String tenTheLoai = "";
 		for (ChiTietTheLoaiTruyenInfo chiTiet : listTheLoai) {
-			tenTheLoai+=chiTiet.getTenTheLoai()+", ";
+			tenTheLoai += chiTiet.getTenTheLoai() + ", ";
 		}
 		tr.setTheLoaiTruyen(Helper.subString(tenTheLoai));
-		
+
 		List<ChiTietDanhMucTruyenInfo> ctdm = dmtruyenDao.listTenDMByMaTruyen(maTruyen);
 		String sort = "ASC";
 		PaginationResult<ChuongInfo> listPaginationChuong = chuongDao.listChuongOfTruyen(maTruyen, sort, page,
@@ -219,7 +226,7 @@ public class HomeController {
 
 	@RequestMapping(value = "/{tenTruyen}/{chuongSo}", method = RequestMethod.GET)
 	public String chuongPage(Model model, @PathVariable("tenTruyen") String tenTruyen,
-			@PathVariable("chuongSo") String chuongSo, HttpSession session) {
+			@PathVariable("chuongSo") String chuongSo, HttpSession session,HttpServletRequest request) {
 
 		Map<String, String> urlTruyen = truyenDao.listPathVariableString();
 		String maTruyen = urlTruyen.get(tenTruyen);
@@ -244,7 +251,7 @@ public class HomeController {
 
 		model.addAttribute("chuongSau", chuongSau);
 		model.addAttribute("chuongTruoc", chuongTruoc);
-
+		
 		ChuongInfo chuongOfId = chuongDao.chuongInfo(idChuong);
 		model.addAttribute("maTruyen", chuongOfId.getIDTruyen());
 		model.addAttribute("noiDung", chuongOfId.getNoiDung());
@@ -266,7 +273,7 @@ public class HomeController {
 		array_readed = reserveArray(array_readed);  // Đảo ngược lại mảng
 		array_readed = hienThiTruyenVuaDoc(array_readed, object_readed);
 		session.setAttribute("array_readed", reserveArray(array_readed)); // Lưu vào session
-		///////////////////////////////
+	///////////////////////////////
 		LuotXemModel luotXemModel = new LuotXemModel();
 		if(luotXemDAO.findLuotXem(chuongOfId.getIDTruyen())== null)
 		{
@@ -282,25 +289,26 @@ public class HomeController {
 		}
 		return "xem_chuong";
 	}
-	public ArrayList<Map<String,String>> hienThiTruyenVuaDoc(ArrayList<Map<String,String>> array_readed,
-			Map<String,String> object_readed )
-	{
+
+	public ArrayList<Map<String, String>> hienThiTruyenVuaDoc(ArrayList<Map<String, String>> array_readed,
+			Map<String, String> object_readed) {
 		if (array_readed.size() != 0) // Nếu đã có truyện
 		{
-			
+
 			boolean checkExsit = false; // Biến kiểm tra xem truyện có tồn tại trong mảng trước đó chưa
 			int limit = 5; // Giới hạn chỉ lưu 5 truyện gần nhất
 			for (int j = 0; j < array_readed.size(); j++) // Duyệt mảng
 			{
-				if (array_readed.get(j).get("maTruyen").equals(object_readed.get("maTruyen"))) // Nếu đã tồn tại truyện vừa
-																							// chọn đọc trong mảng
+				if (array_readed.get(j).get("maTruyen").equals(object_readed.get("maTruyen"))) // Nếu đã tồn tại truyện
+																								// vừa
+																								// chọn đọc trong mảng
 				{
 					Map<String, String> itemLast = array_readed.get(array_readed.size() - 1); // Lưu tạm item cuối cùng
 																								// ra
-					
+
 					array_readed.set(j, itemLast); // Đảo vị trí giữa 2 truyện
 					array_readed.set(array_readed.size() - 1, object_readed); // Gán item cuối cùng bằng item vừa đọc
-					checkExsit = true; // Đưa biến kiểm tra về true	
+					checkExsit = true; // Đưa biến kiểm tra về true
 					break;
 				}
 			}
@@ -325,6 +333,7 @@ public class HomeController {
 		}
 		return array_readed;
 	}
+
 	public ArrayList<Map<String, String>> reserveArray(ArrayList<Map<String, String>> array) {
 		ArrayList<Map<String, String>> newArray = new ArrayList<Map<String, String>>();
 		for (int i = 0; i < array.size(); i++) {
@@ -387,14 +396,14 @@ public class HomeController {
 	@RequestMapping(value = "/tac-gia/{tacGia}", method = RequestMethod.GET)
 	public String tacGiaPage(Model model, @PathVariable("tacGia") String pathTacGia) {
 		loadTheLoaiAndDanhMucTruyen(model);
-		List<TacGiaInfo> listTacGia=tacGiaDao.listTacGia();
+		List<TacGiaInfo> listTacGia = tacGiaDao.listTacGia();
 		Map<String, Object> mapTacGia = new HashMap<String, Object>();
 		for (TacGiaInfo tacGiaInfo : listTacGia) {
 			mapTacGia.put(Helper.pathVariableString(tacGiaInfo.getTenTacGia()), tacGiaInfo);
 		}
-		TacGiaInfo tacGia=(TacGiaInfo) mapTacGia.get(pathTacGia);
-		String tenTacgia= tacGia.getTenTacGia();
-		List<SelectTruyenInfo> listTruyenByTacGia= truyenDao.selectAllTruyenByTacGia(tenTacgia);
+		TacGiaInfo tacGia = (TacGiaInfo) mapTacGia.get(pathTacGia);
+		String tenTacgia = tacGia.getTenTacGia();
+		List<SelectTruyenInfo> listTruyenByTacGia = truyenDao.selectAllTruyenByTacGia(tenTacgia);
 		model.addAttribute("listTacGia", listTruyenByTacGia);
 		model.addAttribute("tenTacGia", tenTacgia);
 		model.addAttribute("gioiThieu", tacGia.getGioiThieu());
@@ -405,12 +414,12 @@ public class HomeController {
 	public String searchPage(Model model, @RequestParam("tu-khoa") String tuKhoa) {
 		loadTheLoaiAndDanhMucTruyen(model);
 		List<SelectTruyenInfo> listTruyenTimKiem = truyenDao.searchTruyen(tuKhoa);
-		Map<String, String > map = new HashMap<String, String>();
-		
+		Map<String, String> map = new HashMap<String, String>();
+
 		for (SelectTruyenInfo selectTruyenInfo : listTruyenTimKiem) {
 			map.put(selectTruyenInfo.getID(), Helper.pathVariableString(selectTruyenInfo.getTenTruyen()));
 		}
-		
+
 		model.addAttribute("listTruyenSearch", listTruyenTimKiem);
 		model.addAttribute("path", map);
 		model.addAttribute("tuKhoa", tuKhoa);
@@ -432,7 +441,11 @@ public class HomeController {
 		if (taikhoan == null || !taikhoan.getMatKhau().equals(passWord)) {
 			session.setAttribute("mess", "Tài khoản hoặc mật khẩu không chính xác");
 			requestStr = "redirect:" + back;
-		} else {
+		} 
+		else if(!taikhoan.isTrangThai()){
+			session.setAttribute("mess", "Tài khoản của bạn đã bị khóa!");
+			requestStr = "redirect:" + back;
+		}else {
 			if (taikhoan.getMaRole() == 2 || taikhoan.getMaRole() == 3) {
 				session.setAttribute("mess", "Đăng nhập thành công!");
 				session.setAttribute("acc_login", taikhoan);

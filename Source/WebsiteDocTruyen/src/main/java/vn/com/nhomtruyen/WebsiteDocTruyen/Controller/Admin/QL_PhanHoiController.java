@@ -109,8 +109,9 @@ public class QL_PhanHoiController {
 		case "delete":
 			for (String id : array_id) {
 				phanHoiDAO.xoa(Integer.parseInt(id));
-				request.getSession().setAttribute("mess", "Vừa xóa: " + array_id.length + " phản hồi");
+				
 			}
+			request.getSession().setAttribute("mess", "Vừa xóa: " + array_id.length + " phản hồi");
 			break;
 		default:
 			break;
