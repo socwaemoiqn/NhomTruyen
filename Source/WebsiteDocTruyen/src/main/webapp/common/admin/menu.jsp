@@ -27,8 +27,8 @@
 							<span class="fa arrow"></span>
 						</a>
 						<ul class="nav nav-third-level">
-							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Tất cả nhóm dịch</a></li>
-							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">Truyện nhóm dịch</a></li>
+							<li><a href="${pageContext.request.contextPath}/quan-tri/ql-nhom-dich">Tất cả nhóm dịch</a></li>
+							<li><a href="${pageContext.request.contextPath}/quan-tri/...">Truyện nhóm dịch</a></li>
 							<li><a href="${pageContext.request.contextPath}/quan-tri/sd">..... nhóm dịch</a></li>
 						</ul>
 					</li>

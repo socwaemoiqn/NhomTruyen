@@ -23,6 +23,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.ChuongDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.DanhMucTruyenDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.InfoTaiKhoanDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.LuotXemDAO;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.NhomDichDao;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.PhanHoiDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.RoleDAO;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.TacGiaDAO;
@@ -33,6 +34,7 @@ import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.ChuongImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.DanhMucTruyenImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.InfoTaiKhoanImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.LuotXemImpl;
+import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.NhomDichImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.PhanHoiImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.RoleImpl;
 import vn.com.nhomtruyen.WebsiteDocTruyen.DAO.Impl.TacGiaImpl;
@@ -151,5 +153,9 @@ public class ApplicationContextConfig {
 	@Bean(name = "luotXemDAO")
 	public LuotXemDAO getLuotXemDAO() {
 		return new LuotXemImpl();
+	}
+	@Bean(name ="nhomDichDao")
+	public NhomDichDao getNhomDich() {
+		return new NhomDichImpl();
 	}
 }
