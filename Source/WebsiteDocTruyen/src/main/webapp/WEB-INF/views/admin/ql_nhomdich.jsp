@@ -143,7 +143,7 @@
 											</c:if>
 										</td>
 										<td style="width: 10%; text-align: center;">
-											<a class="btn btn-primary btn-circle" title="Tất cả Nhóm Dịch"
+											<a class="btn btn-primary btn-circle" title="Tất cả truyên nhóm Dịch"
 											href="${pageContext.request.contextPath}/quan-tri/....=${nd.maNhomDich}">
 												<i class="fa fa-list-ul"></i>
 											</a> 
