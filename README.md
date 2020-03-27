@@ -1,6 +1,6 @@
 #  Dự án quản lý website đọc truyện chữ online - NhomTruyen
 # Thành viên
-  + Nguyễn Công Toàn - Võ Văn Việt - Nguyễn Ngọc Hoàng
+  + Nguyễn Công Toàn - Võ Văn Việt
 # Cấu trúc:
   Gồm 3 thư mục chính
     Thư mục 1: gồm các template về các trang cilent.
